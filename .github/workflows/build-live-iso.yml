@@ -242,9 +242,10 @@ jobs:
 
       # Public download for the website: the ISO and its checksum, under fixed
       # names so each build replaces the previous one (R2 free tier: 10 GB).
-      # Skipped on pull requests and until the R2 secrets are set.
+      # Only after a passed install test; skipped on pull requests and until
+      # the R2 secrets are set.
       - name: Upload ISO to Cloudflare R2
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.install-test.outcome == 'success'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}

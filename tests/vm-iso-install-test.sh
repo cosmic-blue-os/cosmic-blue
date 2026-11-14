@@ -188,7 +188,7 @@ fstype="$(vm 'findmnt -n -o FSTYPE /sysroot' || true)"
 vm 'findmnt -n -o OPTIONS /sysroot | grep -q compress=zstd:1' \
     || echo "::warning::btrfs is not mounted with compress=zstd:1"
 vm 'findmnt -n -o FSTYPE /var/home | grep -qx btrfs' || error "/var/home is not on btrfs"
-vm 'findmnt -o TARGET,SOURCE,FSTYPE,OPTIONS -R /sysroot; findmnt /var; findmnt /var/home; lsblk -f' || true
+vm 'cat /etc/fstab; findmnt -o TARGET,SOURCE,FSTYPE,OPTIONS -R /sysroot; findmnt /; findmnt /var; findmnt /var/home; lsblk -f' || true
 
 # Keyboard layout and clock format from the installer, given to COSMIC by
 # cosmic-blue-user-defaults before the login screen

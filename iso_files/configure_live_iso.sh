@@ -57,6 +57,12 @@ ln -sf /usr/share/cosmic-blue/firefox/policies/policies.json /etc/firefox/polici
 # Profile matched on os-release (ID=fedora, VARIANT_ID=cosmic-blue or
 # cosmic-blue-nvidia, the image name)
 . /etc/os-release
+# Images built before VARIANT_ID was set (such as stable until its next
+# promotion) lack the line, and the installer then used Fedora's profile.
+# Only the live system's copy changes: installed systems get the image as is.
+if ! grep -q '^VARIANT_ID=' /usr/lib/os-release; then
+    echo "VARIANT_ID=${IMAGE_NAME}" >> /usr/lib/os-release
+fi
 mkdir -p /etc/anaconda/profile.d
 tee /etc/anaconda/profile.d/cosmic-blue.conf <<EOF
 # Anaconda configuration file for cosmic-blue
