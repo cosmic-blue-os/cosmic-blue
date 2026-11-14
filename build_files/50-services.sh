@@ -34,6 +34,23 @@ systemctl --global enable \
     podman.socket \
     ublue-user-setup.service
 
+# Keep systemd-gpt-auto-generator from stacking an automount of the EFI
+# system partition on /boot. GRUB tells systemd which disk it booted from
+# (LoaderDevicePartUUID), so on installs where /boot is a directory of the
+# root filesystem (bootc install to-disk, disk images) the generator adds
+# boot.automount on top of ostree's /boot bind mount. Once that automount
+# idles out (2 minutes), ostree cannot remount /boot read-write at shutdown
+# ("Remounting /boot read-write: Invalid argument") and silently drops the
+# staged update: the system reboots into the old image. Fixed upstream in
+# ostree 84188e3 (2026-11-06, bootc-dev/bootc#2402).
+# Nothing else of the generator is used: bootc sets root= on the kernel
+# command line, bootupd mounts the ESP itself, and there is no swap, /home or
+# /srv partition to discover. Installs from the ISO normally have a separate
+# /boot partition, which this does not concern. Remove this once the base
+# image ships an ostree with that fix.
+mkdir -p /etc/systemd/system-generators
+ln -sf /dev/null /etc/systemd/system-generators/systemd-gpt-auto-generator
+
 # uupd replaces rpm-ostree automatic updates
 systemctl disable rpm-ostreed-automatic.timer || true
 

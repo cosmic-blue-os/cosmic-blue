@@ -42,6 +42,20 @@ vm_wait_ssh
 # Problems of the old image are already known: warnings only
 CHECK_LEVEL=warning vm_check_system before-update || true
 
+# What is mounted on /boot: on an install where /boot is a directory of the
+# root filesystem, an automount of the EFI system partition stacked there made
+# ostree drop the staged update at shutdown (build_files/50-services.sh)
+vm 'findmnt -R /boot; systemctl list-units --all --no-legend --plain "*.automount"' || true
+# Images from before that fix: mask the generator as the fixed images do and
+# boot again, so the rest of the update can still be tested. The update is
+# finalized by the old system, so without this it would never apply.
+gpt_auto=/etc/systemd/system-generators/systemd-gpt-auto-generator
+if [[ "$(vm "readlink ${gpt_auto}" || true)" != /dev/null ]]; then
+    echo "::warning::${FROM} predates the /boot automount fix: masking systemd-gpt-auto-generator before the update, as newer images do"
+    vm "mkdir -p ${gpt_auto%/*} && ln -sf /dev/null ${gpt_auto}"
+    vm_reboot
+fi
+
 # 2. Some user data and settings that the update must keep, and a logged in
 # user, as on a real system
 vm "echo kept > /etc/cosmic-blue-update-test"
@@ -62,6 +76,9 @@ vm "timeout 1800 bootc switch --enforce-container-sigpolicy ${TO}" \
     || fail "bootc could not update to ${TO} (pull or signature check failed)"
 staged="$(vm 'bootc status --json' | jq -r '.status.staged.image.imageDigest // empty')"
 [[ "${staged}" == "${to_digest}" ]] || fail "The staged update is '${staged}', not ${to_digest}"
+# People reboot long after the update is staged, by which time idle
+# automounts (2 minutes) have expired: wait as long before rebooting
+sleep 180
 vm_reboot
 
 # 4. Checks of the updated system
