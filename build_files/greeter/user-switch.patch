@@ -1,0 +1,82 @@
+diff --git a/src/greeter.rs b/src/greeter.rs
+index 852e219..e2dafce 100644
+--- a/src/greeter.rs
++++ b/src/greeter.rs
+@@ -972,6 +972,67 @@ impl App {
+                 column = column.push(widget::text(""));
+             }
+ 
++            // cosmic-blue: with 2 to 6 accounts, show them as a row of avatars
++            // (two rows from 5) to pick one in a click; the users menu stays
++            if matches!(self.socket_state, SocketState::Open)
++                && !self.entering_name
++                && !self.authenticating
++                && (2..=6).contains(&self.usernames.len())
++            {
++                let count = self.usernames.len();
++                let per_row = if count <= 4 { count } else { count.div_ceil(2) };
++                let mut user_rows = widget::column::with_capacity(2)
++                    .spacing(8.0)
++                    .align_x(Alignment::Center);
++                for chunk in self.usernames.chunks(per_row) {
++                    let mut user_row = widget::row::with_capacity(chunk.len()).spacing(8.0);
++                    for (name, full_name) in chunk {
++                        let icon = self
++                            .flags
++                            .user_datas
++                            .iter()
++                            .position(|d| &d.name == name)
++                            .and_then(|i| self.flags.user_icons.get(i))
++                            .and_then(|icon| icon.clone());
++                        let picture: Element<_> = match icon {
++                            Some(handle) => widget::image(handle)
++                                .width(Length::Fixed(40.0))
++                                .height(Length::Fixed(40.0))
++                                .content_fit(iced::ContentFit::Fill)
++                                .into(),
++                            None => widget::icon::from_name("avatar-default-symbolic")
++                                .size(40)
++                                .into(),
++                        };
++                        user_row = user_row.push(
++                            widget::column::with_capacity(2)
++                                .spacing(4.0)
++                                .width(Length::Fixed(56.0))
++                                .align_x(Alignment::Center)
++                                .push(
++                                    widget::button::custom(picture)
++                                        .class(theme::Button::Image)
++                                        .selected(name == &self.selected_username.username)
++                                        .padding(2.0)
++                                        .on_press(Message::Username(name.clone())),
++                                )
++                                .push(
++                                    widget::text::caption(full_name.as_str())
++                                        .ellipsize(Ellipsize::End(EllipsizeHeightLimit::Lines(1)))
++                                        .width(Length::Fill)
++                                        .center(),
++                                ),
++                        );
++                    }
++                    user_rows = user_rows.push(user_row);
++                }
++                column = column.push(
++                    widget::container(user_rows)
++                        .width(Length::Fill)
++                        .align_x(Alignment::Center),
++                );
++            }
++
+             id_container(
+                 widget::container(column)
+                     .align_x(Alignment::Center)
+@@ -1434,6 +1495,9 @@ impl cosmic::Application for App {
+                 if self.entering_name || username != self.selected_username.username {
+                     self.entering_name = false;
+                     self.authenticating = false;
++                    // cosmic-blue: the previous user's error (a refused login)
++                    // does not apply to the newly selected one
++                    self.common.error_opt = None;
+                     let data_idx = self
+                         .flags
+                         .user_datas

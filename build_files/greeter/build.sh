@@ -11,6 +11,13 @@
 # compiled into it (res/background.jpg up to COSMIC 1.11, res/background.png
 # after it: the upstream COSMIC wallpaper). The
 # lock screen is the same program and uses the same fallback.
+#
+# user-switch.patch also shows the accounts as a row of avatars under the
+# password field when there are 2 to 6 of them (the users menu stays), and
+# clears the error of a refused login when another user is selected. It is
+# applied with no fuzz: when a new cosmic-greeter no longer takes it, this
+# build fails and the COSMIC update pull request waits for the patch to be
+# adapted.
 # Usage: build.sh <wallpaper.jpg>
 set -euox pipefail
 
@@ -18,7 +25,7 @@ WALLPAPER="$1"
 TOPDIR=/rpmbuild
 SPEC="${TOPDIR}/SPECS/cosmic-greeter.spec"
 
-dnf5 -y install rpm-build dnf5-plugins python3
+dnf5 -y install rpm-build dnf5-plugins python3 patch
 mkdir -p /srpm "${TOPDIR}"
 dnf5 -y download --srpm --destdir /srpm \
     --enablerepo=fedora-source --enablerepo=updates-source \
@@ -46,6 +53,10 @@ fallback="$(grep -o 'include_bytes!("\.\./res/background\.[a-z]*")' "${src}/src/
 test "$(printf '%s\n' "${fallback}" | grep -c .)" = 1
 test -f "${src}/${fallback}"
 install -m 0644 "${WALLPAPER}" "${src}/${fallback}"
+
+patch --directory="${src}" --strip=1 --forward --fuzz=0 \
+    < "$(dirname "$0")/user-switch.patch"
+grep -q 'cosmic-blue: with 2 to 6 accounts' "${src}/src/greeter.rs"
 
 # Compiled crates kept from the previous build in CARGO_CACHE_DIR
 # (Containerfile.helpers). The package's own sources are touched, so they

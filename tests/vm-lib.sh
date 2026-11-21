@@ -709,6 +709,9 @@ except socket.gaierror as error:
         vm 'loginctl list-sessions; /usr/libexec/cosmic-blue-parental-daemon status' || true
     fi
     sleep 20
+    # Two accounts now (the test user and the child): the login screen shows
+    # them as a row of avatars (build_files/greeter/user-switch.patch)
+    screenshot "${SHOTS}/09-login-users"
     type_text "${DEMO_PASSWORD}"
     monitor "sendkey ret"
     sleep 10
