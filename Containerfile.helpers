@@ -49,7 +49,8 @@ RUN dnf5 -y install cargo rust gcc pkgconf-pkg-config libxkbcommon-devel wayland
     && install -D -m 0755 /cargo/target/release/cosmic-blue-tour /out/cosmic-blue-tour \
     && install -D -m 0755 /cargo/target/release/cosmic-blue-updates /out/cosmic-blue-updates \
     && install -D -m 0755 /cargo/target/release/cosmic-blue-parental-controls /out/cosmic-blue-parental-controls \
-    && install -D -m 0755 /cargo/target/release/cosmic-blue-parental-daemon /out/cosmic-blue-parental-daemon
+    && install -D -m 0755 /cargo/target/release/cosmic-blue-parental-daemon /out/cosmic-blue-parental-daemon \
+    && install -D -m 0755 /cargo/target/release/libpam_cosmic_blue_parental.so /out/pam_cosmic_blue_parental.so
 FROM scratch AS tour
 COPY --from=tour-build /out /
 

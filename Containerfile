@@ -36,6 +36,7 @@ COPY --from=helpers /tour/cosmic-blue-tour /system_files/cosmic-blue/usr/libexec
 COPY --from=helpers /tour/cosmic-blue-updates /system_files/cosmic-blue/usr/libexec/cosmic-blue-updates
 COPY --from=helpers /tour/cosmic-blue-parental-controls /system_files/cosmic-blue/usr/libexec/cosmic-blue-parental-controls
 COPY --from=helpers /tour/cosmic-blue-parental-daemon /system_files/cosmic-blue/usr/libexec/cosmic-blue-parental-daemon
+COPY --from=helpers /tour/pam_cosmic_blue_parental.so /system_files/cosmic-blue/usr/lib64/security/pam_cosmic_blue_parental.so
 COPY --from=helpers /greeter /greeter
 COPY --from=helpers /store /store
 COPY --from=helpers /filemanager /filemanager

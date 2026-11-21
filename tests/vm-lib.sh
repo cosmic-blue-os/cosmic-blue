@@ -718,15 +718,14 @@ except socket.gaierror as error:
         && problem "the login screen let the test user in after its time was up"
     vm "env -i PAM_USER=${DEMO_USER} /usr/libexec/cosmic-blue-parental-daemon login-check" \
         && problem "the login check lets the test user in after its time was up"
-    # pam_exec logs the refusal (the login check's own stderr is not kept)
-    if ! vm "journalctl -b --no-pager -g 'pam_exec\\(cosmic-greeter:account\\): /usr/libexec/cosmic-blue-parental-daemon failed: exit code 1'" >/dev/null; then
+    if ! vm "journalctl -b --no-pager -g 'pam_cosmic_blue_parental\\(cosmic-greeter:account\\): login refused for ${DEMO_USER}'" >/dev/null; then
         problem "the login screen did not run the login check"
         vm "grep -rs . /etc/greetd/ | grep -v '^#'; ls /etc/pam.d /usr/lib/pam.d | grep -i greet; \
-            journalctl -b --no-pager -g 'pam_exec|parental-daemon: login' | tail -n 10; \
+            journalctl -b --no-pager -g 'pam_cosmic_blue_parental|greetd' | tail -n 10; \
             ausearch -m avc -ts boot 2>/dev/null | grep -i parental | tail -n 10" || true
     fi
     vm "journalctl -b --no-pager -u cosmic-blue-parental-controls.service" | tail -n 20 || true
-    vm "journalctl -b --no-pager -t pam_exec -g cosmic-blue" | tail -n 5 || true
+    vm "journalctl -b --no-pager -g pam_cosmic_blue_parental" | tail -n 5 || true
     vm "rm -f /etc/cosmic-blue/parental-controls/${DEMO_USER}.json"
     return "${parental_failed}"
 }

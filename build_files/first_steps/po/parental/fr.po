@@ -184,3 +184,15 @@ msgstr "Tu pourras te reconnecter demain."
 
 msgid "You can log in again tomorrow at {}."
 msgstr "Tu pourras te reconnecter demain à {}."
+
+msgid "Type a duration, for example 45 or 1:20."
+msgstr "Saisissez une durée, par exemple 45 ou 1:20."
+
+msgid "Type a time, for example 20:45."
+msgstr "Saisissez une heure, par exemple 20:45."
+
+msgid "Parental controls do not allow logging in now. Ask a parent."
+msgstr "Le contrôle parental ne permet pas de se connecter maintenant. Demande à un parent."
+
+msgid "No limit today"
+msgstr "Sans limite aujourd'hui"

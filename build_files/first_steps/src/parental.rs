@@ -56,13 +56,121 @@ pub(crate) const TEMPLATE_NAME: &str = "cosmic-blue-parental-controls.pot";
 const HELPER: &str = "/usr/libexec/cosmic-blue-parental-helper";
 const EXTEND: &str = "/usr/libexec/cosmic-blue-parental-extend";
 const ICON: &str = "cosmic-blue-parental-controls";
+/// The child's launcher (see more_time_launcher)
+const MORE_TIME_ID: &str = "io.github.cosmic_blue_os.ParentalControls.MoreTime";
 /// Banner of the tours (branding/tour/build.py), behind the app icon
 const BANNER: &str = "/usr/share/cosmic-blue/tour-banner.svg";
 const AVATARS: &str = "/var/lib/AccountsService/icons";
 /// Warnings before the session closes, in seconds
 const WARNINGS: [u64; 3] = [600, 300, 60];
-/// Steps of the time buttons, in minutes
+/// Steps of the - and + buttons, in minutes (any value can be typed)
 const STEP: u32 = 15;
+/// Bounds of a daily screen time, in minutes
+const LIMIT_MIN: u32 = 5;
+const LIMIT_MAX: u32 = 12 * 60;
+
+/// A time setting of a child account: a daily screen time or a bedtime end
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Field {
+    Weekdays,
+    Weekend,
+    BedtimeStart,
+    BedtimeEnd,
+}
+
+impl Field {
+    fn is_clock(self) -> bool {
+        matches!(self, Field::BedtimeStart | Field::BedtimeEnd)
+    }
+
+    fn get(self, rules: &Rules) -> u32 {
+        match self {
+            Field::Weekdays => rules.weekdays,
+            Field::Weekend => rules.weekend,
+            Field::BedtimeStart => rules.bedtime_start,
+            Field::BedtimeEnd => rules.bedtime_end,
+        }
+    }
+
+    fn set(self, rules: &mut Rules, value: u32) {
+        match self {
+            Field::Weekdays => rules.weekdays = value,
+            Field::Weekend => rules.weekend = value,
+            Field::BedtimeStart => rules.bedtime_start = value,
+            Field::BedtimeEnd => rules.bedtime_end = value,
+        }
+    }
+
+    fn show(self, value: u32) -> String {
+        if self.is_clock() {
+            parental_rules::clock(value)
+        } else {
+            duration(u64::from(value) * 60)
+        }
+    }
+
+    /// The value one step up or down: the next multiple of the step, so that
+    /// a typed 50 min goes to 45 or 1 h; times of day go round midnight
+    fn step(self, value: u32, up: bool) -> u32 {
+        let next = if up {
+            value / STEP * STEP + STEP
+        } else {
+            value.div_ceil(STEP) * STEP - STEP.min(value.div_ceil(STEP) * STEP)
+        };
+        if self.is_clock() {
+            if !up && value == 0 { 24 * 60 - STEP } else { next % (24 * 60) }
+        } else {
+            next.clamp(LIMIT_MIN, LIMIT_MAX)
+        }
+    }
+
+    /// What was typed: a duration (45, 45 min, 1 h, 1h20, 1:20) or a time
+    /// of day (20:45, 20h45, 20.45, 2045, 20), whatever the language
+    fn parse(self, typed: &str) -> Option<u32> {
+        let typed = typed.trim().to_lowercase();
+        // Groups of digits, of letters, and separators, in order
+        let mut tokens: Vec<String> = Vec::new();
+        for c in typed.chars() {
+            let kind = |c: char| (c.is_ascii_digit(), c.is_alphabetic());
+            match tokens.last_mut() {
+                Some(last) if !c.is_whitespace() && last.chars().next().map(kind) == Some(kind(c)) && (c.is_ascii_digit() || c.is_alphabetic()) => last.push(c),
+                _ if c.is_whitespace() => {}
+                _ => tokens.push(c.to_string()),
+            }
+        }
+        let mut numbers: Vec<String> = Vec::new();
+        let mut hours_mark = false;
+        for token in &tokens {
+            let first = token.chars().next()?;
+            if first.is_ascii_digit() {
+                numbers.push(token.clone());
+            } else if numbers.len() == 1 && (matches!(first, ':' | '.' | ',' | 'h' | 's' | 'o')) {
+                // 1:20, 1.20, h, hours, heures, Std, Stunden, ore
+                hours_mark = true;
+            } else if !first.is_alphabetic() || !matches!(first, 'h' | 's' | 'o' | 'm') {
+                return None;
+            }
+        }
+        let values: Vec<u32> = numbers.iter().map(|n| n.parse().ok()).collect::<Option<_>>()?;
+        if self.is_clock() {
+            let (h, m) = match values.as_slice() {
+                [n] if numbers[0].len() >= 3 => (n / 100, n % 100),
+                [h] => (*h, 0),
+                [h, m] => (*h, *m),
+                _ => return None,
+            };
+            (h <= 24 && m < 60 && h * 60 + m <= 24 * 60).then_some((h * 60 + m) % (24 * 60))
+        } else {
+            let minutes = match values.as_slice() {
+                [m] if !hours_mark => *m,
+                [h] => h.checked_mul(60)?,
+                [h, m] if hours_mark && *m < 60 => h.checked_mul(60)? + m,
+                _ => return None,
+            };
+            (minutes > 0).then_some(minutes.clamp(LIMIT_MIN, LIMIT_MAX))
+        }
+    }
+}
 
 /// Every text, for the translation check
 const TEXTS: &[&str] = &[
@@ -116,6 +224,7 @@ const TEXTS: &[&str] = &[
     "+15 min",
     "+30 min",
     "+1 h",
+    "No limit today",
     "Give",
     "{} minutes left",
     "1 minute left",
@@ -126,6 +235,9 @@ const TEXTS: &[&str] = &[
     "You can log in again at {}.",
     "You can log in again tomorrow.",
     "You can log in again tomorrow at {}.",
+    "Type a duration, for example 45 or 1:20.",
+    "Type a time, for example 20:45.",
+    "Parental controls do not allow logging in now. Ask a parent.",
 ];
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -197,12 +309,20 @@ fn agent() {
         .map(|output| String::from_utf8_lossy(&output.stdout).into_owned())
         .unwrap_or_default();
     if groups.split_whitespace().any(|group| group == "wheel") {
+        more_time_launcher(false);
         return;
     }
     let mut warned: BTreeSet<u64> = BTreeSet::new();
+    let mut launcher = None;
     loop {
         // Rules can be added or removed while the session runs
-        if let (Some(rules), Some(now)) = (Rules::load(&user), Now::read()) {
+        let rules = Rules::load(&user);
+        let limited = rules.as_ref().is_some_and(|rules| rules.limit_enabled);
+        if launcher != Some(limited) {
+            more_time_launcher(limited);
+            launcher = Some(limited);
+        }
+        if let (Some(rules), Some(now)) = (rules, Now::read()) {
             let usage = Usage::load(&user);
             let extra = parental_rules::load_extra(&user);
             let verdict = parental_rules::verdict(&rules, usage.used_today(&now), &extra, &now);
@@ -225,6 +345,34 @@ fn agent() {
     }
 }
 
+/// The child's "Ask for more time" launcher, in its applications: present
+/// while its screen time is limited, so that it can ask at any time, not only
+/// from a warning
+fn more_time_launcher(show: bool) {
+    let Some(home) = std::env::var_os("HOME") else {
+        return;
+    };
+    let path = Path::new(&home).join(format!(".local/share/applications/{MORE_TIME_ID}.desktop"));
+    if !show {
+        let _ = std::fs::remove_file(&path);
+        return;
+    }
+    let entry = format!(
+        "[Desktop Entry]\nType=Application\nName={}\nComment={}\nIcon={ICON}\nExec=/usr/libexec/cosmic-blue-parental-controls --more-time\nCategories=Utility;\nTerminal=false\n",
+        tr("Ask for more time"),
+        tr("A parent confirms with their password."),
+    );
+    if std::fs::read_to_string(&path).ok().as_deref() == Some(entry.as_str()) {
+        return;
+    }
+    if let Some(dir) = path.parent() {
+        let _ = std::fs::create_dir_all(dir);
+    }
+    if let Err(error) = std::fs::write(&path, entry) {
+        eprintln!("{}: {error}", path.display());
+    }
+}
+
 /// A notification with an "Ask for more time" button, which opens the
 /// window where a parent gives it
 fn notify(remaining: u64, end: &str) {
@@ -236,41 +384,81 @@ fn notify(remaining: u64, end: &str) {
     };
     let body = fill(tr("Your session closes at {}. Save your work."), end);
     let action = format!("more={}", tr("Ask for more time"));
+    // The notification shown, if any: the next warning replaces it in place
+    // (no pile of warnings), and its notify-send, which waits for a click on
+    // the old one, is stopped
+    let (id, waiting) = {
+        let shown = SHOWN.lock().unwrap_or_else(|e| e.into_inner());
+        *shown
+    };
+    if let Some(pid) = waiting {
+        let _ = std::process::Command::new("kill").arg(pid.to_string()).status();
+    }
+    let replace = id.map(|id| id.to_string());
     std::thread::spawn(move || {
-        let output = std::process::Command::new("notify-send")
-            .args([
-                "--app-name",
-                tr("Parental controls"),
-                "--icon",
-                ICON,
-                "--urgency",
-                "critical",
-                "--action",
-                &action,
-                "--wait",
-                &title,
-                &body,
-            ])
-            .output();
-        match output {
-            Ok(output) if String::from_utf8_lossy(&output.stdout).trim() == "more" => {
-                if let Err(error) = std::process::Command::new("/proc/self/exe")
-                    .arg("--more-time")
-                    .spawn()
-                    .or_else(|_| {
-                        std::process::Command::new("/usr/libexec/cosmic-blue-parental-controls")
-                            .arg("--more-time")
-                            .spawn()
-                    })
-                {
-                    eprintln!("Could not open the more time window: {error}");
-                }
+        use std::io::BufRead;
+        let mut args = vec![
+            "--app-name",
+            tr("Parental controls"),
+            "--icon",
+            ICON,
+            "--urgency",
+            "critical",
+            // Until the child closes it: without a time, the COSMIC
+            // notifications take 3 seconds, even for a critical one
+            "--expire-time",
+            "0",
+            "--action",
+            &action,
+            "--print-id",
+            "--wait",
+        ];
+        if let Some(replace) = &replace {
+            args.extend(["--replace-id", replace]);
+        }
+        args.extend([title.as_str(), body.as_str()]);
+        let child = std::process::Command::new("notify-send")
+            .args(&args)
+            .stdout(std::process::Stdio::piped())
+            .spawn();
+        let mut child = match child {
+            Ok(child) => child,
+            Err(error) => {
+                eprintln!("notify-send: {error}");
+                return;
             }
-            Ok(_) => {}
-            Err(error) => eprintln!("notify-send: {error}"),
+        };
+        let pid = child.id();
+        // First line: the notification's id; then the action clicked
+        let mut lines = std::io::BufReader::new(child.stdout.take().expect("piped")).lines();
+        let id = lines.next().and_then(Result::ok).and_then(|line| line.trim().parse().ok());
+        *SHOWN.lock().unwrap_or_else(|e| e.into_inner()) = (id, Some(pid));
+        let clicked = lines.next().and_then(Result::ok).unwrap_or_default();
+        let _ = child.wait();
+        {
+            let mut shown = SHOWN.lock().unwrap_or_else(|e| e.into_inner());
+            if shown.1 == Some(pid) {
+                shown.1 = None;
+            }
+        }
+        if clicked.trim() == "more" {
+            if let Err(error) = std::process::Command::new("/proc/self/exe")
+                .arg("--more-time")
+                .spawn()
+                .or_else(|_| {
+                    std::process::Command::new("/usr/libexec/cosmic-blue-parental-controls")
+                        .arg("--more-time")
+                        .spawn()
+                })
+            {
+                eprintln!("Could not open the more time window: {error}");
+            }
         }
     });
 }
+
+/// The warning notification shown: its id, and the notify-send waiting on it
+static SHOWN: std::sync::Mutex<(Option<u32>, Option<u32>)> = std::sync::Mutex::new((None, None));
 
 // ---------------------------------------------------------------------------
 // Accounts
@@ -412,6 +600,11 @@ enum Message {
     Given(Option<bool>),
     Close,
     CloseToast(widget::ToastId),
+    /// - or + next to a time setting
+    Step(Field, bool),
+    /// Typing in a time setting, then done with it (Enter or elsewhere)
+    Edit(Field, String),
+    Commit,
 }
 
 struct App {
@@ -427,6 +620,8 @@ struct App {
     password_hidden: bool,
     busy: bool,
     minutes: u32,
+    /// The time setting being typed in, and what is typed
+    editing: Option<(Field, String)>,
     toasts: Toasts<Message>,
     banner: Option<widget::svg::Handle>,
 }
@@ -489,6 +684,14 @@ impl App {
             .map(cosmic::Action::App)
     }
 
+    /// The rules of the child account shown
+    fn shown_rules(&self) -> Option<Rules> {
+        let Page::Child(user) = &self.page else {
+            return None;
+        };
+        Some(self.account(user)?.rules.clone().unwrap_or_else(Rules::none))
+    }
+
     fn account(&self, user: &str) -> Option<&Account> {
         self.accounts.iter().find(|account| account.user == user)
     }
@@ -525,6 +728,7 @@ impl Application for App {
             password_hidden: true,
             busy: false,
             minutes: 30,
+            editing: None,
             toasts: Toasts::new(Message::CloseToast),
             banner: Path::new(BANNER)
                 .exists()
@@ -542,6 +746,7 @@ impl Application for App {
             Message::Accounts(accounts) => self.accounts = accounts,
             Message::Open(user) => self.page = Page::Child(user),
             Message::Back => {
+                self.editing = None;
                 self.page = Page::Home;
                 return load();
             }
@@ -616,7 +821,9 @@ impl Application for App {
             Message::Minutes(minutes) => self.minutes = minutes,
             Message::Give => {
                 self.busy = true;
-                let args = vec![EXTEND.to_owned(), user_name(), self.minutes.to_string()];
+                // 0: no limit for the rest of the day
+                let amount = if self.minutes == 0 { "day".to_owned() } else { self.minutes.to_string() };
+                let args = vec![EXTEND.to_owned(), user_name(), amount];
                 return Task::perform(pkexec(args, String::new()), |result| {
                     cosmic::Action::App(Message::Given(result))
                 });
@@ -627,6 +834,37 @@ impl Application for App {
                     Some(true) => std::process::exit(0),
                     Some(false) => return self.toast("Something went wrong, nothing was changed."),
                     None => {}
+                }
+            }
+            Message::Step(field, up) => {
+                self.editing = None;
+                if let Some(mut rules) = self.shown_rules() {
+                    let value = field.step(field.get(&rules), up);
+                    field.set(&mut rules, value);
+                    return self.update(Message::Rules(rules));
+                }
+            }
+            Message::Edit(field, typed) => self.editing = Some((field, typed)),
+            Message::Commit => {
+                let Some((field, typed)) = self.editing.take() else {
+                    return Task::none();
+                };
+                let Some(mut rules) = self.shown_rules() else {
+                    return Task::none();
+                };
+                match field.parse(&typed) {
+                    Some(value) if value == field.get(&rules) => {}
+                    Some(value) => {
+                        field.set(&mut rules, value);
+                        return self.update(Message::Rules(rules));
+                    }
+                    None => {
+                        return self.toast(if field.is_clock() {
+                            "Type a time, for example 20:45."
+                        } else {
+                            "Type a duration, for example 45 or 1:20."
+                        });
+                    }
                 }
             }
             Message::Close => std::process::exit(0),
@@ -865,13 +1103,26 @@ impl App {
                 Message::Rules(rules)
             })
         };
-        let minutes_button = |value: u32, min: u32, max: u32, change: fn(&mut Rules, u32), label: String| {
-            let rules = rules.clone();
-            widget::spin_button(label.clone(), label, value, STEP, min, max, move |value| {
-                let mut rules = rules.clone();
-                change(&mut rules, value);
-                Message::Rules(rules)
-            })
+        // - and + by 15 minutes, and the value itself can be typed in
+        let minutes_button = |field: Field| -> Element<'_, Message> {
+            let shown = match &self.editing {
+                Some((editing, typed)) if *editing == field => typed.clone(),
+                _ => field.show(field.get(&rules)),
+            };
+            widget::row::with_capacity(3)
+                .push(widget::button::icon(widget::icon::from_name("list-remove-symbolic")).on_press(Message::Step(field, false)))
+                .push(
+                    // A visible field, so that it shows it can be typed in
+                    widget::text_input("", shown)
+                        .select_on_focus(true)
+                        .on_input(move |typed| Message::Edit(field, typed))
+                        .on_submit(|_| Message::Commit)
+                        .on_unfocus(Message::Commit)
+                        .width(Length::Fixed(96.0)),
+                )
+                .push(widget::button::icon(widget::icon::from_name("list-add-symbolic")).on_press(Message::Step(field, true)))
+                .align_y(Alignment::Center)
+                .into()
         };
 
         let mut screen = settings::section().title(tr("Screen time")).add(
@@ -888,11 +1139,11 @@ impl App {
             screen = screen
                 .add(settings::item(
                     tr("Monday to Friday"),
-                    minutes_button(rules.weekdays, STEP, 12 * 60, |r, v| r.weekdays = v, duration(u64::from(rules.weekdays) * 60)),
+                    minutes_button(Field::Weekdays),
                 ))
                 .add(settings::item(
                     tr("Saturday and Sunday"),
-                    minutes_button(rules.weekend, STEP, 12 * 60, |r, v| r.weekend = v, duration(u64::from(rules.weekend) * 60)),
+                    minutes_button(Field::Weekend),
                 ));
         }
 
@@ -910,11 +1161,11 @@ impl App {
             bedtime = bedtime
                 .add(settings::item(
                     tr("From"),
-                    minutes_button(rules.bedtime_start, 0, 24 * 60 - STEP, |r, v| r.bedtime_start = v, parental_rules::clock(rules.bedtime_start)),
+                    minutes_button(Field::BedtimeStart),
                 ))
                 .add(settings::item(
                     tr("To"),
-                    minutes_button(rules.bedtime_end, 0, 24 * 60 - STEP, |r, v| r.bedtime_end = v, parental_rules::clock(rules.bedtime_end)),
+                    minutes_button(Field::BedtimeEnd),
                 ));
         }
 
@@ -1099,7 +1350,7 @@ impl App {
         } else {
             widget::button::suggested(tr("Give")).on_press(Message::Give).into()
         };
-        widget::column::with_capacity(6)
+        widget::column::with_capacity(7)
             .spacing(space_m)
             .padding(space_m)
             .align_x(Alignment::Center)
@@ -1118,6 +1369,7 @@ impl App {
                 ])
                 .spacing(space_s),
             )
+            .push(choice("No limit today", 0))
             .push(
                 widget::row::with_capacity(3)
                     .spacing(space_s)
@@ -1129,5 +1381,43 @@ impl App {
             .apply(widget::container)
             .center_x(Length::Fill)
             .into()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Field;
+
+    #[test]
+    fn typed_durations() {
+        for (typed, minutes) in [("45", 45), ("45 min", 45), ("1 h", 60), ("1h20", 80), ("1 h 20 min", 80), ("1:20", 80), ("2 Std", 120), ("2", 5), ("30h", 720)] {
+            assert_eq!(Field::Weekdays.parse(typed), Some(minutes), "{typed}");
+        }
+        for typed in ["", "0", "abc", "1:75", "-5", "1 x"] {
+            assert_eq!(Field::Weekdays.parse(typed), None, "{typed}");
+        }
+    }
+
+    #[test]
+    fn typed_times() {
+        for (typed, minute) in [("20:45", 1245), ("20h45", 1245), ("20.45", 1245), ("2045", 1245), ("20", 1200), ("7", 420), ("0:00", 0), ("24:00", 0)] {
+            assert_eq!(Field::BedtimeStart.parse(typed), Some(minute), "{typed}");
+        }
+        for typed in ["25:00", "20:60", "abc", "2475"] {
+            assert_eq!(Field::BedtimeStart.parse(typed), None, "{typed}");
+        }
+    }
+
+    #[test]
+    fn steps() {
+        assert_eq!(Field::Weekdays.step(50, true), 60);
+        assert_eq!(Field::Weekdays.step(50, false), 45);
+        assert_eq!(Field::Weekdays.step(60, false), 45);
+        assert_eq!(Field::Weekdays.step(15, false), 5);
+        assert_eq!(Field::Weekdays.step(720, true), 720);
+        assert_eq!(Field::BedtimeStart.step(1245, true), 1260);
+        assert_eq!(Field::BedtimeStart.step(1435, true), 0);
+        assert_eq!(Field::BedtimeStart.step(0, false), 1425);
+        assert_eq!(Field::BedtimeStart.step(10, false), 0);
     }
 }

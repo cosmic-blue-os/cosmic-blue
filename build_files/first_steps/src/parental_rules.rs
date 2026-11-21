@@ -329,8 +329,12 @@ pub fn verdict(rules: &Rules, used: u64, extra: &[(i64, u32)], now: &Now) -> Ver
         .max()
         .filter(|until| *until > now.unix);
 
+    // 0 minutes granted: no screen time limit for the rest of the day (the
+    // bedtime hours still apply)
+    let unlimited_today = extra.iter().any(|(at, minutes)| *at >= day_start && *minutes == 0);
     let allowed_today = rules
         .daily_limit(now.weekday)
+        .filter(|_| !unlimited_today)
         .map(|minutes| u64::from(minutes) * 60 + extra_today);
     let left_today = allowed_today.map(|allowed| allowed.saturating_sub(used));
 
@@ -421,6 +425,15 @@ mod tests {
         let n = now(600, 5);
         let v = verdict(&rules, 120 * 60, &[(n.unix - 60, 15)], &n);
         assert_eq!(v.remaining, Some(15 * 60));
+        // No limit today, but not tomorrow
+        let v = verdict(&rules, 300 * 60, &[(n.unix - 60, 0)], &n);
+        assert_eq!((v.blocked, v.remaining, v.allowed_today), (None, None, None));
+        let v = verdict(&rules, 300 * 60, &[(n.unix - 86400, 0)], &n);
+        assert_eq!(v.blocked, Some(Block::Limit));
+        // Bedtime still applies
+        let rules = Rules::default();
+        let v = verdict(&rules, 300 * 60, &[(n.unix - 60, 0)], &now(21 * 60, 5));
+        assert_eq!(v.blocked, Some(Block::Bedtime));
     }
 
     #[test]

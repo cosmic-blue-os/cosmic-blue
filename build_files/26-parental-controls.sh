@@ -12,12 +12,14 @@ dnf5 -y install acl dnsmasq libnotify nftables
 
 # The login check: during bedtime, or once the day's screen time is used up,
 # the login screen refuses a child account with a message saying when it can
-# log in again (pam_exec prints it). Accounts without rules are not affected.
+# log in again. Accounts without rules are not affected.
 # The login screen logs in through greetd with the PAM service named in
 # /etc/greetd/cosmic-greeter.toml ("cosmic-greeter"; "greetd" is greetd's
 # default, covered too). Fedora ships these PAM files in /usr/lib/pam.d: a
 # copy in /etc/pam.d takes precedence.
-line='account    required     pam_exec.so stdout /usr/libexec/cosmic-blue-parental-daemon login-check'
+# pam_cosmic_blue_parental.so (build_files/first_steps/src/pam_parental.rs)
+# runs `cosmic-blue-parental-daemon login-check` and shows its message
+line='account    required     pam_cosmic_blue_parental.so'
 for service in cosmic-greeter greetd; do
     pam="/etc/pam.d/${service}"
     if [[ ! -f "${pam}" ]]; then
@@ -28,10 +30,10 @@ for service in cosmic-greeter greetd; do
         fi
         cp "/usr/lib/pam.d/${service}" "${pam}"
     fi
-    if ! grep -qF 'cosmic-blue-parental-daemon login-check' "${pam}"; then
+    if ! grep -qF 'pam_cosmic_blue_parental.so' "${pam}"; then
         # Before the first account line, so that it runs whatever follows
         awk -v line="${line}" '!done && /^account/ { print line; done = 1 } { print }' "${pam}" > "${pam}.new"
-        grep -qF 'cosmic-blue-parental-daemon login-check' "${pam}.new"
+        grep -qF 'pam_cosmic_blue_parental.so' "${pam}.new"
         cat "${pam}.new" > "${pam}"
         rm -f "${pam}.new"
     fi

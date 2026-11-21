@@ -559,9 +559,14 @@ grep -q '<allow_active>auth_admin</allow_active>' /usr/share/polkit-1/actions/io
 systemctl is-enabled cosmic-blue-parental-controls.service
 command -v dnsmasq nft setfacl notify-send >/dev/null
 for service in cosmic-greeter greetd; do
-    grep -qE '^account +required +pam_exec\.so stdout /usr/libexec/cosmic-blue-parental-daemon login-check$' \
+    grep -qE '^account +required +pam_cosmic_blue_parental\.so$' \
         "/etc/pam.d/${service}"
 done
+# The login screen's PAM module loads (no symbol missing from libpam: a
+# module that does not load refuses every login)
+python3 -c "import ctypes; ctypes.CDLL('libpam.so.0', mode=ctypes.RTLD_GLOBAL); ctypes.CDLL('/usr/lib64/security/pam_cosmic_blue_parental.so').pam_sm_acct_mgmt" \
+    || { echo "pam_cosmic_blue_parental.so does not load"; exit 1; }
+/usr/libexec/cosmic-blue-parental-daemon refusal | grep -q .
 PAM_USER=root /usr/libexec/cosmic-blue-parental-daemon login-check \
     || { echo "The parental controls login check refuses root"; exit 1; }
 # Wrong arguments are refused before anything runs

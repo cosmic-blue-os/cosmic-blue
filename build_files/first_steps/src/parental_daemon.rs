@@ -16,6 +16,8 @@
 //       PAM (pam_exec, account): refuses a login during bedtime or once the
 //       day's time is used up, with a message saying when it is possible
 //       again. Accounts without rules are always let in.
+//   cosmic-blue-parental-daemon refusal
+//       the login screen's message when the check gives no reason
 //   cosmic-blue-parental-daemon status
 //       what the rules allow now, for each child account (tests)
 
@@ -64,8 +66,13 @@ fn main() {
         Some("run") => run(),
         Some("login-check") => std::process::exit(login_check()),
         Some("status") => status(),
+        Some("refusal") => {
+            // The login screen's message when the check gives no reason
+            system_language();
+            println!("{}", tr("Parental controls do not allow logging in now. Ask a parent."));
+        }
         _ => {
-            eprintln!("Usage: cosmic-blue-parental-daemon run | login-check | status");
+            eprintln!("Usage: cosmic-blue-parental-daemon run | login-check | refusal | status");
             std::process::exit(2);
         }
     }

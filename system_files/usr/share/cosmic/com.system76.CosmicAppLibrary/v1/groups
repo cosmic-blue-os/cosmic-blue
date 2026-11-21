@@ -7,6 +7,7 @@
             "io.github.cosmic_blue_os.Welcome",
             "io.github.cosmic_blue_os.Updates",
             "io.github.cosmic_blue_os.ParentalControls",
+            "io.github.cosmic_blue_os.ParentalControls.MoreTime",
             "io.github.cosmic_blue_os.Shortcuts",
             "documentation",
         ]),
