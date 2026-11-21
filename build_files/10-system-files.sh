@@ -200,7 +200,6 @@ python3 -I /ctx/build_files/rename-just-recipes.py "${STAGE}"/usr/share/ublue-os
     "powerwash=reset-system@System|Factory reset: erases everything (experimental)" \
     "check-local-overrides@System|List the system settings changed in /etc" \
     "check-idle-power-draw@System|Measure the power used while idle" \
-    "clean-system@System|Free disk space (containers, Flatpak, Homebrew)" \
     "update@System|Update the system, apps and Homebrew packages now" \
     "toggle-updates@System|Turn automatic updates on or off" \
     "toggle-tpm2|Turn on or off disk unlocking with the TPM2 chip (no password)" \
@@ -235,9 +234,11 @@ PY
 
 # `ujust enroll-secure-boot-key` (projectbluefin/common) queues the akmods key
 # with Universal Blue's password: 60-custom.just has cosmic-blue's own, with
-# the password "cosmicblue" that the ISO uses too.
+# the password "cosmicblue" that the ISO uses too. Its `ujust clean-system`
+# asks question after question: 60-custom.just's runs the script of the
+# "Clean up" button of cosmic-blue Tools (/usr/libexec/cosmic-blue-clean).
 python3 -I /ctx/build_files/drop-just-recipes.py \
-    "${STAGE}/usr/share/ublue-os/just/default.just" enroll-secure-boot-key
+    "${STAGE}/usr/share/ublue-os/just/default.just" enroll-secure-boot-key clean-system
 
 # Bluefin's zsh profile forces every LC_* variable (and LC_ALL) to en_US for
 # zsh login shells, which overrides the language chosen at install time.

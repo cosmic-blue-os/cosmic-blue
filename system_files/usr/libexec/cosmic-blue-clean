@@ -1,0 +1,49 @@
+#!/usr/bin/bash
+# Free disk space without touching anyone's files: what nothing uses any
+# more. Run by `ujust clean-system` and by the "Clean up" button of cosmic-blue
+# Tools (Maintenance page), as the person using the computer:
+#
+#   - their own Flatpak runtimes and extensions that no app needs any more
+#   - their Podman and Docker images that nothing refers to (dangling: older
+#     versions of rebuilt or updated images). Named images, containers and
+#     volumes stay: they may hold work (Distrobox, databases)
+#   - Homebrew's old versions and download cache
+#   - then, with an administrator password, the same for everyone's Flatpak
+#     apps and the system's update caches (cosmic-blue-tools-helper clean)
+#
+# Prints the space freed. Exits with pkexec's code (126) when the password
+# prompt is dismissed, so that the app says nothing.
+set -uo pipefail
+
+free() { df -B1 --output=avail /var 2>/dev/null | tail -n 1 | tr -d ' '; }
+before="$(free)"
+
+echo "Removing unused Flatpak runtimes (yours)..."
+flatpak uninstall --user --unused --noninteractive -y 2>/dev/null || true
+
+if command -v podman >/dev/null 2>&1; then
+    echo "Removing unused Podman images..."
+    podman image prune -f >/dev/null 2>&1 || true
+fi
+# Docker (ujust install-dev-tools) only when this account can use it
+if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+    echo "Removing unused Docker images..."
+    docker image prune -f >/dev/null 2>&1 || true
+fi
+
+if command -v brew >/dev/null 2>&1 && [[ -w "$(brew --prefix 2>/dev/null)" ]]; then
+    echo "Removing old Homebrew versions and downloads..."
+    brew cleanup --prune=all >/dev/null 2>&1 || true
+fi
+
+echo "Removing unused system apps parts and update caches (administrator password)..."
+pkexec /usr/libexec/cosmic-blue-tools-helper clean
+status=$?
+
+after="$(free)"
+if [[ -n "${before}" && -n "${after}" && "${after}" -gt "${before}" ]]; then
+    echo "Freed: $(numfmt --to=si --suffix=B "$((after - before))")"
+else
+    echo "Nothing more to remove."
+fi
+exit "${status}"

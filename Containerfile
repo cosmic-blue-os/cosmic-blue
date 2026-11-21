@@ -33,7 +33,7 @@ COPY system_files /system_files/cosmic-blue
 COPY --from=helpers /theme/cosmic /system_files/cosmic-blue/usr/share/cosmic
 COPY --from=helpers /theme/previous /previous_defaults/theme
 COPY --from=helpers /tour/cosmic-blue-tour /system_files/cosmic-blue/usr/libexec/cosmic-blue-tour
-COPY --from=helpers /tour/cosmic-blue-updates /system_files/cosmic-blue/usr/libexec/cosmic-blue-updates
+COPY --from=helpers /tour/cosmic-blue-tools /system_files/cosmic-blue/usr/libexec/cosmic-blue-tools
 COPY --from=helpers /tour/cosmic-blue-parental-controls /system_files/cosmic-blue/usr/libexec/cosmic-blue-parental-controls
 COPY --from=helpers /tour/cosmic-blue-parental-daemon /system_files/cosmic-blue/usr/libexec/cosmic-blue-parental-daemon
 COPY --from=helpers /greeter /greeter

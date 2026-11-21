@@ -34,8 +34,9 @@ COPY --from=theme-build /out /
 
 # cosmic-blue's tours: "First steps" on installed systems and the live ISO's
 # welcome tour, built with libcosmic like COSMIC's first-run assistant
-# (see build_files/first_steps/src/main.rs), and the Updates and Parental
-# controls apps, which look the same (src/updates.rs, src/parental.rs; with
+# (see build_files/first_steps/src/main.rs), and the cosmic-blue Tools (with
+# its Updates page) and Parental controls apps, which look the same
+# (src/tools.rs, src/parental.rs; with
 # the parental controls service, src/parental_daemon.rs)
 FROM registry.fedoraproject.org/fedora:${BASE_TAG} AS tour-build
 COPY build_files/first_steps /tour
@@ -43,11 +44,12 @@ ENV CARGO_HOME=/cargo/home CARGO_TARGET_DIR=/cargo/target
 RUN dnf5 -y install cargo rust gcc pkgconf-pkg-config libxkbcommon-devel wayland-devel \
     && cd /tour && cargo build --release --locked \
     && /cargo/target/release/cosmic-blue-tour --check \
-    && /cargo/target/release/cosmic-blue-updates --check \
+    && /cargo/target/release/cosmic-blue-tools --check \
+    && cargo test --release --locked --bin cosmic-blue-tools \
     && /cargo/target/release/cosmic-blue-parental-controls --check \
     && cargo test --release --locked --bin cosmic-blue-parental-daemon \
     && install -D -m 0755 /cargo/target/release/cosmic-blue-tour /out/cosmic-blue-tour \
-    && install -D -m 0755 /cargo/target/release/cosmic-blue-updates /out/cosmic-blue-updates \
+    && install -D -m 0755 /cargo/target/release/cosmic-blue-tools /out/cosmic-blue-tools \
     && install -D -m 0755 /cargo/target/release/cosmic-blue-parental-controls /out/cosmic-blue-parental-controls \
     && install -D -m 0755 /cargo/target/release/cosmic-blue-parental-daemon /out/cosmic-blue-parental-daemon
 FROM scratch AS tour

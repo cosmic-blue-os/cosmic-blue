@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Name=cosmic-blue Tools
+Name[fr]=Outils cosmic-blue
+Name[de]=cosmic-blue Werkzeuge
+Name[es]=Herramientas de cosmic-blue
+Name[it]=Strumenti di cosmic-blue
+Name[pt_BR]=Ferramentas do cosmic-blue
+Comment=Updates, maintenance and help, without typing commands
+Comment[fr]=Mises à jour, entretien et aide, sans taper de commande
+Comment[de]=Updates, Pflege und Hilfe, ganz ohne Befehle
+Comment[es]=Actualizaciones, mantenimiento y ayuda, sin escribir comandos
+Comment[it]=Aggiornamenti, manutenzione e aiuto, senza digitare comandi
+Comment[pt_BR]=Atualizações, manutenção e ajuda, sem digitar comandos
+Keywords=cosmic-blue;Tools;Maintenance;Clean;Disk space;Help;Bug;ujust;
+Keywords[fr]=cosmic-blue;Outils;Entretien;Nettoyer;Espace disque;Aide;Bug;ujust;
+Keywords[de]=cosmic-blue;Werkzeuge;Pflege;Aufräumen;Speicherplatz;Hilfe;Fehler;ujust;
+Keywords[es]=cosmic-blue;Herramientas;Mantenimiento;Limpiar;Espacio;Ayuda;Error;ujust;
+Keywords[it]=cosmic-blue;Strumenti;Manutenzione;Pulizia;Spazio;Aiuto;Bug;ujust;
+Keywords[pt_BR]=cosmic-blue;Ferramentas;Manutenção;Limpar;Espaço;Ajuda;Bug;ujust;
+Icon=cosmic-blue-tools
+Exec=/usr/libexec/cosmic-blue-tools
+Terminal=false
+StartupNotify=true
+Categories=System;Settings;

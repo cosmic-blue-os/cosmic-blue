@@ -1,0 +1,448 @@
+# Brazilian Portuguese translation of cosmic-blue Tools
+# (build_files/first_steps/src/tools.rs and its pages).
+msgid ""
+msgstr ""
+"Language: pt_BR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Updates"
+msgstr "Atualizações"
+
+msgid "cosmic-blue updates itself in the background. A new version starts at the next restart, without interrupting you."
+msgstr "O cosmic-blue se atualiza sozinho em segundo plano. Uma nova versão começa na próxima reinicialização, sem interromper você."
+
+msgid "Current version: {}"
+msgstr "Versão atual: {}"
+
+msgid "Weekly updates, tested before they come out"
+msgstr "Atualizações semanais, testadas antes de saírem"
+
+msgid "Daily updates, sooner but less tested"
+msgstr "Atualizações diárias, mais cedo, porém menos testadas"
+
+msgid "dev channel: every change, for testers"
+msgstr "Canal dev: cada mudança, para testadores"
+
+msgid "This system stays on this version: it does not update by itself."
+msgstr "Este sistema fica nesta versão: ele não se atualiza sozinho."
+
+msgid "Check now"
+msgstr "Verificar agora"
+
+msgid "Checking…"
+msgstr "Verificando…"
+
+msgid "You are up to date."
+msgstr "O sistema está atualizado."
+
+msgid "The check did not work. Are you online?"
+msgstr "A verificação não funcionou. Você está conectado à internet?"
+
+msgid "Ready for the next restart: {}"
+msgstr "Pronta para a próxima reinicialização: {}"
+
+msgid "Downloaded and checked. It takes effect at the next restart."
+msgstr "Baixada e verificada. Ela entra em vigor na próxima reinicialização."
+
+msgid "Restart"
+msgstr "Reiniciar"
+
+msgid "Previous version: {}"
+msgstr "Versão anterior: {}"
+
+msgid "Something wrong since the last update? Go back to this version. Your files and settings stay as they are."
+msgstr "Algo deu errado desde a última atualização? Volte para esta versão. Seus arquivos e configurações continuam como estão."
+
+msgid "Go back to it"
+msgstr "Voltar para esta"
+
+msgid "Back to {} at the next restart"
+msgstr "Volta para {} na próxima reinicialização"
+
+msgid "Your files and settings stay as they are. The version you leave will not be installed again: updates start again with the next one."
+msgstr "Seus arquivos e configurações continuam como estão. A versão que você deixa não será instalada de novo: as atualizações voltam com a próxima."
+
+msgid "Version {} is set aside"
+msgstr "A versão {} foi deixada de lado"
+
+msgid "You went back from it, so it will not be installed again. Updates start again with the next version."
+msgstr "Você voltou dela, então ela não será instalada de novo. As atualizações voltam com a próxima versão."
+
+msgid "Get new features early"
+msgstr "Receber as novidades antes"
+
+msgid ""
+"Off (recommended): one tested update a week.\n"
+"On: an update every day, sooner but less tested."
+msgstr ""
+"Desativado (recomendado): uma atualização testada por semana.\n"
+"Ativado: uma atualização por dia, mais cedo, porém menos testada."
+
+msgid "You follow the dev channel, chosen in a terminal. Turn this off to go back to one tested update a week."
+msgstr "Você segue o canal dev, escolhido em um terminal. Desative isto para voltar a uma atualização testada por semana."
+
+msgid "Downloading the new version… This can take a few minutes."
+msgstr "Baixando a nova versão… Isso pode levar alguns minutos."
+
+msgid "Something went wrong, nothing was changed."
+msgstr "Algo deu errado, nada foi alterado."
+
+msgid "The system version could not be read: is this computer installed with cosmic-blue?"
+msgstr "Não foi possível ler a versão do sistema: este computador está instalado com o cosmic-blue?"
+
+msgid "Apps from COSMIC Store update by themselves too."
+msgstr "Os aplicativos da COSMIC Store também se atualizam sozinhos."
+
+msgid "What's new"
+msgstr "Novidades"
+
+msgid "An older version"
+msgstr "Uma versão mais antiga"
+
+msgid "Choose the stable version of a past week. The system then stays on it, without updates, until you resume them."
+msgstr "Escolher a versão estável de uma semana passada. O sistema fica nela, sem atualizações, até você retomá-las."
+
+msgid "Choose…"
+msgstr "Escolher…"
+
+msgid "Hide"
+msgstr "Ocultar"
+
+msgid "Stable version of {}"
+msgstr "Versão estável de {}"
+
+msgid "Use this one"
+msgstr "Usar esta"
+
+msgid "No older version found. Are you online?"
+msgstr "Nenhuma versão mais antiga encontrada. Você está conectado à internet?"
+
+msgid "{y}-{m}-{d}"
+msgstr "{d}/{m}/{y}"
+
+msgid "Updates are paused"
+msgstr "As atualizações estão pausadas"
+
+msgid "This system stays on this version. Resume them to get one tested update a week again."
+msgstr "Este sistema fica nesta versão. Retome-as para voltar a receber uma atualização testada por semana."
+
+msgid "Resume updates"
+msgstr "Retomar as atualizações"
+
+msgid "cosmic-blue Tools"
+msgstr "Ferramentas do cosmic-blue"
+
+msgid "Maintenance"
+msgstr "Manutenção"
+
+msgid "Keep the computer tidy and in shape, without typing commands."
+msgstr "Manter o computador organizado e em forma, sem digitar comandos."
+
+msgid "Disk space"
+msgstr "Espaço em disco"
+
+msgid "{used} used of {total}"
+msgstr "{used} usados de {total}"
+
+msgid "{} free"
+msgstr "{} livres"
+
+msgid "See what takes space"
+msgstr "Ver o que ocupa espaço"
+
+msgid "Free up space"
+msgstr "Liberar espaço"
+
+msgid "Removes what nothing uses any more: leftover parts of removed apps, unused container images, old downloads of tools. Your files stay as they are."
+msgstr "Remove o que nada mais usa: restos de aplicativos removidos, imagens de contêiner sem uso, downloads antigos de ferramentas. Seus arquivos ficam como estão."
+
+msgid "Clean up"
+msgstr "Limpar"
+
+msgid "Cleaning up…"
+msgstr "Limpando…"
+
+msgid "{} freed"
+msgstr "{} liberados"
+
+msgid "Everything was already tidy."
+msgstr "Tudo já estava em ordem."
+
+msgid "Apps that come with cosmic-blue"
+msgstr "Aplicativos que vêm com o cosmic-blue"
+
+msgid "All of them are installed."
+msgstr "Todos estão instalados."
+
+msgid "One of them was removed. Put it back?"
+msgstr "Um deles foi removido. Reinstalar?"
+
+msgid "{} of them were removed. Put them back?"
+msgstr "{} deles foram removidos. Reinstalar?"
+
+msgid "Reinstall"
+msgstr "Reinstalar"
+
+msgid "Installing…"
+msgstr "Instalando…"
+
+msgid "The apps are back."
+msgstr "Os aplicativos estão de volta."
+
+msgid "The apps could not be installed. Are you online?"
+msgstr "Não foi possível instalar os aplicativos. Você está conectado?"
+
+msgid "Firmware updates"
+msgstr "Atualizações de firmware"
+
+msgid "New versions of the BIOS, SSD, dock… from their makers."
+msgstr "Novas versões do BIOS, SSD, dock… dos fabricantes."
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "Find answers, ask a question, or tell us what goes wrong."
+msgstr "Encontrar respostas, fazer uma pergunta ou nos contar o que dá errado."
+
+msgid "Documentation"
+msgstr "Documentação"
+
+msgid "Updates, software, commands and tips"
+msgstr "Atualizações, programas, comandos e dicas"
+
+msgid "Ask a question"
+msgstr "Fazer uma pergunta"
+
+msgid "Other cosmic-blue users and its makers answer, on GitHub."
+msgstr "Outros usuários do cosmic-blue e seus autores respondem, no GitHub."
+
+msgid "Report a problem"
+msgstr "Relatar um problema"
+
+msgid "Opens the bug report form with the details of this computer filled in. They hold no personal data. A GitHub account is needed."
+msgstr "Abre o formulário de relato de erro com os detalhes deste computador já preenchidos. Eles não contêm dados pessoais. É preciso uma conta do GitHub."
+
+msgid "Show the details"
+msgstr "Ver os detalhes"
+
+msgid "Hide the details"
+msgstr "Ocultar os detalhes"
+
+msgid "Report"
+msgstr "Relatar"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Copied."
+msgstr "Copiado."
+
+msgid "B"
+msgstr "B"
+
+msgid "kB"
+msgstr "kB"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "GB"
+msgstr "GB"
+
+msgid "TB"
+msgstr "TB"
+
+msgid "A second app source for COSMIC Store, with apps that are not on Flathub. Less checked than Flathub."
+msgstr "Uma segunda fonte de aplicativos para a COSMIC Store, com aplicativos que não estão no Flathub. Menos verificada que o Flathub."
+
+msgid "A text file in your home folder, to keep or to compare."
+msgstr "Um arquivo de texto na sua pasta pessoal, para guardar ou comparar."
+
+msgid "Accent color, wallpaper, panel, dock, fonts…"
+msgstr "Cor de destaque, papel de parede, painel, dock, fontes…"
+
+msgid "Accept and install"
+msgstr "Aceitar e instalar"
+
+msgid "All COSMIC settings"
+msgstr "Todas as configurações do COSMIC"
+
+msgid "Appearance"
+msgstr "Aparência e configurações"
+
+msgid "Arial, Times New Roman, Verdana… for documents made on Windows. cosmic-blue already has look-alikes with the same sizes."
+msgstr "Arial, Times New Roman, Verdana… para documentos feitos no Windows. O cosmic-blue já tem fontes parecidas com as mesmas medidas."
+
+msgid "Back to the cosmic-blue colors, dark theme, icons, fonts and wallpaper. Panel, dock, keyboard and shortcuts stay."
+msgstr "Volta às cores, ao tema escuro, aos ícones, às fontes e ao papel de parede do cosmic-blue. Painel, dock, teclado e atalhos ficam."
+
+msgid "Back to the cosmic-blue defaults, for every setting. A copy of the current ones is kept."
+msgstr "Volta aos padrões do cosmic-blue em todas as configurações. Uma cópia das atuais é guardada."
+
+msgid "Battery charge limit"
+msgstr "Limite de carga da bateria"
+
+msgid "Battery, graphics card and firmware settings."
+msgstr "Bateria, placa de vídeo e configurações do firmware."
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Charging stops at 80 %: the battery lasts longer when the laptop stays plugged in."
+msgstr "A carga para em 80 %: a bateria dura mais quando o notebook fica na tomada."
+
+msgid "Computer"
+msgstr "Computador"
+
+msgid "Dark theme"
+msgstr "Tema escuro"
+
+msgid "Developer tools"
+msgstr "Ferramentas de desenvolvimento"
+
+
+msgid "Every COSMIC setting goes back to the defaults. A copy is kept in your settings folder."
+msgstr "Todas as configurações do COSMIC voltam ao padrão. Uma cópia fica na sua pasta de configurações."
+
+msgid "Extra software"
+msgstr "Programas extras"
+
+msgid "Firmware settings (BIOS/UEFI)"
+msgstr "Configurações do firmware (BIOS/UEFI)"
+
+msgid "FlatPark"
+msgstr "FlatPark"
+
+msgid "Games"
+msgstr "Jogos"
+
+msgid "Install"
+msgstr "Instalar"
+
+msgid "Installed. Restart open apps to see them."
+msgstr "Instaladas. Reinicie os aplicativos abertos para vê-las."
+
+msgid "Light text on dark backgrounds. Off: the light theme."
+msgstr "Texto claro sobre fundo escuro. Desligado: o tema claro."
+
+msgid "Log out and back in to finish."
+msgstr "Saia e entre de novo para concluir."
+
+msgid "Microsoft fonts"
+msgstr "Fontes da Microsoft"
+
+msgid "Microsoft's license applies to these fonts."
+msgstr "Estas fontes seguem a licença da Microsoft."
+
+msgid "More in Settings"
+msgstr "Mais nas Configurações"
+
+msgid "NVIDIA graphics card"
+msgstr "Placa de vídeo NVIDIA"
+
+
+msgid "Read it"
+msgstr "Ler"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Reset"
+msgstr "Redefinir"
+
+msgid "Restart into the computer's own settings: boot order, virtualization, Secure Boot…"
+msgstr "Reiniciar nas configurações do próprio computador: ordem de inicialização, virtualização, Secure Boot…"
+
+msgid "Restart now"
+msgstr "Reiniciar agora"
+
+msgid "Restore"
+msgstr "Restaurar"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Save my settings"
+msgstr "Salvar minhas configurações"
+
+msgid "Saved in your home folder."
+msgstr "Salvo na sua pasta pessoal."
+
+
+msgid "Switch"
+msgstr "Trocar"
+
+msgid "The NVIDIA edition is downloaded now and starts at the next restart. With Secure Boot on, a blue screen asks for the password cosmicblue once."
+msgstr "A edição NVIDIA é baixada agora e inicia na próxima reinicialização. Com o Secure Boot ligado, uma tela azul pede uma vez a senha cosmicblue."
+
+msgid "The NVIDIA edition starts at the next restart."
+msgstr "A edição NVIDIA inicia na próxima reinicialização."
+
+msgid "The computer restarts now. Save your work first."
+msgstr "O computador reinicia agora. Salve seu trabalho antes."
+
+msgid "The cosmic-blue look"
+msgstr "O visual do cosmic-blue"
+
+msgid "The look of the desktop and your COSMIC settings."
+msgstr "A aparência da área de trabalho e suas configurações do COSMIC."
+
+msgid "Use it"
+msgstr "Usar"
+
+msgid "Use the NVIDIA edition of cosmic-blue, with NVIDIA's own driver, for games and graphics apps."
+msgstr "Usar a edição NVIDIA do cosmic-blue, com o driver da NVIDIA, para jogos e aplicativos gráficos."
+
+msgid "Virtual machines"
+msgstr "Máquinas virtuais"
+
+msgid "What cosmic-blue does not install by itself, ready in one click."
+msgstr "O que o cosmic-blue não instala sozinho, pronto em um clique."
+
+msgid "Working…"
+msgstr "Em andamento…"
+
+msgid "You use the NVIDIA edition, with NVIDIA's own driver."
+msgstr "Você usa a edição NVIDIA, com o driver da NVIDIA."
+
+msgid "virt-manager, to run Windows or another Linux in a window."
+msgstr "virt-manager, para rodar Windows ou outro Linux numa janela."
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Code editors"
+msgstr "Editores de código"
+
+msgid "Containers"
+msgstr "Contêineres"
+
+msgid "In the terminal"
+msgstr "No terminal"
+
+msgid "Docker, VS Code, Neovim… Tick the ones you want, untick the ones to remove."
+msgstr "Docker, VS Code, Neovim… Marque os que quiser e desmarque os que quiser remover."
+
+msgid "Homebrew is not set up yet: only Podman Desktop can be installed now."
+msgstr "O Homebrew ainda não está pronto: por enquanto só o Podman Desktop pode ser instalado."
+
+msgid "The developer tools are ready."
+msgstr "As ferramentas de desenvolvimento estão prontas."
+
+msgid "Stores"
+msgstr "Lojas"
+
+msgid "Windows games"
+msgstr "Jogos do Windows"
+
+msgid "And also"
+msgstr "E também"
+
+msgid "Steam, Heroic, Lutris… Tick the ones you want, untick the ones to remove. Your games and saves stay."
+msgstr "Steam, Heroic, Lutris… Marque os que quiser e desmarque os que quiser remover. Seus jogos e jogos salvos ficam."
+
+msgid "Your game apps are ready."
+msgstr "Seus aplicativos de jogos estão prontos."

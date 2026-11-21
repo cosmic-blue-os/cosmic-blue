@@ -72,11 +72,14 @@ touch /etc/skel/.config/cosmic-initial-setup-done
 mkdir -p /etc/skel/.config/cosmic-blue
 touch /etc/skel/.config/cosmic-blue/first-steps-pending
 
-# The Updates app (/usr/libexec/cosmic-blue-updates, built with the tour)
-# replaces the "System Update" launcher of Bluefin's shared files, which ran
-# `ujust update` in a terminal: its "Check now" runs the same update
+# The Updates launcher (cosmic-blue Tools on its Updates page, built with the
+# tour) replaces the "System Update" launcher of Bluefin's shared files, which
+# ran `ujust update` in a terminal: its "Check now" runs the same update
 # (uupd-manual.service), and `ujust update` stays for the terminal.
+# /usr/libexec/cosmic-blue-updates, its earlier program (the tour, tests),
+# opens the same page.
 rm -f /usr/share/applications/system-update.desktop
+ln -sf cosmic-blue-tools /usr/libexec/cosmic-blue-updates
 
 systemctl set-default graphical.target
 

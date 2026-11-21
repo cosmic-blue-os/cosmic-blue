@@ -19,17 +19,6 @@ pub const THUMBNAILS: &str = "/usr/share/cosmic-blue/wallpapers";
 pub const AVATARS: &str = "/usr/share/pixmaps/faces";
 const IMAGE_INFO: &str = "/usr/share/ublue-os/image-info.json";
 /// Homebrew, set up at the first boot (ublue-os/brew)
-pub const BREW: &str = "/home/linuxbrew/.linuxbrew/bin/brew";
-const BREW_PREFIX: &str = "/home/linuxbrew/.linuxbrew";
-
-pub fn brew_has_formula(name: &str) -> bool {
-    Path::new(BREW_PREFIX).join("Cellar").join(name).is_dir()
-}
-
-pub fn brew_has_cask(name: &str) -> bool {
-    Path::new(BREW_PREFIX).join("Caskroom").join(name).is_dir()
-}
-
 pub const UPDATES_HELPER: &str = "/usr/libexec/cosmic-blue-updates-helper";
 
 fn config_dir() -> PathBuf {
@@ -500,11 +489,47 @@ pub fn package_kind(path: &Path) -> Package {
 /// "google-chrome-stable_current_amd64.deb" -> "google chrome"
 pub fn search_term(path: &Path) -> String {
     const NOISE: &[&str] = &[
-        "setup", "installer", "install", "full", "x64", "x86", "win", "win32", "win64",
-        "windows", "amd64", "arm64", "aarch64", "i386", "i686", "x86_64", "noarch", "linux",
-        "latest", "stable", "current", "release", "portable", "offline", "online", "web",
-        "user", "system", "deb", "rpm", "exe", "msi", "ubuntu", "debian", "fedora", "el8",
-        "el9", "el10", "bin", "pkg", "package",
+        "setup",
+        "installer",
+        "install",
+        "full",
+        "x64",
+        "x86",
+        "win",
+        "win32",
+        "win64",
+        "windows",
+        "amd64",
+        "arm64",
+        "aarch64",
+        "i386",
+        "i686",
+        "x86_64",
+        "noarch",
+        "linux",
+        "latest",
+        "stable",
+        "current",
+        "release",
+        "portable",
+        "offline",
+        "online",
+        "web",
+        "user",
+        "system",
+        "deb",
+        "rpm",
+        "exe",
+        "msi",
+        "ubuntu",
+        "debian",
+        "fedora",
+        "el8",
+        "el9",
+        "el10",
+        "bin",
+        "pkg",
+        "package",
     ];
     let stem = path
         .file_stem()

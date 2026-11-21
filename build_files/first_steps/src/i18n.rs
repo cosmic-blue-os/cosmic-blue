@@ -102,7 +102,7 @@ fn language_index() -> Option<usize> {
 }
 
 /// The session language code ("fr", "pt_BR"), when it has a translation
-#[allow(dead_code)] // (used by the tours, not by Updates)
+#[allow(dead_code)] // (used by the tours and Tools, not by Parental controls)
 pub fn language() -> Option<&'static str> {
     language_index().map(|index| LANGUAGES[index].0)
 }

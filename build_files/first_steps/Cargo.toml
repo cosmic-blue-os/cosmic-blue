@@ -9,16 +9,16 @@ publish = false
 # cosmic-initial-setup's epoch-<COSMIC version> Cargo.lock, trimmed by cargo to
 # our dependencies (Containerfile.helpers builds with --locked);
 # check-cosmic-version.yml refreshes it with each COSMIC version.
-# cosmic-blue-tour (src/main.rs) is the package's own program; Updates is a
-# second one, and Parental controls a third, sharing the translation code
-# (src/i18n.rs) and the look
+# cosmic-blue-tour (src/main.rs) is the package's own program; Tools (with
+# its Updates page) is a second one, and Parental controls a third, sharing
+# the translation code (src/i18n.rs) and the look
 [[bin]]
 name = "cosmic-blue-tour"
 path = "src/main.rs"
 
 [[bin]]
-name = "cosmic-blue-updates"
-path = "src/updates.rs"
+name = "cosmic-blue-tools"
+path = "src/tools.rs"
 
 # Parental controls: the app (window, warnings in a child's session) and the
 # service that applies the rules as root (src/parental_daemon.rs, without

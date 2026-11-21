@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+# The changes cosmic-blue Tools (/usr/libexec/cosmic-blue-tools) makes to the
+# system, run as root through pkexec after an administrator password (polkit
+# action io.github.cosmic_blue_os.tools.manage). Only these:
+#
+#   clean    remove the Flatpak runtimes and extensions that no app installed
+#            for everyone needs any more, and the system's update caches
+#            (rpm-ostree cleanup --base --repomd: the deployments, so the
+#            previous version, stay). Run by /usr/libexec/cosmic-blue-clean.
+set -euo pipefail
+
+usage() {
+    echo "Usage: ${0##*/} clean" >&2
+    exit 2
+}
+
+case "${1:-} $#" in
+    "clean 1") ;;
+    *) usage ;;
+esac
+
+case "$1" in
+    clean)
+        flatpak uninstall --system --unused --noninteractive -y
+        rpm-ostree cleanup --base --repomd
+        ;;
+esac

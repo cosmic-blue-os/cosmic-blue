@@ -37,8 +37,10 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::time::Duration;
 
+mod devtools;
 mod i18n;
 mod system;
+use devtools::{DEV_TOOLS, DevTool, ToolKind, brew_install, brew_installed, dev_tools};
 use i18n::{language, tr};
 use system::{Computer, Package};
 
@@ -105,7 +107,11 @@ impl Origin {
     fn card(self) -> (&'static str, &'static str, &'static str) {
         match self {
             Origin::Windows => ("computer-symbolic", "Windows", "Your bearings from Windows"),
-            Origin::Mac => ("computer-laptop-symbolic", "macOS", "Your bearings from the Mac"),
+            Origin::Mac => (
+                "computer-laptop-symbolic",
+                "macOS",
+                "Your bearings from the Mac",
+            ),
             Origin::Linux => (
                 "utilities-terminal-symbolic",
                 "Linux",
@@ -150,104 +156,6 @@ const PROFILES: &[Profile] = &[
         ],
     },
 ];
-
-/// Developer tools, as in `ujust install-dev-tools` (Bluefin's menu), but
-/// picked in the tour: Homebrew formulas and casks for the user, Podman
-/// Desktop from Flathub. Lima stays with ujust (its setup needs a restart).
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-enum ToolKind {
-    /// Homebrew formulas (the first one tells if it is installed)
-    Formula(&'static [&'static str]),
-    /// A Homebrew cask, its name in the ublue-os tap or Homebrew's
-    Cask(&'static str, bool),
-    Flatpak(&'static str),
-}
-
-struct DevTool {
-    name: &'static str,
-    kind: ToolKind,
-}
-
-/// Groups of developer tools: a heading, then its tools
-const DEV_TOOLS: &[(&str, &[DevTool])] = &[
-    (
-        "Containers",
-        &[
-            DevTool {
-                name: "Docker",
-                kind: ToolKind::Formula(&["docker", "docker-compose", "lazydocker", "dive"]),
-            },
-            DevTool {
-                name: "Podman Desktop",
-                kind: ToolKind::Flatpak("io.podman_desktop.PodmanDesktop"),
-            },
-        ],
-    ),
-    (
-        "Code editors",
-        &[
-            DevTool {
-                name: "VS Code",
-                kind: ToolKind::Cask("visual-studio-code-linux", true),
-            },
-            DevTool {
-                name: "VSCodium",
-                kind: ToolKind::Cask("vscodium-linux", true),
-            },
-            DevTool {
-                name: "Zed",
-                kind: ToolKind::Cask("zed", false),
-            },
-            DevTool {
-                name: "JetBrains Toolbox",
-                kind: ToolKind::Cask("jetbrains-toolbox-linux", true),
-            },
-            DevTool {
-                name: "Antigravity",
-                kind: ToolKind::Cask("antigravity-ide-linux", true),
-            },
-        ],
-    ),
-    (
-        "In the terminal",
-        &[
-            DevTool {
-                name: "Neovim",
-                kind: ToolKind::Formula(&["neovim"]),
-            },
-            DevTool {
-                name: "Helix",
-                kind: ToolKind::Formula(&["helix"]),
-            },
-            DevTool {
-                name: "vim",
-                kind: ToolKind::Formula(&["vim"]),
-            },
-            DevTool {
-                name: "micro",
-                kind: ToolKind::Formula(&["micro"]),
-            },
-        ],
-    ),
-];
-
-/// Every developer tool, numbered in the order of DEV_TOOLS
-fn dev_tools() -> impl Iterator<Item = &'static DevTool> {
-    DEV_TOOLS.iter().flat_map(|(_, tools)| tools.iter())
-}
-
-/// The Homebrew tools that are installed (numbers of dev_tools())
-fn brew_installed() -> BTreeSet<usize> {
-    dev_tools()
-        .enumerate()
-        .filter(|(_, tool)| match tool.kind {
-            ToolKind::Formula(names) => system::brew_has_formula(names[0]),
-            ToolKind::Cask(name, _) => system::brew_has_cask(name),
-            ToolKind::Flatpak(_) => false,
-        })
-        .map(|(i, _)| i)
-        .collect()
-}
 
 /// Things to try on the "Try it" page: each button does the real thing
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -478,10 +386,7 @@ fn bearings(origin: Origin) -> Page {
                 "Microsoft Store → COSMIC Store",
                 "Apps install and update from there",
             ),
-            row(
-                "File Explorer → Files",
-                "Super + E opens it, as on Windows",
-            ),
+            row("File Explorer → Files", "Super + E opens it, as on Windows"),
             row(
                 "Settings and Control Panel → Settings",
                 "Everything in one place",
@@ -535,7 +440,9 @@ fn pages(mode: &Mode, origin: Option<Origin>) -> Vec<Page> {
                 note: Some("Thousands of other apps are in COSMIC Store."),
                 ..Page::new(
                     "What do you use your computer for?",
-                    Some("Pick what concerns you: nothing installs without a click, and everything can be removed later."),
+                    Some(
+                        "Pick what concerns you: nothing installs without a click, and everything can be removed later.",
+                    ),
                     Body::Profiles,
                 )
             };
@@ -720,7 +627,10 @@ const SHORTCUTS: &[(&str, &[(&str, &str)])] = &[
     (
         "Workspaces",
         &[
-            ("Super + Ctrl + ← ↑ ↓ →", "Go to the next or previous workspace"),
+            (
+                "Super + Ctrl + ← ↑ ↓ →",
+                "Go to the next or previous workspace",
+            ),
             ("Super + 1 … 9", "Go to a workspace"),
             ("Super + Shift + 1 … 9", "Move the window to a workspace"),
         ],
@@ -854,7 +764,12 @@ fn all_texts() -> Vec<&'static str> {
         texts.push(heading);
         texts.extend(rows.iter().map(|(_, description)| *description));
     }
-    let origins = [None, Some(Origin::Windows), Some(Origin::Mac), Some(Origin::Linux)];
+    let origins = [
+        None,
+        Some(Origin::Windows),
+        Some(Origin::Mac),
+        Some(Origin::Linux),
+    ];
     for (mode, origin) in origins
         .iter()
         .map(|origin| (Mode::FirstSteps, *origin))
@@ -1078,17 +993,21 @@ impl<T: Tour> App<T> {
         };
         let tools_done = tools
             .iter()
-            .filter(|i| dev_tools().nth(**i).is_some_and(|tool| self.tool_installed(**i, tool)))
+            .filter(|i| {
+                dev_tools()
+                    .nth(**i)
+                    .is_some_and(|tool| self.tool_installed(**i, tool))
+            })
             .count();
-        let apps_done = apps.iter().filter(|app| self.installed.contains(*app)).count();
+        let apps_done = apps
+            .iter()
+            .filter(|app| self.installed.contains(*app))
+            .count();
         Some((apps_done + tools_done, apps.len() + tools.len()))
     }
 
     fn profile_installed(&self, profile: &Profile) -> bool {
-        profile
-            .apps
-            .iter()
-            .all(|app| self.installed.contains(*app))
+        profile.apps.iter().all(|app| self.installed.contains(*app))
     }
 }
 
@@ -1106,36 +1025,15 @@ fn blocking<R: Send + 'static>(
     )
 }
 
-/// Installs developer tools with Homebrew, as the user (like `ujust
-/// install-dev-tools`, with the devcontainer CLI it always adds)
-async fn brew_install(formulas: Vec<&'static str>, casks: Vec<String>) -> bool {
-    let brew = |args: Vec<String>| async move {
-        tokio::process::Command::new(system::BREW)
-            .args(&args)
-            .env("HOMEBREW_NO_ENV_HINTS", "1")
-            .stdin(std::process::Stdio::null())
-            .status()
-            .await
-            .is_ok_and(|status| status.success())
-    };
-    let mut ok = true;
-    if casks.iter().any(|cask| cask.starts_with("ublue-os/tap/")) {
-        brew(vec!["tap".into(), "ublue-os/tap".into()]).await;
-    }
-    if !formulas.is_empty() {
-        let mut args = vec!["install".to_owned(), "devcontainer".to_owned()];
-        args.extend(formulas.iter().map(|name| (*name).to_owned()));
-        ok &= brew(args).await;
-    }
-    for cask in casks {
-        ok &= brew(vec!["install".into(), "--cask".into(), cask]).await;
-    }
-    ok
-}
-
 fn check_apps() -> Task<Message> {
     blocking(
-        || (system::installed_apps(), brew_installed(), system::preinstall_running()),
+        || {
+            (
+                system::installed_apps(),
+                brew_installed(),
+                system::preinstall_running(),
+            )
+        },
         |(apps, brew, running)| Message::Apps(apps, brew, running),
     )
 }
@@ -1347,11 +1245,7 @@ impl<T: Tour> Application for App<T> {
                         }
                         ToolKind::Cask(name, tap) => {
                             tools.push(i);
-                            casks.push(if tap {
-                                format!("ublue-os/tap/{name}")
-                            } else {
-                                name.to_owned()
-                            });
+                            casks.push(devtools::cask_name(name, tap));
                         }
                     }
                 }
@@ -1382,10 +1276,9 @@ impl<T: Tour> Application for App<T> {
                     ));
                 }
                 if !tools.is_empty() {
-                    tasks.push(Task::perform(
-                        brew_install(formulas, casks),
-                        |ok| cosmic::Action::App(Message::InstallDone(ok)),
-                    ));
+                    tasks.push(Task::perform(brew_install(formulas, casks), |ok| {
+                        cosmic::Action::App(Message::InstallDone(ok))
+                    }));
                 }
                 self.install = Install::Running {
                     apps,
@@ -1506,8 +1399,8 @@ impl<T: Tour> Application for App<T> {
             _ => None,
         });
         // While apps install, look again every few seconds
-        let installing = self.preinstall_progress().is_some()
-            || matches!(self.install, Install::Running { .. });
+        let installing =
+            self.preinstall_progress().is_some() || matches!(self.install, Install::Running { .. });
         if installing {
             Subscription::batch([
                 keys,
@@ -1561,7 +1454,8 @@ impl<T: Tour> Application for App<T> {
             // On the apps page, Next installs what is chosen (in the
             // background: the tour goes on meanwhile)
             if matches!(page.body, Body::Profiles) && self.anything_chosen() {
-                widget::button::suggested(tr("Install and continue")).on_press(Message::InstallAndNext)
+                widget::button::suggested(tr("Install and continue"))
+                    .on_press(Message::InstallAndNext)
             } else {
                 widget::button::suggested(tr("Next")).on_press(Message::PageOpen(self.page_i + 1))
             }
@@ -1812,8 +1706,11 @@ impl<T: Tour> App<T> {
             Body::Features(rows) => rows
                 .iter()
                 .map(|(title, subtitle)| {
-                    settings::item_row(vec![two_lines(text::heading(tr(title)).into(), tr(subtitle))])
-                        .into()
+                    settings::item_row(vec![two_lines(
+                        text::heading(tr(title)).into(),
+                        tr(subtitle),
+                    )])
+                    .into()
                 })
                 .collect(),
             Body::Rows(rows) => rows
@@ -1862,7 +1759,10 @@ impl<T: Tour> App<T> {
             .push(settings::section().add(accessibility_row(space_s)));
         if let Some((done, all)) = self.preinstall_progress() {
             column = column.push(install_progress(
-                fill(&fill(tr("Installing your apps: {} of {}"), &done.to_string()), &all.to_string()),
+                fill(
+                    &fill(tr("Installing your apps: {} of {}"), &done.to_string()),
+                    &all.to_string(),
+                ),
                 tr("They show up in the app library as they arrive."),
                 done,
                 all,
@@ -1886,7 +1786,9 @@ impl<T: Tour> App<T> {
         );
         // (otherwise it hides when a window covers it)
         let dock = settings::item_row(vec![
-            text::body(tr("Dock always visible")).width(Length::Fill).into(),
+            text::body(tr("Dock always visible"))
+                .width(Length::Fill)
+                .into(),
             widget::toggler(self.dock_visible)
                 .on_toggle(Message::Dock)
                 .into(),
@@ -1992,7 +1894,10 @@ impl<T: Tour> App<T> {
         let mut body = vec![section(rows)];
         if let Some((done, all)) = self.install_count() {
             body.push(install_progress(
-                fill(&fill(tr("Installing: {} of {}"), &done.to_string()), &all.to_string()),
+                fill(
+                    &fill(tr("Installing: {} of {}"), &done.to_string()),
+                    &all.to_string(),
+                ),
                 tr("They show up in the app library as they arrive."),
                 done,
                 all,
@@ -2013,7 +1918,7 @@ impl<T: Tour> App<T> {
 
     /// The developer tools, by group, each with its checkbox
     fn dev_rows<'a>(&'a self, space_s: u16) -> Vec<Element<'a, Message>> {
-        let brew = Path::new(system::BREW).exists();
+        let brew = Path::new(devtools::BREW).exists();
         let mut i = 0;
         let mut rows = Vec::with_capacity(DEV_TOOLS.len());
         for (heading, tools) in DEV_TOOLS {
@@ -2058,14 +1963,10 @@ impl<T: Tour> App<T> {
                             .width(Length::Fill);
                         let mut cells = grid.into_iter().peekable();
                         while cells.peek().is_some() {
-                            lines = lines.push(
-                                cells
-                                    .by_ref()
-                                    .take(3)
-                                    .fold(widget::row::with_capacity(3).spacing(space_s), |row, cell| {
-                                        row.push(cell)
-                                    }),
-                            );
+                            lines = lines.push(cells.by_ref().take(3).fold(
+                                widget::row::with_capacity(3).spacing(space_s),
+                                |row, cell| row.push(cell),
+                            ));
                         }
                         lines.into()
                     },
@@ -2076,9 +1977,13 @@ impl<T: Tour> App<T> {
             );
         }
         let note = if brew {
-            tr("Ticked and grey: already installed. Lima and virtual machines: ujust install-dev-tools and ujust install-vms, in a terminal.")
+            tr(
+                "Ticked and grey: already installed. Lima and virtual machines: ujust install-dev-tools and ujust install-vms, in a terminal.",
+            )
         } else {
-            tr("Homebrew is still being set up: the code editors and terminal tools can be chosen in a few minutes.")
+            tr(
+                "Homebrew is still being set up: the code editors and terminal tools can be chosen in a few minutes.",
+            )
         };
         vec![
             section(rows),
@@ -2104,18 +2009,19 @@ impl<T: Tour> App<T> {
                     .into(),
             ];
         };
-        let item = |done: bool, title: String, caption: String, end: Option<Element<'a, Message>>| {
-            let mut text_column = widget::column::with_capacity(2)
-                .spacing(2)
-                .push(text::heading(title))
-                .width(Length::Fill);
-            if !caption.is_empty() {
-                text_column = text_column.push(dim_caption(caption).wrapping(Wrapping::Word));
-            }
-            let mut items = vec![state_icon(done), text_column.into()];
-            items.extend(end);
-            Element::from(settings::item_row(items).spacing(space_s))
-        };
+        let item =
+            |done: bool, title: String, caption: String, end: Option<Element<'a, Message>>| {
+                let mut text_column = widget::column::with_capacity(2)
+                    .spacing(2)
+                    .push(text::heading(title))
+                    .width(Length::Fill);
+                if !caption.is_empty() {
+                    text_column = text_column.push(dim_caption(caption).wrapping(Wrapping::Word));
+                }
+                let mut items = vec![state_icon(done), text_column.into()];
+                items.extend(end);
+                Element::from(settings::item_row(items).spacing(space_s))
+            };
         let mut rows = Vec::new();
         match computer.online {
             Some(true) => rows.push(item(
@@ -2139,7 +2045,8 @@ impl<T: Tour> App<T> {
             (Some(true), _) => rows.push(item(
                 true,
                 tr("NVIDIA graphics card").to_owned(),
-                tr("Its driver is installed: this is the NVIDIA edition of cosmic-blue.").to_owned(),
+                tr("Its driver is installed: this is the NVIDIA edition of cosmic-blue.")
+                    .to_owned(),
                 None,
             )),
             (Some(false), Nvidia::Switched) => {
@@ -2148,7 +2055,12 @@ impl<T: Tour> App<T> {
                     caption.push(' ');
                     caption.push_str(tr("At the restart, a blue screen asks to enroll a key: choose Enroll MOK, Continue, Yes, then type the password cosmicblue (the keyboard is QWERTY there)."));
                 }
-                rows.push(item(true, tr("NVIDIA graphics card").to_owned(), caption, None));
+                rows.push(item(
+                    true,
+                    tr("NVIDIA graphics card").to_owned(),
+                    caption,
+                    None,
+                ));
             }
             (Some(false), state) => {
                 let switching = *state == Nvidia::Switching;
@@ -2239,7 +2151,10 @@ impl<T: Tour> App<T> {
         match (&self.install, self.install_count()) {
             (_, Some((finished, all))) => {
                 done.push(check(
-                    fill(&fill(tr("Installing: {} of {}"), &finished.to_string()), &all.to_string()),
+                    fill(
+                        &fill(tr("Installing: {} of {}"), &finished.to_string()),
+                        &all.to_string(),
+                    ),
                     Some(tr("They show up in the app library as they arrive.").to_owned()),
                 ));
             }
@@ -2268,7 +2183,11 @@ impl<T: Tour> App<T> {
         ])
         .spacing(space_s);
         let links = [
-            ("Documentation", "Updates, software, commands and tips", docs_url()),
+            (
+                "Documentation",
+                "Updates, software, commands and tips",
+                docs_url(),
+            ),
             (
                 "Report a problem",
                 "Found a bug or something unclear? Tell us on GitHub",
@@ -2295,9 +2214,11 @@ impl<T: Tour> App<T> {
             .push(settings::section().add(backups))
             .push(section(links))
             .push(
-                text::caption(tr("This tour and the Keyboard shortcuts app stay in the app library."))
-                    .align_x(Alignment::Center)
-                    .width(Length::Fill),
+                text::caption(tr(
+                    "This tour and the Keyboard shortcuts app stay in the app library.",
+                ))
+                .align_x(Alignment::Center)
+                .width(Length::Fill),
             )
             .into()
     }
@@ -2305,21 +2226,32 @@ impl<T: Tour> App<T> {
     /// The window a downloaded .exe, .msi, .deb or .rpm file opens
     fn open_view<'a>(&'a self, file: &'a Path) -> Element<'a, Message> {
         let cosmic_theme::Spacing {
-            space_s, space_m, space_l, ..
+            space_s,
+            space_m,
+            space_l,
+            ..
         } = theme::spacing();
         let kind = system::package_kind(file);
         let name = short_name(file);
         let term = system::search_term(file);
         let explanation = match kind {
-            Package::Windows => "This is a Windows program. On cosmic-blue, apps come from COSMIC Store: most well-known apps are there, or a good alternative.",
-            Package::Debian => "This is a package for Debian and Ubuntu. On cosmic-blue, apps come from COSMIC Store: most well-known apps are there, or a good alternative.",
-            Package::Rpm => "This is a package for Fedora. cosmic-blue's system is a read-only image: apps come from COSMIC Store instead. Most well-known apps are there, or a good alternative.",
+            Package::Windows => {
+                "This is a Windows program. On cosmic-blue, apps come from COSMIC Store: most well-known apps are there, or a good alternative."
+            }
+            Package::Debian => {
+                "This is a package for Debian and Ubuntu. On cosmic-blue, apps come from COSMIC Store: most well-known apps are there, or a good alternative."
+            }
+            Package::Rpm => {
+                "This is a package for Fedora. cosmic-blue's system is a read-only image: apps come from COSMIC Store instead. Most well-known apps are there, or a good alternative."
+            }
         };
         let hint = match kind {
             Package::Windows => {
                 "A Windows program with no equivalent? Bottles, in COSMIC Store, runs some of them."
             }
-            _ => "For advanced users: distrobox installs it in a container of another distribution.",
+            _ => {
+                "For advanced users: distrobox installs it in a container of another distribution."
+            }
         };
         let search_label = if term.is_empty() {
             tr("Open COSMIC Store").to_owned()
@@ -2336,17 +2268,18 @@ impl<T: Tour> App<T> {
             .push(widget::space::horizontal())
             .push(widget::button::standard(tr("Close")).on_press(Message::Exit));
         if kind == Package::Windows && self.installed.contains("com.usebottles.bottles") {
-            buttons = buttons.push(
-                widget::button::standard(tr("Open with Bottles"))
-                    .on_press(Message::OpenWith(&["flatpak", "run", "com.usebottles.bottles"])),
-            );
+            buttons = buttons.push(widget::button::standard(tr("Open with Bottles")).on_press(
+                Message::OpenWith(&["flatpak", "run", "com.usebottles.bottles"]),
+            ));
         }
-        buttons = buttons.push(
-            widget::button::suggested(search_label).on_press(Message::OpenWith(search)),
-        );
+        buttons = buttons
+            .push(widget::button::suggested(search_label).on_press(Message::OpenWith(search)));
         widget::column::with_capacity(6)
             .spacing(space_m)
-            .push(text::title3(fill(tr("“{}” does not install here"), &name)).wrapping(Wrapping::Word))
+            .push(
+                text::title3(fill(tr("“{}” does not install here"), &name))
+                    .wrapping(Wrapping::Word),
+            )
             .push(text::body(tr(explanation)).wrapping(Wrapping::Word))
             .push(text::caption(tr(hint)).wrapping(Wrapping::Word))
             .push(widget::space::vertical())
@@ -2359,13 +2292,18 @@ impl<T: Tour> App<T> {
     /// The "Keyboard shortcuts" app
     fn shortcuts_view(&self) -> Element<'_, Message> {
         let cosmic_theme::Spacing {
-            space_s, space_m, space_l, ..
+            space_s,
+            space_m,
+            space_l,
+            ..
         } = theme::spacing();
         let mut column = widget::column::with_capacity(SHORTCUTS.len() + 3)
             .spacing(space_m)
             .push(
-                text::caption(tr("Super is the key with the Windows logo on most keyboards."))
-                    .width(Length::Fill),
+                text::caption(tr(
+                    "Super is the key with the Windows logo on most keyboards.",
+                ))
+                .width(Length::Fill),
             );
         for (title, rows) in SHORTCUTS {
             let mut section = settings::section().title(tr(title));
@@ -2386,10 +2324,9 @@ impl<T: Tour> App<T> {
         column
             .push(
                 widget::button::standard(tr("Change them in Settings"))
-                    .on_press_maybe(
-                        in_path("cosmic-settings")
-                            .then_some(Message::Run(Action::Launch(&["cosmic-settings", "keyboard"]))),
-                    )
+                    .on_press_maybe(in_path("cosmic-settings").then_some(Message::Run(
+                        Action::Launch(&["cosmic-settings", "keyboard"]),
+                    )))
                     .apply(widget::container)
                     .center_x(Length::Fill),
             )
@@ -2411,7 +2348,12 @@ fn card_style(selected: bool) -> theme::Button {
         let component = &theme.current_container().component;
         let mut style = widget::button::Style::new();
         style.background = Some(cosmic::iced::Background::Color(
-            if hover { component.hover } else { component.base }.into(),
+            if hover {
+                component.hover
+            } else {
+                component.base
+            }
+            .into(),
         ));
         style.border_radius = cosmic.corner_radii.radius_s.into();
         style.text_color = Some(component.on.into());
@@ -2481,13 +2423,12 @@ fn two_lines<'a>(first: Element<'a, Message>, caption: &'static str) -> Element<
 /// Names of keys found in the texts (and their translations), drawn as
 /// keyboard keys when they are part of a combination such as "Super + A"
 const KEY_NAMES: &[&str] = &[
-    "Super", "Alt", "Ctrl", "Strg", "Shift", "Maj", "Umschalt", "Mayús", "Maiusc", "Tab",
-    "Esc", "Escape", "Échap", "Enter", "Print", "←", "↑", "↓", "→",
+    "Super", "Alt", "Ctrl", "Strg", "Shift", "Maj", "Umschalt", "Mayús", "Maiusc", "Tab", "Esc",
+    "Escape", "Échap", "Enter", "Print", "←", "↑", "↓", "→",
 ];
 
 fn is_key(word: &str) -> bool {
-    KEY_NAMES.contains(&word)
-        || (word.chars().count() == 1 && !matches!(word, "+" | "/" | "…"))
+    KEY_NAMES.contains(&word) || (word.chars().count() == 1 && !matches!(word, "+" | "/" | "…"))
 }
 
 /// The pieces of a line: plain words, and key combinations (their keys)
@@ -2510,9 +2451,9 @@ fn pieces(line: &str) -> Vec<Piece<'_>> {
         };
         let starts = is_key(words[i])
             && words.get(i + 1) == Some(&"+")
-            && words.get(i + 2).is_some_and(|next| {
-                is_key(&next[..strip(next)])
-            });
+            && words
+                .get(i + 2)
+                .is_some_and(|next| is_key(&next[..strip(next)]));
         if !starts {
             pieces.push(Piece::Word(words[i]));
             i += 1;
@@ -2579,7 +2520,9 @@ fn keycap<'a>(name: &'a str) -> Element<'a, Message> {
 
 /// A combination of keys: "Super + A" as two keys joined by "+"
 fn key_combo<'a>(keys: &[&'a str]) -> Element<'a, Message> {
-    let mut row = widget::row::with_capacity(keys.len() * 2).spacing(3).align_y(Alignment::Center);
+    let mut row = widget::row::with_capacity(keys.len() * 2)
+        .spacing(3)
+        .align_y(Alignment::Center);
     let mut previous: Option<&str> = None;
     for key in keys {
         // "+" between the keys, but not inside a group of arrows or a range
@@ -2589,14 +2532,20 @@ fn key_combo<'a>(keys: &[&'a str]) -> Element<'a, Message> {
         if previous.is_some() && !grouped {
             row = row.push(text::caption("+"));
         }
-        row = row.push(if *key == "…" { text::caption("…").into() } else { keycap(key) });
+        row = row.push(if *key == "…" {
+            text::caption("…").into()
+        } else {
+            keycap(key)
+        });
         previous = Some(key);
     }
     row.into()
 }
 
 /// A row's description: smaller and dimmer than its title
-fn dim_caption<'a>(caption: impl Into<std::borrow::Cow<'a, str>> + 'a) -> widget::Text<'a, cosmic::Theme> {
+fn dim_caption<'a>(
+    caption: impl Into<std::borrow::Cow<'a, str>> + 'a,
+) -> widget::Text<'a, cosmic::Theme> {
     text::caption(caption).class(theme::Text::Custom(|theme| {
         let mut color = theme.cosmic().on_bg_color();
         color.alpha = 0.72;
@@ -2617,7 +2566,9 @@ fn title_line<'a>(title: &'a str) -> Element<'a, Message> {
         pieces
             .into_iter()
             .fold(
-                widget::row::with_capacity(3).spacing(4).align_y(Alignment::Center),
+                widget::row::with_capacity(3)
+                    .spacing(4)
+                    .align_y(Alignment::Center),
                 |row, piece| match piece {
                     Piece::Word(word) => row.push(text::heading(word)),
                     Piece::Keys(keys) => row.push(key_combo(&keys)),
@@ -2642,7 +2593,9 @@ fn with_keys_end<'a>(keys: &'a str) -> Element<'a, Message> {
     pieces(keys)
         .into_iter()
         .fold(
-            widget::row::with_capacity(3).spacing(6).align_y(Alignment::Center),
+            widget::row::with_capacity(3)
+                .spacing(6)
+                .align_y(Alignment::Center),
             |row, piece| match piece {
                 Piece::Word(word) => row.push(dim_caption(word)),
                 Piece::Keys(keys) => row.push(key_combo(&keys)),
@@ -2654,26 +2607,32 @@ fn with_keys_end<'a>(keys: &'a str) -> Element<'a, Message> {
 /// A caption where key combinations show as keys; each line of the text is
 /// a line on screen, and long lines wrap between words
 fn with_keys<'a>(caption: &'a str) -> Element<'a, Message> {
-    if !caption.lines().any(|line| pieces(line).iter().any(|p| matches!(p, Piece::Keys(_)))) {
+    if !caption
+        .lines()
+        .any(|line| pieces(line).iter().any(|p| matches!(p, Piece::Keys(_))))
+    {
         return dim_caption(caption).wrapping(Wrapping::Word).into();
     }
     caption
         .lines()
-        .fold(widget::column::with_capacity(2).spacing(4), |column, line| {
-            let words: Vec<Element<'a, Message>> = pieces(line)
-                .into_iter()
-                .map(|piece| match piece {
-                    Piece::Word(word) => dim_caption(word).into(),
-                    Piece::Keys(keys) => key_combo(&keys),
-                })
-                .collect();
-            column.push(
-                widget::flex_row(words)
-                    .column_spacing(4)
-                    .row_spacing(4)
-                    .align_items(Alignment::Center),
-            )
-        })
+        .fold(
+            widget::column::with_capacity(2).spacing(4),
+            |column, line| {
+                let words: Vec<Element<'a, Message>> = pieces(line)
+                    .into_iter()
+                    .map(|piece| match piece {
+                        Piece::Word(word) => dim_caption(word).into(),
+                        Piece::Keys(keys) => key_combo(&keys),
+                    })
+                    .collect();
+                column.push(
+                    widget::flex_row(words)
+                        .column_spacing(4)
+                        .row_spacing(4)
+                        .align_items(Alignment::Center),
+                )
+            },
+        )
         .width(Length::Fill)
         .into()
 }
@@ -2734,22 +2693,45 @@ mod tests {
         assert_eq!(pieces("Super + A"), vec![Keys(vec!["Super", "A"])]);
         assert_eq!(
             pieces("Screen reader: Super + Alt + S"),
-            vec![Word("Screen"), Word("reader:"), Keys(vec!["Super", "Alt", "S"])]
+            vec![
+                Word("Screen"),
+                Word("reader:"),
+                Keys(vec!["Super", "Alt", "S"])
+            ]
         );
         assert_eq!(
             pieces("Tiling: Super + Y. The app"),
-            vec![Word("Tiling:"), Keys(vec!["Super", "Y"]), Word("."), Word("The"), Word("app")]
+            vec![
+                Word("Tiling:"),
+                Keys(vec!["Super", "Y"]),
+                Word("."),
+                Word("The"),
+                Word("app")
+            ]
         );
         assert_eq!(
             pieces("Super + = and Super + -"),
-            vec![Keys(vec!["Super", "="]), Word("and"), Keys(vec!["Super", "-"])]
+            vec![
+                Keys(vec!["Super", "="]),
+                Word("and"),
+                Keys(vec!["Super", "-"])
+            ]
         );
-        assert_eq!(pieces("Super + ← ↑ ↓ →"), vec![Keys(vec!["Super", "←", "↑", "↓", "→"])]);
-        assert_eq!(pieces("Super + 1 … 9"), vec![Keys(vec!["Super", "1", "…", "9"])]);
+        assert_eq!(
+            pieces("Super + ← ↑ ↓ →"),
+            vec![Keys(vec!["Super", "←", "↑", "↓", "→"])]
+        );
+        assert_eq!(
+            pieces("Super + 1 … 9"),
+            vec![Keys(vec!["Super", "1", "…", "9"])]
+        );
         assert_eq!(
             pieces("Super + Ctrl + flèches"),
             vec![Keys(vec!["Super", "Ctrl"]), Word("+"), Word("flèches")]
         );
-        assert_eq!(pieces("Press Super, type"), vec![Word("Press"), Word("Super,"), Word("type")]);
+        assert_eq!(
+            pieces("Press Super, type"),
+            vec![Word("Press"), Word("Super,"), Word("type")]
+        );
     }
 }

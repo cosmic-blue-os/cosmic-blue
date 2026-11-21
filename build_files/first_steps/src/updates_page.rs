@@ -23,47 +23,30 @@
 // No notifications: the system updates by itself, this is for when people
 // want to look or act.
 //
-//   cosmic-blue-updates            the window
-//   cosmic-blue-updates --status   what the window would show, as text (tests)
-//   cosmic-blue-updates --older    the older stable versions it would list
-//   cosmic-blue-updates --check    image build test: every text has its
-//                                  translations (no window)
+// This is the first page of cosmic-blue Tools (tools.rs), which the Updates
+// launcher opens directly (`cosmic-blue-tools --updates`, and
+// /usr/libexec/cosmic-blue-updates, a link to it). From the command line:
+//   cosmic-blue-tools --status   what the page would show, as text (tests)
+//   cosmic-blue-tools --older    the older stable versions it would list
 //
 // The look is the tours' (main.rs): same banner, title, rows and buttons.
-// Text is in English, translated from the PO files of po/updates/.
 
-use cosmic::app::{Core, Settings, Task};
-use cosmic::iced::core::text::Wrapping;
-use cosmic::iced::{Alignment, Length, Limits};
+use crate::common::{fill, header, run, state_icon, two_lines};
+use crate::i18n::tr;
+use cosmic::app::Task;
+use cosmic::iced::{Alignment, Length};
 use cosmic::widget::{self, settings, text, toaster::Toasts};
-use cosmic::{Application, ApplicationExt, Apply, Element, cosmic_theme, executor, theme};
-use std::path::Path;
-
-mod i18n;
-use i18n::tr;
-
-pub(crate) const LANGUAGES: &[(&str, &str)] = &[
-    ("de", include_str!("../po/updates/de.po")),
-    ("es", include_str!("../po/updates/es.po")),
-    ("fr", include_str!("../po/updates/fr.po")),
-    ("it", include_str!("../po/updates/it.po")),
-    ("pt_BR", include_str!("../po/updates/pt_BR.po")),
-];
-pub(crate) const TEMPLATE: &str = include_str!("../po/updates/cosmic-blue-updates.pot");
-pub(crate) const PO_DIR: &str = "po/updates";
-pub(crate) const TEMPLATE_NAME: &str = "cosmic-blue-updates.pot";
+use cosmic::{Apply, Element, cosmic_theme, theme};
 
 const HELPER: &str = "/usr/libexec/cosmic-blue-updates-helper";
 /// The version left behind by the last rollback: "<digest> <version>"
 const HOLD: &str = "/var/lib/cosmic-blue/update-hold";
 const RELEASES: &str = "https://github.com/cosmic-blue-os/cosmic-blue/releases";
 const VENDOR: &str = "ghcr.io/cosmic-blue-os/";
-/// Banner of the tours (branding/tour/build.py), behind the app icon
-const BANNER: &str = "/usr/share/cosmic-blue/tour-banner.svg";
 const ICON: &str = "cosmic-blue-update";
 
 /// Every text, for the translation check
-const TEXTS: &[&str] = &[
+pub const TEXTS: &[&str] = &[
     "Updates",
     "cosmic-blue updates itself in the background. A new version starts at the next restart, without interrupting you.",
     "Current version: {}",
@@ -106,34 +89,33 @@ const TEXTS: &[&str] = &[
     "Resume updates",
 ];
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = std::env::args().skip(1).collect();
-    if args.iter().any(|arg| arg == "--check") {
-        std::process::exit(if i18n::check(TEXTS) { 0 } else { 1 });
+/// --older and --status: Some(exit code) when one of them is given
+pub fn command_line(args: &[String]) -> Option<i32> {
+    let older = args.iter().any(|arg| arg == "--older");
+    if !older && !args.iter().any(|arg| arg == "--status") {
+        return None;
     }
-    if args.iter().any(|arg| arg == "--older") {
-        let status = read_status()?;
+    let status = match read_status() {
+        Ok(status) => status,
+        Err(error) => {
+            eprintln!("{error}");
+            return Some(1);
+        }
+    };
+    if older {
         for tag in stable_tags(status.booted.image()) {
             println!("{tag}");
         }
-        return Ok(());
-    }
-    if args.iter().any(|arg| arg == "--status") {
-        let status = read_status()?;
+    } else {
         println!("{}", status.summary());
-        return Ok(());
     }
-    let settings = Settings::default()
-        .size(cosmic::iced::Size::new(760.0, 760.0))
-        .size_limits(Limits::NONE.min_width(520.0).min_height(480.0));
-    cosmic::app::run::<App>(settings, ())?;
-    Ok(())
+    Some(0)
 }
 
 /// One deployment (a version of the system on the disk), as rpm-ostree
 /// lists them
 #[derive(Clone, Debug, Default, PartialEq)]
-struct Deployment {
+pub struct Deployment {
     version: String,
     /// "ostree-image-signed:docker://ghcr.io/cosmic-blue-os/cosmic-blue:stable"
     reference: String,
@@ -183,7 +165,7 @@ impl Deployment {
 }
 
 #[derive(Clone, Debug, Default)]
-struct Status {
+pub struct Status {
     booted: Deployment,
     /// Downloaded update, which starts at the next restart
     staged: Option<Deployment>,
@@ -276,7 +258,7 @@ fn read_status() -> Result<Status, String> {
 
 /// What runs in the background, shown instead of the buttons it concerns
 #[derive(Clone, Copy, Debug, PartialEq)]
-enum Busy {
+pub enum Busy {
     Checking,
     Switching,
     RollingBack,
@@ -285,7 +267,7 @@ enum Busy {
 }
 
 #[derive(Clone, Debug)]
-enum Message {
+pub enum Message {
     Status(Result<Status, String>),
     CheckNow,
     Rollback,
@@ -303,36 +285,12 @@ enum Message {
     CloseToast(widget::ToastId),
 }
 
-struct App {
-    core: Core,
+pub struct Page {
     status: Option<Result<Status, String>>,
     busy: Option<Busy>,
     /// Tags of the older stable versions, once listed (None: list closed)
     older: Option<Vec<String>>,
     toasts: Toasts<Message>,
-    banner: Option<widget::svg::Handle>,
-}
-
-/// Runs a command in the background: Some(true) when it worked, None when
-/// pkexec says the password prompt was dismissed (126) or the password was
-/// wrong three times (127)
-async fn run(program: &'static str, args: Vec<String>) -> Option<bool> {
-    match tokio::process::Command::new(program)
-        .args(&args)
-        .status()
-        .await
-    {
-        Ok(status) if status.success() => Some(true),
-        Ok(status) if program == "pkexec" && matches!(status.code(), Some(126 | 127)) => None,
-        Ok(status) => {
-            eprintln!("{program} {args:?}: {status}");
-            Some(false)
-        }
-        Err(error) => {
-            eprintln!("Could not start {program}: {error}");
-            Some(false)
-        }
-    }
 }
 
 fn refresh() -> Task<Message> {
@@ -353,7 +311,7 @@ fn background(busy: Busy, program: &'static str, args: &[&str]) -> Task<Message>
     })
 }
 
-impl App {
+impl Page {
     fn toast(&mut self, message: &'static str) -> Task<Message> {
         self.toasts
             .push(widget::toaster::Toast::new(tr(message)))
@@ -361,39 +319,18 @@ impl App {
     }
 }
 
-impl Application for App {
-    type Executor = executor::Default;
-    type Flags = ();
-    type Message = Message;
-    const APP_ID: &'static str = "io.github.cosmic_blue_os.Updates";
-
-    fn core(&self) -> &Core {
-        &self.core
-    }
-
-    fn core_mut(&mut self) -> &mut Core {
-        &mut self.core
-    }
-
-    fn init(core: Core, _flags: ()) -> (Self, Task<Message>) {
-        let mut app = App {
-            core,
+impl Page {
+    pub fn new() -> (Self, Task<Message>) {
+        let page = Page {
             status: None,
             busy: None,
             older: None,
             toasts: Toasts::new(Message::CloseToast),
-            banner: Path::new(BANNER)
-                .exists()
-                .then(|| widget::svg::Handle::from_path(BANNER)),
         };
-        let title = match app.core.main_window_id() {
-            Some(id) => app.set_window_title(tr("Updates").to_owned(), id),
-            None => Task::none(),
-        };
-        (app, Task::batch([title, refresh()]))
+        (page, refresh())
     }
 
-    fn update(&mut self, message: Message) -> Task<Message> {
+    pub fn update(&mut self, message: Message) -> Task<Message> {
         match message {
             Message::Status(status) => self.status = Some(status),
             Message::CheckNow => {
@@ -488,7 +425,7 @@ impl Application for App {
         Task::none()
     }
 
-    fn view(&self) -> Element<'_, Message> {
+    pub fn view(&self) -> Element<'_, Message> {
         let cosmic_theme::Spacing {
             space_xxs,
             space_s,
@@ -496,20 +433,6 @@ impl Application for App {
             space_l: _,
             ..
         } = theme::spacing();
-
-        let icon = widget::icon::from_name(ICON).size(64);
-        let header: Element<'_, Message> = match &self.banner {
-            Some(banner) => cosmic::iced::widget::stack![
-                widget::svg(banner.clone()).width(600).height(100),
-                widget::container(icon).center(Length::Fill),
-            ]
-            .width(600)
-            .height(100)
-            .apply(widget::container)
-            .center_x(Length::Fill)
-            .into(),
-            None => widget::container(icon).center_x(Length::Fill).into(),
-        };
 
         let mut content = widget::column::with_capacity(8)
             .spacing(space_s)
@@ -563,25 +486,12 @@ impl Application for App {
                 .center_x(Length::Fill),
         );
 
-        let page = widget::column::with_capacity(6)
-            .push(header)
-            .push(widget::space::vertical().height(space_xxs))
-            .push(text::title2(tr("Updates")).center().width(Length::Fill))
-            .push(widget::space::vertical().height(space_s))
-            .push(content)
-            .push(widget::space::vertical().height(space_s))
-            .max_width(640.0)
-            .width(640.0)
-            .align_x(Alignment::Center)
-            .apply(widget::container)
-            .center_x(Length::Fill)
-            .apply(widget::scrollable);
-
+        let page = header(ICON, tr("Updates"), content.into());
         widget::toaster(&self.toasts, page)
     }
 }
 
-impl App {
+impl Page {
     /// Current version, update waiting for a restart, previous version
     fn versions<'a>(&'a self, status: &'a Status, space_s: u16) -> Element<'a, Message> {
         let idle = self.busy.is_none();
@@ -758,7 +668,7 @@ impl App {
     }
 }
 
-impl App {
+impl Page {
     /// "An older version": the stable versions of past weeks, listed once
     /// "Choose…" is clicked (the previous version above is the one put
     /// forward)
@@ -863,37 +773,4 @@ fn date(tag: &str) -> String {
         .replace("{y}", &digits[..4])
         .replace("{m}", &digits[4..6])
         .replace("{d}", &digits[6..])
-}
-
-/// A translated text with its {} replaced
-fn fill(text: &str, value: &str) -> String {
-    text.replacen("{}", value, 1)
-}
-
-/// The symbol in front of a row: in the accent color for the version running
-fn state_icon<'a>(name: &'static str, accent: bool) -> Element<'a, Message> {
-    let icon = widget::icon::from_name(name)
-        .size(24)
-        .apply(widget::container);
-    if accent {
-        icon.class(theme::Container::custom(|theme| {
-            cosmic::iced::widget::container::Style {
-                icon_color: Some(theme.cosmic().accent_color().into()),
-                ..Default::default()
-            }
-        }))
-        .into()
-    } else {
-        icon.into()
-    }
-}
-
-/// A row's text: a first line, and a caption under it
-fn two_lines<'a>(first: Element<'a, Message>, caption: String) -> Element<'a, Message> {
-    widget::column::with_capacity(2)
-        .spacing(2)
-        .push(first)
-        .push(text::caption(caption).wrapping(Wrapping::Word))
-        .width(Length::Fill)
-        .into()
 }

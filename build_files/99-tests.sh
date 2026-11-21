@@ -256,7 +256,7 @@ done
 recipes="$(just --justfile /usr/share/ublue-os/just/00-entry.just --summary)"
 for recipe in toggle-dark-mode reset-cosmic-theme reset-cosmic-config export-cosmic-config \
               install-microsoft-fonts install-cli-tools report-bug enroll-secure-boot-key \
-              switch-channel install-gaming; do
+              switch-channel install-gaming clean-system; do
     grep -qw -- "${recipe}" <<<"${recipes}"
 done
 
@@ -504,16 +504,37 @@ if ldd /usr/libexec/cosmic-blue-tour | grep 'not found'; then
 fi
 /usr/libexec/cosmic-blue-tour --check
 
-# Updates app: its launcher, its translations, the root helper it runs with
-# pkexec (polkit action, limited to that program), and uupd going through the
-# bootc wrapper that keeps a version left behind from coming back
-grep -qx 'Exec=/usr/libexec/cosmic-blue-updates' \
+# cosmic-blue Tools: its launchers (the Updates one opens its Updates page;
+# the earlier program name still does), its translations, the root helpers
+# it runs with pkexec (polkit actions, limited to those programs), the
+# scripts it shares with `ujust clean-system` and `ujust report-bug`, and
+# uupd going through the bootc wrapper that keeps a version left behind from
+# coming back
+grep -qx 'Exec=/usr/libexec/cosmic-blue-tools' \
+    /usr/share/applications/io.github.cosmic_blue_os.Tools.desktop
+grep -qx 'Icon=cosmic-blue-tools' /usr/share/applications/io.github.cosmic_blue_os.Tools.desktop
+test -s /usr/share/icons/hicolor/scalable/apps/cosmic-blue-tools.svg
+grep -qx 'Exec=/usr/libexec/cosmic-blue-tools --updates' \
     /usr/share/applications/io.github.cosmic_blue_os.Updates.desktop
 grep -qx 'Icon=cosmic-blue-update' /usr/share/applications/io.github.cosmic_blue_os.Updates.desktop
-if ldd /usr/libexec/cosmic-blue-updates | grep 'not found'; then
-    echo "cosmic-blue-updates: missing libraries"; exit 1
+test "$(readlink /usr/libexec/cosmic-blue-updates)" = cosmic-blue-tools
+if ldd /usr/libexec/cosmic-blue-tools | grep 'not found'; then
+    echo "cosmic-blue-tools: missing libraries"; exit 1
 fi
-/usr/libexec/cosmic-blue-updates --check
+/usr/libexec/cosmic-blue-tools --check
+for script in cosmic-blue-clean cosmic-blue-tools-helper cosmic-blue-report-bug; do
+    test -x "/usr/libexec/${script}"
+done
+grep -q '<annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/cosmic-blue-tools-helper</annotate>' \
+    /usr/share/polkit-1/actions/io.github.cosmic_blue_os.tools.policy
+if /usr/libexec/cosmic-blue-tools-helper clean everything 2>/dev/null; then
+    echo "cosmic-blue-tools-helper accepted unknown arguments"; exit 1
+fi
+grep -q '/usr/libexec/cosmic-blue-clean' /usr/share/ublue-os/just/60-custom.just
+grep -q '/usr/libexec/cosmic-blue-report-bug open' /usr/share/ublue-os/just/60-custom.just
+# Only cosmic-blue's own `ujust clean-system` (Bluefin's is dropped)
+test "$(grep -h '^clean-system' /usr/share/ublue-os/just/*.just | wc -l)" -eq 1
+/usr/libexec/cosmic-blue-report-bug url | grep -q '^https://github.com/cosmic-blue-os/cosmic-blue/issues/new?template=bug_report.yml&system-info=Image'
 test -x /usr/libexec/cosmic-blue-updates-helper
 test -x /usr/libexec/cosmic-blue-bootc
 grep -q '<annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/cosmic-blue-updates-helper</annotate>' \

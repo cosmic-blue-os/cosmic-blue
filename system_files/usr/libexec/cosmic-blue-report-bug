@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+# Report a cosmic-blue bug: the system details (cosmic-blue-system-info, no
+# personal data) go into the "System details" field of the bug report form
+# through its URL. Nothing is sent until the report is submitted on GitHub.
+# Run by `ujust report-bug` and by "Report a problem" in cosmic-blue Tools.
+#
+#   cosmic-blue-report-bug open    open the form in the browser
+#   cosmic-blue-report-bug url     print the form's address with the details
+set -euo pipefail
+
+form="https://github.com/cosmic-blue-os/cosmic-blue/issues/new?template=bug_report.yml"
+
+case "${1:-} $#" in
+    "open 1" | "url 1") ;;
+    *)
+        echo "Usage: ${0##*/} open|url" >&2
+        exit 2
+        ;;
+esac
+
+info="$(/usr/libexec/cosmic-blue-system-info)"
+url="${form}&system-info=$(printf '%s\n' "${info}" | jq -sRr @uri)"
+# Browsers and GitHub refuse very long addresses: then the details are pasted
+if [[ "${#url}" -gt 7000 ]]; then
+    url="${form}"
+fi
+case "$1" in
+    url) printf '%s\n' "${url}" ;;
+    open)
+        xdg-open "${url}" >/dev/null 2>&1 &
+        disown
+        ;;
+esac

@@ -5,6 +5,7 @@
         filter: AppIds([
             "io.github.cosmic_blue_os.FirstSteps",
             "io.github.cosmic_blue_os.Welcome",
+            "io.github.cosmic_blue_os.Tools",
             "io.github.cosmic_blue_os.Updates",
             "io.github.cosmic_blue_os.ParentalControls",
             "io.github.cosmic_blue_os.Shortcuts",
@@ -30,6 +31,7 @@
                 "com.system76.CosmicTerm",
                 "io.github.cosmic_blue_os.FirstSteps",
                 "io.github.cosmic_blue_os.Welcome",
+                "io.github.cosmic_blue_os.Tools",
                 "io.github.cosmic_blue_os.Updates",
                 "io.github.cosmic_blue_os.ParentalControls",
                 "io.github.cosmic_blue_os.Shortcuts",

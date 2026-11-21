@@ -224,5 +224,7 @@ touch /etc/skel/.config/cosmic-initial-setup-done
 rm -f /etc/xdg/autostart/io.github.cosmic_blue_os.FirstSteps.desktop \
     /usr/share/applications/io.github.cosmic_blue_os.FirstSteps.desktop
 rm -rf /etc/skel/.config/cosmic-blue/first-steps-pending
-# Nothing to update or roll back in a live session: no Updates app
-rm -f /usr/share/applications/io.github.cosmic_blue_os.Updates.desktop
+# Nothing to update, roll back or clean up in a live session: no cosmic-blue
+# Tools, nor its Updates launcher
+rm -f /usr/share/applications/io.github.cosmic_blue_os.Updates.desktop \
+    /usr/share/applications/io.github.cosmic_blue_os.Tools.desktop

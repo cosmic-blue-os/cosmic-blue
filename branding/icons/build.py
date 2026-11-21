@@ -35,6 +35,7 @@ FIRST_STEPS_ICON = HICOLOR_APPS / "cosmic-blue-welcome.svg"
 DOCS_ICON = HICOLOR_APPS / "cosmic-blue-docs.svg"
 UPDATE_ICON = HICOLOR_APPS / "cosmic-blue-update.svg"
 TOUR_STORE_ICON = HICOLOR_APPS / "cosmic-blue-tour-store.svg"
+TOOLS_ICON = HICOLOR_APPS / "cosmic-blue-tools.svg"
 
 def stroke(d, width=2.2):
     return (f'<path d="{d}" fill="none" stroke="currentColor" stroke-width="{width}" '
@@ -324,6 +325,19 @@ def circle_arrow(r, start, end, opacity=None, head=6.2, width=5):
 # the lower one translucent
 UPDATE = tela_app(circle_arrow(13.5, 165, 40) + circle_arrow(13.5, 345, 220, ".45"))
 
+# cosmic-blue Tools (the ujust commands as buttons): a wrench, with a
+# screwdriver behind it in translucent white
+TOOLS = tela_app(
+    '<g transform="translate(32 32) rotate(45)">'
+    '<rect x="-2.6" y="-17" width="5.2" height="14" rx="1.2" fill="#fff" opacity=".45"/>'
+    '<rect x="-4.2" y="-3" width="8.4" height="20" rx="4.2" fill="#fff" opacity=".45"/></g>'
+    '<mask id="wrench-jaw"><rect x="-20" y="-24" width="40" height="44" fill="#fff"/>'
+    '<path d="M-3.2 -25h6.4v8.5a3.2 3.2 0 0 1 -6.4 0z" fill="#000"/></mask>'
+    '<g transform="translate(32 32) rotate(-45)"><g mask="url(#wrench-jaw)">'
+    '<circle cx="0" cy="-12" r="8.6" fill="#fff"/>'
+    '<rect x="-3.4" y="-8" width="6.8" height="25" rx="3.4" fill="#fff"/></g></g>'
+)
+
 # The first steps tour's commands page: a prompt in a terminal window
 COMMANDS = tela_app(
     '<rect x="15" y="18" width="34" height="28" rx="4" fill="none" stroke="#fff" stroke-opacity=".45" '
@@ -479,6 +493,7 @@ def main():
     FIRST_STEPS_ICON.write_text(WELCOME)
     DOCS_ICON.write_text(DOCS)
     UPDATE_ICON.write_text(UPDATE)
+    TOOLS_ICON.write_text(TOOLS)
     TOUR_STORE_ICON.write_text(TOUR_STORE)
     # Bring your things: COSMIC Files' folder
     for name, icon in {**TOUR_ICONS, "cosmic-blue-tour-files": FILES}.items():

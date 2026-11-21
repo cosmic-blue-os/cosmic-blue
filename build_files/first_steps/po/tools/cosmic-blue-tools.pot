@@ -1,0 +1,446 @@
+# Texts of cosmic-blue Tools (build_files/first_steps/src/tools.rs and its
+# pages: updates_page.rs, maintenance.rs, help.rs).
+# Each language has a copy with its translations: <language>.po
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Updates"
+msgstr ""
+
+msgid "cosmic-blue updates itself in the background. A new version starts at the next restart, without interrupting you."
+msgstr ""
+
+msgid "Current version: {}"
+msgstr ""
+
+msgid "Weekly updates, tested before they come out"
+msgstr ""
+
+msgid "Daily updates, sooner but less tested"
+msgstr ""
+
+msgid "dev channel: every change, for testers"
+msgstr ""
+
+msgid "This system stays on this version: it does not update by itself."
+msgstr ""
+
+msgid "Check now"
+msgstr ""
+
+msgid "Checking…"
+msgstr ""
+
+msgid "You are up to date."
+msgstr ""
+
+msgid "The check did not work. Are you online?"
+msgstr ""
+
+msgid "Ready for the next restart: {}"
+msgstr ""
+
+msgid "Downloaded and checked. It takes effect at the next restart."
+msgstr ""
+
+msgid "Restart"
+msgstr ""
+
+msgid "Previous version: {}"
+msgstr ""
+
+msgid "Something wrong since the last update? Go back to this version. Your files and settings stay as they are."
+msgstr ""
+
+msgid "Go back to it"
+msgstr ""
+
+msgid "Back to {} at the next restart"
+msgstr ""
+
+msgid "Your files and settings stay as they are. The version you leave will not be installed again: updates start again with the next one."
+msgstr ""
+
+msgid "Version {} is set aside"
+msgstr ""
+
+msgid "You went back from it, so it will not be installed again. Updates start again with the next version."
+msgstr ""
+
+msgid "Get new features early"
+msgstr ""
+
+msgid ""
+"Off (recommended): one tested update a week.\n"
+"On: an update every day, sooner but less tested."
+msgstr ""
+
+msgid "You follow the dev channel, chosen in a terminal. Turn this off to go back to one tested update a week."
+msgstr ""
+
+msgid "Downloading the new version… This can take a few minutes."
+msgstr ""
+
+msgid "Something went wrong, nothing was changed."
+msgstr ""
+
+msgid "The system version could not be read: is this computer installed with cosmic-blue?"
+msgstr ""
+
+msgid "Apps from COSMIC Store update by themselves too."
+msgstr ""
+
+msgid "What's new"
+msgstr ""
+
+msgid "An older version"
+msgstr ""
+
+msgid "Choose the stable version of a past week. The system then stays on it, without updates, until you resume them."
+msgstr ""
+
+msgid "Choose…"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Stable version of {}"
+msgstr ""
+
+msgid "Use this one"
+msgstr ""
+
+msgid "No older version found. Are you online?"
+msgstr ""
+
+msgid "{y}-{m}-{d}"
+msgstr ""
+
+msgid "Updates are paused"
+msgstr ""
+
+msgid "This system stays on this version. Resume them to get one tested update a week again."
+msgstr ""
+
+msgid "Resume updates"
+msgstr ""
+
+msgid "cosmic-blue Tools"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Keep the computer tidy and in shape, without typing commands."
+msgstr ""
+
+msgid "Disk space"
+msgstr ""
+
+msgid "{used} used of {total}"
+msgstr ""
+
+msgid "{} free"
+msgstr ""
+
+msgid "See what takes space"
+msgstr ""
+
+msgid "Free up space"
+msgstr ""
+
+msgid "Removes what nothing uses any more: leftover parts of removed apps, unused container images, old downloads of tools. Your files stay as they are."
+msgstr ""
+
+msgid "Clean up"
+msgstr ""
+
+msgid "Cleaning up…"
+msgstr ""
+
+msgid "{} freed"
+msgstr ""
+
+msgid "Everything was already tidy."
+msgstr ""
+
+msgid "Apps that come with cosmic-blue"
+msgstr ""
+
+msgid "All of them are installed."
+msgstr ""
+
+msgid "One of them was removed. Put it back?"
+msgstr ""
+
+msgid "{} of them were removed. Put them back?"
+msgstr ""
+
+msgid "Reinstall"
+msgstr ""
+
+msgid "Installing…"
+msgstr ""
+
+msgid "The apps are back."
+msgstr ""
+
+msgid "The apps could not be installed. Are you online?"
+msgstr ""
+
+msgid "Firmware updates"
+msgstr ""
+
+msgid "New versions of the BIOS, SSD, dock… from their makers."
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Find answers, ask a question, or tell us what goes wrong."
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "Updates, software, commands and tips"
+msgstr ""
+
+msgid "Ask a question"
+msgstr ""
+
+msgid "Other cosmic-blue users and its makers answer, on GitHub."
+msgstr ""
+
+msgid "Report a problem"
+msgstr ""
+
+msgid "Opens the bug report form with the details of this computer filled in. They hold no personal data. A GitHub account is needed."
+msgstr ""
+
+msgid "Show the details"
+msgstr ""
+
+msgid "Hide the details"
+msgstr ""
+
+msgid "Report"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copied."
+msgstr ""
+
+msgid "B"
+msgstr ""
+
+msgid "kB"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "TB"
+msgstr ""
+
+msgid "A second app source for COSMIC Store, with apps that are not on Flathub. Less checked than Flathub."
+msgstr ""
+
+msgid "A text file in your home folder, to keep or to compare."
+msgstr ""
+
+msgid "Accent color, wallpaper, panel, dock, fonts…"
+msgstr ""
+
+msgid "Accept and install"
+msgstr ""
+
+msgid "All COSMIC settings"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "Arial, Times New Roman, Verdana… for documents made on Windows. cosmic-blue already has look-alikes with the same sizes."
+msgstr ""
+
+msgid "Back to the cosmic-blue colors, dark theme, icons, fonts and wallpaper. Panel, dock, keyboard and shortcuts stay."
+msgstr ""
+
+msgid "Back to the cosmic-blue defaults, for every setting. A copy of the current ones is kept."
+msgstr ""
+
+msgid "Battery charge limit"
+msgstr ""
+
+msgid "Battery, graphics card and firmware settings."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Charging stops at 80 %: the battery lasts longer when the laptop stays plugged in."
+msgstr ""
+
+msgid "Computer"
+msgstr ""
+
+msgid "Dark theme"
+msgstr ""
+
+msgid "Developer tools"
+msgstr ""
+
+
+msgid "Every COSMIC setting goes back to the defaults. A copy is kept in your settings folder."
+msgstr ""
+
+msgid "Extra software"
+msgstr ""
+
+msgid "Firmware settings (BIOS/UEFI)"
+msgstr ""
+
+msgid "FlatPark"
+msgstr ""
+
+msgid "Games"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "Installed. Restart open apps to see them."
+msgstr ""
+
+msgid "Light text on dark backgrounds. Off: the light theme."
+msgstr ""
+
+msgid "Log out and back in to finish."
+msgstr ""
+
+msgid "Microsoft fonts"
+msgstr ""
+
+msgid "Microsoft's license applies to these fonts."
+msgstr ""
+
+msgid "More in Settings"
+msgstr ""
+
+msgid "NVIDIA graphics card"
+msgstr ""
+
+
+msgid "Read it"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Restart into the computer's own settings: boot order, virtualization, Secure Boot…"
+msgstr ""
+
+msgid "Restart now"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save my settings"
+msgstr ""
+
+msgid "Saved in your home folder."
+msgstr ""
+
+
+msgid "Switch"
+msgstr ""
+
+msgid "The NVIDIA edition is downloaded now and starts at the next restart. With Secure Boot on, a blue screen asks for the password cosmicblue once."
+msgstr ""
+
+msgid "The NVIDIA edition starts at the next restart."
+msgstr ""
+
+msgid "The computer restarts now. Save your work first."
+msgstr ""
+
+msgid "The cosmic-blue look"
+msgstr ""
+
+msgid "The look of the desktop and your COSMIC settings."
+msgstr ""
+
+msgid "Use it"
+msgstr ""
+
+msgid "Use the NVIDIA edition of cosmic-blue, with NVIDIA's own driver, for games and graphics apps."
+msgstr ""
+
+msgid "Virtual machines"
+msgstr ""
+
+msgid "What cosmic-blue does not install by itself, ready in one click."
+msgstr ""
+
+msgid "Working…"
+msgstr ""
+
+msgid "You use the NVIDIA edition, with NVIDIA's own driver."
+msgstr ""
+
+msgid "virt-manager, to run Windows or another Linux in a window."
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Code editors"
+msgstr ""
+
+msgid "Containers"
+msgstr ""
+
+msgid "In the terminal"
+msgstr ""
+
+msgid "Docker, VS Code, Neovim… Tick the ones you want, untick the ones to remove."
+msgstr ""
+
+msgid "Homebrew is not set up yet: only Podman Desktop can be installed now."
+msgstr ""
+
+msgid "The developer tools are ready."
+msgstr ""
+
+msgid "Stores"
+msgstr ""
+
+msgid "Windows games"
+msgstr ""
+
+msgid "And also"
+msgstr ""
+
+msgid "Steam, Heroic, Lutris… Tick the ones you want, untick the ones to remove. Your games and saves stay."
+msgstr ""
+
+msgid "Your game apps are ready."
+msgstr ""

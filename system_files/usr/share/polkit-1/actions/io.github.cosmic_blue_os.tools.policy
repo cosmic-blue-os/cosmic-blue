@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- cosmic-blue Tools (/usr/libexec/cosmic-blue-tools) and `ujust
+     clean-system` run this helper as root with pkexec: removing what
+     nothing uses any more (Flatpak runtimes installed for everyone, update
+     caches). An administrator password, remembered for a few minutes. -->
+<policyconfig>
+  <vendor>cosmic-blue</vendor>
+  <vendor_url>https://cosmic-blue-os.github.io/cosmic-blue/</vendor_url>
+  <action id="io.github.cosmic_blue_os.tools.manage">
+    <description>Free up disk space</description>
+    <description xml:lang="fr">Libérer de l'espace disque</description>
+    <description xml:lang="de">Speicherplatz freigeben</description>
+    <description xml:lang="es">Liberar espacio en disco</description>
+    <description xml:lang="it">Liberare spazio su disco</description>
+    <description xml:lang="pt_BR">Liberar espaço em disco</description>
+    <message>Authentication is required to remove what nothing uses any more</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour supprimer ce qui ne sert plus</message>
+    <message xml:lang="de">Zum Entfernen von nicht mehr Benötigtem ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="es">Se necesita autenticación para eliminar lo que ya no se usa</message>
+    <message xml:lang="it">È necessario autenticarsi per rimuovere ciò che non serve più</message>
+    <message xml:lang="pt_BR">É necessário se autenticar para remover o que não é mais usado</message>
+    <icon_name>cosmic-blue-tools</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/cosmic-blue-tools-helper</annotate>
+  </action>
+</policyconfig>
