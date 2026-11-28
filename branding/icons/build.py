@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the Celenn OS icons drawn on top of Tela circle.
 
-- places: folders (a planet-like disk in the logo blues, with a folder tab),
+- places: folders (a whole folder in the logo blues, with a white symbol),
   the home, desktop, network and trash icons
 - mimetypes: common file types (a light page whose symbol and folded corner
   take the color of the type)
@@ -104,33 +104,47 @@ def glyph(name, x, y, scale, color):
 # --- Folders -----------------------------------------------------------------
 
 FOLDER_DEFS = (
-    '<clipPath id="disk"><circle cx="32" cy="32" r="28"/></clipPath>'
+    '<linearGradient id="back" x1="0" y1="0" x2="0" y2="1">'
+    '<stop offset="0" stop-color="#3a74ea"/><stop offset="1" stop-color="#2556c8"/></linearGradient>'
     '<linearGradient id="front" x1=".15" y1="0" x2=".85" y2="1">'
     '<stop offset="0" stop-color="#78aeff"/><stop offset=".55" stop-color="#4f8dff"/>'
     '<stop offset="1" stop-color="#2f6bff"/></linearGradient>'
 )
+# The back panel and its tab, every corner rounded
+FOLDER_BACK = ("M9 9h13.2a3 3 0 0 1 2.4 1.2l2.4 3.1a3 3 0 0 0 2.4 1.2H55a4 4 0 0 1 4 4V52"
+               "a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V13a4 4 0 0 1 4-4z")
+# The front panel of an open folder, tilted towards the viewer: wider at the top
+FOLDER_FRONT_OPEN = ("M6.2 25h51.6a2.6 2.6 0 0 1 2.6 2.9l-1.5 24.4a4 4 0 0 1-4 3.7H9.1"
+                     "a4 4 0 0 1-4-3.7L3.6 27.9A2.6 2.6 0 0 1 6.2 25z")
 
 
 def folder(name, open_=False):
-    """A planet-like folder, the size of Tela circle's icons.
+    """A whole folder: the back panel with its tab, a sheet of paper, the
+    lighter front panel with the white symbol.
 
-    The folder is a disk: the inside, the back panel with its tab, the
-    lighter front panel, which starts lower when the folder is open. The
-    inside stays a light enough blue for the disk's top edge to read as a
-    clean round on dark backgrounds (a dark navy one merged into them).
+    Nothing is cut: an earlier round version clipped the folder to a disk,
+    which cut the tab in half and left a straight band across the top, so
+    the folders looked unfinished. It spans 54 px, like the disk of Tela
+    circle's icons.
     """
-    front = 22.0 if open_ else 18.6
-    disk = (
-        '<g clip-path="url(#disk)">'
-        '<rect x="4" y="4" width="56" height="56" fill="#5d93f5"/>'
-        '<path d="M4 11.3H29.2L33.1 15.2H60V60H4z" fill="#2f63d8"/>'
-        f'<path d="M4 {front}H60V60H4z" fill="url(#front)"/>'
-        f'<path d="M4 {front + 0.6}H60" stroke="#d6e8ff" stroke-width="1.2" opacity=".8"/>'
-        "</g>"
-        + glyph(name, 32, front + (60 - front) * 0.45, 1.1, "#ffffff")
+    if open_:
+        paper = '<rect x="9" y="15" width="46" height="14" rx="2" fill="#eaf2ff"/>'
+        front = f'<path d="{FOLDER_FRONT_OPEN}" fill="url(#front)"/>'
+        top, left, right, middle = 25.0, 6.6, 57.4, 40.5
+    else:
+        paper = '<rect x="9" y="16.5" width="46" height="14" rx="2" fill="#eaf2ff"/>'
+        front = '<rect x="5" y="21" width="54" height="35" rx="4" fill="url(#front)"/>'
+        top, left, right, middle = 21.0, 9.0, 55.0, 38.5
+    body = (
+        f'<path d="{FOLDER_BACK}" fill="url(#back)"/>'
+        + paper
+        + front
+        # A light edge along the top of the front panel
+        + f'<path d="M{left} {top + 0.6}H{right}" stroke="#d6e8ff" stroke-width="1.2" '
+        'stroke-linecap="round" opacity=".85"/>'
+        + glyph(name, 32, middle, 1.05, "#ffffff")
     )
-    # Drawn at 56 px, scaled to the 54 px disk of Tela circle's icons
-    return svg(f'<g transform="translate(32 32) scale({27 / 28:.4f}) translate(-32 -32)">{disk}</g>', FOLDER_DEFS)
+    return svg(body, FOLDER_DEFS)
 
 
 # Tela's file names: the icon theme also takes every Tela alias of them.
