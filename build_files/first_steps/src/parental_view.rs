@@ -736,12 +736,20 @@ impl App {
         for chunk in self.faces.chunks(self.faces.len().div_ceil(2).max(1)) {
             let mut row = widget::row::with_capacity(chunk.len()).spacing(8);
             for (face, handle) in chunk {
-                row = row.push(style::picture_button(
-                    handle.clone(),
-                    36,
-                    self.face.as_ref() == Some(face),
-                    Message::Face(face.clone()),
-                ));
+                row = row.push(
+                    style::picture_button(
+                        handle.clone(),
+                        36,
+                        self.face.as_ref() == Some(face),
+                        Message::Face(face.clone()),
+                    )
+                    // For screen readers: "Picture: rocket"
+                    .name(format!(
+                        "{}: {}",
+                        tr("Picture"),
+                        style::image_name(face)
+                    )),
+                );
             }
             pictures = pictures.push(row);
         }

@@ -15,7 +15,14 @@ pub fn spawn_with(program: &str, args: &[&str], env: Option<(&str, &str)>) {
     if let Some((key, value)) = env {
         command.env(key, value);
     }
-    if let Err(error) = command.spawn() {
-        eprintln!("Could not start {program}: {error}");
+    match command.spawn() {
+        // Waited for aside, so that a program that ends before this window
+        // does not stay in the process list as a zombie
+        Ok(mut child) => {
+            std::thread::spawn(move || {
+                let _ = child.wait();
+            });
+        }
+        Err(error) => eprintln!("Could not start {program}: {error}"),
     }
 }

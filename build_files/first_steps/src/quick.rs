@@ -1,4 +1,4 @@
-// The quick menu of celenn Tools (`celenn-tools --quick`, on
+// The quick menu of Celenn OS Tools (`celenn-tools --quick`, on
 // Super + Alt + Space): a small window with what people do most, a search,
 // and the whole toolbox one click away. The same shortcut, Escape or a click
 // elsewhere closes it. It opens the tools themselves (tools.rs), so they
@@ -193,27 +193,7 @@ fn key_combo<'a>(keys: &'static str) -> Element<'a, Message> {
         if i > 0 {
             row = row.push(text::caption("+"));
         }
-        row = row.push(
-            text::caption(key_name(key))
-                .apply(widget::container)
-                .padding([1, 6])
-                .class(theme::Container::custom(|theme| {
-                    let cosmic = theme.cosmic();
-                    let mut background = cosmic.on_bg_color();
-                    background.alpha = 0.1;
-                    let mut border = cosmic.on_bg_color();
-                    border.alpha = 0.35;
-                    cosmic::iced::widget::container::Style {
-                        background: Some(cosmic::iced::Color::from(background).into()),
-                        border: cosmic::iced::Border {
-                            color: border.into(),
-                            width: 1.0,
-                            radius: 5.0.into(),
-                        },
-                        ..Default::default()
-                    }
-                })),
-        );
+        row = row.push(crate::style::keycap(key_name(key)));
     }
     row.into()
 }
@@ -371,4 +351,28 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
         .resizable(None);
     cosmic::app::run::<App>(settings, ())?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// The shortcuts the menu shows are on the shortcuts sheet, which the
+    /// image build checks against the shortcuts COSMIC really has
+    /// (shortcuts.rs, `celenn-tour --check-shortcuts`)
+    #[test]
+    fn shortcuts_are_on_the_sheet() {
+        let sheet = include_str!("shortcuts.rs");
+        let mut shown = 0;
+        for entry in ENTRIES {
+            if let Some(keys) = entry.texts().3 {
+                assert!(
+                    sheet.contains(&format!("(\"{keys}\", ")),
+                    "{keys} is not on the shortcuts sheet"
+                );
+                shown += 1;
+            }
+        }
+        assert_eq!(shown, 3);
+    }
 }

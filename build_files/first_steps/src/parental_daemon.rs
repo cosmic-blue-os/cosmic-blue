@@ -232,7 +232,7 @@ const DOH_V6: &str = "2606:4700:4700::1111, 2606:4700:4700::1001, \
 /// Ports of the usual VPN protocols (WireGuard, OpenVPN, IPsec, L2TP,
 /// PPTP), refused to the filtered accounts' own programs. Connections made
 /// by NetworkManager run as root: polkit keeps children from adding them
-/// (50-celenn-parental.rules).
+/// (10-celenn-parental.rules).
 const VPN_UDP: &str = "51820, 1194, 500, 4500, 1701";
 const VPN_TCP: &str = "1194, 1723";
 
@@ -320,6 +320,9 @@ impl Applied {
 }
 
 fn run() {
+    // Before the second thread starts: the environment is only safe to
+    // change while nothing else reads it
+    system_language();
     std::thread::spawn(watch_apps);
     let mut applied = Applied::default();
     let mut last = Instant::now();
@@ -456,7 +459,8 @@ fn system_language() {
                 .map(|value| value.trim_matches('"').to_owned())
         });
     if let Some(lang) = lang {
-        // Single-threaded here, before any translation is read
+        // Every caller is still single-threaded (run() calls this before
+        // it starts the applications thread), and no translation was read
         unsafe { std::env::set_var("LANG", lang) };
     }
 }
@@ -557,7 +561,7 @@ fn watch_apps() {
     const EVERY: Duration = Duration::from_secs(2);
     /// The installed applications are read again after this (new ones)
     const APPS_AGAIN: Duration = Duration::from_secs(60);
-    system_language();
+    // (the system language was set by run(), before this thread started)
     let lang = std::env::var("LANG").unwrap_or_default();
     let mut apps: Option<(Instant, Vec<parental_apps::App>)> = None;
     // Last message per child and reason, not to repeat it every 2 s

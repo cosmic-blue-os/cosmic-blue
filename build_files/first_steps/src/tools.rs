@@ -685,6 +685,7 @@ impl App {
         };
         let help = widget::tooltip(
             widget::button::icon(widget::icon::from_name("help-browser-symbolic"))
+                .name(tr("Help on this tool"))
                 .on_press(Message::Docs(Some(tool))),
             text::body(tr("Help on this tool")),
             widget::tooltip::Position::Bottom,
