@@ -22,11 +22,11 @@ use cosmic_theme::{AlphaMap, BlurStrength, Theme, ThemeBuilder};
 
 /// Dark theme accent: the middle of the logo orbit gradient (#4f8dff).
 const ACCENT_DARK: Srgb<u8> = Srgb::new(0x4f, 0x8d, 0xff);
-/// Light theme accent: the deep blue of the logo planet (#1d47c4), dark
-/// enough to stay readable on light surfaces.
 /// Dark theme accent of the images of 2026-11-26 (#266, reverted: the cyan
 /// side felt harsh and not "space" enough)
 const ACCENT_DARK_3A9DFF: Srgb<u8> = Srgb::new(0x3a, 0x9d, 0xff);
+/// Light theme accent: the deep blue of the logo planet (#1d47c4), dark
+/// enough to stay readable on light surfaces.
 const ACCENT_LIGHT: Srgb<u8> = Srgb::new(0x1d, 0x47, 0xc4);
 
 /// Window background, dark theme: night blue at the lightness of COSMIC's
@@ -79,7 +79,8 @@ const GLASS_0_8: (BlurStrength, f32) = (BlurStrength::High, 0.8); // until 2026-
 const GLASS_0_65: (BlurStrength, f32) = (BlurStrength::High, 0.65); // until 2026-11-21
 
 /// The alpha map COSMIC Settings writes for a "Glass opacity" value (same
-/// formula as cosmic-settings 1.11.0, appearance/mod.rs, Message::Glass).
+/// formula as cosmic-settings 1.11.0 and 1.12.0, appearance/mod.rs,
+/// Message::Glass).
 fn glass_alpha_map(glass: f32) -> AlphaMap {
     let alpha_map = AlphaMap::default();
     let offset = (glass - 0.5) / 0.5

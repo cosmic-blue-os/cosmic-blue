@@ -602,6 +602,12 @@ for script in celenn-clean celenn-tools-helper celenn-report-bug; do
 done
 grep -q '<annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/celenn-tools-helper</annotate>' \
     /usr/share/polkit-1/actions/io.github.celenn_os.tools.policy
+# One polkit action per change, picked by pkexec from the helper's first
+# argument: the password prompt says what it is for
+for mode in clean disks driver-key; do
+    grep -qx "    <annotate key=\"org.freedesktop.policykit.exec.argv1\">${mode}</annotate>" \
+        /usr/share/polkit-1/actions/io.github.celenn_os.tools.policy
+done
 if /usr/libexec/celenn-tools-helper clean everything 2>/dev/null; then
     echo "celenn-tools-helper accepted unknown arguments"; exit 1
 fi

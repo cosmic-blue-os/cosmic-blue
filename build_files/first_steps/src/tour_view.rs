@@ -3,16 +3,6 @@
 
 use super::*;
 
-/// A picture's name from its file, for screen readers:
-/// "celenn-shooting-star.jpg" -> "shooting star"
-pub(super) fn image_name(path: &Path) -> String {
-    path.file_stem()
-        .map(|stem| stem.to_string_lossy())
-        .unwrap_or_default()
-        .trim_start_matches("celenn-")
-        .replace(['-', '_'], " ")
-}
-
 /// A file name short enough for a title: long ones keep their start and
 /// their end ("google-chrome-st…amd64.deb")
 pub(super) fn short_name(file: &Path) -> String {
@@ -356,7 +346,7 @@ impl<T: Tour> App<T> {
                 .map(|(i, (path, handle))| {
                     widget::button::image(handle.clone())
                         // For screen readers: "Wallpaper: arcs"
-                        .name(format!("{}: {}", tr("Wallpaper"), image_name(path)))
+                        .name(format!("{}: {}", tr("Wallpaper"), style::image_name(path)))
                         .width(92)
                         .height(52)
                         .selected(self.wallpaper.as_deref() == Some(path.as_path()))
@@ -385,7 +375,11 @@ impl<T: Tour> App<T> {
                         self.avatar == Some(i),
                         Message::Avatar(i),
                     )
-                    .name(format!("{}: {}", tr("Your picture"), image_name(path)))
+                    .name(format!(
+                        "{}: {}",
+                        tr("Your picture"),
+                        style::image_name(path)
+                    ))
                     .into()
                 })
                 .collect();

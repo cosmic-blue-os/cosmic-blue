@@ -29,8 +29,9 @@ Each exported setting is reviewed, never copied as is:
   The same tool writes the "Celenn Dark" and "Celenn Light" constellations
   (COSMIC theme bundles, `CosmicThemeBundle.celenn-*`), which must stay
   identical to the default themes.
-- **Icons, cursor, wallpaper**: stay the Celenn OS ones (`CosmicTk`,
-  `CosmicBackground*`).
+- **Icons, cursor, wallpaper**: stay the Celenn OS ones. Since COSMIC 1.12
+  the icon theme is part of the theme (`build_files/theme`); `CosmicTk` still
+  holds it for older accounts. The wallpaper is in `CosmicBackground*`.
 - **Hardware-specific**: displays, scaling, touchpad, power and anything that
   depends on one machine is dropped.
 - **Per-user**: keyboard layout, clock format, language and anything personal

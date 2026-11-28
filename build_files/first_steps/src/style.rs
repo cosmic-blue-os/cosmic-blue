@@ -26,6 +26,42 @@ pub fn dim_caption<'a>(caption: impl Into<Cow<'a, str>> + 'a) -> widget::Text<'a
     }))
 }
 
+/// A picture's name from its file, for screen readers:
+/// "celenn-shooting-star.jpg" -> "shooting star"
+pub fn image_name(path: &std::path::Path) -> String {
+    path.file_stem()
+        .map(|stem| stem.to_string_lossy())
+        .unwrap_or_default()
+        .trim_start_matches("celenn-")
+        .replace(['-', '_'], " ")
+}
+
+/// A keyboard key: its name in a small rounded box (the tour's tips, the
+/// shortcuts sheet, the quick menu)
+pub fn keycap<'a, M: 'a>(name: &'a str) -> cosmic::Element<'a, M> {
+    use cosmic::Apply;
+    text::caption(name)
+        .apply(widget::container)
+        .padding([1, 6])
+        .class(theme::Container::custom(|theme| {
+            let cosmic = theme.cosmic();
+            let mut background = cosmic.on_bg_color();
+            background.alpha = 0.1;
+            let mut border = cosmic.on_bg_color();
+            border.alpha = 0.35;
+            cosmic::iced::widget::container::Style {
+                background: Some(cosmic::iced::Color::from(background).into()),
+                border: cosmic::iced::Border {
+                    color: border.into(),
+                    width: 1.0,
+                    radius: 5.0.into(),
+                },
+                ..Default::default()
+            }
+        }))
+        .into()
+}
+
 /// The top of a page, as in COSMIC Settings: its picture (an icon in the
 /// style of the dock's buttons, or a person's picture), its title and a
 /// dimmed caption, on the left, so that the page's rows come right after

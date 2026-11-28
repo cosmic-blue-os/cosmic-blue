@@ -511,6 +511,7 @@ impl Page {
             .push(widget::button::standard(tr("First steps again")).on_press(Message::Tour))
             .push(widget::tooltip(
                 widget::button::icon(widget::icon::from_name("help-browser-symbolic"))
+                    .name(tr("Help on this tool"))
                     .on_press(Message::Docs),
                 text::body(tr("Help on this tool")),
                 widget::tooltip::Position::Top,
