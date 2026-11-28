@@ -2,9 +2,14 @@
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <!-- Celenn OS Tools (/usr/libexec/celenn-tools) and `ujust
-     clean-system` run this helper as root with pkexec: removing what
-     nothing uses any more (Flatpak runtimes installed for everyone, update
-     caches). An administrator password, remembered for a few minutes. -->
+     clean-system` run /usr/libexec/celenn-tools-helper as root with pkexec.
+     One action per change it makes, picked by pkexec from the helper's first
+     argument (exec.argv1), so that the password prompt says what it is for
+     and a password given for one is not remembered for another: removing
+     what nothing uses any more (Flatpak runtimes installed for everyone,
+     update caches), opening internal disks at every startup (/etc/fstab),
+     and queuing the NVIDIA driver's key for Secure Boot. An administrator
+     password, remembered for a few minutes for the same change. -->
 <policyconfig>
   <vendor>Celenn OS</vendor>
   <vendor_url>https://celenn-os.github.io/celenn/</vendor_url>
@@ -28,5 +33,50 @@
       <allow_active>auth_admin_keep</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/celenn-tools-helper</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">clean</annotate>
+  </action>
+  <action id="io.github.celenn_os.tools.disks">
+    <description>Open disks at every startup</description>
+    <description xml:lang="fr">Ouvrir des disques à chaque démarrage</description>
+    <description xml:lang="de">Laufwerke bei jedem Start öffnen</description>
+    <description xml:lang="es">Abrir discos en cada inicio</description>
+    <description xml:lang="it">Aprire dischi a ogni avvio</description>
+    <description xml:lang="pt_BR">Abrir discos a cada inicialização</description>
+    <message>Authentication is required to change the disks that open at every startup</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour changer les disques qui s'ouvrent à chaque démarrage</message>
+    <message xml:lang="de">Zum Ändern der Laufwerke, die bei jedem Start geöffnet werden, ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="es">Se necesita autenticación para cambiar los discos que se abren en cada inicio</message>
+    <message xml:lang="it">È necessario autenticarsi per cambiare i dischi che si aprono a ogni avvio</message>
+    <message xml:lang="pt_BR">É necessário se autenticar para mudar os discos abertos a cada inicialização</message>
+    <icon_name>celenn-tools</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/celenn-tools-helper</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">disks</annotate>
+  </action>
+  <action id="io.github.celenn_os.tools.driver-key">
+    <description>Allow the NVIDIA driver with Secure Boot</description>
+    <description xml:lang="fr">Autoriser le pilote NVIDIA avec Secure Boot</description>
+    <description xml:lang="de">Den NVIDIA-Treiber mit Secure Boot erlauben</description>
+    <description xml:lang="es">Permitir el controlador NVIDIA con Secure Boot</description>
+    <description xml:lang="it">Consentire il driver NVIDIA con Secure Boot</description>
+    <description xml:lang="pt_BR">Permitir o driver NVIDIA com o Secure Boot</description>
+    <message>Authentication is required to allow the NVIDIA driver with Secure Boot</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour autoriser le pilote NVIDIA avec Secure Boot</message>
+    <message xml:lang="de">Zum Erlauben des NVIDIA-Treibers mit Secure Boot ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="es">Se necesita autenticación para permitir el controlador NVIDIA con Secure Boot</message>
+    <message xml:lang="it">È necessario autenticarsi per consentire il driver NVIDIA con Secure Boot</message>
+    <message xml:lang="pt_BR">É necessário se autenticar para permitir o driver NVIDIA com o Secure Boot</message>
+    <icon_name>celenn-tools</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/celenn-tools-helper</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">driver-key</annotate>
   </action>
 </policyconfig>

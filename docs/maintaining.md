@@ -78,7 +78,7 @@ changes to COSMIC no longer fitting the new code:
      user-switch.patch`), fix the rejected parts by hand, and check that it
      builds (`cargo check`).
   3. Write the new patch with `git diff > user-switch.patch`. It must still
-     contain the marker comment `Celenn OS: with 2 to 6 accounts`.
+     contain the marker comment `Celenn OS: with 2 to 8 accounts`.
 - **COSMIC Store and Files** (`build_files/store/patch.py`,
   `build_files/filemanager/patch.py`). Each replacement must match exactly
   once. The build log names the one that no longer matches: update its

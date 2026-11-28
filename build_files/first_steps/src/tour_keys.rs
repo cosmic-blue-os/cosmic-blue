@@ -77,30 +77,6 @@ pub(super) fn pieces(line: &str) -> Vec<Piece<'_>> {
     pieces
 }
 
-/// A keyboard key: its name in a small rounded box
-pub(super) fn keycap<'a>(name: &'a str) -> Element<'a, Message> {
-    text::caption(name)
-        .apply(widget::container)
-        .padding([1, 6])
-        .class(theme::Container::custom(|theme| {
-            let cosmic = theme.cosmic();
-            let mut background = cosmic.on_bg_color();
-            background.alpha = 0.1;
-            let mut border = cosmic.on_bg_color();
-            border.alpha = 0.35;
-            cosmic::iced::widget::container::Style {
-                background: Some(cosmic::iced::Color::from(background).into()),
-                border: cosmic::iced::Border {
-                    color: border.into(),
-                    width: 1.0,
-                    radius: 5.0.into(),
-                },
-                ..Default::default()
-            }
-        }))
-        .into()
-}
-
 /// A combination of keys: "Super + A" as two keys joined by "+"
 pub(super) fn key_combo<'a>(keys: &[&'a str]) -> Element<'a, Message> {
     let mut row = widget::row::with_capacity(keys.len() * 2)
@@ -118,7 +94,7 @@ pub(super) fn key_combo<'a>(keys: &[&'a str]) -> Element<'a, Message> {
         row = row.push(if *key == "…" {
             text::caption("…").into()
         } else {
-            keycap(key)
+            crate::style::keycap(key)
         });
         previous = Some(key);
     }

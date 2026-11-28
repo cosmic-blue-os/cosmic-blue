@@ -735,8 +735,29 @@ msgstr "Numériser"
 msgid "Change computers"
 msgstr "Changer d'ordinateur"
 
-msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
-msgstr "Vos réglages et la liste de vos applis dans un fichier, à reprendre sur un autre ordinateur Celenn OS."
+msgid "Take your settings, your apps and your files to another Celenn OS computer."
+msgstr "Emportez vos réglages, vos applis et vos fichiers sur un autre ordinateur Celenn OS."
+
+msgid "Save my settings"
+msgstr "Enregistrer mes réglages"
+
+msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
+msgstr "Apparence, clavier, raccourcis et la liste de vos applis, dans un fichier du dossier Documents. Copiez-le sur une clé USB pour l'emporter."
+
+msgid "Restore my settings"
+msgstr "Reprendre mes réglages"
+
+msgid "On the new computer, choose the file saved on the old one, then tick what you want back."
+msgstr "Sur le nouvel ordinateur, choisissez le fichier enregistré sur l'ancien, puis cochez ce que vous voulez reprendre."
+
+msgid "My files"
+msgstr "Mes fichiers"
+
+msgid "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers."
+msgstr "Vos documents et photos ne sont pas dans le fichier de réglages : copiez-les sur une clé USB, ou envoyez-les par le Wi-Fi avec LocalSend, ouvert sur les deux ordinateurs."
+
+msgid "Open LocalSend"
+msgstr "Ouvrir LocalSend"
 
 msgid "Restore…"
 msgstr "Reprendre…"
@@ -1085,8 +1106,8 @@ msgstr "Ce qu'il y a dedans"
 msgid "When something is wrong"
 msgstr "Quand ça ne va pas"
 
-msgid "Your settings and apps, in one file."
-msgstr "Réglages et applications, en un fichier."
+msgid "Settings, apps and files"
+msgstr "Réglages, applis et fichiers"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "Celenn OS se met à jour en arrière-plan. Une nouvelle version démarre au prochain redémarrage, sans vous interrompre."

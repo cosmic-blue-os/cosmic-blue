@@ -31,8 +31,9 @@ Each exported setting is reviewed, never copied as is:
   identical to the default themes. COSMIC's own constellations (upstream
   `cosmic-theme-bundles`, which Fedora doesn't package) are installed next to
   them by `build_files/20-cosmic.sh` and are only offered, never the default.
-- **Icons, cursor, wallpaper**: stay the Celenn OS ones (`CosmicTk`,
-  `CosmicBackground*`).
+- **Icons, cursor, wallpaper**: stay the Celenn OS ones. Since COSMIC 1.12
+  the icon theme is part of the theme (`build_files/theme`); `CosmicTk` still
+  holds it for older accounts. The wallpaper is in `CosmicBackground*`.
 - **Hardware-specific**: displays, scaling, touchpad, power and anything that
   depends on one machine is dropped.
 - **Per-user**: keyboard layout, clock format, language and anything personal

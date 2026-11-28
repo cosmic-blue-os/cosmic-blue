@@ -687,7 +687,7 @@ msgid "Technical details"
 msgstr "Technische Details"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Der Bericht öffnet sich ausgefüllt im Browser: die celenn-Version, die Hardware und dieser Fehler. Keine Dateien, keine persönlichen Daten. Sie lesen ihn vor dem Senden; schreiben Sie in Ihrer Sprache. Zum Senden braucht es ein GitHub-Konto."
+msgstr "Der Bericht öffnet sich ausgefüllt im Browser: die Celenn-OS-Version, die Hardware und dieser Fehler. Keine Dateien, keine persönlichen Daten. Sie lesen ihn vor dem Senden; schreiben Sie in Ihrer Sprache. Zum Senden braucht es ein GitHub-Konto."
 
 msgid "Open the report"
 msgstr "Bericht öffnen"
@@ -753,7 +753,7 @@ msgid "Office, games, graphics and more: COSMIC Store, or Celenn OS Tools → In
 msgstr "Büro, Spiele, Grafik und mehr: COSMIC Store oder Celenn OS Werkzeuge → Apps installieren."
 
 msgid "From another Celenn OS computer"
-msgstr "Von einem anderen celenn-Computer"
+msgstr "Von einem anderen Celenn-OS-Computer"
 
 msgid "Your settings and the list of your apps, with the file saved there in Celenn OS Tools → Change computers."
 msgstr "Ihre Einstellungen und die Liste Ihrer Apps, mit der dort in Celenn OS Werkzeuge → Computer wechseln gespeicherten Datei."

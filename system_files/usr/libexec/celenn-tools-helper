@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 # The changes Celenn OS Tools (/usr/libexec/celenn-tools) makes to the
-# system, run as root through pkexec after an administrator password (polkit
-# action io.github.celenn_os.tools.manage). Only these:
+# system, run as root through pkexec after an administrator password (one
+# polkit action per change, picked from the first argument: tools.manage for
+# clean, tools.disks, tools.driver-key). Only these:
 #
 #   clean    remove the Flatpak runtimes and extensions that no app installed
 #            for everyone needs any more, and the system's update caches
@@ -177,13 +178,17 @@ disk_on() { # uuid
         echo "${uuid} not-internal"; return 1
     fi
     # In use by the system, or opened in Files: Files' own mount is closed
-    # first (the disk then opens at its new place)
-    for mounted in $(findmnt -rno TARGET -S "${dev}" 2>/dev/null; findmnt -rno TARGET -S "UUID=${uuid}" 2>/dev/null); do
+    # first (the disk then opens at its new place). findmnt -r writes a
+    # space or another unusual character as \x<code> ("My\x20Disk"), which
+    # printf %b turns back into the real folder name.
+    while IFS= read -r mounted; do
+        [[ -n "${mounted}" ]] || continue
+        mounted="$(printf '%b' "${mounted}")"
         case "${mounted}" in
-            /run/media/*) umount "${mounted}" 2>/dev/null || { echo "${uuid} busy"; return 1; } ;;
+            /run/media/*) umount -- "${mounted}" 2>/dev/null || { echo "${uuid} busy"; return 1; } ;;
             *) echo "${uuid} system"; return 1 ;;
         esac
-    done
+    done < <(findmnt -rno TARGET -S "${dev}" 2>/dev/null; findmnt -rno TARGET -S "UUID=${uuid}" 2>/dev/null)
     # The partition Windows runs from: left alone (Windows' own files)
     if [[ "${fstype}" == ntfs ]]; then
         probe="$(mktemp -d)"
@@ -200,12 +205,14 @@ disk_on() { # uuid
     local uid="${PKEXEC_UID:-0}" gid
     gid="$(id -g "${uid}" 2>/dev/null || echo 0)"
     pass=0
+    # nosuid,nodev, as Files (udisks) opens a disk: a data disk never holds
+    # programs that run as another user, nor device files
     case "${fstype}" in
-        ext4) options=defaults; pass=2 ;;
-        xfs | btrfs) options=defaults ;;
-        ntfs) fstype=ntfs3; options="uid=${uid},gid=${gid},umask=0022,windows_names" ;;
-        exfat) options="uid=${uid},gid=${gid},umask=0022" ;;
-        vfat) options="uid=${uid},gid=${gid},umask=0022,shortname=mixed,utf8" ;;
+        ext4) options=defaults,nosuid,nodev; pass=2 ;;
+        xfs | btrfs) options=defaults,nosuid,nodev ;;
+        ntfs) fstype=ntfs3; options="nosuid,nodev,uid=${uid},gid=${gid},umask=0022,windows_names" ;;
+        exfat) options="nosuid,nodev,uid=${uid},gid=${gid},umask=0022" ;;
+        vfat) options="nosuid,nodev,uid=${uid},gid=${gid},umask=0022,shortname=mixed,utf8" ;;
     esac
     options+=",nofail,x-systemd.device-timeout=10s,x-gvfs-show,${MARK}"
     mp="${MOUNT_ROOT}/$(mount_name "$(column "${dev}" LABEL)" "${uuid}")"
