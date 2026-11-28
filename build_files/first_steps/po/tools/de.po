@@ -106,7 +106,7 @@ msgid "Choose the stable version of a past week. The system then stays on it, wi
 msgstr "Die stabile Version einer vergangenen Woche wählen. Das System bleibt dann dabei, ohne Updates, bis Sie sie fortsetzen."
 
 msgid "Choose…"
-msgstr "Wählen…"
+msgstr "Auswählen…"
 
 msgid "Hide"
 msgstr "Ausblenden"
@@ -561,8 +561,8 @@ msgstr "Ihr Passwort-Manager ist bereit."
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr "Haken Sie die gewünschten an, entfernen Sie den Haken bei denen, die weg sollen."
 
-msgid "Version {} starts at the next restart."
-msgstr "Version {} startet beim nächsten Neustart."
+msgid "Ready at the next restart."
+msgstr "Bereit beim nächsten Neustart."
 
 msgid "Backups"
 msgstr "Datensicherung"
@@ -760,7 +760,7 @@ msgid "Open LocalSend"
 msgstr "LocalSend öffnen"
 
 msgid "Restore…"
-msgstr "Übernehmen …"
+msgstr "Übernehmen…"
 
 msgid "Saved in Documents."
 msgstr "In Dokumente gespeichert."
@@ -811,7 +811,7 @@ msgid "Take them back"
 msgstr "Übernehmen"
 
 msgid "Restoring…"
-msgstr "Wird übernommen …"
+msgstr "Wird übernommen…"
 
 msgid "Restored"
 msgstr "Übernommen"
@@ -984,7 +984,7 @@ msgid "Disk space and the trash"
 msgstr "Speicherplatz und Papierkorb"
 
 msgid "Disks open at startup"
-msgstr "Beim Start eingebundene Laufwerke"
+msgstr "Laufwerke beim Start"
 
 msgid "Every day"
 msgstr "Im Alltag"
@@ -1028,8 +1028,8 @@ msgstr "NVIDIA-Treiber"
 msgid "Not set up yet."
 msgstr "Noch nicht eingerichtet."
 
-msgid "Office, games, school, development…"
-msgstr "Büro, Spiele, Schule, Entwicklung…"
+msgid "Office, games, school…"
+msgstr "Büro, Spiele, Schule…"
 
 msgid "One thing needs your attention: {}"
 msgstr "Eine Sache braucht Ihre Aufmerksamkeit: {}"
@@ -1040,8 +1040,8 @@ msgstr "Drucken und Scannen"
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr "Drucker im Netzwerk oder per USB angeschlossen erscheinen von selbst. Fügen Sie hier einen hinzu oder richten Sie ihn ein."
 
-msgid "Processor, memory, graphics card"
-msgstr "Prozessor, Arbeitsspeicher, Grafikkarte"
+msgid "Processor, memory, disk"
+msgstr "Prozessor, Speicher, Laufwerk"
 
 msgid "Protect your files"
 msgstr "Dateien schützen"
@@ -1070,10 +1070,10 @@ msgstr "Die Ladegrenze des Akkus"
 msgid "The graphics card's driver"
 msgstr "Der Treiber der Grafikkarte"
 
-msgid "The system version could not be read."
-msgstr "Die Systemversion konnte nicht gelesen werden."
+msgid "Could not read the version."
+msgstr "Version nicht lesbar."
 
-msgid "The system, the apps and the devices"
+msgid "System, apps and devices"
 msgstr "System, Apps und Geräte"
 
 msgid "Theme and layout"
@@ -1118,8 +1118,8 @@ msgstr "{} Dinge brauchen Ihre Aufmerksamkeit: {}"
 msgid "Charging stops at 80 %."
 msgstr "Das Laden stoppt bei 80 %."
 
-msgid "Choose the ones that open at startup."
-msgstr "Wählen Sie die, die beim Start eingebunden werden."
+msgid "None opens at startup yet."
+msgstr "Noch keins öffnet beim Start."
 
 msgid "Clean up the system"
 msgstr "System aufräumen"
@@ -1136,11 +1136,11 @@ msgstr "Keine vorherige Version"
 msgid "No printer added yet."
 msgstr "Noch kein Drucker hinzugefügt."
 
-msgid "Off: the battery charges fully."
-msgstr "Aus: Der Akku lädt voll."
+msgid "Off: charges to 100 %."
+msgstr "Aus: lädt bis 100 %."
 
-msgid "The open driver built into Linux."
-msgstr "Der offene, in Linux eingebaute Treiber."
+msgid "The open Linux driver."
+msgstr "Der offene Linux-Treiber."
 
 msgid "This computer has only ever run this version."
 msgstr "Dieser Computer lief bisher nur mit dieser Version."

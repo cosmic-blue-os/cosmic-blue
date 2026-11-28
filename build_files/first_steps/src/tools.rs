@@ -89,6 +89,10 @@ mod transfer;
 mod units;
 mod update_progress;
 mod updates_page;
+mod webapp_folder;
+mod webapp_icons;
+mod webapp_launcher;
+mod webapp_site;
 mod webapps;
 use i18n::tr;
 
@@ -118,10 +122,10 @@ const TEXTS: &[&str] = &[
     "Copy",
     "Update",
     "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you.",
-    "The system, the apps and the devices",
+    "System, apps and devices",
     "Install apps",
     "Ready in one click. In each list, the apps most used on Linux are already ticked.",
-    "Office, games, school, development…",
+    "Office, games, school…",
     "Web apps",
     "Your favourite sites in their own window, with their icon in your apps and the dock.",
     "WhatsApp, Netflix, Gmail…",
@@ -139,7 +143,7 @@ const TEXTS: &[&str] = &[
     "Settings, apps and files",
     "What's inside",
     "What this computer is made of, and how it starts.",
-    "Processor, memory, graphics card",
+    "Processor, memory, disk",
     "Spare the battery",
     "Charging stops at 80 %: the battery lasts longer when the laptop stays plugged in.",
     "The battery charge limit",
@@ -275,12 +279,12 @@ impl Tool {
             Tool::Update => (
                 "Update",
                 "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you.",
-                "The system, the apps and the devices",
+                "System, apps and devices",
             ),
             Tool::Apps => (
                 "Install apps",
                 "Ready in one click. In each list, the apps most used on Linux are already ticked.",
-                "Office, games, school, development…",
+                "Office, games, school…",
             ),
             Tool::WebApps => (
                 "Web apps",
@@ -310,7 +314,7 @@ impl Tool {
             Tool::Inside => (
                 "What's inside",
                 "What this computer is made of, and how it starts.",
-                "Processor, memory, graphics card",
+                "Processor, memory, disk",
             ),
             Tool::Battery => (
                 "Spare the battery",

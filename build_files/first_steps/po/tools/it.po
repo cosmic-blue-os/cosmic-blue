@@ -45,7 +45,7 @@ msgid "Previous version: {}"
 msgstr "Versione precedente: {}"
 
 msgid "Something wrong since the last update? Go back to this version. Your files and settings stay as they are."
-msgstr "Qualcosa non va dall'ultimo aggiornamento? Torna a questa versione. I tuoi file e le tue impostazioni restano come sono."
+msgstr "Qualcosa non va dall’ultimo aggiornamento? Torna a questa versione. I tuoi file e le tue impostazioni restano come sono."
 
 msgid "Go back to it"
 msgstr "Torna a questa"
@@ -346,13 +346,13 @@ msgid "No battery on this computer: nothing to set."
 msgstr "Questo computer non ha una batteria: niente da regolare."
 
 msgid "This computer starts in legacy BIOS mode. To open its settings, press the key shown when it powers on, often F2, F10 or Del."
-msgstr "Questo computer si avvia in modalità BIOS legacy. Per aprire le sue impostazioni, premete il tasto indicato all'accensione, spesso F2, F10 o Canc."
+msgstr "Questo computer si avvia in modalità BIOS legacy. Per aprire le sue impostazioni, premi il tasto indicato all’accensione, spesso F2, F10 o Canc."
 
 msgid "Cancel"
 msgstr "Annulla"
 
 msgid "Charging stops at 80 %: the battery lasts longer when the laptop stays plugged in."
-msgstr "La carica si ferma all'80 %: la batteria dura di più quando il portatile resta collegato."
+msgstr "La carica si ferma all’80 %: la batteria dura di più quando il portatile resta collegato."
 
 msgid "Dark theme"
 msgstr "Tema scuro"
@@ -439,22 +439,22 @@ msgid "Switch"
 msgstr "Passa"
 
 msgid "The NVIDIA edition is downloaded now and starts at the next restart. With Secure Boot on, a blue screen asks for the password celennos once."
-msgstr "L'edizione NVIDIA viene scaricata ora e parte al prossimo riavvio. Con Secure Boot attivo, una schermata blu chiede una volta la password celennos."
+msgstr "L’edizione NVIDIA viene scaricata ora e parte al prossimo riavvio. Con Secure Boot attivo, una schermata blu chiede una volta la password celennos."
 
 msgid "The NVIDIA edition starts at the next restart."
-msgstr "L'edizione NVIDIA parte al prossimo riavvio."
+msgstr "L’edizione NVIDIA parte al prossimo riavvio."
 
 msgid "The computer restarts now. Save your work first."
 msgstr "Il computer si riavvia subito. Salva prima il tuo lavoro."
 
 msgid "The Celenn OS look"
-msgstr "L'aspetto di Celenn OS"
+msgstr "L’aspetto di Celenn OS"
 
 msgid "Use it"
 msgstr "Usala"
 
 msgid "Use the NVIDIA edition of Celenn OS, with NVIDIA's own driver, for games and graphics apps."
-msgstr "Usare l'edizione NVIDIA di Celenn OS, con il driver di NVIDIA, per giochi e app di grafica."
+msgstr "Usare l’edizione NVIDIA di Celenn OS, con il driver di NVIDIA, per giochi e app di grafica."
 
 msgid "Virtual machines"
 msgstr "Macchine virtuali"
@@ -463,7 +463,7 @@ msgid "Working…"
 msgstr "In corso…"
 
 msgid "You use the NVIDIA edition, with NVIDIA's own driver."
-msgstr "Usi l'edizione NVIDIA, con il driver di NVIDIA."
+msgstr "Usi l’edizione NVIDIA, con il driver di NVIDIA."
 
 msgid "virt-manager, to run Windows or another Linux in a window."
 msgstr "virt-manager, per eseguire Windows o un altro Linux in una finestra."
@@ -508,7 +508,7 @@ msgid "Allow"
 msgstr "Consenti"
 
 msgid "At the next restart, a blue screen asks for the password celennos: choose Enroll MOK, Continue, Yes, type celennos, then Reboot. The keyboard may be in QWERTY."
-msgstr "Al prossimo riavvio, una schermata blu chiede la password celennos: scegliete Enroll MOK, Continue, Yes, digitate celennos, poi Reboot. La tastiera può essere in QWERTY inglese."
+msgstr "Al prossimo riavvio, una schermata blu chiede la password celennos: scegli Enroll MOK, Continue, Yes, digita celennos, poi Reboot. La tastiera può essere in QWERTY inglese."
 
 msgid "Close"
 msgstr "Chiudi"
@@ -538,7 +538,7 @@ msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try 
 msgstr "Il disco è pieno ({} liberi). Libera spazio con Strumenti di Celenn OS, poi riprova."
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l'hardware e questo errore. Nessun file né dato personale. Lo rileggete prima di inviarlo; scrivete nella vostra lingua. Per inviarlo serve un account GitHub."
+msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l’hardware e questo errore. Nessun file né dato personale. Lo rileggi prima di inviarlo; scrivi nella tua lingua. Per inviarlo serve un account GitHub."
 
 msgid "The server does not answer. Try again in a few minutes."
 msgstr "Il server non risponde. Riprovate tra qualche minuto."
@@ -561,8 +561,8 @@ msgstr "Il tuo gestore di password è pronto."
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr "Seleziona quelli che vuoi, deseleziona quelli da rimuovere."
 
-msgid "Version {} starts at the next restart."
-msgstr "La versione {} parte al prossimo riavvio."
+msgid "Ready at the next restart."
+msgstr "Pronta al prossimo riavvio."
 
 msgid "Backups"
 msgstr "Backup"
@@ -583,10 +583,10 @@ msgid "Almost full: {} free."
 msgstr "Quasi pieno: {} liberi."
 
 msgid "One device has an update."
-msgstr "Un dispositivo ha un aggiornamento."
+msgstr "Un dispositivo da aggiornare."
 
 msgid "{} devices have an update."
-msgstr "{} dispositivi hanno un aggiornamento."
+msgstr "{} dispositivi da aggiornare."
 
 msgid "Nothing found."
 msgstr "Nessun risultato."
@@ -742,7 +742,7 @@ msgid "Save my settings"
 msgstr "Salva le mie impostazioni"
 
 msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
-msgstr "Aspetto, tastiera, scorciatoie e l'elenco delle tue app, in un file nella cartella Documenti. Copialo su una chiavetta USB per portarlo con te."
+msgstr "Aspetto, tastiera, scorciatoie e l’elenco delle tue app, in un file nella cartella Documenti. Copialo su una chiavetta USB per portarlo con te."
 
 msgid "Restore my settings"
 msgstr "Riprendi le mie impostazioni"
@@ -769,7 +769,7 @@ msgid "Show"
 msgstr "Mostra"
 
 msgid "Choose the file saved on your other computer"
-msgstr "Scegli il file salvato sull'altro computer"
+msgstr "Scegli il file salvato sull’altro computer"
 
 msgid "celenn-settings"
 msgstr "celenn-impostazioni"
@@ -819,7 +819,7 @@ msgstr "Ripreso"
 
 
 msgid "Your own wallpaper is not in the file: copy the picture, then choose it in Settings."
-msgstr "Il tuo sfondo personale non è nel file: copia l'immagine, poi sceglila nelle Impostazioni."
+msgstr "Il tuo sfondo personale non è nel file: copia l’immagine, poi sceglila nelle Impostazioni."
 
 msgid "{} shortcuts start a program: for safety, add them again in Settings."
 msgstr "{} scorciatoie avviano un programma: per sicurezza, aggiungile di nuovo nelle Impostazioni."
@@ -852,7 +852,7 @@ msgid "This file could not be read."
 msgstr "Non è stato possibile leggere questo file."
 
 msgid "Nothing to take back: everything in this file is already here."
-msgstr "Niente da riprendere: tutto ciò che c'è in questo file è già qui."
+msgstr "Niente da riprendere: tutto ciò che c’è in questo file è già qui."
 
 msgid "Other disks"
 msgstr "Altri dischi"
@@ -867,13 +867,13 @@ msgid "{} open at every startup."
 msgstr "{} si aprono a ogni avvio."
 
 msgid "None opens at startup yet: choose the ones Files and Steam should always find."
-msgstr "Nessuno si apre ancora all'avvio: scegli quelli che File e Steam devono trovare sempre."
+msgstr "Nessuno si apre ancora all’avvio: scegli quelli che File e Steam devono trovare sempre."
 
 msgid "Turn on the ones you want open at every startup, without clicking them in Files."
 msgstr "Attiva quelli che vuoi trovare aperti a ogni avvio, senza cliccarci sopra in File."
 
 msgid "They open at every startup, even before you log in, and always at the same place: Files, Steam and your apps find them. USB drives are not concerned."
-msgstr "Si aprono a ogni avvio, ancora prima dell'accesso, e sempre nello stesso posto: File, Steam e le tue app li ritrovano. Le chiavette USB non sono interessate."
+msgstr "Si aprono a ogni avvio, ancora prima dell’accesso, e sempre nello stesso posto: File, Steam e le tue app li ritrovano. Le chiavette USB non sono interessate."
 
 msgid "Back"
 msgstr "Indietro"
@@ -915,7 +915,7 @@ msgid "In Files and in {}."
 msgstr "In File e in {}."
 
 msgid "Not opened at this startup. If Windows is also on this computer, turn off its Fast Startup."
-msgstr "Non aperto a questo avvio. Se su questo computer c'è anche Windows, disattiva il suo avvio rapido."
+msgstr "Non aperto a questo avvio. Se su questo computer c’è anche Windows, disattiva il suo avvio rapido."
 
 msgid "Not opened at this startup: the disk was not found, or it has an error."
 msgstr "Non aperto a questo avvio: il disco non è stato trovato o ha un errore."
@@ -930,7 +930,7 @@ msgid "Windows' own disk stays closed, so that nothing can harm it."
 msgstr "Il disco di Windows stesso resta chiuso, perché niente possa danneggiarlo."
 
 msgid "Already opened at startup by a setting of your own."
-msgstr "Già aperto all'avvio da una tua impostazione."
+msgstr "Già aperto all’avvio da una tua impostazione."
 
 msgid "Not offered"
 msgstr "Non proposto"
@@ -945,7 +945,7 @@ msgid "{}: a file on it is open. It closes at the next restart."
 msgstr "{}: un file su questo disco è aperto. Si chiuderà al prossimo riavvio."
 
 msgid "{}: Windows did not fully shut down. In Windows, turn off Fast Startup and shut down, then try again."
-msgstr "{}: Windows non si è spento del tutto. In Windows, disattiva l'avvio rapido e spegni, poi riprova."
+msgstr "{}: Windows non si è spento del tutto. In Windows, disattiva l’avvio rapido e spegni, poi riprova."
 
 msgid "{}: Windows' own disk stays closed, so that nothing can harm it."
 msgstr "{}: il disco di Windows stesso resta chiuso, perché niente possa danneggiarlo."
@@ -1005,7 +1005,7 @@ msgid "Go back"
 msgstr "Tornare indietro"
 
 msgid "Guide, questions, report a problem"
-msgstr "Guida, domande, segnalare un problema"
+msgstr "Guida, domande, problemi"
 
 msgid "Help on this tool"
 msgstr "Aiuto su questo strumento"
@@ -1028,8 +1028,8 @@ msgstr "Driver NVIDIA"
 msgid "Not set up yet."
 msgstr "Non ancora configurato."
 
-msgid "Office, games, school, development…"
-msgstr "Ufficio, giochi, scuola, sviluppo…"
+msgid "Office, games, school…"
+msgstr "Ufficio, giochi, scuola…"
 
 msgid "One thing needs your attention: {}"
 msgstr "Una cosa richiede la tua attenzione: {}"
@@ -1040,8 +1040,8 @@ msgstr "Stampare e scansionare"
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr "Le stampanti in rete o collegate via USB compaiono da sole. Aggiungine una o configurala qui."
 
-msgid "Processor, memory, graphics card"
-msgstr "Processore, memoria, scheda grafica"
+msgid "Processor, memory, disk"
+msgstr "Processore, memoria, disco"
 
 msgid "Protect your files"
 msgstr "Proteggi i tuoi file"
@@ -1070,11 +1070,11 @@ msgstr "Il limite di carica della batteria"
 msgid "The graphics card's driver"
 msgstr "Il driver della scheda grafica"
 
-msgid "The system version could not be read."
-msgstr "Impossibile leggere la versione del sistema."
+msgid "Could not read the version."
+msgstr "Versione non leggibile."
 
-msgid "The system, the apps and the devices"
-msgstr "Il sistema, le app e i dispositivi"
+msgid "System, apps and devices"
+msgstr "Sistema, app e dispositivi"
 
 msgid "Theme and layout"
 msgstr "Tema e disposizione"
@@ -1086,7 +1086,7 @@ msgid "Toolbox"
 msgstr "Cassetta degli attrezzi"
 
 msgid "Up to date, version {}"
-msgstr "Aggiornato, versione {}"
+msgstr "Aggiornato alla {}"
 
 msgid "Update"
 msgstr "Aggiornare"
@@ -1116,16 +1116,16 @@ msgid "{} things need your attention: {}"
 msgstr "{} cose richiedono la tua attenzione: {}"
 
 msgid "Charging stops at 80 %."
-msgstr "La carica si ferma all'80 %."
+msgstr "La carica si ferma all’80 %."
 
-msgid "Choose the ones that open at startup."
-msgstr "Scegli quelli che si aprono all'avvio."
+msgid "None opens at startup yet."
+msgstr "Nessuno si apre all’avvio."
 
 msgid "Clean up the system"
 msgstr "Pulire il sistema"
 
 msgid "Its driver waits for your OK."
-msgstr "Il suo driver attende il tuo consenso."
+msgstr "Il driver attende il tuo OK."
 
 msgid "NVIDIA's own driver."
 msgstr "Il driver di NVIDIA."
@@ -1136,11 +1136,11 @@ msgstr "Nessuna versione precedente"
 msgid "No printer added yet."
 msgstr "Nessuna stampante aggiunta."
 
-msgid "Off: the battery charges fully."
-msgstr "Disattivato: la batteria si carica del tutto."
+msgid "Off: charges to 100 %."
+msgstr "Disattivato: carica al 100 %."
 
-msgid "The open driver built into Linux."
-msgstr "Il driver libero integrato in Linux."
+msgid "The open Linux driver."
+msgstr "Il driver libero di Linux."
 
 msgid "This computer has only ever run this version."
 msgstr "Questo computer ha sempre usato solo questa versione."
@@ -1164,7 +1164,7 @@ msgid "Documents and sheets"
 msgstr "Documenti e fogli"
 
 msgid "Email"
-msgstr "Posta"
+msgstr "Email"
 
 msgid "Films and series"
 msgstr "Film e serie"

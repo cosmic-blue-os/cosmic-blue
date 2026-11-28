@@ -207,13 +207,14 @@ distrobox enter arch</code></pre>
     <section class="block">
       <h2 id="tools">Celenn OS Tools</h2>
       <p><strong>Celenn OS Tools</strong> is a toolbox: each tile opens one tool. <em>Every day</em>: update, install apps, web apps, free up space, protect your files, print, change computers. <em>My computer</em>: what is inside, the battery, other disks, the look, the NVIDIA driver, Microsoft fonts. <em>When something is wrong</em>: go back, repair, get help. A line at the top says when something needs your attention, and <em>For experienced users…</em> gathers the update channel, older versions, firmware and virtual machines. Each tool shows the matching <code>ujust</code> command, and its <strong>?</strong> button opens its part of this guide. Changes to the system ask for an administrator's password.</p>
+      <p>From anywhere, <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> opens the <strong>Quick menu</strong>: take a screenshot, see the keyboard shortcuts, lock the screen, or type what you want to do to find the right tool. Press the shortcut again, or <kbd>Escape</kbd>, to close it.</p>
     </section>
 
     <section class="block">
       <h2 id="parental">Parental controls</h2>
       <p>The <strong>Parental controls</strong> app creates child accounts and sets for each one a daily screen time (weekdays and weekend), bedtime hours and a family web filter. Only the time in front of the screen counts. The child is warned 10, 5 and 1 minutes before the session closes, and can ask for more time, which a parent gives with their password.</p>
       <h3>What it cannot stop</h3>
-      <p>The web filter blocks adult content, gambling and malicious sites in every browser of the child's account, and forces safe search. It also refuses the usual ways around it: other DNS servers, encrypted DNS to public resolvers, and VPN connections the child would add. It cannot block everything: an app that hides its traffic as ordinary web browsing, such as Tor Browser or a VPN browser extension, gets around it, and someone with the computer in hand can start another system from a USB stick. Keep an eye on the apps a child installs.</p>
+      <p>The web filter blocks adult content, gambling and malicious sites in every browser of the child's account, and forces safe search. It also refuses the usual ways around it: other DNS servers, encrypted DNS to public resolvers, and VPN connections the child would add. It cannot block everything: an app that hides its traffic as ordinary web browsing, such as Tor Browser or a VPN browser extension, gets around it, and someone with the computer in hand can start another system from a USB stick. Screen time has a limit of the same kind: a child who knows the terminal can make the system believe the screen is locked, which stops the count, but bedtime still closes the session. Keep an eye on the apps a child installs.</p>
     </section>
 
     <section class="block">
@@ -285,6 +286,8 @@ distrobox enter arch</code></pre>
       </div>
       <h3>Backups</h3>
       <p>The <strong>Backups</strong> app (Déjà Dup) is installed: it saves your home folder to an external drive, a network share or a cloud storage, encrypted if you want, and restores single files or everything. For the terminal, <code>restic</code>, <code>borg</code> and <code>rclone</code> are installed too.</p>
+      <h3>Trash</h3>
+      <p>Files that stay in the trash for more than 30 days are deleted on their own. To keep them, turn off <em>Delete files that stayed in the trash for more than 30 days</em> in Celenn OS Tools, under <em>Free up space</em>. This only concerns the trash of your home folder, not that of USB drives.</p>
       <h3>Coming from another system</h3>
       <p>Back up your files first (Backups, or a copy to an external drive), install Celenn OS, then copy them back into your home folder. Install your apps again from COSMIC Store; Flatpak apps keep their data in <code>~/.var/app</code>, which you can copy over from another system that used the same Flatpaks.</p>
     </section>
@@ -296,6 +299,8 @@ distrobox enter arch</code></pre>
         <li>Updates, once a day: the Celenn OS images on GitHub, Flathub and the COSMIC app repository, and Homebrew if you use it (with Homebrew's usage statistics turned off).</li>
         <li>Fedora's anonymous weekly count (<code>rpm-ostree-countme</code>): one request a week to Fedora's servers, with the Fedora release and a rough age of the system but no identifier, so that Fedora knows how many systems use it.</li>
         <li>Firefox: telemetry, studies, sponsored content and ad measurement are off. uBlock Origin blocks ads and trackers, and sites open over HTTPS whenever they can.</li>
+        <li>The <em>Web apps</em> tool: the first time it opens, it fetches the logo of each site it offers from that site, and keeps it on the computer. A site you add yourself is contacted the same way.</li>
+        <li>Child accounts with the web filter on (Parental controls): to block sites, the names of the sites they open are sent to the CleanBrowsing family filter instead of the usual DNS server.</li>
         <li>Tailscale is installed, for <code>sudo tailscale up</code>: its service runs but does not join any network until you sign in.</li>
       </ul>
       <p>To stop the Fedora count, or the Tailscale service if you do not use it:</p>

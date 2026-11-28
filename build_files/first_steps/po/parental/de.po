@@ -45,7 +45,7 @@ msgid "An account without administrator rights, ready in one click"
 msgstr "Ein Konto ohne Administratorrechte, mit einem Klick bereit"
 
 msgid "Add…"
-msgstr "Hinzufügen …"
+msgstr "Hinzufügen…"
 
 msgid "Only a parent (an administrator account) can change these settings."
 msgstr "Nur ein Elternteil (Administratorkonto) kann diese Einstellungen ändern."
@@ -246,7 +246,7 @@ msgid "{} of {}"
 msgstr "{} von {}"
 
 msgid "Choose…"
-msgstr "Auswählen …"
+msgstr "Auswählen…"
 
 msgid "Downloaded programs (AppImages, executable files) do not run on this account."
 msgstr "Heruntergeladene Programme (AppImages, ausführbare Dateien) starten auf diesem Konto nicht."

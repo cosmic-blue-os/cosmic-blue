@@ -559,7 +559,7 @@ msgstr ""
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr ""
 
-msgid "Version {} starts at the next restart."
+msgid "Ready at the next restart."
 msgstr ""
 
 msgid "Backups"
@@ -1026,7 +1026,7 @@ msgstr ""
 msgid "Not set up yet."
 msgstr ""
 
-msgid "Office, games, school, development…"
+msgid "Office, games, school…"
 msgstr ""
 
 msgid "One thing needs your attention: {}"
@@ -1038,7 +1038,7 @@ msgstr ""
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr ""
 
-msgid "Processor, memory, graphics card"
+msgid "Processor, memory, disk"
 msgstr ""
 
 msgid "Protect your files"
@@ -1068,10 +1068,10 @@ msgstr ""
 msgid "The graphics card's driver"
 msgstr ""
 
-msgid "The system version could not be read."
+msgid "Could not read the version."
 msgstr ""
 
-msgid "The system, the apps and the devices"
+msgid "System, apps and devices"
 msgstr ""
 
 msgid "Theme and layout"
@@ -1116,7 +1116,7 @@ msgstr ""
 msgid "Charging stops at 80 %."
 msgstr ""
 
-msgid "Choose the ones that open at startup."
+msgid "None opens at startup yet."
 msgstr ""
 
 msgid "Clean up the system"
@@ -1134,10 +1134,10 @@ msgstr ""
 msgid "No printer added yet."
 msgstr ""
 
-msgid "Off: the battery charges fully."
+msgid "Off: charges to 100 %."
 msgstr ""
 
-msgid "The open driver built into Linux."
+msgid "The open Linux driver."
 msgstr ""
 
 msgid "This computer has only ever run this version."

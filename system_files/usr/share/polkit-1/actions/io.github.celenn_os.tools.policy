@@ -15,7 +15,7 @@
   <vendor_url>https://celenn-os.github.io/celenn/</vendor_url>
   <action id="io.github.celenn_os.tools.manage">
     <description>Free up disk space</description>
-    <description xml:lang="fr">Libérer de l'espace disque</description>
+    <description xml:lang="fr">Libérer de l’espace disque</description>
     <description xml:lang="de">Speicherplatz freigeben</description>
     <description xml:lang="es">Liberar espacio en disco</description>
     <description xml:lang="it">Liberare spazio su disco</description>
@@ -43,7 +43,7 @@
     <description xml:lang="it">Aprire dischi a ogni avvio</description>
     <description xml:lang="pt_BR">Abrir discos a cada inicialização</description>
     <message>Authentication is required to change the disks that open at every startup</message>
-    <message xml:lang="fr">Une authentification est nécessaire pour changer les disques qui s'ouvrent à chaque démarrage</message>
+    <message xml:lang="fr">Une authentification est nécessaire pour changer les disques qui s’ouvrent à chaque démarrage</message>
     <message xml:lang="de">Zum Ändern der Laufwerke, die bei jedem Start geöffnet werden, ist eine Authentifizierung erforderlich</message>
     <message xml:lang="es">Se necesita autenticación para cambiar los discos que se abren en cada inicio</message>
     <message xml:lang="it">È necessario autenticarsi per cambiare i dischi che si aprono a ogni avvio</message>

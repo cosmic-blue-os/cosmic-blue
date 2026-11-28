@@ -207,13 +207,14 @@ distrobox enter arch</code></pre>
     <section class="block">
       <h2 id="tools">Celenn OS Werkzeuge</h2>
       <p><strong>Celenn OS Werkzeuge</strong> ist ein Werkzeugkasten: Jede Kachel öffnet ein Werkzeug. <em>Im Alltag</em>: aktualisieren, Apps installieren, Web-Apps, Speicherplatz freigeben, Dateien schützen, drucken, Computer wechseln. <em>Mein Computer</em>: was drinsteckt, der Akku, weitere Laufwerke, das Aussehen, der NVIDIA-Treiber, Microsoft-Schriften. <em>Wenn etwas nicht stimmt</em>: zurückgehen, reparieren, Hilfe erhalten. Eine Zeile oben zeigt, was Ihre Aufmerksamkeit braucht, und <em>Für Erfahrene…</em> bündelt den Update-Kanal, ältere Versionen, Firmware und virtuelle Maschinen. Jedes Werkzeug zeigt den passenden <code>ujust</code>-Befehl, und sein Knopf <strong>?</strong> öffnet seinen Teil dieser Anleitung. Änderungen am System verlangen das Passwort eines Administrators.</p>
+      <p>Von überall öffnet <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Leertaste</kbd> das <strong>Schnellmenü</strong>: ein Bildschirmfoto aufnehmen, die Tastenkürzel ansehen, den Bildschirm sperren oder eingeben, was Sie tun möchten, um das passende Werkzeug zu finden. Drücken Sie das Tastenkürzel erneut oder <kbd>Esc</kbd>, um es zu schließen.</p>
     </section>
 
     <section class="block">
       <h2 id="parental">Jugendschutz</h2>
       <p>Die App <strong>Jugendschutz</strong> legt Kinderkonten an und stellt für jedes eine tägliche Bildschirmzeit (Wochentage und Wochenende), Schlafenszeiten und einen Familien-Webfilter ein. Nur die Zeit vor dem Bildschirm zählt. Das Kind wird 10, 5 und 1 Minute vor dem Ende der Sitzung gewarnt und kann um mehr Zeit bitten, die ein Elternteil mit seinem Passwort gewährt.</p>
       <h3>Was er nicht verhindern kann</h3>
-      <p>Der Webfilter sperrt Inhalte für Erwachsene, Glücksspiel und schädliche Seiten in jedem Browser des Kinderkontos und erzwingt die sichere Suche. Er verweigert auch die üblichen Umwege: andere DNS-Server, verschlüsseltes DNS zu öffentlichen Resolvern und VPN-Verbindungen, die das Kind hinzufügen würde. Alles sperren kann er nicht: Eine App, die ihren Verkehr wie normales Surfen aussehen lässt, etwa der Tor Browser oder eine VPN-Browsererweiterung, kommt daran vorbei, und wer den Computer in der Hand hat, kann ein anderes System von einem USB-Stick starten. Behalten Sie die Apps im Blick, die ein Kind installiert.</p>
+      <p>Der Webfilter sperrt Inhalte für Erwachsene, Glücksspiel und schädliche Seiten in jedem Browser des Kinderkontos und erzwingt die sichere Suche. Er verweigert auch die üblichen Umwege: andere DNS-Server, verschlüsseltes DNS zu öffentlichen Resolvern und VPN-Verbindungen, die das Kind hinzufügen würde. Alles sperren kann er nicht: Eine App, die ihren Verkehr wie normales Surfen aussehen lässt, etwa der Tor Browser oder eine VPN-Browsererweiterung, kommt daran vorbei, und wer den Computer in der Hand hat, kann ein anderes System von einem USB-Stick starten. Die Bildschirmzeit hat eine Grenze derselben Art: Ein Kind, das sich mit dem Terminal auskennt, kann dem System vorgaukeln, dass der Bildschirm gesperrt ist, und so die Zählung anhalten. Die Schlafenszeit beendet die Sitzung trotzdem. Behalten Sie die Apps im Blick, die ein Kind installiert.</p>
     </section>
 
     <section class="block">
@@ -285,6 +286,8 @@ distrobox enter arch</code></pre>
       </div>
       <h3>Datensicherung</h3>
       <p>Die App <strong>Datensicherungen</strong> (Déjà Dup) ist installiert: Sie sichert Ihren persönlichen Ordner auf ein externes Laufwerk, eine Netzwerkfreigabe oder einen Cloud-Speicher, auf Wunsch verschlüsselt, und stellt einzelne Dateien oder alles wieder her. Für das Terminal sind auch <code>restic</code>, <code>borg</code> und <code>rclone</code> installiert.</p>
+      <h3>Papierkorb</h3>
+      <p>Dateien, die länger als 30 Tage im Papierkorb liegen, werden von selbst gelöscht. Um sie zu behalten, schalten Sie in Celenn OS Werkzeuge unter <em>Speicherplatz freigeben</em> die Option <em>Dateien löschen, die länger als 30 Tage im Papierkorb liegen</em> aus. Das betrifft nur den Papierkorb Ihres persönlichen Ordners, nicht den von USB-Sticks.</p>
       <h3>Umstieg von einem anderen System</h3>
       <p>Sichern Sie zuerst Ihre Dateien (mit Datensicherungen oder als Kopie auf ein externes Laufwerk), installieren Sie Celenn OS und kopieren Sie sie dann zurück in Ihren persönlichen Ordner. Installieren Sie Ihre Apps erneut aus dem COSMIC Store; Flatpak-Apps speichern ihre Daten in <code>~/.var/app</code>, das Sie von einem anderen System mit denselben Flatpaks übernehmen können.</p>
     </section>
@@ -296,6 +299,8 @@ distrobox enter arch</code></pre>
         <li>Updates, einmal am Tag: die Celenn-OS-Images auf GitHub, Flathub und das COSMIC-App-Repository, und Homebrew, wenn Sie es nutzen (mit abgeschalteten Nutzungsstatistiken von Homebrew).</li>
         <li>Fedoras anonyme wöchentliche Zählung (<code>rpm-ostree-countme</code>): eine Anfrage pro Woche an Fedoras Server, mit der Fedora-Version und dem ungefähren Alter des Systems, aber ohne Kennung, damit Fedora weiß, wie viele Systeme es nutzen.</li>
         <li>Firefox: Telemetrie, Studien, gesponserte Inhalte und Werbemessung sind aus. uBlock Origin blockiert Werbung und Tracker, und Websites öffnen sich wann immer möglich über HTTPS.</li>
+        <li>Das Werkzeug <em>Web-Apps</em>: Beim ersten Öffnen lädt es das Logo jeder angebotenen Website von dieser Website selbst und speichert es auf dem Computer. Eine Website, die Sie selbst hinzufügen, wird ebenso kontaktiert.</li>
+        <li>Kinderkonten mit eingeschaltetem Webfilter (Jugendschutz): Um Websites zu sperren, werden die Namen der Websites, die sie öffnen, an den Familienfilter von CleanBrowsing statt an den üblichen DNS-Server gesendet.</li>
         <li>Tailscale ist installiert, für <code>sudo tailscale up</code>: Sein Dienst läuft, tritt aber keinem Netzwerk bei, bevor Sie sich anmelden.</li>
       </ul>
       <p>Um die Fedora-Zählung zu stoppen, oder den Tailscale-Dienst, wenn Sie ihn nicht nutzen:</p>

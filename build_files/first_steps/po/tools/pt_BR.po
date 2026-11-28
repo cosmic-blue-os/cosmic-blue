@@ -561,8 +561,8 @@ msgstr "Seu gerenciador de senhas está pronto."
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr "Marque os que quiser e desmarque os que quiser remover."
 
-msgid "Version {} starts at the next restart."
-msgstr "A versão {} inicia na próxima reinicialização."
+msgid "Ready at the next restart."
+msgstr "Pronta ao reiniciar."
 
 msgid "Backups"
 msgstr "Backups"
@@ -583,10 +583,10 @@ msgid "Almost full: {} free."
 msgstr "Quase cheio: {} livres."
 
 msgid "One device has an update."
-msgstr "Um dispositivo tem uma atualização."
+msgstr "Um dispositivo a atualizar."
 
 msgid "{} devices have an update."
-msgstr "{} dispositivos têm uma atualização."
+msgstr "{} dispositivos a atualizar."
 
 msgid "Nothing found."
 msgstr "Nada encontrado."
@@ -757,7 +757,7 @@ msgid "Documents and photos are not in the settings file: copy them to a USB dri
 msgstr "Documentos e fotos não estão no arquivo de configurações: copie-os para um pendrive ou envie-os pelo Wi-Fi com o LocalSend, aberto nos dois computadores."
 
 msgid "Open LocalSend"
-msgstr "Abrir LocalSend"
+msgstr "Abrir o LocalSend"
 
 msgid "Restore…"
 msgstr "Recuperar…"
@@ -966,7 +966,7 @@ msgid "All is well: Celenn OS looks after itself."
 msgstr "Tudo certo: o Celenn OS cuida de si mesmo."
 
 msgid "Apps, look, settings"
-msgstr "Aplicativos, aparência, configurações"
+msgstr "Apps, aparência, ajustes"
 
 msgid "Arial, Times New Roman, Verdana…"
 msgstr "Arial, Times New Roman, Verdana…"
@@ -1005,7 +1005,7 @@ msgid "Go back"
 msgstr "Voltar atrás"
 
 msgid "Guide, questions, report a problem"
-msgstr "Guia, perguntas, relatar um problema"
+msgstr "Guia, perguntas, problemas"
 
 msgid "Help on this tool"
 msgstr "Ajuda sobre esta ferramenta"
@@ -1028,8 +1028,8 @@ msgstr "Driver NVIDIA"
 msgid "Not set up yet."
 msgstr "Ainda não configurado."
 
-msgid "Office, games, school, development…"
-msgstr "Escritório, jogos, escola, desenvolvimento…"
+msgid "Office, games, school…"
+msgstr "Escritório, jogos, escola…"
 
 msgid "One thing needs your attention: {}"
 msgstr "Uma coisa precisa da sua atenção: {}"
@@ -1040,8 +1040,8 @@ msgstr "Imprimir e digitalizar"
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr "Impressoras na rede ou ligadas por USB aparecem sozinhas. Adicione uma ou configure-a aqui."
 
-msgid "Processor, memory, graphics card"
-msgstr "Processador, memória, placa de vídeo"
+msgid "Processor, memory, disk"
+msgstr "Processador, memória, disco"
 
 msgid "Protect your files"
 msgstr "Proteja seus arquivos"
@@ -1070,11 +1070,11 @@ msgstr "O limite de carga da bateria"
 msgid "The graphics card's driver"
 msgstr "O driver da placa de vídeo"
 
-msgid "The system version could not be read."
-msgstr "Não foi possível ler a versão do sistema."
+msgid "Could not read the version."
+msgstr "Versão não encontrada."
 
-msgid "The system, the apps and the devices"
-msgstr "O sistema, os aplicativos e os dispositivos"
+msgid "System, apps and devices"
+msgstr "Sistema, apps e dispositivos"
 
 msgid "Theme and layout"
 msgstr "Tema e layout"
@@ -1118,14 +1118,14 @@ msgstr "{} coisas precisam da sua atenção: {}"
 msgid "Charging stops at 80 %."
 msgstr "A carga para em 80 %."
 
-msgid "Choose the ones that open at startup."
-msgstr "Escolha os que abrem na inicialização."
+msgid "None opens at startup yet."
+msgstr "Nenhum abre ao iniciar ainda."
 
 msgid "Clean up the system"
 msgstr "Limpar o sistema"
 
 msgid "Its driver waits for your OK."
-msgstr "O driver dela aguarda sua permissão."
+msgstr "O driver aguarda seu OK."
 
 msgid "NVIDIA's own driver."
 msgstr "O driver da própria NVIDIA."
@@ -1136,11 +1136,11 @@ msgstr "Nenhuma versão anterior"
 msgid "No printer added yet."
 msgstr "Nenhuma impressora adicionada."
 
-msgid "Off: the battery charges fully."
-msgstr "Desligado: a bateria carrega por completo."
+msgid "Off: charges to 100 %."
+msgstr "Desligado: carrega até 100 %."
 
-msgid "The open driver built into Linux."
-msgstr "O driver livre que vem no Linux."
+msgid "The open Linux driver."
+msgstr "O driver livre do Linux."
 
 msgid "This computer has only ever run this version."
 msgstr "Este computador só usou esta versão até agora."

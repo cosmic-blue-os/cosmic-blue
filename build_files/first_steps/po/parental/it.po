@@ -75,7 +75,7 @@ msgid "No computer at night"
 msgstr "Niente computer di notte"
 
 msgid "The session closes and logging in is refused during these hours."
-msgstr "La sessione si chiude e l'accesso è negato in queste ore."
+msgstr "La sessione si chiude e l’accesso è negato in queste ore."
 
 msgid "From"
 msgstr "Dalle"
@@ -90,7 +90,7 @@ msgid "Block unsuitable websites"
 msgstr "Blocca i siti non adatti"
 
 msgid "Adult content, gambling and malicious sites, in every browser. Safe search is forced. Uses the CleanBrowsing family filter."
-msgstr "Contenuti per adulti, gioco d'azzardo e siti dannosi, in ogni browser. La ricerca sicura è forzata. Usa il filtro famiglia di CleanBrowsing."
+msgstr "Contenuti per adulti, gioco d’azzardo e siti dannosi, in ogni browser. La ricerca sicura è forzata. Usa il filtro famiglia di CleanBrowsing."
 
 msgid "This week"
 msgstr "Questa settimana"
@@ -222,7 +222,7 @@ msgid "Technical details"
 msgstr "Dettagli tecnici"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l'hardware e questo errore. Nessun file né dato personale. Lo rileggete prima di inviarlo; scrivete nella vostra lingua. Per inviarlo serve un account GitHub."
+msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l’hardware e questo errore. Nessun file né dato personale. Lo rileggi prima di inviarlo; scrivi nella tua lingua. Per inviarlo serve un account GitHub."
 
 msgid "Open the report"
 msgstr "Apri il rapporto"
@@ -237,7 +237,7 @@ msgid "Applications validated by a parent"
 msgstr "Applicazioni approvate da un genitore"
 
 msgid "{} only uses the applications you ticked. Installing an application needs a parent's password."
-msgstr "{} usa solo le applicazioni che hai spuntato. Per installare un'applicazione serve la password di un genitore."
+msgstr "{} usa solo le applicazioni che hai spuntato. Per installare un’applicazione serve la password di un genitore."
 
 msgid "Allowed applications"
 msgstr "Applicazioni consentite"
@@ -255,7 +255,7 @@ msgid "Applications of {}"
 msgstr "Applicazioni di {}"
 
 msgid "Search for an application"
-msgstr "Cerca un'applicazione"
+msgstr "Cerca un’applicazione"
 
 msgid "Allowed"
 msgstr "Consentite"
@@ -267,7 +267,7 @@ msgid "Applications installed later are blocked until you tick them."
 msgstr "Le applicazioni installate in seguito restano bloccate finché non le spunti."
 
 msgid "{} is not allowed"
-msgstr "L'applicazione {} non è consentita"
+msgstr "L’applicazione {} non è consentita"
 
 msgid "A parent must allow it first in Parental controls."
 msgstr "Un genitore deve prima consentirla nel Controllo parentale."
@@ -291,16 +291,16 @@ msgid "{allowed} allowed out of {total}"
 msgstr "{allowed} consentite su {total}"
 
 msgid "One application found"
-msgstr "Un'applicazione trovata"
+msgstr "Un’applicazione trovata"
 
 msgid "{} applications found"
 msgstr "{} applicazioni trovate"
 
 msgid "One application allowed"
-msgstr "Un'applicazione consentita"
+msgstr "Un’applicazione consentita"
 
 msgid "One application blocked"
-msgstr "Un'applicazione bloccata"
+msgstr "Un’applicazione bloccata"
 
 msgid "{} applications allowed"
 msgstr "{} applicazioni consentite"
@@ -345,13 +345,13 @@ msgid "At most 4 h. For more, turn on No limit today."
 msgstr "Al massimo 4 h. Per di più, attiva Nessun limite oggi."
 
 msgid "Keep to bedtime"
-msgstr "Rispetta l'ora di andare a letto"
+msgstr "Rispetta l’ora di andare a letto"
 
 msgid "The session closes at {} all the same."
 msgstr "La sessione si chiude comunque alle {}."
 
 msgid "Bedtime ({}) does not apply to this time."
-msgstr "L'ora di andare a letto ({}) non vale per questo tempo."
+msgstr "L’ora di andare a letto ({}) non vale per questo tempo."
 
 msgid "B"
 msgstr "B"

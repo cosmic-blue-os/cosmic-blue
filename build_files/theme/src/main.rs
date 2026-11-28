@@ -237,3 +237,111 @@ fn main() {
 fn write_pair([dark, light]: [ThemeBuilder; 2]) {
     write(dark, light);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use cosmic_theme::palette::Srgba;
+
+    /// WCAG 2.1 contrast ratio of two colors (their alpha left out)
+    fn contrast(a: Srgba, b: Srgba) -> f32 {
+        let luminance = |c: Srgba| {
+            let linear = |v: f32| {
+                if v <= 0.040_45 {
+                    v / 12.92
+                } else {
+                    ((v + 0.055) / 1.055).powf(2.4)
+                }
+            };
+            0.2126 * linear(c.red) + 0.7152 * linear(c.green) + 0.0722 * linear(c.blue)
+        };
+        let (l1, l2) = (luminance(a), luminance(b));
+        (l1.max(l2) + 0.05) / (l1.min(l2) + 0.05)
+    }
+
+    fn rgb(c: Srgba) -> Srgb<u8> {
+        Srgb::new(c.red, c.green, c.blue).into_format()
+    }
+
+    fn themes() -> [Theme; 2] {
+        let [dark, light] = celenn(
+            ACCENT_DARK,
+            THICKNESS,
+            GLASS_OPACITY_DARK,
+            GLASS_OPACITY_LIGHT,
+        );
+        [
+            named(dark, NAME_DARK).build(),
+            named(light, NAME_LIGHT).build(),
+        ]
+    }
+
+    #[test]
+    fn glass_opacity_like_cosmic_settings() {
+        // COSMIC Settings' default glass opacity (0.5) changes nothing
+        assert_eq!(glass_alpha_map(0.5), AlphaMap::default());
+        // More glass opacity, more opaque surfaces
+        let alpha = |glass| glass_alpha_map(glass).blurred_alpha(THICKNESS);
+        assert!(alpha(GLASS_OPACITY_DARK) < alpha(GLASS_OPACITY_LIGHT));
+        assert!(alpha(GLASS_OPACITY_LIGHT) < alpha(0.5));
+        assert!(alpha(GLASS_OPACITY_DARK) > 0.0);
+    }
+
+    #[test]
+    fn the_celenn_themes() {
+        let [dark, light] = themes();
+        assert!(dark.is_dark && !light.is_dark);
+        assert_eq!(
+            (dark.name.as_str(), light.name.as_str()),
+            (NAME_DARK, NAME_LIGHT)
+        );
+        assert_eq!(rgb(dark.accent_color()), ACCENT_DARK);
+        assert_eq!(rgb(light.accent_color()), ACCENT_LIGHT);
+        for theme in [&dark, &light] {
+            assert_eq!(theme.icon_theme, ICON_THEME);
+            assert_eq!(theme.frosted, THICKNESS);
+            assert!(theme.frosted_windows && theme.frosted_panel);
+            // The window hint follows the accent
+            assert_eq!(theme.window_hint, None);
+        }
+    }
+
+    /// Text stays readable on the themes' surfaces (WCAG AA: 4.5 for text,
+    /// 3 for the accent color used as text, as COSMIC does for links and
+    /// selected items)
+    #[test]
+    fn readable_text() {
+        for theme in themes() {
+            let name = &theme.name;
+            for (what, text, surface, minimum) in [
+                (
+                    "text on windows",
+                    theme.on_bg_color(),
+                    theme.bg_color(),
+                    4.5,
+                ),
+                (
+                    "text on cards",
+                    theme.primary(false).on,
+                    theme.primary(false).base,
+                    4.5,
+                ),
+                (
+                    "text on accent buttons",
+                    theme.on_accent_color(),
+                    theme.accent_color(),
+                    4.5,
+                ),
+                (
+                    "accent text on windows",
+                    theme.accent_text_color(),
+                    theme.bg_color(),
+                    3.0,
+                ),
+            ] {
+                let ratio = contrast(text, surface);
+                assert!(ratio >= minimum, "{name}: {what}: {ratio:.2} < {minimum}");
+            }
+        }
+    }
+}

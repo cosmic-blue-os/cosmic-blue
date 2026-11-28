@@ -150,7 +150,7 @@ msgid "Could not be checked."
 msgstr "Konnte nicht geprüft werden."
 
 msgid "Checking this computer…"
-msgstr "Dieser Computer wird geprüft …"
+msgstr "Dieser Computer wird geprüft…"
 
 msgid "Test the sound"
 msgstr "Ton testen"
@@ -759,7 +759,7 @@ msgid "Your settings and the list of your apps, with the file saved there in Cel
 msgstr "Ihre Einstellungen und die Liste Ihrer Apps, mit der dort in Celenn OS Werkzeuge → Computer wechseln gespeicherten Datei."
 
 msgid "Restore…"
-msgstr "Übernehmen …"
+msgstr "Übernehmen…"
 
 msgid "Ticked and grey: already installed."
 msgstr "Angehakt und grau: bereits installiert."

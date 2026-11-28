@@ -119,7 +119,8 @@ pub fn label<'a, M: 'static>(title: &'static str, caption: String) -> Element<'a
 
 /// What the image's screenshot test asks a page to show at once, from
 /// CELENN_TOOLS_PREVIEW (tests/vm-lib.sh): "failure" (a failure card in
-/// Free up space) or "developer-tools" (the list open in Install apps)
+/// Free up space), "developer-tools" (the list open in Install apps) or
+/// "offline" (Web apps without fetching its sites' icons)
 pub fn preview(what: &str) -> bool {
     std::env::var("CELENN_TOOLS_PREVIEW").is_ok_and(|value| value == what)
 }

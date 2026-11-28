@@ -424,10 +424,11 @@ desktop_tour() {
 
     # Files (the folder icons: the test user's home, in grid view), Settings
     # (accent, theme), COSMIC Store (our rebuild, which no other step starts:
-    # a crash fails vm_check_crashes),
-    # Celenn OS Tools (its home, tools, a failure card, the developer tools list)
-    # and Keyboard shortcuts (Celenn OS's own apps; images before them skip
-    # them). A command may start with VARIABLE=value settings.
+    # a crash fails vm_check_crashes), Celenn OS Tools (its home, tools, a
+    # failure card, the developer tools list, Change computers, Web apps
+    # without its sites' logos: no wait on 14 sites) and Keyboard shortcuts
+    # (Celenn OS's own apps; images before them skip them). A command may
+    # start with VARIABLE=value settings.
     local entry name cmd program settings
     for entry in "05-files|cosmic-files /home/${DEMO_USER}" "06-settings|cosmic-settings appearance" "06-store|cosmic-store" \
         "06-tools-overview|/usr/libexec/celenn-tools" \
@@ -443,7 +444,7 @@ desktop_tour() {
         "06-tools-developer|CELENN_TOOLS_PREVIEW=developer-tools /usr/libexec/celenn-tools --tool apps" \
         "06-tools-disks|/usr/libexec/celenn-tools --tool disks" \
         "06-tools-transfer|/usr/libexec/celenn-tools --tool transfer" \
-        "06-tools-web-apps|/usr/libexec/celenn-tools --tool web-apps" \
+        "06-tools-web-apps|CELENN_TOOLS_PREVIEW=offline /usr/libexec/celenn-tools --tool web-apps" \
         "06-quick-menu|/usr/libexec/celenn-tools --quick" \
         "06-shortcuts|/usr/libexec/celenn-tour --shortcuts"; do
         name="${entry%%|*}"
@@ -469,8 +470,6 @@ desktop_tour() {
             monitor "sendkey ctrl-2"
             sleep 3
         fi
-        # (Web apps: its sites' icons come from the internet)
-        [[ "${name}" == 06-tools-web-apps ]] && sleep 18
         screenshot "${SHOTS}/${name}"
         vm "pkill -u ${DEMO_USER} -f '^(/usr/bin/)?${program}'" || true
         sleep 3

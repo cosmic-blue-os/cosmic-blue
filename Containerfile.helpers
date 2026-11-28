@@ -19,11 +19,13 @@ ARG BASE_TAG
 # dependencies from one build to the next (only the program itself is then
 # compiled again). Without it, /cargo is an ordinary directory of the stage.
 
-# Default COSMIC themes with frosted glass (see build_files/theme/src/main.rs)
+# Default COSMIC themes with frosted glass (see build_files/theme/src/main.rs;
+# its unit tests check the colors, the glass and the text contrast)
 FROM docker.io/library/rust:1 AS theme-build
 COPY build_files/theme /theme
 ENV CARGO_HOME=/cargo/home CARGO_TARGET_DIR=/cargo/target
 RUN cd /theme && cargo build --release --locked \
+    && cargo test --release --locked \
     && XDG_CONFIG_HOME=/out /cargo/target/release/celenn-theme \
     && XDG_CONFIG_HOME=/out/previous/stock /cargo/target/release/celenn-theme stock \
     && XDG_CONFIG_HOME=/out/previous/frosted /cargo/target/release/celenn-theme frosted \
@@ -41,6 +43,13 @@ COPY --from=theme-build /out /
 # the parental controls service, src/parental_daemon.rs)
 FROM registry.fedoraproject.org/fedora:${BASE_TAG} AS tour-build
 COPY build_files/first_steps /tour
+# COSMIC files that Tools changes (the app list's folders, the dock's
+# favorites): the unit tests read them with COSMIC's own types, at the
+# path they have in the repository (/tour/../../system_files)
+COPY system_files/usr/share/cosmic/com.system76.CosmicAppLibrary/v1/groups \
+    /system_files/usr/share/cosmic/com.system76.CosmicAppLibrary/v1/groups
+COPY system_files/usr/share/cosmic/com.system76.CosmicAppList/v1/favorites \
+    /system_files/usr/share/cosmic/com.system76.CosmicAppList/v1/favorites
 ENV CARGO_HOME=/cargo/home CARGO_TARGET_DIR=/cargo/target
 # Every unit test of every program runs here (cargo test), and clippy's
 # warnings fail the build

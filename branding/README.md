@@ -17,7 +17,8 @@ full name "Celenn OS", which the default wallpaper and the boot screen show.
 - `logo/celenn-logo-horizontal-dark.svg` / `-light.svg`: mark + wordmark,
   for dark and light backgrounds
 - `logo/celenn-os-logo-horizontal-dark.svg`: mark + "Celenn OS", for dark
-  backgrounds (boot screen watermark, default wallpaper)
+  backgrounds; its text alone is the name on the boot screen and in the
+  default wallpaper's corner
 
 ## Boot screen
 
@@ -28,7 +29,8 @@ our images:
 
 - `bgrt-fallback.png`: the mark at 192x192, shown in the middle when the
   firmware has no logo (virtual machines, some PCs)
-- `watermark.png`: the mark and "Celenn OS" at 352x70, at the bottom
+- `watermark.png`: "Celenn OS" alone, 70 px high, at the bottom (without
+  the mark: it is a "C", which read as a double C before the name)
 
 Regenerate both with `node plymouth/render.js` (Playwright).
 - the spinner: Fedora's frames tinted with the orbit blues at build time

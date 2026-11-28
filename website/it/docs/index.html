@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Documentazione · Celenn OS</title>
-  <meta name="description" content="Come usare Celenn OS: aggiornamenti e ripristino, installare software, comandi ujust, l'aspetto e come ottenere aiuto.">
+  <meta name="description" content="Come usare Celenn OS: aggiornamenti e ripristino, installare software, comandi ujust, l’aspetto e come ottenere aiuto.">
   <meta name="theme-color" content="#050a1a">
   <link rel="canonical" href="https://celenn-os.github.io/celenn/it/docs/">
   <meta property="og:title" content="Documentazione · Celenn OS">
-  <meta property="og:description" content="Come usare Celenn OS: aggiornamenti e ripristino, installare software, comandi ujust, l'aspetto e come ottenere aiuto.">
+  <meta property="og:description" content="Come usare Celenn OS: aggiornamenti e ripristino, installare software, comandi ujust, l’aspetto e come ottenere aiuto.">
   <meta property="og:image" content="https://celenn-os.github.io/celenn/img/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -77,7 +77,7 @@
         <ul>
           <li><a href="#updates">Aggiornamenti e ripristino</a></li>
           <li><a href="#apps">Installare software</a></li>
-          <li><a href="#alternatives">I vostri programmi Windows e Mac</a></li>
+          <li><a href="#alternatives">I tuoi programmi Windows e Mac</a></li>
           <li><a href="#hardware">Stampanti, firmware, batteria</a></li>
         </ul>
         <h2>Il tuo sistema</h2>
@@ -109,7 +109,7 @@
 
     <section class="block">
       <h2 id="updates">Aggiornamenti e ripristino</h2>
-      <p>L'app <strong>Aggiornamenti</strong> mostra la versione in uso. Se qualcosa non va dopo un aggiornamento, <em>Tornare indietro</em>, negli Strumenti di Celenn OS, torna alla versione precedente al prossimo riavvio, senza toccare i tuoi file, e la versione che lasci non viene reinstallata. <em>Ricevi le novità in anticipo</em>, in <em>Per utenti esperti…</em>, porta un aggiornamento ogni giorno invece di un aggiornamento testato a settimana.</p>
+      <p>L’app <strong>Aggiornamenti</strong> mostra la versione in uso. Se qualcosa non va dopo un aggiornamento, <em>Tornare indietro</em>, negli Strumenti di Celenn OS, torna alla versione precedente al prossimo riavvio, senza toccare i tuoi file, e la versione che lasci non viene reinstallata. <em>Ricevi le novità in anticipo</em>, in <em>Per utenti esperti…</em>, porta un aggiornamento ogni giorno invece di un aggiornamento testato a settimana.</p>
       <p>Il sistema, le app Flatpak, i pacchetti Homebrew e le AppImage aggiunte con Gear Lever si aggiornano da soli in background. Un aggiornamento del sistema si applica al riavvio successivo. Per aggiornare subito, o per disattivare gli aggiornamenti automatici:</p>
       <div class="code">
         <pre><code>ujust update           # aggiorna tutto subito
@@ -157,8 +157,8 @@ distrobox enter arch</code></pre>
     </section>
 
     <section class="block">
-      <h2 id="alternatives">I vostri programmi Windows e Mac, qui</h2>
-      <p>I programmi Windows (.exe) e Mac non si installano qui. Quasi tutti hanno un equivalente gratuito, spesso già installato. Gli altri sono in <strong>COSMIC Store</strong>: cercate il loro nome.</p>
+      <h2 id="alternatives">I tuoi programmi Windows e Mac, qui</h2>
+      <p>I programmi Windows (.exe) e Mac non si installano qui. Quasi tutti hanno un equivalente gratuito, spesso già installato. Gli altri sono in <strong>COSMIC Store</strong>: cerca il loro nome.</p>
       <div class="table">
         <table>
           <thead><tr><th>Per</th><th>Su Windows o Mac</th><th>Su Celenn OS</th><th>Dove</th></tr></thead>
@@ -189,7 +189,7 @@ distrobox enter arch</code></pre>
       <h3>Stampanti e scanner</h3>
       <p>La maggior parte delle stampanti di rete e USB funziona subito, senza driver. Per aggiungerne una a mano, apri <strong>Impostazioni di stampa</strong>: sono installati i driver per HP, Epson, Brother, Canon e altri. <strong>Scanner di documenti</strong> acquisisce con gli scanner di rete e USB.</p>
       <h3>Altri dischi</h3>
-      <p>Un secondo disco interno, o l'unità D: di Windows, può aprirsi a ogni avvio: negli <strong>Strumenti di Celenn OS</strong>, <em>Altri dischi</em>. Si trova allora sempre nello stesso posto, <code>/mnt/&lt;il suo nome&gt;</code>, in File e per Steam, che può tenerci una libreria. Un disco in formato Windows (NTFS) si apre solo se Windows è stato spento del tutto: disattiva l'avvio rapido di Windows. Il disco su cui gira Windows e i dischi cifrati non sono proposti.</p>
+      <p>Un secondo disco interno, o l’unità D: di Windows, può aprirsi a ogni avvio: negli <strong>Strumenti di Celenn OS</strong>, <em>Altri dischi</em>. Si trova allora sempre nello stesso posto, <code>/mnt/&lt;il suo nome&gt;</code>, in File e per Steam, che può tenerci una libreria. Un disco in formato Windows (NTFS) si apre solo se Windows è stato spento del tutto: disattiva l’avvio rapido di Windows. Il disco su cui gira Windows e i dischi cifrati non sono proposti.</p>
       <h3>Aggiornamenti del firmware</h3>
       <p>L’app <strong>Firmware</strong> aggiorna il firmware del computer e dei suoi dispositivi (BIOS/UEFI, SSD, dock…), quando il produttore lo pubblica su fwupd.org. Oppure dal terminale:</p>
       <div class="code">
@@ -206,14 +206,15 @@ distrobox enter arch</code></pre>
 
     <section class="block">
       <h2 id="tools">Strumenti di Celenn OS</h2>
-      <p><strong>Strumenti di Celenn OS</strong> è una cassetta degli attrezzi: ogni riquadro apre uno strumento. <em>Ogni giorno</em>: aggiornare, installare app, app web, liberare spazio, proteggere i tuoi file, stampare, cambiare computer. <em>Il mio computer</em>: cosa c'è dentro, la batteria, altri dischi, l'aspetto, il driver NVIDIA, i caratteri Microsoft. <em>Quando qualcosa non va</em>: tornare indietro, riparare, ottenere aiuto. Una riga in alto segnala ciò che richiede la tua attenzione, e <em>Per utenti esperti…</em> riunisce il canale degli aggiornamenti, le versioni precedenti, il firmware e le macchine virtuali. Ogni strumento mostra il comando <code>ujust</code> corrispondente, e il suo pulsante <strong>?</strong> apre la sua parte di questa guida. Le modifiche al sistema chiedono la password di un amministratore.</p>
+      <p><strong>Strumenti di Celenn OS</strong> è una cassetta degli attrezzi: ogni riquadro apre uno strumento. <em>Ogni giorno</em>: aggiornare, installare app, app web, liberare spazio, proteggere i tuoi file, stampare, cambiare computer. <em>Il mio computer</em>: cosa c’è dentro, la batteria, altri dischi, l’aspetto, il driver NVIDIA, i caratteri Microsoft. <em>Quando qualcosa non va</em>: tornare indietro, riparare, ottenere aiuto. Una riga in alto segnala ciò che richiede la tua attenzione, e <em>Per utenti esperti…</em> riunisce il canale degli aggiornamenti, le versioni precedenti, il firmware e le macchine virtuali. Ogni strumento mostra il comando <code>ujust</code> corrispondente, e il suo pulsante <strong>?</strong> apre la sua parte di questa guida. Le modifiche al sistema chiedono la password di un amministratore.</p>
+      <p>Da qualsiasi punto, <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Spazio</kbd> apre il <strong>Menu rapido</strong>: fare uno screenshot, vedere le scorciatoie da tastiera, bloccare lo schermo o scrivere cosa vuoi fare per trovare lo strumento giusto. Premi di nuovo la scorciatoia, o <kbd>Esc</kbd>, per chiuderlo.</p>
     </section>
 
     <section class="block">
       <h2 id="parental">Controllo parentale</h2>
-      <p>L'app <strong>Controllo parentale</strong> crea account per bambini e imposta per ciascuno un tempo di utilizzo giornaliero (giorni feriali e fine settimana), orari della nanna e un filtro web per la famiglia. Conta solo il tempo davanti allo schermo. Il bambino viene avvisato 10, 5 e 1 minuto prima della chiusura della sessione, e può chiedere più tempo, che un genitore concede con la propria password.</p>
+      <p>L’app <strong>Controllo parentale</strong> crea account per bambini e imposta per ciascuno un tempo di utilizzo giornaliero (giorni feriali e fine settimana), orari della nanna e un filtro web per la famiglia. Conta solo il tempo davanti allo schermo. Il bambino viene avvisato 10, 5 e 1 minuto prima della chiusura della sessione, e può chiedere più tempo, che un genitore concede con la propria password.</p>
       <h3>Cosa non può impedire</h3>
-      <p>Il filtro web blocca contenuti per adulti, gioco d'azzardo e siti malevoli in tutti i browser dell'account del bambino, e impone la ricerca sicura. Rifiuta anche i soliti modi per aggirarlo: altri server DNS, DNS cifrato verso resolver pubblici e connessioni VPN che il bambino aggiungerebbe. Non può bloccare tutto: un'app che fa passare il suo traffico per normale navigazione web, come Tor Browser o un'estensione VPN del browser, lo aggira, e chi ha il computer in mano può avviare un altro sistema da una chiavetta USB. Tenete d'occhio le app che un bambino installa.</p>
+      <p>Il filtro web blocca contenuti per adulti, gioco d’azzardo e siti malevoli in tutti i browser dell’account del bambino, e impone la ricerca sicura. Rifiuta anche i soliti modi per aggirarlo: altri server DNS, DNS cifrato verso resolver pubblici e connessioni VPN che il bambino aggiungerebbe. Non può bloccare tutto: un’app che fa passare il suo traffico per normale navigazione web, come Tor Browser o un’estensione VPN del browser, lo aggira, e chi ha il computer in mano può avviare un altro sistema da una chiavetta USB. Il tempo di utilizzo ha un limite dello stesso tipo: un bambino che conosce il terminale può far credere al sistema che lo schermo sia bloccato, il che ferma il conteggio, ma l’orario della nanna chiude comunque la sessione. Tieni d’occhio le app che un bambino installa.</p>
     </section>
 
     <section class="block">
@@ -285,6 +286,8 @@ distrobox enter arch</code></pre>
       </div>
       <h3>Backup</h3>
       <p>L’app <strong>Backup</strong> (Déjà Dup) è installata: salva la tua cartella home su un disco esterno, una condivisione di rete o un cloud, cifrata se vuoi, e ripristina singoli file o tutto. Per il terminale sono installati anche <code>restic</code>, <code>borg</code> e <code>rclone</code>.</p>
+      <h3>Cestino</h3>
+      <p>I file rimasti nel cestino per più di 30 giorni vengono eliminati da soli. Per tenerli, disattiva <em>Eliminare i file rimasti nel cestino per più di 30 giorni</em> in Strumenti di Celenn OS, in <em>Liberare spazio</em>. Riguarda solo il cestino della tua cartella home, non quello delle chiavette USB.</p>
       <h3>Se arrivi da un altro sistema</h3>
       <p>Prima fai un backup dei tuoi file (con Backup, o copiandoli su un disco esterno), installa Celenn OS, poi ricopiali nella tua cartella home. Reinstalla le tue app da COSMIC Store; le app Flatpak tengono i loro dati in <code>~/.var/app</code>, che puoi copiare da un altro sistema che usava gli stessi Flatpak.</p>
     </section>
@@ -296,6 +299,8 @@ distrobox enter arch</code></pre>
         <li>Aggiornamenti, una volta al giorno: le immagini di Celenn OS su GitHub, Flathub e il repository di app di COSMIC, e Homebrew se lo usi (con le sue statistiche d’uso disattivate).</li>
         <li>Il conteggio settimanale anonimo di Fedora (<code>rpm-ostree-countme</code>): una richiesta a settimana ai server di Fedora, con la versione di Fedora e l’età approssimativa del sistema ma nessun identificativo, perché Fedora sappia quanti sistemi la usano.</li>
         <li>Firefox: telemetria, studi, contenuti sponsorizzati e misurazione pubblicitaria sono disattivati. uBlock Origin blocca pubblicità e tracker, e i siti si aprono in HTTPS ogni volta che è possibile.</li>
+        <li>Lo strumento <em>App web</em>: la prima volta che si apre, scarica il logo di ogni sito che propone da quel sito stesso e lo conserva sul computer. Un sito che aggiungi tu viene contattato allo stesso modo.</li>
+        <li>Gli account dei bambini con il filtro web attivo (Controllo parentale): per bloccare i siti, i nomi dei siti che aprono vengono inviati al filtro per famiglie di CleanBrowsing invece che al solito server DNS.</li>
         <li>Tailscale è installato, per <code>sudo tailscale up</code>: il suo servizio è attivo ma non entra in nessuna rete finché non accedi.</li>
       </ul>
       <p>Per fermare il conteggio di Fedora, o il servizio Tailscale se non lo usi:</p>
@@ -356,7 +361,7 @@ cosign verify-attestation --key cosign.pub --type spdxjson \
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Aiuto</h2>
         <ul>
-          <li><a href="../install/">Guida all'installazione</a></li>
+          <li><a href="../install/">Guida all’installazione</a></li>
           <li><a href="../docs/">Documentazione</a></li>
           <li><a href="../docs/troubleshooting/">Risoluzione dei problemi</a></li>
           <li><a href="../#faq">Domande frequenti</a></li>

@@ -61,6 +61,8 @@ reset-cosmic-theme confirm="ask":
         com.system76.CosmicTheme.Mode
         com.system76.CosmicTk
         com.system76.CosmicBackground
+        com.system76.CosmicBackground.Dark
+        com.system76.CosmicBackground.Light
     )
     echo "This restores the Celenn OS colors, dark theme, icons, fonts and wallpaper."
     echo "Other COSMIC settings (panel, dock, keyboard, shortcuts...) are kept."

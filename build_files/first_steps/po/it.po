@@ -687,7 +687,7 @@ msgid "Technical details"
 msgstr "Dettagli tecnici"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l'hardware e questo errore. Nessun file né dato personale. Lo rileggete prima di inviarlo; scrivete nella vostra lingua. Per inviarlo serve un account GitHub."
+msgstr "Il rapporto si apre nel browser, già compilato: la versione di Celenn OS, l’hardware e questo errore. Nessun file né dato personale. Lo rileggi prima di inviarlo; scrivi nella tua lingua. Per inviarlo serve un account GitHub."
 
 msgid "Open the report"
 msgstr "Apri il rapporto"

@@ -20,11 +20,23 @@ pub const AVATARS: &str = "/usr/share/pixmaps/faces";
 /// Homebrew, set up at the first boot (ublue-os/brew)
 pub const UPDATES_HELPER: &str = "/usr/libexec/celenn-updates-helper";
 
-pub fn config_dir() -> PathBuf {
-    std::env::var_os("XDG_CONFIG_HOME")
+/// The home folder ("/" when HOME is not set)
+pub fn home() -> PathBuf {
+    std::env::var_os("HOME").map_or_else(|| PathBuf::from("/"), PathBuf::from)
+}
+
+/// An XDG base folder (XDG_CONFIG_HOME, XDG_DATA_HOME...) when it is set to
+/// an absolute path, else its default under the home folder (the XDG Base
+/// Directory rule: a relative path is ignored)
+pub fn xdg(variable: &str, default: &str) -> PathBuf {
+    std::env::var_os(variable)
         .map(PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|home| Path::new(&home).join(".config")))
-        .unwrap_or_else(|| PathBuf::from(".config"))
+        .filter(|path| path.is_absolute())
+        .unwrap_or_else(|| home().join(default))
+}
+
+pub fn config_dir() -> PathBuf {
+    xdg("XDG_CONFIG_HOME", ".config")
 }
 
 /// A COSMIC setting: the person's value, else the system default
@@ -101,29 +113,45 @@ pub fn wallpapers() -> Vec<(PathBuf, PathBuf)> {
     found
 }
 
-/// The wallpaper shown now: its file, from the background setting
+/// The wallpaper settings, one per theme (dark, light): COSMIC 1.12's
+/// cosmic-bg reads these (cosmic-bg-config's Mode::config_name), and the
+/// older com.system76.CosmicBackground only once, to fill them when they
+/// are empty
+pub const BACKGROUNDS: [&str; 2] = [
+    "com.system76.CosmicBackground.Dark",
+    "com.system76.CosmicBackground.Light",
+];
+
+/// The wallpaper shown now: its file, from the background setting of the
+/// current theme
 pub fn current_wallpaper() -> Option<PathBuf> {
-    let all = cosmic_read("com.system76.CosmicBackground", "all")?;
+    let id = if is_dark() {
+        BACKGROUNDS[0]
+    } else {
+        BACKGROUNDS[1]
+    };
+    let all = cosmic_read(id, "all")?;
     let start = all.find("Path(\"")? + "Path(\"".len();
     let end = start + all[start..].find('"')?;
     Some(PathBuf::from(&all[start..end]))
 }
 
-/// The same wallpaper on every screen. Only the picture of the current
-/// setting (the person's, else Celenn OS's default,
-/// /usr/share/cosmic/com.system76.CosmicBackground) changes: the other
-/// fields, including any a new COSMIC adds, stay as they are.
+/// The same wallpaper on every screen, in the dark and the light theme.
+/// Only the picture of each setting (the person's, else Celenn OS's
+/// default in /usr/share/cosmic) changes: the other fields, including any
+/// a new COSMIC adds, stay as they are.
 pub fn set_wallpaper(path: &Path) -> bool {
-    let id = "com.system76.CosmicBackground";
     let source = format!("Path({:?})", path.to_string_lossy());
-    let value = cosmic_read(id, "all")
-        .and_then(|entry| with_source(&entry, &source))
-        .unwrap_or_else(|| {
-            format!(
-                "(\n    output: \"all\",\n    source: {source},\n    filter_by_theme: true,\n    rotation_frequency: 300,\n    filter_method: Lanczos,\n    scaling_mode: Zoom,\n    sampling_method: Alphanumeric,\n)"
-            )
-        });
-    cosmic_write(id, "same-on-all", "true") && cosmic_write(id, "all", &value)
+    BACKGROUNDS.iter().fold(true, |done, id| {
+        let value = cosmic_read(id, "all")
+            .and_then(|entry| with_source(&entry, &source))
+            .unwrap_or_else(|| {
+                format!(
+                    "(\n    output: \"all\",\n    source: {source},\n    filter_by_theme: true,\n    rotation_frequency: 300,\n    filter_method: Lanczos,\n    scaling_mode: Zoom,\n    sampling_method: Alphanumeric,\n)"
+                )
+            });
+        cosmic_write(id, "same-on-all", "true") && cosmic_write(id, "all", &value) && done
+    })
 }
 
 /// A background entry (RON) with its `source` replaced: None when it has

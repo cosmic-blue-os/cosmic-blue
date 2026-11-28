@@ -513,7 +513,7 @@ msgid "Open Firefox"
 msgstr "Ouvrir Firefox"
 
 msgid "Email"
-msgstr "Courriel"
+msgstr "E-mail"
 
 msgid "Thunderbird sets up your account with just your address and password."
 msgstr "Thunderbird configure votre compte avec juste votre adresse et votre mot de passe."
@@ -663,19 +663,19 @@ msgid "ujust lists the system's recipes, brew installs command line tools: the d
 msgstr "ujust liste les recettes du système, brew installe les outils en ligne de commande : la documentation les présente toutes."
 
 msgid "“{}” did not work"
-msgstr "« {} » n'a pas abouti"
+msgstr "« {} » n’a pas abouti"
 
 msgid "No internet connection. Connect to a network, then try again. Nothing was changed."
-msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n'a été modifié."
+msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n’a été modifié."
 
 msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try again."
-msgstr "Le disque est plein ({} libres). Libérez de l'espace avec Outils Celenn OS, puis réessayez."
+msgstr "Le disque est plein ({} libres). Libérez de l’espace avec Outils Celenn OS, puis réessayez."
 
 msgid "The server does not answer. Try again in a few minutes."
 msgstr "Le serveur ne répond pas. Réessayez dans quelques minutes."
 
 msgid "Something unexpected went wrong. Nothing was changed."
-msgstr "Un problème inattendu est survenu. Rien n'a été modifié."
+msgstr "Un problème inattendu est survenu. Rien n’a été modifié."
 
 msgid "Try again"
 msgstr "Réessayer"
@@ -687,7 +687,7 @@ msgid "Technical details"
 msgstr "Détails techniques"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Le rapport s'ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l'envoyer ; écrivez dans votre langue. L'envoi demande un compte GitHub."
+msgstr "Le rapport s’ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l’envoyer ; écrivez dans votre langue. L’envoi demande un compte GitHub."
 
 msgid "Open the report"
 msgstr "Ouvrir le rapport"
@@ -756,7 +756,7 @@ msgid "From another Celenn OS computer"
 msgstr "Depuis un autre ordinateur Celenn OS"
 
 msgid "Your settings and the list of your apps, with the file saved there in Celenn OS Tools → Change computers."
-msgstr "Vos réglages et la liste de vos applis, avec le fichier enregistré là-bas dans Outils Celenn OS → Changer d'ordinateur."
+msgstr "Vos réglages et la liste de vos applis, avec le fichier enregistré là-bas dans Outils Celenn OS → Changer d’ordinateur."
 
 msgid "Restore…"
 msgstr "Reprendre…"
