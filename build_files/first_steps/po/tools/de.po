@@ -244,7 +244,7 @@ msgid "Ask a question"
 msgstr "Eine Frage stellen"
 
 msgid "Other Celenn OS users and its makers answer, on GitHub."
-msgstr "Andere celenn-Nutzer und seine Macher antworten, auf GitHub."
+msgstr "Andere Celenn-OS-Nutzer und seine Macher antworten, auf GitHub."
 
 msgid "Report a problem"
 msgstr "Ein Problem melden"
@@ -448,7 +448,7 @@ msgid "The computer restarts now. Save your work first."
 msgstr "Der Computer startet sofort neu. Speichern Sie vorher Ihre Arbeit."
 
 msgid "The Celenn OS look"
-msgstr "Der celenn-Look"
+msgstr "Der Celenn-OS-Look"
 
 msgid "Use it"
 msgstr "Verwenden"
@@ -538,7 +538,7 @@ msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try 
 msgstr "Die Festplatte ist voll ({} frei). Geben Sie mit Celenn OS Werkzeuge Speicherplatz frei und versuchen Sie es erneut."
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Der Bericht öffnet sich ausgefüllt im Browser: die celenn-Version, die Hardware und dieser Fehler. Keine Dateien, keine persönlichen Daten. Sie lesen ihn vor dem Senden; schreiben Sie in Ihrer Sprache. Zum Senden braucht es ein GitHub-Konto."
+msgstr "Der Bericht öffnet sich ausgefüllt im Browser: die Celenn-OS-Version, die Hardware und dieser Fehler. Keine Dateien, keine persönlichen Daten. Sie lesen ihn vor dem Senden; schreiben Sie in Ihrer Sprache. Zum Senden braucht es ein GitHub-Konto."
 
 msgid "The server does not answer. Try again in a few minutes."
 msgstr "Der Server antwortet nicht. Versuchen Sie es in ein paar Minuten erneut."
@@ -735,8 +735,29 @@ msgstr "Scannen"
 msgid "Change computers"
 msgstr "Computer wechseln"
 
-msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
-msgstr "Ihre Einstellungen und die Liste Ihrer Apps in einer Datei, zum Übernehmen auf einem anderen celenn-Computer."
+msgid "Take your settings, your apps and your files to another Celenn OS computer."
+msgstr "Nehmen Sie Ihre Einstellungen, Ihre Apps und Ihre Dateien auf einen anderen Celenn-OS-Computer mit."
+
+msgid "Save my settings"
+msgstr "Meine Einstellungen speichern"
+
+msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
+msgstr "Aussehen, Tastatur, Tastenkürzel und die Liste Ihrer Apps in einer Datei im Ordner Dokumente. Kopieren Sie sie auf einen USB-Stick, um sie mitzunehmen."
+
+msgid "Restore my settings"
+msgstr "Meine Einstellungen übernehmen"
+
+msgid "On the new computer, choose the file saved on the old one, then tick what you want back."
+msgstr "Wählen Sie auf dem neuen Computer die auf dem alten gespeicherte Datei und haken Sie an, was Sie übernehmen möchten."
+
+msgid "My files"
+msgstr "Meine Dateien"
+
+msgid "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers."
+msgstr "Dokumente und Fotos sind nicht in der Einstellungsdatei: Kopieren Sie sie auf einen USB-Stick oder senden Sie sie per WLAN mit LocalSend, auf beiden Computern geöffnet."
+
+msgid "Open LocalSend"
+msgstr "LocalSend öffnen"
 
 msgid "Restore…"
 msgstr "Übernehmen …"
@@ -807,7 +828,7 @@ msgid "One shortcut starts a program: for safety, add it again in Settings."
 msgstr "Ein Tastenkürzel startet ein Programm: Legen Sie es zur Sicherheit in den Einstellungen neu an."
 
 msgid "{} settings unknown to this version of Celenn OS were left out."
-msgstr "{} Einstellungen, die diese celenn-Version nicht kennt, wurden ausgelassen."
+msgstr "{} Einstellungen, die diese Celenn-OS-Version nicht kennt, wurden ausgelassen."
 
 msgid "{} app names were not valid and were left out."
 msgstr "{} App-Namen waren ungültig und wurden ausgelassen."
@@ -822,7 +843,7 @@ msgid "Log out and back in to see every change."
 msgstr "Melden Sie sich ab und wieder an, um alle Änderungen zu sehen."
 
 msgid "This file is not a Celenn OS settings file."
-msgstr "Diese Datei ist keine celenn-Einstellungsdatei."
+msgstr "Diese Datei ist keine Celenn-OS-Einstellungsdatei."
 
 msgid "This file was saved by a newer Celenn OS. Update this computer first."
 msgstr "Diese Datei stammt von einem neueren Celenn OS. Aktualisieren Sie zuerst diesen Computer."
@@ -1085,8 +1106,8 @@ msgstr "Was drinsteckt"
 msgid "When something is wrong"
 msgstr "Wenn etwas nicht stimmt"
 
-msgid "Your settings and apps, in one file."
-msgstr "Ihre Einstellungen und Apps in einer Datei."
+msgid "Settings, apps and files"
+msgstr "Einstellungen, Apps, Dateien"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "Celenn OS aktualisiert sich im Hintergrund. Eine neue Version startet beim nächsten Neustart, ohne Sie zu unterbrechen."

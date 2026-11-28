@@ -735,8 +735,29 @@ msgstr "Scansiona"
 msgid "Change computers"
 msgstr "Cambiare computer"
 
-msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
-msgstr "Le tue impostazioni e l'elenco delle tue app in un file, da riprendere su un altro computer Celenn OS."
+msgid "Take your settings, your apps and your files to another Celenn OS computer."
+msgstr "Porta le tue impostazioni, le tue app e i tuoi file su un altro computer Celenn OS."
+
+msgid "Save my settings"
+msgstr "Salva le mie impostazioni"
+
+msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
+msgstr "Aspetto, tastiera, scorciatoie e l'elenco delle tue app, in un file nella cartella Documenti. Copialo su una chiavetta USB per portarlo con te."
+
+msgid "Restore my settings"
+msgstr "Riprendi le mie impostazioni"
+
+msgid "On the new computer, choose the file saved on the old one, then tick what you want back."
+msgstr "Sul nuovo computer, scegli il file salvato sul vecchio, poi spunta ciò che vuoi riprendere."
+
+msgid "My files"
+msgstr "I miei file"
+
+msgid "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers."
+msgstr "Documenti e foto non sono nel file delle impostazioni: copiali su una chiavetta USB, o inviali via Wi-Fi con LocalSend, aperto su entrambi i computer."
+
+msgid "Open LocalSend"
+msgstr "Apri LocalSend"
 
 msgid "Restore…"
 msgstr "Riprendi…"
@@ -1085,8 +1106,8 @@ msgstr "Cosa c’è dentro"
 msgid "When something is wrong"
 msgstr "Quando qualcosa non va"
 
-msgid "Your settings and apps, in one file."
-msgstr "Le tue impostazioni e app, in un solo file."
+msgid "Settings, apps and files"
+msgstr "Impostazioni, app e file"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "Celenn OS si aggiorna in background. Una nuova versione parte al prossimo riavvio, senza interromperti."

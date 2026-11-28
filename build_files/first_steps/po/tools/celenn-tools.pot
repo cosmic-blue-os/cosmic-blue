@@ -733,7 +733,28 @@ msgstr ""
 msgid "Change computers"
 msgstr ""
 
-msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
+msgid "Take your settings, your apps and your files to another Celenn OS computer."
+msgstr ""
+
+msgid "Save my settings"
+msgstr ""
+
+msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
+msgstr ""
+
+msgid "Restore my settings"
+msgstr ""
+
+msgid "On the new computer, choose the file saved on the old one, then tick what you want back."
+msgstr ""
+
+msgid "My files"
+msgstr ""
+
+msgid "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers."
+msgstr ""
+
+msgid "Open LocalSend"
 msgstr ""
 
 msgid "Restore…"
@@ -1083,7 +1104,7 @@ msgstr ""
 msgid "When something is wrong"
 msgstr ""
 
-msgid "Your settings and apps, in one file."
+msgid "Settings, apps and files"
 msgstr ""
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."

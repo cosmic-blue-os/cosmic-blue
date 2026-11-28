@@ -28,7 +28,13 @@ use std::process::{Command, Stdio};
 
 pub const TEXTS: &[&str] = &[
     "Change computers",
-    "Your settings and the list of your apps in a file, to take back on another Celenn OS computer.",
+    "Save my settings",
+    "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along.",
+    "Restore my settings",
+    "On the new computer, choose the file saved on the old one, then tick what you want back.",
+    "My files",
+    "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers.",
+    "Open LocalSend",
     "Restore…",
     "Saved in Documents.",
     "Show",
