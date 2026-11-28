@@ -145,11 +145,11 @@ pub const TEXTS: &[&str] = &[
     "Save",
     "No printer added yet.",
     "Charging stops at 80 %.",
-    "Off: the battery charges fully.",
-    "Choose the ones that open at startup.",
+    "Off: charges to 100 %.",
+    "None opens at startup yet.",
     "Its driver waits for your OK.",
     "NVIDIA's own driver.",
-    "The open driver built into Linux.",
+    "The open Linux driver.",
 ];
 
 /// The parts of these pages, each one tool (tools.rs)
@@ -950,7 +950,7 @@ impl Page {
             Part::Battery => match state.battery_limit {
                 None => Summary::Hidden,
                 Some(true) => Summary::Says(tr("Charging stops at 80 %.").to_owned()),
-                Some(false) => Summary::Says(tr("Off: the battery charges fully.").to_owned()),
+                Some(false) => Summary::Says(tr("Off: charges to 100 %.").to_owned()),
             },
             Part::Disks => {
                 if state.disks.is_empty() {
@@ -960,7 +960,7 @@ impl Page {
                 } else if state.disks.iter().any(crate::disks::Disk::at_startup) {
                     Summary::Says(crate::disks::summary(&state.disks))
                 } else {
-                    Summary::Says(tr("Choose the ones that open at startup.").to_owned())
+                    Summary::Says(tr("None opens at startup yet.").to_owned())
                 }
             }
             Part::Look => Summary::Says(
@@ -977,9 +977,7 @@ impl Page {
                     Summary::Warns(tr("Its driver waits for your OK.").to_owned())
                 }
                 (Some(true), _) => Summary::Says(tr("NVIDIA's own driver.").to_owned()),
-                (Some(false), _) => {
-                    Summary::Says(tr("The open driver built into Linux.").to_owned())
-                }
+                (Some(false), _) => Summary::Says(tr("The open Linux driver.").to_owned()),
             },
             Part::Fonts => Summary::Says(
                 tr(if state.fonts {
@@ -989,8 +987,8 @@ impl Page {
                 })
                 .to_owned(),
             ),
-            Part::Apps => Summary::Says(tr("Office, games, school, development…").to_owned()),
-            Part::Transfer => Summary::Says(tr("Your settings and apps, in one file.").to_owned()),
+            Part::Apps => Summary::Says(tr("Office, games, school…").to_owned()),
+            Part::Transfer => Summary::Says(tr("Your settings and apps").to_owned()),
             Part::Repair | Part::Advanced => Summary::Unknown,
         }
     }

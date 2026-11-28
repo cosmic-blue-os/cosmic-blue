@@ -25,9 +25,9 @@ pub const TEXTS: &[&str] = &[
     "One thing needs your attention: {}",
     "{} things need your attention: {}",
     "Up to date, version {}",
-    "Version {} starts at the next restart.",
+    "Ready at the next restart.",
     "Updates are paused",
-    "The system version could not be read.",
+    "Could not read the version.",
     "One device has an update.",
     "{} devices have an update.",
     "Not set up yet.",
@@ -328,9 +328,8 @@ impl Page {
                     Summary::Warns(tr("Updates are paused").to_owned())
                 }
                 Some(Ok(System {
-                    staged: Some(staged),
-                    ..
-                })) => Summary::Says(fill(tr("Version {} starts at the next restart."), staged)),
+                    staged: Some(_), ..
+                })) => Summary::Says(tr("Ready at the next restart.").to_owned()),
                 Some(Ok(system)) => match facts.firmware {
                     Some(1) => Summary::Warns(tr("One device has an update.").to_owned()),
                     Some(devices) if devices > 1 => {
@@ -338,9 +337,7 @@ impl Page {
                     }
                     _ => Summary::Says(fill(tr("Up to date, version {}"), &system.version)),
                 },
-                Some(Err(_)) => {
-                    Summary::Warns(tr("The system version could not be read.").to_owned())
-                }
+                Some(Err(_)) => Summary::Warns(tr("Could not read the version.").to_owned()),
                 None => Summary::Unknown,
             },
             Tool::Backup => match facts.backup {
@@ -624,6 +621,206 @@ fn grid<'a>(tiles: Vec<Element<'a, Message>>) -> Element<'a, Message> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Open Sans (COSMIC's interface font) advance widths, in thousandths
+    /// of the font size, of the characters the Tools texts use
+    const OPEN_SANS: &[(char, u16)] = &[
+        (' ', 260),
+        ('%', 823),
+        ('\'', 221),
+        ('(', 296),
+        (')', 296),
+        (',', 245),
+        ('-', 322),
+        ('.', 266),
+        ('/', 367),
+        ('0', 572),
+        ('1', 572),
+        ('2', 572),
+        ('3', 572),
+        ('4', 572),
+        ('5', 572),
+        ('6', 572),
+        ('7', 572),
+        ('8', 572),
+        ('9', 572),
+        (':', 266),
+        (';', 266),
+        ('?', 429),
+        ('A', 633),
+        ('B', 648),
+        ('C', 631),
+        ('D', 729),
+        ('E', 556),
+        ('F', 516),
+        ('G', 728),
+        ('H', 738),
+        ('I', 279),
+        ('J', 267),
+        ('K', 614),
+        ('L', 519),
+        ('M', 903),
+        ('N', 754),
+        ('O', 779),
+        ('P', 602),
+        ('Q', 779),
+        ('R', 618),
+        ('S', 549),
+        ('T', 553),
+        ('U', 728),
+        ('V', 595),
+        ('W', 926),
+        ('X', 577),
+        ('Y', 560),
+        ('Z', 571),
+        ('a', 556),
+        ('b', 613),
+        ('c', 476),
+        ('d', 613),
+        ('e', 561),
+        ('f', 339),
+        ('g', 548),
+        ('h', 614),
+        ('i', 253),
+        ('j', 253),
+        ('k', 525),
+        ('l', 253),
+        ('m', 930),
+        ('n', 614),
+        ('o', 604),
+        ('p', 613),
+        ('q', 613),
+        ('r', 408),
+        ('s', 477),
+        ('t', 353),
+        ('u', 614),
+        ('v', 501),
+        ('w', 778),
+        ('x', 524),
+        ('y', 504),
+        ('z', 468),
+        ('{', 379),
+        ('}', 379),
+        ('«', 497),
+        ('»', 497),
+        ('¿', 429),
+        ('À', 633),
+        ('Ä', 633),
+        ('É', 556),
+        ('Ê', 556),
+        ('Ó', 779),
+        ('Ö', 779),
+        ('Ú', 728),
+        ('Ü', 728),
+        ('ß', 622),
+        ('à', 556),
+        ('á', 556),
+        ('ã', 556),
+        ('ä', 556),
+        ('ç', 476),
+        ('è', 561),
+        ('é', 561),
+        ('ê', 561),
+        ('í', 253),
+        ('î', 253),
+        ('ñ', 614),
+        ('ò', 604),
+        ('ó', 604),
+        ('ô', 604),
+        ('õ', 604),
+        ('ö', 604),
+        ('ù', 614),
+        ('ú', 614),
+        ('û', 614),
+        ('ü', 614),
+        ('œ', 942),
+        ('’', 170),
+        ('“', 350),
+        ('”', 350),
+        ('„', 405),
+        ('…', 784),
+    ];
+
+    /// A text's width in pixels at a size, a character missing from the
+    /// table counted as wide as the font size (wider than any letter)
+    fn width(text: &str, size: f32) -> f32 {
+        text.chars()
+            .map(|c| {
+                OPEN_SANS
+                    .iter()
+                    .find(|(known, _)| *known == c)
+                    .map_or(1000, |(_, advance)| *advance)
+            })
+            .map(|advance| f32::from(advance) * size / 1000.0)
+            .sum()
+    }
+
+    /// Every tile caption fits on its one line in every language: in the
+    /// window's default size a tile leaves about 205 px to its caption
+    /// (12 px text; "Guide, questions, report a problem", 196 px, shows
+    /// whole). Captions with a value get a long example of it. A new tile
+    /// caption goes in this list.
+    #[test]
+    fn tile_captions_fit() {
+        let mut captions: Vec<(&str, &str)> = Tool::ALL
+            .iter()
+            .filter(|tool| **tool != Tool::Advanced)
+            .map(|tool| (tool.texts().2, ""))
+            .collect();
+        captions.extend([
+            ("Up to date, version {}", "45.20261128.1"),
+            ("Ready at the next restart.", ""),
+            ("Updates are paused", ""),
+            ("One device has an update.", ""),
+            ("{} devices have an update.", "12"),
+            ("Could not read the version.", ""),
+            ("Not set up yet.", ""),
+            ("Last backup today.", ""),
+            ("Last backup {} days ago.", "99"),
+            ("Almost full: {} free.", "999.9 MB"),
+            ("{} free", "999.9 GB"),
+            ("No printer added yet.", ""),
+            ("Charging stops at 80 %.", ""),
+            ("Off: charges to 100 %.", ""),
+            ("None opens at startup yet.", ""),
+            ("Dark theme", ""),
+            ("Light theme", ""),
+            ("Its driver waits for your OK.", ""),
+            ("NVIDIA's own driver.", ""),
+            ("The open Linux driver.", ""),
+            ("Installed.", ""),
+        ]);
+        let po = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("po/tools");
+        let mut catalogs = vec![("en".to_owned(), Vec::new())];
+        for entry in std::fs::read_dir(&po).unwrap() {
+            let path = entry.unwrap().path();
+            if path.extension().is_some_and(|e| e == "po") {
+                let lang = path.file_stem().unwrap().to_string_lossy().into_owned();
+                let text = std::fs::read_to_string(&path).unwrap();
+                catalogs.push((lang, crate::i18n::parse_po(&text)));
+            }
+        }
+        assert!(catalogs.len() > 1, "no catalog in {}", po.display());
+        let mut too_long = Vec::new();
+        for (lang, catalog) in &catalogs {
+            for (text, value) in &captions {
+                let translated = catalog
+                    .iter()
+                    .find(|(id, _)| id == text)
+                    .map_or(*text, |(_, translation)| translation.as_str());
+                let shown = fill(translated, value);
+                let px = width(&shown, 12.0);
+                if px > 200.0 {
+                    too_long.push(format!("{lang}: {shown} ({px:.0} px)"));
+                }
+            }
+        }
+        assert!(
+            too_long.is_empty(),
+            "tile captions cut:\n{}",
+            too_long.join("\n")
+        );
+    }
 
     #[test]
     fn folds_accents() {

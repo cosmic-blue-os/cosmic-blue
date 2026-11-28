@@ -561,8 +561,8 @@ msgstr "Tu gestor de contraseñas está listo."
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr "Marca los que quieras y desmarca los que quieras quitar."
 
-msgid "Version {} starts at the next restart."
-msgstr "La versión {} arranca en el próximo reinicio."
+msgid "Ready at the next restart."
+msgstr "Lista en el próximo reinicio."
 
 msgid "Backups"
 msgstr "Copias de seguridad"
@@ -583,10 +583,10 @@ msgid "Almost full: {} free."
 msgstr "Casi lleno: {} libres."
 
 msgid "One device has an update."
-msgstr "Un dispositivo tiene una actualización."
+msgstr "Un dispositivo por actualizar."
 
 msgid "{} devices have an update."
-msgstr "{} dispositivos tienen una actualización."
+msgstr "{} dispositivos por actualizar."
 
 msgid "Nothing found."
 msgstr "No se encontró nada."
@@ -984,7 +984,7 @@ msgid "Go back"
 msgstr "Volver atrás"
 
 msgid "Guide, questions, report a problem"
-msgstr "Guía, preguntas, informar de un problema"
+msgstr "Guía, preguntas, problemas"
 
 msgid "Help on this tool"
 msgstr "Ayuda sobre esta herramienta"
@@ -1007,8 +1007,8 @@ msgstr "Controlador NVIDIA"
 msgid "Not set up yet."
 msgstr "Aún sin configurar."
 
-msgid "Office, games, school, development…"
-msgstr "Ofimática, juegos, escuela, desarrollo…"
+msgid "Office, games, school…"
+msgstr "Ofimática, juegos, escuela…"
 
 msgid "One thing needs your attention: {}"
 msgstr "Una cosa necesita tu atención: {}"
@@ -1019,8 +1019,8 @@ msgstr "Imprimir y escanear"
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr "Las impresoras de la red o conectadas por USB aparecen solas. Añade una o configúrala aquí."
 
-msgid "Processor, memory, graphics card"
-msgstr "Procesador, memoria, tarjeta gráfica"
+msgid "Processor, memory, disk"
+msgstr "Procesador, memoria, disco"
 
 msgid "Protect your files"
 msgstr "Protege tus archivos"
@@ -1049,11 +1049,11 @@ msgstr "El límite de carga de la batería"
 msgid "The graphics card's driver"
 msgstr "El controlador de la tarjeta gráfica"
 
-msgid "The system version could not be read."
-msgstr "No se pudo leer la versión del sistema."
+msgid "Could not read the version."
+msgstr "No se pudo leer la versión."
 
-msgid "The system, the apps and the devices"
-msgstr "El sistema, las aplicaciones y los dispositivos"
+msgid "System, apps and devices"
+msgstr "Sistema, apps y dispositivos"
 
 msgid "Theme and layout"
 msgstr "Tema y disposición"
@@ -1085,8 +1085,8 @@ msgstr "Qué hay dentro"
 msgid "When something is wrong"
 msgstr "Cuando algo va mal"
 
-msgid "Your settings and apps, in one file."
-msgstr "Tus ajustes y aplicaciones, en un solo archivo."
+msgid "Your settings and apps"
+msgstr "Tus ajustes y aplicaciones"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "Celenn OS se actualiza en segundo plano. Una nueva versión arranca en el próximo reinicio, sin interrumpirte."
@@ -1097,8 +1097,8 @@ msgstr "{} cosas necesitan tu atención: {}"
 msgid "Charging stops at 80 %."
 msgstr "La carga se detiene al 80 %."
 
-msgid "Choose the ones that open at startup."
-msgstr "Elige los que se abren al inicio."
+msgid "None opens at startup yet."
+msgstr "Ninguno se abre al inicio aún."
 
 msgid "Clean up the system"
 msgstr "Limpiar el sistema"
@@ -1115,11 +1115,11 @@ msgstr "No hay versión anterior"
 msgid "No printer added yet."
 msgstr "Aún no hay ninguna impresora."
 
-msgid "Off: the battery charges fully."
-msgstr "Desactivado: la batería se carga del todo."
+msgid "Off: charges to 100 %."
+msgstr "Desactivado: carga al 100 %."
 
-msgid "The open driver built into Linux."
-msgstr "El controlador libre integrado en Linux."
+msgid "The open Linux driver."
+msgstr "El controlador libre de Linux."
 
 msgid "This computer has only ever run this version."
 msgstr "Este ordenador solo ha usado esta versión."

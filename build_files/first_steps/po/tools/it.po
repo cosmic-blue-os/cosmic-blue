@@ -561,8 +561,8 @@ msgstr "Il tuo gestore di password è pronto."
 msgid "Tick the ones you want, untick the ones to remove."
 msgstr "Seleziona quelli che vuoi, deseleziona quelli da rimuovere."
 
-msgid "Version {} starts at the next restart."
-msgstr "La versione {} parte al prossimo riavvio."
+msgid "Ready at the next restart."
+msgstr "Pronta al prossimo riavvio."
 
 msgid "Backups"
 msgstr "Backup"
@@ -583,10 +583,10 @@ msgid "Almost full: {} free."
 msgstr "Quasi pieno: {} liberi."
 
 msgid "One device has an update."
-msgstr "Un dispositivo ha un aggiornamento."
+msgstr "Un dispositivo da aggiornare."
 
 msgid "{} devices have an update."
-msgstr "{} dispositivi hanno un aggiornamento."
+msgstr "{} dispositivi da aggiornare."
 
 msgid "Nothing found."
 msgstr "Nessun risultato."
@@ -984,7 +984,7 @@ msgid "Go back"
 msgstr "Tornare indietro"
 
 msgid "Guide, questions, report a problem"
-msgstr "Guida, domande, segnalare un problema"
+msgstr "Guida, domande, problemi"
 
 msgid "Help on this tool"
 msgstr "Aiuto su questo strumento"
@@ -1007,8 +1007,8 @@ msgstr "Driver NVIDIA"
 msgid "Not set up yet."
 msgstr "Non ancora configurato."
 
-msgid "Office, games, school, development…"
-msgstr "Ufficio, giochi, scuola, sviluppo…"
+msgid "Office, games, school…"
+msgstr "Ufficio, giochi, scuola…"
 
 msgid "One thing needs your attention: {}"
 msgstr "Una cosa richiede la tua attenzione: {}"
@@ -1019,8 +1019,8 @@ msgstr "Stampare e scansionare"
 msgid "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here."
 msgstr "Le stampanti in rete o collegate via USB compaiono da sole. Aggiungine una o configurala qui."
 
-msgid "Processor, memory, graphics card"
-msgstr "Processore, memoria, scheda grafica"
+msgid "Processor, memory, disk"
+msgstr "Processore, memoria, disco"
 
 msgid "Protect your files"
 msgstr "Proteggi i tuoi file"
@@ -1049,11 +1049,11 @@ msgstr "Il limite di carica della batteria"
 msgid "The graphics card's driver"
 msgstr "Il driver della scheda grafica"
 
-msgid "The system version could not be read."
-msgstr "Impossibile leggere la versione del sistema."
+msgid "Could not read the version."
+msgstr "Versione non leggibile."
 
-msgid "The system, the apps and the devices"
-msgstr "Il sistema, le app e i dispositivi"
+msgid "System, apps and devices"
+msgstr "Sistema, app e dispositivi"
 
 msgid "Theme and layout"
 msgstr "Tema e disposizione"
@@ -1065,7 +1065,7 @@ msgid "Toolbox"
 msgstr "Cassetta degli attrezzi"
 
 msgid "Up to date, version {}"
-msgstr "Aggiornato, versione {}"
+msgstr "Aggiornato alla {}"
 
 msgid "Update"
 msgstr "Aggiornare"
@@ -1085,8 +1085,8 @@ msgstr "Cosa c’è dentro"
 msgid "When something is wrong"
 msgstr "Quando qualcosa non va"
 
-msgid "Your settings and apps, in one file."
-msgstr "Le tue impostazioni e app, in un solo file."
+msgid "Your settings and apps"
+msgstr "Le tue impostazioni e app"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "Celenn OS si aggiorna in background. Una nuova versione parte al prossimo riavvio, senza interromperti."
@@ -1097,14 +1097,14 @@ msgstr "{} cose richiedono la tua attenzione: {}"
 msgid "Charging stops at 80 %."
 msgstr "La carica si ferma all’80 %."
 
-msgid "Choose the ones that open at startup."
-msgstr "Scegli quelli che si aprono all’avvio."
+msgid "None opens at startup yet."
+msgstr "Nessuno si apre all’avvio."
 
 msgid "Clean up the system"
 msgstr "Pulire il sistema"
 
 msgid "Its driver waits for your OK."
-msgstr "Il suo driver attende il tuo consenso."
+msgstr "Il driver attende il tuo OK."
 
 msgid "NVIDIA's own driver."
 msgstr "Il driver di NVIDIA."
@@ -1115,11 +1115,11 @@ msgstr "Nessuna versione precedente"
 msgid "No printer added yet."
 msgstr "Nessuna stampante aggiunta."
 
-msgid "Off: the battery charges fully."
-msgstr "Disattivato: la batteria si carica del tutto."
+msgid "Off: charges to 100 %."
+msgstr "Disattivato: carica al 100 %."
 
-msgid "The open driver built into Linux."
-msgstr "Il driver libero integrato in Linux."
+msgid "The open Linux driver."
+msgstr "Il driver libero di Linux."
 
 msgid "This computer has only ever run this version."
 msgstr "Questo computer ha sempre usato solo questa versione."
