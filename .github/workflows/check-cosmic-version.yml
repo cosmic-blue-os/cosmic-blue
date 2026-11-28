@@ -4,6 +4,8 @@ name: Check Fedora and COSMIC versions
 #   - the Fedora release of Bluefin's stable tag (ghcr.io/ublue-os/bluefin),
 #     which moves to a new Fedora once Universal Blue has tested it,
 #   - the COSMIC version that this Fedora release ships.
+# It also checks that the COSMIC settings Celenn OS ships and changes are at
+# the versions this COSMIC reads (tests/check-cosmic-config.sh).
 # When one of them changed, it:
 #   1. opens a pull request that moves BASE_TAG and BASE_IMAGE to the new
 #      Fedora release, the theme tool to the libcosmic revision of the COSMIC
@@ -25,6 +27,7 @@ on:
       - 'build_files/cosmic-version'
       - 'Containerfile'
       - '.github/workflows/check-cosmic-version.yml'
+      - 'tests/check-cosmic-config.sh'
   workflow_dispatch:
 
 concurrency:
@@ -108,6 +111,10 @@ jobs:
             test -n "${current}"
           fi
           echo "Fedora ${target_tag}: COSMIC ${current}, pinned: ${pinned}"
+
+          # The settings Celenn OS ships and changes are at the versions this
+          # COSMIC reads: one that moved stops the update until it is adapted
+          tests/check-cosmic-config.sh "${current}"
 
           {
             echo "base_tag=${base_tag}"
