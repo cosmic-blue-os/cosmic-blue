@@ -19,11 +19,13 @@ ARG BASE_TAG
 # dependencies from one build to the next (only the program itself is then
 # compiled again). Without it, /cargo is an ordinary directory of the stage.
 
-# Default COSMIC themes with frosted glass (see build_files/theme/src/main.rs)
+# Default COSMIC themes with frosted glass (see build_files/theme/src/main.rs;
+# its unit tests check the colors, the glass and the text contrast)
 FROM docker.io/library/rust:1 AS theme-build
 COPY build_files/theme /theme
 ENV CARGO_HOME=/cargo/home CARGO_TARGET_DIR=/cargo/target
 RUN cd /theme && cargo build --release --locked \
+    && cargo test --release --locked \
     && XDG_CONFIG_HOME=/out /cargo/target/release/celenn-theme \
     && XDG_CONFIG_HOME=/out/previous/stock /cargo/target/release/celenn-theme stock \
     && XDG_CONFIG_HOME=/out/previous/frosted /cargo/target/release/celenn-theme frosted \
