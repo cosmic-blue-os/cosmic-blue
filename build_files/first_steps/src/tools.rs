@@ -10,9 +10,10 @@
 //
 //   Every day              Update, Install apps, Web apps (webapps.rs),
 //                          Free up space, Protect your files, Print and
-//                          scan, Change computers
-//   My computer            What's inside, Spare the battery, Other disks,
-//                          Make it yours, NVIDIA driver, Microsoft fonts
+//                          scan
+//   My computer            What's inside, Change computers, Spare the
+//                          battery, Other disks, Make it yours, NVIDIA
+//                          driver, Microsoft fonts
 //   When something is wrong  Go back, Repair, Get help
 //   For experienced users  (a button under the tiles) the update channel,
 //                          an older version, the firmware settings, virtual
@@ -138,8 +139,8 @@ const TEXTS: &[&str] = &[
     "Printers on the network or plugged in by USB show up by themselves. Add one or set it up here.",
     "Printers and scanners",
     "Change computers",
-    "Your settings and the list of your apps in a file, to take back on another Celenn OS computer.",
-    "Your settings and apps",
+    "Take your settings, your apps and your files to another Celenn OS computer.",
+    "Settings, apps and files",
     "What's inside",
     "What this computer is made of, and how it starts.",
     "Processor, memory, disk",
@@ -307,8 +308,8 @@ impl Tool {
             ),
             Tool::Transfer => (
                 "Change computers",
-                "Your settings and the list of your apps in a file, to take back on another Celenn OS computer.",
-                "Your settings and apps",
+                "Take your settings, your apps and your files to another Celenn OS computer.",
+                "Settings, apps and files",
             ),
             Tool::Inside => (
                 "What's inside",
@@ -376,7 +377,8 @@ impl Tool {
             Tool::Space => "edit-clear-all-symbolic",
             Tool::Backup => "document-save-symbolic",
             Tool::Print => "printer-symbolic",
-            Tool::Transfer => "document-send-symbolic",
+            // Drawn for Celenn OS (branding/icons/build.py)
+            Tool::Transfer => "celenn-tools-transfer-symbolic",
             Tool::Inside => "computer-symbolic",
             Tool::Battery => "battery-symbolic",
             Tool::Disks => "drive-multidisk-symbolic",

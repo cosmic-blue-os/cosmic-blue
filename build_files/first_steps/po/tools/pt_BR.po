@@ -735,8 +735,29 @@ msgstr "Digitalizar"
 msgid "Change computers"
 msgstr "Trocar de computador"
 
-msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
-msgstr "Suas configurações e a lista dos seus apps em um arquivo, para recuperar em outro computador Celenn OS."
+msgid "Take your settings, your apps and your files to another Celenn OS computer."
+msgstr "Leve suas configurações, seus apps e seus arquivos para outro computador Celenn OS."
+
+msgid "Save my settings"
+msgstr "Salvar minhas configurações"
+
+msgid "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along."
+msgstr "Aparência, teclado, atalhos e a lista dos seus apps, em um arquivo na pasta Documentos. Copie-o para um pendrive para levá-lo com você."
+
+msgid "Restore my settings"
+msgstr "Recuperar minhas configurações"
+
+msgid "On the new computer, choose the file saved on the old one, then tick what you want back."
+msgstr "No computador novo, escolha o arquivo salvo no antigo e marque o que deseja recuperar."
+
+msgid "My files"
+msgstr "Meus arquivos"
+
+msgid "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers."
+msgstr "Documentos e fotos não estão no arquivo de configurações: copie-os para um pendrive ou envie-os pelo Wi-Fi com o LocalSend, aberto nos dois computadores."
+
+msgid "Open LocalSend"
+msgstr "Abrir o LocalSend"
 
 msgid "Restore…"
 msgstr "Recuperar…"
@@ -1085,8 +1106,8 @@ msgstr "O que há dentro"
 msgid "When something is wrong"
 msgstr "Quando algo dá errado"
 
-msgid "Your settings and apps"
-msgstr "Suas configurações e apps"
+msgid "Settings, apps and files"
+msgstr "Configurações, apps e arquivos"
 
 msgid "Celenn OS updates itself in the background. A new version starts at the next restart, without interrupting you."
 msgstr "O Celenn OS se atualiza em segundo plano. Uma nova versão inicia na próxima reinicialização, sem interromper você."
