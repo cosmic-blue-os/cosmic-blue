@@ -51,6 +51,12 @@ system starts.
 - Each ISO should stay under **5 GB**: the R2 free tier is 10 GB for both.
   Over that, the run warns and opens an issue. Find what grew before
   publishing anything else.
+- The bucket is the repository variable `R2_BUCKET`, and its public URL,
+  which the website's download buttons use, is `ISO_BASE_URL`. To move the
+  ISOs to another bucket: give the R2 keys access to it, change both
+  variables, run this workflow by hand, then run the website workflow. Once
+  the website links to the new bucket, delete the old one within a few days:
+  the 10 GB free tier counts every bucket of the account.
 - The ISO tool (titanoboa) is pinned to an older commit on purpose, and its
   Renovate rule is paused. Its newer versions work differently. Move only
   when Bluefin's own ISO build moves, and turn the Renovate rule back on then.
