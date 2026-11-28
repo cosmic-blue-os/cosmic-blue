@@ -315,9 +315,7 @@ impl Page {
     }
 
     pub fn view(&self) -> Element<'_, Message> {
-        let cosmic_theme::Spacing {
-            space_s, ..
-        } = theme::spacing();
+        let cosmic_theme::Spacing { space_s, .. } = theme::spacing();
         // The popular sites, then the other web apps, three per line
         let mut tiles: Vec<Element<'_, Message>> = SITES
             .iter()
@@ -836,7 +834,10 @@ fn set_icon(id: &str, source: &Path) -> std::io::Result<()> {
         "{}-{}.{}",
         id,
         std::process::id(),
-        source.extension().and_then(|ext| ext.to_str()).unwrap_or("png")
+        source
+            .extension()
+            .and_then(|ext| ext.to_str())
+            .unwrap_or("png")
     ));
     std::fs::copy(source, &staged)?;
     for path in [&png, &svg] {
@@ -868,7 +869,10 @@ fn refresh_app_list() {
 fn update_folder() {
     let mine = config_home().join(GROUPS);
     let system = std::fs::read_to_string(Path::new("/usr/share").join(GROUPS)).ok();
-    let Some(current) = std::fs::read_to_string(&mine).ok().or_else(|| system.clone()) else {
+    let Some(current) = std::fs::read_to_string(&mine)
+        .ok()
+        .or_else(|| system.clone())
+    else {
         return;
     };
     let Some(groups) = with_folder(&current, !installed().is_empty(), tr("Web apps")) else {
@@ -1416,9 +1420,9 @@ pub fn framed_svg(text: &str) -> String {
                 .filter(|value| *value > 0.0)
         })
     };
-    let view_box = attribute(tag, "viewbox").map(str::to_owned).or_else(|| {
-        Some(format!("0 0 {} {}", number("width")?, number("height")?))
-    });
+    let view_box = attribute(tag, "viewbox")
+        .map(str::to_owned)
+        .or_else(|| Some(format!("0 0 {} {}", number("width")?, number("height")?)));
     let Some(view_box) = view_box else {
         return text.to_owned();
     };
@@ -1530,7 +1534,10 @@ mod tests {
         let with = with_folder(&system, true, "Applis web").unwrap();
         assert!(with.contains("name: \"Applis web\""));
         assert!(with.contains("categories: [\"X-Celenn-WebApp\"]"));
-        assert_eq!(ron_items(&with).unwrap().len(), ron_items(&system).unwrap().len() + 1);
+        assert_eq!(
+            ron_items(&with).unwrap().len(),
+            ron_items(&system).unwrap().len() + 1
+        );
         assert_eq!(with_folder(&with, true, "Web apps").unwrap(), with);
         let without = with_folder(&with, false, "Web apps").unwrap();
         assert_eq!(ron_items(&without), ron_items(&system));
