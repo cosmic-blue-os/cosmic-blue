@@ -207,6 +207,7 @@ distrobox enter arch</code></pre>
     <section class="block">
       <h2 id="tools">Ferramentas do Celenn OS</h2>
       <p><strong>Ferramentas do Celenn OS</strong> é uma caixa de ferramentas: cada bloco abre uma ferramenta. <em>No dia a dia</em>: atualizar, instalar aplicativos, apps da web, liberar espaço, proteger seus arquivos, imprimir, trocar de computador. <em>Meu computador</em>: o que há dentro, a bateria, outros discos, a aparência, o driver NVIDIA, as fontes da Microsoft. <em>Quando algo dá errado</em>: voltar atrás, reparar, obter ajuda. Uma linha no topo indica o que precisa da sua atenção, e <em>Para usuários experientes…</em> reúne o canal de atualizações, as versões anteriores, o firmware e as máquinas virtuais. Cada ferramenta mostra o comando <code>ujust</code> correspondente, e seu botão <strong>?</strong> abre a parte dela neste guia. Mudanças no sistema pedem a senha de um administrador.</p>
+      <p>De qualquer lugar, <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Espaço</kbd> abre o <strong>Menu rápido</strong>: tirar uma captura de tela, ver os atalhos de teclado, bloquear a tela ou digitar o que você quer fazer para achar a ferramenta certa. Pressione o atalho de novo, ou <kbd>Esc</kbd>, para fechá-lo.</p>
     </section>
 
     <section class="block">
@@ -285,6 +286,8 @@ distrobox enter arch</code></pre>
       </div>
       <h3>Backups</h3>
       <p>O aplicativo <strong>Backups</strong> (Déjà Dup) está instalado: ele salva sua pasta pessoal em um disco externo, um compartilhamento de rede ou um armazenamento na nuvem, criptografado se você quiser, e restaura arquivos avulsos ou tudo. Para o terminal, <code>restic</code>, <code>borg</code> e <code>rclone</code> também estão instalados.</p>
+      <h3>Lixeira</h3>
+      <p>Os arquivos que estão na lixeira há mais de 30 dias são excluídos sozinhos. Para mantê-los, desligue <em>Excluir os arquivos que estão na lixeira há mais de 30 dias</em> nas Ferramentas do Celenn OS, em <em>Liberar espaço</em>. Isso vale só para a lixeira da sua pasta pessoal, não para a dos pendrives.</p>
       <h3>Vindo de outro sistema</h3>
       <p>Primeiro faça backup dos seus arquivos (com o Backups, ou copiando para um disco externo), instale o Celenn OS e depois copie-os de volta para sua pasta pessoal. Instale seus aplicativos de novo pela COSMIC Store; os aplicativos Flatpak guardam seus dados em <code>~/.var/app</code>, que você pode copiar de outro sistema que usava os mesmos Flatpaks.</p>
     </section>
@@ -296,6 +299,8 @@ distrobox enter arch</code></pre>
         <li>Atualizações, uma vez por dia: as imagens do Celenn OS no GitHub, o Flathub e o repositório de aplicativos do COSMIC, e o Homebrew se você o usar (com as estatísticas de uso do Homebrew desligadas).</li>
         <li>A contagem semanal anônima do Fedora (<code>rpm-ostree-countme</code>): uma requisição por semana aos servidores do Fedora, com a versão do Fedora e a idade aproximada do sistema, mas sem nenhum identificador, para que o Fedora saiba quantos sistemas o usam.</li>
         <li>Firefox: telemetria, estudos, conteúdo patrocinado e medição de anúncios estão desligados. O uBlock Origin bloqueia anúncios e rastreadores, e os sites abrem por HTTPS sempre que possível.</li>
+        <li>A ferramenta <em>Apps da web</em>: na primeira vez que abre, ela baixa o logotipo de cada site oferecido do próprio site e o guarda no computador. Um site que você mesmo adiciona é contatado da mesma forma.</li>
+        <li>As contas infantis com o filtro web ligado (Controle parental): para bloquear sites, os nomes dos sites que elas abrem são enviados ao filtro familiar do CleanBrowsing em vez do servidor DNS de sempre.</li>
         <li>O Tailscale está instalado, para <code>sudo tailscale up</code>: o serviço roda, mas não entra em nenhuma rede até você fazer login.</li>
       </ul>
       <p>Para parar a contagem do Fedora, ou o serviço do Tailscale se você não o usa:</p>

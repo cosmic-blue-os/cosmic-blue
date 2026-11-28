@@ -24,7 +24,7 @@ msgid "Standard account · no limits"
 msgstr "Compte standard · aucune limite"
 
 msgid "This is a child"
-msgstr "C'est un enfant"
+msgstr "C’est un enfant"
 
 msgid "Picture"
 msgstr "Image"
@@ -33,10 +33,10 @@ msgid "No limits"
 msgstr "Aucune limite"
 
 msgid "Today: {} of {}"
-msgstr "Aujourd'hui : {} sur {}"
+msgstr "Aujourd’hui : {} sur {}"
 
 msgid "Today: {}"
-msgstr "Aujourd'hui : {}"
+msgstr "Aujourd’hui : {}"
 
 msgid "Add a child account"
 msgstr "Ajouter un compte enfant"
@@ -54,13 +54,13 @@ msgid "Back"
 msgstr "Retour"
 
 msgid "Screen time"
-msgstr "Temps d'écran"
+msgstr "Temps d’écran"
 
 msgid "Limit screen time"
-msgstr "Limiter le temps d'écran"
+msgstr "Limiter le temps d’écran"
 
 msgid "Only time in front of the screen counts. Warnings 10, 5 and 1 minutes before the end."
-msgstr "Seul le temps passé devant l'écran compte. Avertissements 10, 5 et 1 min avant la fin."
+msgstr "Seul le temps passé devant l’écran compte. Avertissements 10, 5 et 1 min avant la fin."
 
 msgid "Monday to Friday"
 msgstr "Du lundi au vendredi"
@@ -72,7 +72,7 @@ msgid "Bedtime"
 msgstr "Heure du coucher"
 
 msgid "No computer at night"
-msgstr "Pas d'ordinateur la nuit"
+msgstr "Pas d’ordinateur la nuit"
 
 msgid "The session closes and logging in is refused during these hours."
 msgstr "La session se ferme et la connexion est refusée pendant ces heures."
@@ -90,7 +90,7 @@ msgid "Block unsuitable websites"
 msgstr "Bloquer les sites inadaptés"
 
 msgid "Adult content, gambling and malicious sites, in every browser. Safe search is forced. Uses the CleanBrowsing family filter."
-msgstr "Contenus pour adultes, jeux d'argent et sites malveillants, dans tous les navigateurs. Recherche sécurisée forcée. Utilise le filtre familial CleanBrowsing."
+msgstr "Contenus pour adultes, jeux d’argent et sites malveillants, dans tous les navigateurs. Recherche sécurisée forcée. Utilise le filtre familial CleanBrowsing."
 
 msgid "This week"
 msgstr "Cette semaine"
@@ -135,7 +135,7 @@ msgid "Password"
 msgstr "Mot de passe"
 
 msgid "The child logs in with this name and password."
-msgstr "L'enfant se connecte avec ce nom et ce mot de passe."
+msgstr "L’enfant se connecte avec ce nom et ce mot de passe."
 
 msgid "Create"
 msgstr "Créer"
@@ -156,7 +156,7 @@ msgid "{} minutes left"
 msgstr "Plus que {} minutes"
 
 msgid "1 minute left"
-msgstr "Plus qu'une minute"
+msgstr "Plus qu’une minute"
 
 msgid "Your session closes at {}. Save your work."
 msgstr "Ta session se ferme à {}. Pense à enregistrer ton travail."
@@ -165,10 +165,10 @@ msgid "Ask for more time"
 msgstr "Demander plus de temps"
 
 msgid "It is bedtime."
-msgstr "C'est l'heure d'aller dormir."
+msgstr "C’est l’heure d’aller dormir."
 
 msgid "Screen time is over for today."
-msgstr "Le temps d'écran est terminé pour aujourd'hui."
+msgstr "Le temps d’écran est terminé pour aujourd’hui."
 
 msgid "You can log in again at {}."
 msgstr "Tu pourras te reconnecter à {}."
@@ -189,31 +189,31 @@ msgid "Parental controls do not allow logging in now. Ask a parent."
 msgstr "Le contrôle parental ne permet pas de se connecter maintenant. Demande à un parent."
 
 msgid "No limit today"
-msgstr "Sans limite aujourd'hui"
+msgstr "Sans limite aujourd’hui"
 
 msgid "Saving the settings"
 msgstr "Enregistrer les réglages"
 
 msgid "“{}” did not work"
-msgstr "« {} » n'a pas abouti"
+msgstr "« {} » n’a pas abouti"
 
 msgid "No internet connection. Connect to a network, then try again. Nothing was changed."
-msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n'a été modifié."
+msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n’a été modifié."
 
 msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try again."
-msgstr "Le disque est plein ({} libres). Libérez de l'espace avec Outils Celenn OS, puis réessayez."
+msgstr "Le disque est plein ({} libres). Libérez de l’espace avec Outils Celenn OS, puis réessayez."
 
 msgid "The server does not answer. Try again in a few minutes."
 msgstr "Le serveur ne répond pas. Réessayez dans quelques minutes."
 
 msgid "Something unexpected went wrong. Nothing was changed."
-msgstr "Un problème inattendu est survenu. Rien n'a été modifié."
+msgstr "Un problème inattendu est survenu. Rien n’a été modifié."
 
 msgid "Try again"
 msgstr "Réessayer"
 
 msgid "Network settings"
-msgstr "Réglages réseau"
+msgstr "Paramètres réseau"
 
 msgid "Report the problem"
 msgstr "Signaler le problème"
@@ -222,7 +222,7 @@ msgid "Technical details"
 msgstr "Détails techniques"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Le rapport s'ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l'envoyer ; écrivez dans votre langue. L'envoi demande un compte GitHub."
+msgstr "Le rapport s’ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l’envoyer ; écrivez dans votre langue. L’envoi demande un compte GitHub."
 
 msgid "Open the report"
 msgstr "Ouvrir le rapport"
@@ -237,7 +237,7 @@ msgid "Applications validated by a parent"
 msgstr "Applications validées par un parent"
 
 msgid "{} only uses the applications you ticked. Installing an application needs a parent's password."
-msgstr "{} utilise seulement les applications que vous avez cochées. Installer une application demande le mot de passe d'un parent."
+msgstr "{} utilise seulement les applications que vous avez cochées. Installer une application demande le mot de passe d’un parent."
 
 msgid "Allowed applications"
 msgstr "Applications autorisées"
@@ -264,13 +264,13 @@ msgid "Blocked"
 msgstr "Bloquées"
 
 msgid "Applications installed later are blocked until you tick them."
-msgstr "Les applications installées plus tard sont bloquées jusqu'à ce que vous les cochiez."
+msgstr "Les applications installées plus tard sont bloquées jusqu’à ce que vous les cochiez."
 
 msgid "{} is not allowed"
-msgstr "L'application {} n'est pas autorisée"
+msgstr "L’application {} n’est pas autorisée"
 
 msgid "A parent must allow it first in Parental controls."
-msgstr "Un parent doit d'abord l'autoriser dans le Contrôle parental."
+msgstr "Un parent doit d’abord l’autoriser dans le Contrôle parental."
 
 msgid "Program blocked"
 msgstr "Programme bloqué"
@@ -309,7 +309,7 @@ msgid "{} applications blocked"
 msgstr "{} applications bloquées"
 
 msgid "Today"
-msgstr "Aujourd'hui"
+msgstr "Aujourd’hui"
 
 msgid "Most used applications"
 msgstr "Applications les plus utilisées"
@@ -318,7 +318,7 @@ msgid "Extra time"
 msgstr "Temps en plus"
 
 msgid "Bedtime included, until tomorrow morning"
-msgstr "Heure du coucher comprise, jusqu'à demain matin"
+msgstr "Heure du coucher comprise, jusqu’à demain matin"
 
 msgid "The session closes in {}."
 msgstr "La session se ferme dans {}."
@@ -330,7 +330,7 @@ msgid "The session will close at {}."
 msgstr "La session se fermera à {}."
 
 msgid "No limit until tomorrow at {}."
-msgstr "Plus de limite jusqu'à demain {}."
+msgstr "Plus de limite jusqu’à demain {}."
 
 msgid "No limit for the rest of the day."
 msgstr "Plus de limite pour le reste de la journée."
@@ -342,16 +342,16 @@ msgid "Remove the limit"
 msgstr "Enlever la limite"
 
 msgid "At most 4 h. For more, turn on No limit today."
-msgstr "4 h au maximum. Pour plus, active Sans limite aujourd'hui."
+msgstr "4 h au maximum. Pour plus, active Sans limite aujourd’hui."
 
 msgid "Keep to bedtime"
-msgstr "Respecter l'heure du coucher"
+msgstr "Respecter l’heure du coucher"
 
 msgid "The session closes at {} all the same."
 msgstr "La session se ferme à {} quand même."
 
 msgid "Bedtime ({}) does not apply to this time."
-msgstr "L'heure du coucher ({}) ne s'applique pas à ce temps."
+msgstr "L’heure du coucher ({}) ne s’applique pas à ce temps."
 
 msgid "B"
 msgstr "o"

@@ -106,7 +106,7 @@ msgid "Choose the stable version of a past week. The system then stays on it, wi
 msgstr "Die stabile Version einer vergangenen Woche wählen. Das System bleibt dann dabei, ohne Updates, bis Sie sie fortsetzen."
 
 msgid "Choose…"
-msgstr "Wählen…"
+msgstr "Auswählen…"
 
 msgid "Hide"
 msgstr "Ausblenden"
@@ -739,7 +739,7 @@ msgid "Your settings and the list of your apps in a file, to take back on anothe
 msgstr "Ihre Einstellungen und die Liste Ihrer Apps in einer Datei, zum Übernehmen auf einem anderen celenn-Computer."
 
 msgid "Restore…"
-msgstr "Übernehmen …"
+msgstr "Übernehmen…"
 
 msgid "Saved in Documents."
 msgstr "In Dokumente gespeichert."
@@ -790,7 +790,7 @@ msgid "Take them back"
 msgstr "Übernehmen"
 
 msgid "Restoring…"
-msgstr "Wird übernommen …"
+msgstr "Wird übernommen…"
 
 msgid "Restored"
 msgstr "Übernommen"

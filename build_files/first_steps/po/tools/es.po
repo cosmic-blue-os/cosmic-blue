@@ -45,7 +45,7 @@ msgid "Previous version: {}"
 msgstr "Versión anterior: {}"
 
 msgid "Something wrong since the last update? Go back to this version. Your files and settings stay as they are."
-msgstr "¿Algo falla desde la última actualización? Vuelva a esta versión. Sus archivos y ajustes no cambian."
+msgstr "¿Algo falla desde la última actualización? Vuelve a esta versión. Tus archivos y ajustes no cambian."
 
 msgid "Go back to it"
 msgstr "Volver a esta"
@@ -54,7 +54,7 @@ msgid "Back to {} at the next restart"
 msgstr "Vuelta a {} en el próximo reinicio"
 
 msgid "Your files and settings stay as they are. The version you leave will not be installed again: updates start again with the next one."
-msgstr "Sus archivos y ajustes no cambian. La versión que deja no se volverá a instalar: las actualizaciones siguen con la próxima."
+msgstr "Tus archivos y ajustes no cambian. La versión que dejas no se volverá a instalar: las actualizaciones siguen con la próxima."
 
 msgid "Version {} is set aside"
 msgstr "La versión {} queda apartada"
@@ -73,7 +73,7 @@ msgstr ""
 "Activado: una actualización cada día, antes pero menos probada."
 
 msgid "You follow the dev channel, chosen in a terminal. Turn this off to go back to one tested update a week."
-msgstr "Sigue el canal dev, elegido en una terminal. Desactive esto para volver a una actualización probada por semana."
+msgstr "Sigue el canal dev, elegido en una terminal. Desactiva esto para volver a una actualización probada por semana."
 
 msgid "Downloading the new version… This can take a few minutes."
 msgstr "Descargando la nueva versión… Puede tardar unos minutos."
@@ -118,7 +118,7 @@ msgid "Use this one"
 msgstr "Usar esta"
 
 msgid "No older version found. Are you online?"
-msgstr "No se encontró ninguna versión anterior. ¿Tiene conexión a Internet?"
+msgstr "No se encontró ninguna versión anterior. ¿Tienes conexión a Internet?"
 
 msgid "{y}-{m}-{d}"
 msgstr "{d}/{m}/{y}"
@@ -301,7 +301,7 @@ msgid "Battery charge limit"
 msgstr "Límite de carga de la batería"
 
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Configuración"
 
 msgid "Model"
 msgstr "Modelo"
@@ -346,7 +346,7 @@ msgid "No battery on this computer: nothing to set."
 msgstr "Este ordenador no tiene batería: no hay nada que ajustar."
 
 msgid "This computer starts in legacy BIOS mode. To open its settings, press the key shown when it powers on, often F2, F10 or Del."
-msgstr "Este ordenador arranca en modo BIOS heredado. Para abrir sus ajustes, pulse la tecla que aparece al encenderlo, a menudo F2, F10 o Supr."
+msgstr "Este ordenador arranca en modo BIOS heredado. Para abrir sus ajustes, pulsa la tecla que aparece al encenderlo, a menudo F2, F10 o Supr."
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -358,7 +358,7 @@ msgid "Dark theme"
 msgstr "Tema oscuro"
 
 msgid "Every COSMIC setting goes back to the defaults. A copy is kept in your settings folder."
-msgstr "Todos los ajustes de COSMIC vuelven a los valores predeterminados. Se guarda una copia en su carpeta de configuración."
+msgstr "Todos los ajustes de COSMIC vuelven a los valores predeterminados. Se guarda una copia en tu carpeta de configuración."
 
 msgid "Firmware settings (BIOS/UEFI)"
 msgstr "Ajustes del firmware (BIOS/UEFI)"
@@ -373,7 +373,7 @@ msgid "Install"
 msgstr "Instalar"
 
 msgid "Installed. Restart open apps to see them."
-msgstr "Instaladas. Reinicie las aplicaciones abiertas para verlas."
+msgstr "Instaladas. Reinicia las aplicaciones abiertas para verlas."
 
 msgid "Light text on dark backgrounds. Off: the light theme."
 msgstr "Texto claro sobre fondo oscuro. Desactivado: el tema claro."
@@ -400,7 +400,7 @@ msgid "Bar at the bottom"
 msgstr "Barra abajo"
 
 msgid "Log out and back in to finish."
-msgstr "Cierre la sesión y vuelva a entrar para terminar."
+msgstr "Cierra la sesión y vuelve a entrar para terminar."
 
 msgid "Microsoft fonts"
 msgstr "Fuentes de Microsoft"
@@ -445,7 +445,7 @@ msgid "The NVIDIA edition starts at the next restart."
 msgstr "La edición NVIDIA arranca en el próximo reinicio."
 
 msgid "The computer restarts now. Save your work first."
-msgstr "El ordenador se reinicia ahora. Guarde antes su trabajo."
+msgstr "El ordenador se reinicia ahora. Guarda antes tu trabajo."
 
 msgid "The Celenn OS look"
 msgstr "El aspecto de Celenn OS"
@@ -502,22 +502,22 @@ msgid "Steam, Heroic, Lutris, Discord…"
 msgstr "Steam, Heroic, Lutris, Discord…"
 
 msgid "Your game apps are ready."
-msgstr "Sus aplicaciones de juegos están listas."
+msgstr "Tus aplicaciones de juegos están listas."
 
 msgid "Allow"
 msgstr "Permitir"
 
 msgid "At the next restart, a blue screen asks for the password celennos: choose Enroll MOK, Continue, Yes, type celennos, then Reboot. The keyboard may be in QWERTY."
-msgstr "En el próximo reinicio, una pantalla azul pide la contraseña celennos: elija Enroll MOK, Continue, Yes, escriba celennos y luego Reboot. El teclado puede estar en QWERTY inglés."
+msgstr "En el próximo reinicio, una pantalla azul pide la contraseña celennos: elige Enroll MOK, Continue, Yes, escribe celennos y luego Reboot. El teclado puede estar en QWERTY inglés."
 
 msgid "Close"
 msgstr "Cerrar"
 
 msgid "Network settings"
-msgstr "Ajustes de red"
+msgstr "Configuración de red"
 
 msgid "No internet connection. Connect to a network, then try again. Nothing was changed."
-msgstr "No hay conexión a Internet. Conéctese a una red y vuelva a intentarlo. No se ha cambiado nada."
+msgstr "No hay conexión a Internet. Conéctate a una red y vuelve a intentarlo. No se ha cambiado nada."
 
 msgid "Open the report"
 msgstr "Abrir el informe"
@@ -526,7 +526,7 @@ msgid "Report the problem"
 msgstr "Informar del problema"
 
 msgid "Secure Boot does not let NVIDIA's driver load yet. Allow it once: at the next restart, a blue screen asks for the password celennos."
-msgstr "Secure Boot aún no deja cargar el controlador de NVIDIA. Permítalo una vez: en el próximo reinicio, una pantalla azul pide la contraseña celennos."
+msgstr "Secure Boot aún no deja cargar el controlador de NVIDIA. Permítelo una vez: en el próximo reinicio, una pantalla azul pide la contraseña celennos."
 
 msgid "Something unexpected went wrong. Nothing was changed."
 msgstr "Algo inesperado ha fallado. No se ha cambiado nada."
@@ -538,10 +538,10 @@ msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try 
 msgstr "El disco está lleno ({} libres). Libera espacio con Herramientas de Celenn OS y vuelve a intentarlo."
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "El informe se abre en el navegador, ya rellenado: la versión de Celenn OS, el hardware y este error. Sin archivos ni datos personales. Lo revisa antes de enviarlo; escriba en su idioma. Para enviarlo hace falta una cuenta de GitHub."
+msgstr "El informe se abre en el navegador, ya rellenado: la versión de Celenn OS, el hardware y este error. Sin archivos ni datos personales. Lo revisas antes de enviarlo; escribe en tu idioma. Para enviarlo hace falta una cuenta de GitHub."
 
 msgid "The server does not answer. Try again in a few minutes."
-msgstr "El servidor no responde. Vuelva a intentarlo en unos minutos."
+msgstr "El servidor no responde. Vuelve a intentarlo en unos minutos."
 
 msgid "Try again"
 msgstr "Reintentar"
@@ -556,10 +556,10 @@ msgid "Passwords"
 msgstr "Contraseñas"
 
 msgid "Your password manager is ready."
-msgstr "Su gestor de contraseñas está listo."
+msgstr "Tu gestor de contraseñas está listo."
 
 msgid "Tick the ones you want, untick the ones to remove."
-msgstr "Marque los que quiera y desmarque los que quiera quitar."
+msgstr "Marca los que quieras y desmarca los que quieras quitar."
 
 msgid "Version {} starts at the next restart."
 msgstr "La versión {} arranca en el próximo reinicio."
@@ -568,7 +568,7 @@ msgid "Backups"
 msgstr "Copias de seguridad"
 
 msgid "Not set up yet. A USB drive is enough: Déjà Dup keeps a copy of your home folder."
-msgstr "Aún no configuradas. Basta con una memoria USB: Déjà Dup guarda una copia de su carpeta personal."
+msgstr "Aún no configuradas. Basta con una memoria USB: Déjà Dup guarda una copia de tu carpeta personal."
 
 msgid "Set up"
 msgstr "Configurar"
@@ -736,7 +736,7 @@ msgid "Change computers"
 msgstr "Cambiar de ordenador"
 
 msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
-msgstr "Sus ajustes y la lista de sus aplicaciones en un archivo, para recuperarlos en otro ordenador con Celenn OS."
+msgstr "Tus ajustes y la lista de tus aplicaciones en un archivo, para recuperarlos en otro ordenador con Celenn OS."
 
 msgid "Restore…"
 msgstr "Recuperar…"
@@ -748,7 +748,7 @@ msgid "Show"
 msgstr "Mostrar"
 
 msgid "Choose the file saved on your other computer"
-msgstr "Elija el archivo guardado en su otro ordenador"
+msgstr "Elige el archivo guardado en tu otro ordenador"
 
 msgid "celenn-settings"
 msgstr "celenn-ajustes"
@@ -757,10 +757,10 @@ msgid "Restore these settings"
 msgstr "Recuperar estos ajustes"
 
 msgid "Saved on {} on “{}”. Tick what you want back. Your files are not in this file: use Déjà Dup or LocalSend for them."
-msgstr "Guardados el {} en «{}». Marque lo que quiere recuperar. Sus archivos no están en este archivo: use Déjà Dup o LocalSend para ellos."
+msgstr "Guardados el {} en «{}». Marca lo que quieres recuperar. Tus archivos no están en este archivo: usa Déjà Dup o LocalSend para ellos."
 
 msgid "Saved on {}. Tick what you want back. Your files are not in this file: use Déjà Dup or LocalSend for them."
-msgstr "Guardados el {}. Marque lo que quiere recuperar. Sus archivos no están en este archivo: use Déjà Dup o LocalSend para ellos."
+msgstr "Guardados el {}. Marca lo que quieres recuperar. Tus archivos no están en este archivo: usa Déjà Dup o LocalSend para ellos."
 
 msgid "Look"
 msgstr "Apariencia"
@@ -798,13 +798,13 @@ msgstr "Recuperado"
 
 
 msgid "Your own wallpaper is not in the file: copy the picture, then choose it in Settings."
-msgstr "Su propio fondo de pantalla no está en el archivo: copie la imagen y elíjala en Configuración."
+msgstr "Tu propio fondo de pantalla no está en el archivo: copia la imagen y elígela en Configuración."
 
 msgid "{} shortcuts start a program: for safety, add them again in Settings."
-msgstr "{} atajos abren un programa: por seguridad, vuelva a añadirlos en Configuración."
+msgstr "{} atajos abren un programa: por seguridad, vuelve a añadirlos en Configuración."
 
 msgid "One shortcut starts a program: for safety, add it again in Settings."
-msgstr "Un atajo abre un programa: por seguridad, vuelva a añadirlo en Configuración."
+msgstr "Un atajo abre un programa: por seguridad, vuelve a añadirlo en Configuración."
 
 msgid "{} settings unknown to this version of Celenn OS were left out."
 msgstr "Se han omitido {} ajustes que esta versión de Celenn OS no conoce."
@@ -816,16 +816,16 @@ msgid "The apps could not be installed."
 msgstr "No se han podido instalar las aplicaciones."
 
 msgid "A copy of your previous settings is in {}."
-msgstr "Hay una copia de sus ajustes anteriores en {}."
+msgstr "Hay una copia de tus ajustes anteriores en {}."
 
 msgid "Log out and back in to see every change."
-msgstr "Cierre la sesión y vuelva a entrar para ver todos los cambios."
+msgstr "Cierra la sesión y vuelve a entrar para ver todos los cambios."
 
 msgid "This file is not a Celenn OS settings file."
 msgstr "Este archivo no es un archivo de ajustes de Celenn OS."
 
 msgid "This file was saved by a newer Celenn OS. Update this computer first."
-msgstr "Este archivo viene de un Celenn OS más reciente. Actualice primero este ordenador."
+msgstr "Este archivo viene de un Celenn OS más reciente. Actualiza primero este ordenador."
 
 msgid "This file could not be read."
 msgstr "No se ha podido leer este archivo."
@@ -846,16 +846,16 @@ msgid "{} open at every startup."
 msgstr "{} se abren en cada inicio."
 
 msgid "None opens at startup yet: choose the ones Files and Steam should always find."
-msgstr "Ninguno se abre todavía al inicio: elija los que Archivos y Steam deben encontrar siempre."
+msgstr "Ninguno se abre todavía al inicio: elige los que Archivos y Steam deben encontrar siempre."
 
 msgid "Turn on the ones you want open at every startup, without clicking them in Files."
-msgstr "Active los que quiera tener abiertos en cada inicio, sin hacer clic en ellos en Archivos."
+msgstr "Activa los que quieras tener abiertos en cada inicio, sin hacer clic en ellos en Archivos."
 
 msgid "They open at every startup, even before you log in, and always at the same place: Files, Steam and your apps find them. USB drives are not concerned."
-msgstr "Se abren en cada inicio, incluso antes de iniciar sesión, y siempre en el mismo lugar: Archivos, Steam y sus aplicaciones los encuentran. Las memorias USB no están incluidas."
+msgstr "Se abren en cada inicio, incluso antes de iniciar sesión, y siempre en el mismo lugar: Archivos, Steam y tus aplicaciones los encuentran. Las memorias USB no están incluidas."
 
 msgid "Back"
-msgstr "Volver"
+msgstr "Atrás"
 
 msgid "{} disk"
 msgstr "Disco de {}"
@@ -894,16 +894,16 @@ msgid "In Files and in {}."
 msgstr "En Archivos y en {}."
 
 msgid "Not opened at this startup. If Windows is also on this computer, turn off its Fast Startup."
-msgstr "No se abrió en este inicio. Si Windows también está en este ordenador, desactive su inicio rápido."
+msgstr "No se abrió en este inicio. Si Windows también está en este ordenador, desactiva su inicio rápido."
 
 msgid "Not opened at this startup: the disk was not found, or it has an error."
 msgstr "No se abrió en este inicio: no se encontró el disco o tiene un error."
 
 msgid "Encrypted with BitLocker: open it in Files, with its recovery key."
-msgstr "Cifrado con BitLocker: ábralo en Archivos, con su clave de recuperación."
+msgstr "Cifrado con BitLocker: ábrelo en Archivos, con su clave de recuperación."
 
 msgid "Encrypted: open it in Files, with its password."
-msgstr "Cifrado: ábralo en Archivos, con su contraseña."
+msgstr "Cifrado: ábrelo en Archivos, con su contraseña."
 
 msgid "Windows' own disk stays closed, so that nothing can harm it."
 msgstr "El disco del propio Windows queda cerrado, para que nada pueda dañarlo."
@@ -918,13 +918,13 @@ msgid "Done."
 msgstr "Hecho."
 
 msgid "{}: a file on it is open. Close it, then try again."
-msgstr "{}: hay un archivo abierto en él. Ciérrelo y vuelva a intentarlo."
+msgstr "{}: hay un archivo abierto en él. Ciérralo y vuelve a intentarlo."
 
 msgid "{}: a file on it is open. It closes at the next restart."
 msgstr "{}: hay un archivo abierto en él. Se cerrará en el próximo reinicio."
 
 msgid "{}: Windows did not fully shut down. In Windows, turn off Fast Startup and shut down, then try again."
-msgstr "{}: Windows no se apagó por completo. En Windows, desactive el inicio rápido y apague, luego vuelva a intentarlo."
+msgstr "{}: Windows no se apagó por completo. En Windows, desactiva el inicio rápido y apaga, luego vuelve a intentarlo."
 
 msgid "{}: Windows' own disk stays closed, so that nothing can harm it."
 msgstr "{}: el disco del propio Windows queda cerrado, para que nada pueda dañarlo."
@@ -1149,7 +1149,7 @@ msgid "Films and series"
 msgstr "Películas y series"
 
 msgid "Firefox is missing. Put it back in Repair."
-msgstr "Falta Firefox. Vuelva a ponerlo en Reparar."
+msgstr "Falta Firefox. Vuelve a ponerlo en Reparar."
 
 msgid "For example laposte.fr"
 msgstr "Por ejemplo correos.es"
@@ -1174,10 +1174,10 @@ msgid "Remove {}? You will have to sign in again if you add it back."
 msgstr "¿Quitar {}? Tendrá que volver a iniciar sesión si la añade de nuevo."
 
 msgid "They open with Firefox: the protection against ads and tracking, and the parental controls, apply to them too. Sign in once in each one."
-msgstr "Se abren con Firefox: la protección contra anuncios y rastreo, y el control parental, también se aplican. Inicie sesión una vez en cada una."
+msgstr "Se abren con Firefox: la protección contra anuncios y rastreo, y el control parental, también se aplican. Inicia sesión una vez en cada una."
 
 msgid "This address does not look right. Type it as in the address bar, for example laposte.fr."
-msgstr "Esta dirección no parece correcta. Escríbala como en la barra de direcciones, por ejemplo correos.es."
+msgstr "Esta dirección no parece correcta. Escríbela como en la barra de direcciones, por ejemplo correos.es."
 
 msgid "Videos"
 msgstr "Vídeos"
@@ -1192,11 +1192,11 @@ msgid "Word and Excel online"
 msgstr "Word y Excel en línea"
 
 msgid "Your favourite sites in their own window, with their icon in your apps and the dock."
-msgstr "Sus sitios favoritos en su propia ventana, con su icono en sus aplicaciones y en el dock."
+msgstr "Tus sitios favoritos en su propia ventana, con su icono en tus aplicaciones y en el dock."
 
 
 msgid "Your photos"
-msgstr "Sus fotos"
+msgstr "Tus fotos"
 
 msgid "Photos and stories"
 msgstr "Fotos e historias"
@@ -1205,7 +1205,7 @@ msgid "{} could not be added. Is this computer connected to the internet?"
 msgstr "No se pudo añadir {}. ¿Está este equipo conectado a internet?"
 
 msgid "{} is in your apps."
-msgstr "{} está en sus aplicaciones."
+msgstr "{} está en tus aplicaciones."
 
 msgid "{} was removed."
 msgstr "Se quitó {}."
@@ -1214,7 +1214,7 @@ msgid "Quick menu"
 msgstr "Menú rápido"
 
 msgid "What do you want to do?"
-msgstr "¿Qué quiere hacer?"
+msgstr "¿Qué quieres hacer?"
 
 msgid "Right away"
 msgstr "Ahora mismo"
@@ -1235,7 +1235,7 @@ msgid "Lock the screen"
 msgstr "Bloquear la pantalla"
 
 msgid "Your windows stay open"
-msgstr "Sus ventanas siguen abiertas"
+msgstr "Tus ventanas siguen abiertas"
 
 msgid "The whole toolbox…"
 msgstr "Toda la caja de herramientas…"

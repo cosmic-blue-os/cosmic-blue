@@ -75,12 +75,12 @@
       <nav id="doc-nav" class="doc-nav" aria-label="Sommaire">
         <h2>Dépannage</h2>
         <ul>
-          <li><a href="#no-boot">L'ordinateur ne démarre pas</a></li>
+          <li><a href="#no-boot">L’ordinateur ne démarre pas</a></li>
           <li><a href="#bad-update">Une mise à jour a cassé quelque chose</a></li>
-          <li><a href="#no-desktop">Le bureau ne s'ouvre pas</a></li>
+          <li><a href="#no-desktop">Le bureau ne s’ouvre pas</a></li>
           <li><a href="#settings">Apparence et réglages</a></li>
           <li><a href="#apps">Une application ne marche pas</a></li>
-          <li><a href="#no-updates">Les mises à jour ne s'installent pas</a></li>
+          <li><a href="#no-updates">Les mises à jour ne s’installent pas</a></li>
           <li><a href="#nvidia">Pilote NVIDIA</a></li>
           <li><a href="#report">Signaler un problème</a></li>
         </ul>
@@ -96,10 +96,10 @@
     </section>
 
     <section class="block">
-      <h2 id="no-boot">L'ordinateur ne démarre plus après une mise à jour</h2>
+      <h2 id="no-boot">L’ordinateur ne démarre plus après une mise à jour</h2>
       <ol>
-        <li>Allumez l'ordinateur et appuyez plusieurs fois sur <kbd>Échap</kbd> (ou maintenez <kbd>Maj</kbd>) jusqu'à voir le menu de démarrage.</li>
-        <li>Choisissez la deuxième entrée, marquée <code>ostree:1</code>&nbsp;: c'est la version d'avant la mise à jour.</li>
+        <li>Allumez l’ordinateur et appuyez plusieurs fois sur <kbd>Échap</kbd> (ou maintenez <kbd>Maj</kbd>) jusqu’à voir le menu de démarrage.</li>
+        <li>Choisissez la deuxième entrée, marquée <code>ostree:1</code>&nbsp;: c’est la version d’avant la mise à jour.</li>
         <li>Une fois sur le bureau, gardez cette version pour les démarrages suivants&nbsp;:</li>
       </ol>
       <div class="code">
@@ -111,7 +111,7 @@
 
     <section class="block">
       <h2 id="bad-update">Une mise à jour a cassé quelque chose</h2>
-      <p>Revenez à la version d'avant. Elle reste installée jusqu'à la mise à jour suivante, donc cela marche sans réseau&nbsp;:</p>
+      <p>Revenez à la version d’avant. Elle reste installée jusqu’à la mise à jour suivante, donc cela marche sans réseau&nbsp;:</p>
       <div class="code">
         <pre><code>sudo bootc rollback    # utiliser la version précédente au prochain démarrage
 sudo systemctl reboot</code></pre>
@@ -124,7 +124,7 @@ ujust toggle-updates enable    # les réactiver plus tard</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
       <h3>Revenir plus loin en arrière</h3>
-      <p>Chaque construction a sa propre version, comme <code>44.20261110</code>&nbsp;: <code>sudo bootc status</code> affiche la vôtre, et la <a href="https://github.com/celenn-os/celenn/releases">page des versions</a> liste celles de chaque semaine. Vous pouvez en installer une, puis revenir aux mises à jour normales plus tard. Sur l'image NVIDIA, écrivez <code>celenn-nvidia</code> au lieu de <code>Celenn OS</code>.</p>
+      <p>Chaque construction a sa propre version, comme <code>44.20261110</code>&nbsp;: <code>sudo bootc status</code> affiche la vôtre, et la <a href="https://github.com/celenn-os/celenn/releases">page des versions</a> liste celles de chaque semaine. Vous pouvez en installer une, puis revenir aux mises à jour normales plus tard. Sur l’image NVIDIA, écrivez <code>celenn-nvidia</code> au lieu de <code>Celenn OS</code>.</p>
       <div class="code">
         <pre><code>sudo bootc switch --enforce-container-sigpolicy ghcr.io/celenn-os/celenn:44.20261110   # rester sur cette version
 sudo bootc switch --enforce-container-sigpolicy ghcr.io/celenn-os/celenn:stable        # revenir aux mises à jour hebdomadaires</code></pre>
@@ -133,10 +133,10 @@ sudo bootc switch --enforce-container-sigpolicy ghcr.io/celenn-os/celenn:stable 
     </section>
 
     <section class="block">
-      <h2 id="no-desktop">Le bureau ne s'ouvre pas</h2>
-      <p>Écran noir, ou retour à l'écran de connexion après avoir tapé votre mot de passe&nbsp;? Vos réglages COSMIC peuvent en être la cause.</p>
+      <h2 id="no-desktop">Le bureau ne s’ouvre pas</h2>
+      <p>Écran noir, ou retour à l’écran de connexion après avoir tapé votre mot de passe&nbsp;? Vos réglages COSMIC peuvent en être la cause.</p>
       <ol>
-        <li>Appuyez sur <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F3</kbd> pour ouvrir une console texte, et connectez-vous avec votre nom d'utilisateur et votre mot de passe.</li>
+        <li>Appuyez sur <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F3</kbd> pour ouvrir une console texte, et connectez-vous avec votre nom d’utilisateur et votre mot de passe.</li>
         <li>Réinitialisez les réglages COSMIC (vos fichiers et applications ne sont pas touchés), puis redémarrez&nbsp;:</li>
       </ol>
       <div class="code">
@@ -149,24 +149,24 @@ sudo systemctl reboot</code></pre>
 
     <section class="block">
       <h2 id="settings">Apparence et réglages</h2>
-      <p>Vous avez perdu le style Celenn OS, ou un panneau, le dock ou un raccourci se comporte mal&nbsp;? Réinitialisez seulement l'apparence, ou tous les réglages COSMIC. Déconnectez-vous puis reconnectez-vous ensuite.</p>
+      <p>Vous avez perdu le style Celenn OS, ou un panneau, le dock ou un raccourci se comporte mal&nbsp;? Réinitialisez seulement l’apparence, ou tous les réglages COSMIC. Déconnectez-vous puis reconnectez-vous ensuite.</p>
       <dl class="commands">
         <dt><code>ujust reset-cosmic-theme</code></dt>
-        <dd>Restaurer les couleurs, le thème sombre, les icônes, les polices et le fond d'écran. Le panneau, le dock, le clavier et les raccourcis sont gardés.</dd>
+        <dd>Restaurer les couleurs, le thème sombre, les icônes, les polices et le fond d’écran. Le panneau, le dock, le clavier et les raccourcis sont gardés.</dd>
         <dt><code>ujust reset-cosmic-config</code></dt>
-        <dd>Réinitialiser tous les réglages COSMIC, en gardant la disposition du clavier et le format de l'heure. Les anciens réglages sont déplacés dans un dossier <code>~/.config/cosmic.backup-</code>, et la commande indique comment les remettre.</dd>
+        <dd>Réinitialiser tous les réglages COSMIC, en gardant la disposition du clavier et le format de l’heure. Les anciens réglages sont déplacés dans un dossier <code>~/.config/cosmic.backup-</code>, et la commande indique comment les remettre.</dd>
       </dl>
     </section>
 
     <section class="block">
       <h2 id="apps">Une application ne marche pas</h2>
-      <p>Les applications du COSMIC Store sont des Flatpak. Mettez-les à jour et réparez les fichiers installés d'abord&nbsp;:</p>
+      <p>Les applications du COSMIC Store sont des Flatpak. Mettez-les à jour et réparez les fichiers installés d’abord&nbsp;:</p>
       <div class="code">
         <pre><code>flatpak update
 sudo flatpak repair</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>Toujours cassée&nbsp;? Lancez l'application avec des réglages neufs. Trouvez son identifiant, puis mettez ses données de côté (remettez le dossier pour annuler)&nbsp;:</p>
+      <p>Toujours cassée&nbsp;? Lancez l’application avec des réglages neufs. Trouvez son identifiant, puis mettez ses données de côté (remettez le dossier pour annuler)&nbsp;:</p>
       <div class="code">
         <pre><code>flatpak list --app
 mv ~/.var/app/org.example.App ~/.var/app/org.example.App.old</code></pre>
@@ -176,24 +176,24 @@ mv ~/.var/app/org.example.App ~/.var/app/org.example.App.old</code></pre>
     </section>
 
     <section class="block">
-      <h2 id="no-updates">Les mises à jour ne s'installent pas</h2>
-      <p>Lancez la mise à jour à la main pour voir l'erreur, et vérifiez que les mises à jour automatiques sont actives&nbsp;:</p>
+      <h2 id="no-updates">Les mises à jour ne s’installent pas</h2>
+      <p>Lancez la mise à jour à la main pour voir l’erreur, et vérifiez que les mises à jour automatiques sont actives&nbsp;:</p>
       <div class="code">
         <pre><code>ujust update
 ujust toggle-updates</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>Disque plein&nbsp;? Dans <strong>Outils Celenn OS</strong>, <em>Libérer de l'espace</em>, <em>Nettoyer</em> supprime ce qui ne sert plus&nbsp;: runtimes Flatpak, images de conteneurs inutilisées, anciens téléchargements Homebrew. Vos fichiers, vos conteneurs et leurs volumes restent. Dans un terminal&nbsp;: <code>ujust clean-system</code>.</p>
+      <p>Disque plein&nbsp;? Dans <strong>Outils Celenn OS</strong>, <em>Libérer de l’espace</em>, <em>Nettoyer</em> supprime ce qui ne sert plus&nbsp;: runtimes Flatpak, images de conteneurs inutilisées, anciens téléchargements Homebrew. Vos fichiers, vos conteneurs et leurs volumes restent. Dans un terminal&nbsp;: <code>ujust clean-system</code>.</p>
     </section>
 
     <section class="block">
       <h2 id="nvidia">Pilote NVIDIA</h2>
-      <p>Sur l'image NVIDIA avec Secure Boot actif, le pilote ne se charge qu'une fois sa clé enregistrée. Lancez la commande ci-dessous et redémarrez&nbsp;: un écran bleu propose <strong>Enroll MOK</strong>, avec le mot de passe <code>celennos</code> (tapé sur une disposition QWERTY).</p>
+      <p>Sur l’image NVIDIA avec Secure Boot actif, le pilote ne se charge qu’une fois sa clé enregistrée. Lancez la commande ci-dessous et redémarrez&nbsp;: un écran bleu propose <strong>Enroll MOK</strong>, avec le mot de passe <code>celennos</code> (tapé sur une disposition QWERTY).</p>
       <div class="code">
         <pre><code>ujust enroll-secure-boot-key</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>Vous avez installé l'image standard sur un ordinateur avec une carte NVIDIA&nbsp;? Passez à l'image NVIDIA&nbsp;:</p>
+      <p>Vous avez installé l’image standard sur un ordinateur avec une carte NVIDIA&nbsp;? Passez à l’image NVIDIA&nbsp;:</p>
       <div class="code">
         <pre><code>sudo bootc switch --enforce-container-sigpolicy ghcr.io/celenn-os/celenn-nvidia:stable</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -202,7 +202,7 @@ ujust toggle-updates</code></pre>
 
     <section class="block">
       <h2 id="report">Signaler un problème</h2>
-      <p>Lancez la première commande ci-dessous sur l'ordinateur concerné&nbsp;: elle rassemble les informations du système (aucune donnée personnelle) et ouvre un <a href="https://github.com/celenn-os/celenn/issues/new/choose">rapport de bug</a> déjà rempli avec elles (en anglais de préférence). Dites ce que vous avez fait et ce qui s'est passé. Si le problème est apparu au démarrage précédent, ajoutez les erreurs qu'il a enregistrées (seconde commande). Les questions vont dans les <a href="https://github.com/celenn-os/celenn/discussions">Discussions</a>.</p>
+      <p>Lancez la première commande ci-dessous sur l’ordinateur concerné&nbsp;: elle rassemble les informations du système (aucune donnée personnelle) et ouvre un <a href="https://github.com/celenn-os/celenn/issues/new/choose">rapport de bug</a> déjà rempli avec elles (en anglais de préférence). Dites ce que vous avez fait et ce qui s’est passé. Si le problème est apparu au démarrage précédent, ajoutez les erreurs qu’il a enregistrées (seconde commande). Les questions vont dans les <a href="https://github.com/celenn-os/celenn/discussions">Discussions</a>.</p>
       <div class="code">
         <pre><code>ujust report-bug
 sudo journalctl -b -1 -p err --no-pager</code></pre>
@@ -222,14 +222,14 @@ sudo journalctl -b -1 -p err --no-pager</code></pre>
         <h2 id="footer-discover">Découvrir</h2>
         <ul>
           <li><a href="../../why/">Pourquoi Celenn OS ?</a></li>
-          <li><a href="../../screenshots/">Captures d'écran</a></li>
+          <li><a href="../../screenshots/">Captures d’écran</a></li>
           <li><a href="../../#download">Télécharger</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Aide</h2>
         <ul>
-          <li><a href="../../install/">Guide d'installation</a></li>
+          <li><a href="../../install/">Guide d’installation</a></li>
           <li><a href="../../docs/">Documentation</a></li>
           <li><a href="../../docs/troubleshooting/">Dépannage</a></li>
           <li><a href="../../#faq">Questions fréquentes</a></li>

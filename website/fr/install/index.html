@@ -69,7 +69,7 @@
   <main id="main" class="docs" data-pagefind-body>
     <section class="block">
       <h1>Installer Celenn OS, pas à pas</h1>
-      <p>Comptez une demi-heure. Vous pouvez d'abord essayer Celenn OS depuis la clé USB&nbsp;: rien ne change sur l'ordinateur tant que vous ne lancez pas l'installation.</p>
+      <p>Comptez une demi-heure. Vous pouvez d’abord essayer Celenn OS depuis la clé USB&nbsp;: rien ne change sur l’ordinateur tant que vous ne lancez pas l’installation.</p>
       <div class="needs">
         <div><strong>Clé USB de 8 Go</strong>elle sera effacée</div>
         <div><strong>64 Go de disque</strong>128 Go conseillés</div>
@@ -88,20 +88,20 @@
         <li id="usb"><h2>Créez la clé USB</h2>
           <p>Installez <a href="https://fedoraproject.org/workstation/download">Fedora Media Writer</a> (Windows ou Mac), choisissez <em>Sélectionner un fichier .iso</em>, puis votre clé, puis <em>Écrire</em>.</p></li>
         <li id="boot"><h2>Démarrez sur la clé</h2>
-          <p>Clé branchée, allumez l'ordinateur en appuyant plusieurs fois sur la touche de votre marque, puis choisissez la clé USB.</p>
+          <p>Clé branchée, allumez l’ordinateur en appuyant plusieurs fois sur la touche de votre marque, puis choisissez la clé USB.</p>
           <table class="keys"><thead><tr><th>Marque</th><th>Touche</th></tr></thead><tbody><tr><td>Acer, Dell, Lenovo</td><td><kbd>F12</kbd></td></tr><tr><td>HP</td><td><kbd>F9</kbd> / <kbd>Échap</kbd></td></tr><tr><td>ASUS</td><td><kbd>F8</kbd> / <kbd>Échap</kbd></td></tr><tr><td>MSI</td><td><kbd>F11</kbd></td></tr><tr><td>Autre</td><td><kbd>F12</kbd>, <kbd>F11</kbd> / <kbd>Échap</kbd></td></tr></tbody></table>
           <p class="note">Ça ne marche pas&nbsp;? Depuis Windows&nbsp;: <em>Paramètres → Système → Récupération → Démarrage avancé → Redémarrer maintenant</em>, puis <em>Utiliser un périphérique</em>.</p></li>
         <li id="try"><h2>Essayez, puis installez</h2>
-          <p>Le bureau Celenn OS démarre depuis la clé. Vérifiez le Wi-Fi, le son et l'écran. Quand tout va bien, ouvrez <strong>Install Celenn OS</strong> sur le bureau.</p></li>
+          <p>Le bureau Celenn OS démarre depuis la clé. Vérifiez le Wi-Fi, le son et l’écran. Quand tout va bien, ouvrez <strong>Install Celenn OS</strong> sur le bureau.</p></li>
         <li id="disk"><h2>Choisissez où installer</h2>
           <div class="choices">
-            <div><h3>Remplacer Windows <span class="tag">le plus simple</span></h3><p>Dans l'installateur, choisissez le disque et demandez à libérer de l'espace en supprimant tout. Tout le disque est effacé.</p></div>
-            <div><h3>À côté de Windows</h3><p>D'abord, dans Windows, ouvrez <em>Gestion des disques</em>, faites un clic droit sur la partition Windows et <em>Réduire le volume</em> pour libérer au moins 64 Go. L'installateur utilise ensuite cet espace libre tout seul.</p></div>
+            <div><h3>Remplacer Windows <span class="tag">le plus simple</span></h3><p>Dans l’installateur, choisissez le disque et demandez à libérer de l’espace en supprimant tout. Tout le disque est effacé.</p></div>
+            <div><h3>À côté de Windows</h3><p>D’abord, dans Windows, ouvrez <em>Gestion des disques</em>, faites un clic droit sur la partition Windows et <em>Réduire le volume</em> pour libérer au moins 64 Go. L’installateur utilise ensuite cet espace libre tout seul.</p></div>
           </div>
-          <p class="note warn">Avant de réduire, coupez le chiffrement dans Windows&nbsp;: <em>Paramètres → Confidentialité et sécurité → Chiffrement de l'appareil</em> (ou BitLocker). Un second disque rien que pour Celenn OS est encore plus simple.</p>
-          <p>Celenn OS démarre ensuite par défaut. Pour lancer Windows, utilisez la touche de l'étape 4 et choisissez <em>Windows Boot Manager</em>.</p></li>
+          <p class="note warn">Avant de réduire, coupez le chiffrement dans Windows&nbsp;: <em>Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil</em> (ou BitLocker). Un second disque rien que pour Celenn OS est encore plus simple.</p>
+          <p>Celenn OS démarre ensuite par défaut. Pour lancer Windows, utilisez la touche de l’étape 4 et choisissez <em>Windows Boot Manager</em>.</p></li>
         <li id="nvidia"><h2>Version NVIDIA&nbsp;: un écran bleu au premier redémarrage</h2>
-          <p>C'est normal et n'arrive qu'une fois, quand Secure Boot est activé&nbsp;: il autorise le pilote NVIDIA. Utilisez les flèches et <kbd>Entrée</kbd>. Le mot de passe est <code>celennos</code> (le clavier peut être en QWERTY).</p>
+          <p>C’est normal et n’arrive qu’une fois, quand Secure Boot est activé&nbsp;: il autorise le pilote NVIDIA. Utilisez les flèches et <kbd>Entrée</kbd>. Le mot de passe est <code>celennos</code> (le clavier peut être en QWERTY).</p>
           <div class="mok">
           <figure><svg viewBox="0 0 320 200" role="img" aria-label="Enroll key from disk"><rect width="320" height="200" fill="#0000a8"/><rect x="40" y="30" width="240" height="140" fill="#a8a8a8"/><text x="160" y="50" text-anchor="middle">Perform MOK management</text><text x="160" y="85" text-anchor="middle">Continue boot</text><rect x="60" y="94" width="200" height="18" fill="#000"/><text x="160" y="107" text-anchor="middle" fill="#fff">Enroll MOK</text><text x="160" y="129" text-anchor="middle">Enroll key from disk</text></svg><figcaption>1. <em>Enroll MOK</em></figcaption></figure>
           <figure><svg viewBox="0 0 320 200" role="img" aria-label="Continue"><rect width="320" height="200" fill="#0000a8"/><rect x="40" y="30" width="240" height="140" fill="#a8a8a8"/><text x="160" y="50" text-anchor="middle">Enroll MOK</text><text x="160" y="85" text-anchor="middle">View key 0</text><rect x="60" y="94" width="200" height="18" fill="#000"/><text x="160" y="107" text-anchor="middle" fill="#fff">Continue</text></svg><figcaption>2. <em>Continue</em></figcaption></figure>
@@ -110,7 +110,7 @@
           </div>
           <p>Raté&nbsp;? Le bureau démarre quand même, sans le pilote NVIDIA. Ouvrez <strong>Outils Celenn OS → Pilote NVIDIA</strong>, cliquez sur <em>Autoriser</em>, puis redémarrez.</p></li>
         <li id="welcome"><h2>Bienvenue</h2>
-          <p>Après le redémarrage, créez votre compte. La visite guidée s'ouvre ensuite et vous aide à tout régler.</p></li>
+          <p>Après le redémarrage, créez votre compte. La visite guidée s’ouvre ensuite et vous aide à tout régler.</p></li>
       </ol>
     </section>
   </main>
@@ -125,14 +125,14 @@
         <h2 id="footer-discover">Découvrir</h2>
         <ul>
           <li><a href="../why/">Pourquoi Celenn OS ?</a></li>
-          <li><a href="../screenshots/">Captures d'écran</a></li>
+          <li><a href="../screenshots/">Captures d’écran</a></li>
           <li><a href="../#download">Télécharger</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Aide</h2>
         <ul>
-          <li><a href="../install/">Guide d'installation</a></li>
+          <li><a href="../install/">Guide d’installation</a></li>
           <li><a href="../docs/">Documentation</a></li>
           <li><a href="../docs/troubleshooting/">Dépannage</a></li>
           <li><a href="../#faq">Questions fréquentes</a></li>

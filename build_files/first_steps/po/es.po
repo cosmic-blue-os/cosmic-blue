@@ -69,7 +69,7 @@ msgid "Is this computer ready?"
 msgstr "¿Está listo este ordenador?"
 
 msgid "Celenn OS runs from the USB drive, without touching your disk. Here is what it found."
-msgstr "Celenn OS funciona desde la memoria USB, sin tocar su disco. Esto es lo que ha encontrado."
+msgstr "Celenn OS funciona desde la memoria USB, sin tocar tu disco. Esto es lo que ha encontrado."
 
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
@@ -81,7 +81,7 @@ msgid "Wi-Fi works."
 msgstr "El Wi-Fi funciona."
 
 msgid "{} has no free driver. Plug in a network cable, or a small USB Wi-Fi adapter: everything else works."
-msgstr "{} no tiene controlador libre. Conecte un cable de red o un pequeño adaptador Wi-Fi USB: todo lo demás funciona."
+msgstr "{} no tiene controlador libre. Conecta un cable de red o un pequeño adaptador Wi-Fi USB: todo lo demás funciona."
 
 msgid "{} was found but does not start. Its driver may need firmware that is missing."
 msgstr "Se ha encontrado {}, pero no arranca. Puede que su controlador necesite un firmware que falta."
@@ -108,7 +108,7 @@ msgid "{}: the NVIDIA driver is ready."
 msgstr "{}: el controlador de NVIDIA está listo."
 
 msgid "{}. For games, switch to the NVIDIA edition after installing: one click in Celenn OS Tools → NVIDIA driver."
-msgstr "{}. Para juegos, cambie a la edición NVIDIA después de instalar: un clic en Herramientas de Celenn OS → Controlador NVIDIA."
+msgstr "{}. Para juegos, cambia a la edición NVIDIA después de instalar: un clic en Herramientas de Celenn OS → Controlador NVIDIA."
 
 msgid "{}: no driver, the picture may be slow."
 msgstr "{}: sin controlador, la imagen puede ir lenta."
@@ -129,7 +129,7 @@ msgid "Disk"
 msgstr "Disco"
 
 msgid "No internal disk found. If this computer has one, its firmware may hide it: in its settings, set the storage mode to AHCI instead of RAID or Intel RST."
-msgstr "No se ha encontrado ningún disco interno. Si este ordenador tiene uno, puede que el firmware lo oculte: en su configuración, ponga el modo de almacenamiento en AHCI en lugar de RAID o Intel RST."
+msgstr "No se ha encontrado ningún disco interno. Si este ordenador tiene uno, puede que el firmware lo oculte: en su configuración, pon el modo de almacenamiento en AHCI en lugar de RAID o Intel RST."
 
 msgid "{} GB disk: 64 GB is the minimum."
 msgstr "Disco de {} GB: el mínimo es 64 GB."
@@ -141,10 +141,10 @@ msgid "{} GB disk."
 msgstr "Disco de {} GB."
 
 msgid "{} GB disk. Windows is on it: you can keep both."
-msgstr "Disco de {} GB. Windows está en él: puede conservar los dos."
+msgstr "Disco de {} GB. Windows está en él: puedes conservar los dos."
 
 msgid "{} GB disk. Windows is on it, encrypted with BitLocker: before installing, turn BitLocker off in Windows, or at least write down its recovery key."
-msgstr "Disco de {} GB. Windows está en él, cifrado con BitLocker: antes de instalar, desactive BitLocker en Windows o, al menos, anote su clave de recuperación."
+msgstr "Disco de {} GB. Windows está en él, cifrado con BitLocker: antes de instalar, desactiva BitLocker en Windows o, al menos, anota su clave de recuperación."
 
 msgid "Could not be checked."
 msgstr "No se ha podido comprobar."
@@ -165,7 +165,7 @@ msgid "Copied"
 msgstr "Copiado"
 
 msgid "A printer or a game controller: plug it in to check it."
-msgstr "Una impresora o un mando: conéctelo para comprobarlo."
+msgstr "Una impresora o un mando: conéctalo para comprobarlo."
 
 msgid "One thing to look at before installing"
 msgstr "Una cosa que revisar antes de instalar"
@@ -303,7 +303,7 @@ msgid "Downloading the NVIDIA edition… This can take a while."
 msgstr "Descargando la edición NVIDIA… Puede tardar un rato."
 
 msgid "The NVIDIA edition starts at the next restart."
-msgstr "La edición NVIDIA se inicia en el siguiente reinicio."
+msgstr "La edición NVIDIA arranca en el próximo reinicio."
 
 msgid "At the restart, a blue screen asks to enroll a key: choose Enroll MOK, Continue, Yes, then type the password celennos (the keyboard is QWERTY there)."
 msgstr "Al reiniciar, una pantalla azul pide registrar una clave: elige Enroll MOK, Continue, Yes y escribe la contraseña celennos (allí el teclado es QWERTY)."
@@ -666,13 +666,13 @@ msgid "“{}” did not work"
 msgstr "«{}» no ha funcionado"
 
 msgid "No internet connection. Connect to a network, then try again. Nothing was changed."
-msgstr "No hay conexión a Internet. Conéctese a una red y vuelva a intentarlo. No se ha cambiado nada."
+msgstr "No hay conexión a Internet. Conéctate a una red y vuelve a intentarlo. No se ha cambiado nada."
 
 msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try again."
 msgstr "El disco está lleno ({} libres). Libera espacio con Herramientas de Celenn OS y vuelve a intentarlo."
 
 msgid "The server does not answer. Try again in a few minutes."
-msgstr "El servidor no responde. Vuelva a intentarlo en unos minutos."
+msgstr "El servidor no responde. Vuelve a intentarlo en unos minutos."
 
 msgid "Something unexpected went wrong. Nothing was changed."
 msgstr "Algo inesperado ha fallado. No se ha cambiado nada."
@@ -687,7 +687,7 @@ msgid "Technical details"
 msgstr "Detalles técnicos"
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "El informe se abre en el navegador, ya rellenado: la versión de Celenn OS, el hardware y este error. Sin archivos ni datos personales. Lo revisa antes de enviarlo; escriba en su idioma. Para enviarlo hace falta una cuenta de GitHub."
+msgstr "El informe se abre en el navegador, ya rellenado: la versión de Celenn OS, el hardware y este error. Sin archivos ni datos personales. Lo revisas antes de enviarlo; escribe en tu idioma. Para enviarlo hace falta una cuenta de GitHub."
 
 msgid "Open the report"
 msgstr "Abrir el informe"
@@ -756,7 +756,7 @@ msgid "From another Celenn OS computer"
 msgstr "Desde otro ordenador con Celenn OS"
 
 msgid "Your settings and the list of your apps, with the file saved there in Celenn OS Tools → Change computers."
-msgstr "Sus ajustes y la lista de sus aplicaciones, con el archivo guardado allí en Herramientas de Celenn OS → Cambiar de ordenador."
+msgstr "Tus ajustes y la lista de tus aplicaciones, con el archivo guardado allí en Herramientas de Celenn OS → Cambiar de ordenador."
 
 msgid "Restore…"
 msgstr "Recuperar…"
@@ -801,7 +801,7 @@ msgid "Bitwarden, Secrets, KeePassXC"
 msgstr "Bitwarden, Secrets, KeePassXC"
 
 msgid "Your password manager is ready."
-msgstr "Su gestor de contraseñas está listo."
+msgstr "Tu gestor de contraseñas está listo."
 
 msgid "Bitwarden: a free account, on this computer, your phone and in Firefox. Secrets and KeePassXC: an encrypted file, no account."
 msgstr "Bitwarden: una cuenta gratuita, en este ordenador, tu teléfono y en Firefox. Secrets y KeePassXC: un archivo cifrado, sin cuenta."
@@ -840,7 +840,7 @@ msgid "Steam, Heroic, Lutris, Discord…"
 msgstr "Steam, Heroic, Lutris, Discord…"
 
 msgid "Your game apps are ready."
-msgstr "Sus aplicaciones de juegos están listas."
+msgstr "Tus aplicaciones de juegos están listas."
 
 msgid "Removing an app keeps your games and saves."
 msgstr "Quitar una aplicación conserva tus juegos y partidas guardadas."

@@ -167,6 +167,22 @@ for page in "${all_pages[@]}"; do
 done
 (( indent_errors == 0 )) || exit 1
 
+# French and Italian text uses the typographic apostrophe (l’écran), like
+# the apps (tests/check-translations.py); commands keep the straight one
+apostrophe_errors=0
+for page in "${all_pages[@]}"; do
+  [[ "${page}" == fr/* || "${page}" == it/* ]] || continue
+  if ! perl -CSD -0ne '
+      s/<(pre|code|script)\b.*?<\/\1>//gs;
+      my $bad = 0;
+      while (/(.{0,30}\p{L}\x27[\p{L}\d].{0,30})/g) { print STDERR "  $1\n"; $bad = 1 }
+      exit $bad;' "${root}/website/${page}"; then
+    echo "::error file=website/${page}::straight apostrophe in the text (use ’)"
+    apostrophe_errors=1
+  fi
+done
+(( apostrophe_errors == 0 )) || exit 1
+
 for page in "${all_pages[@]}"; do
   mkdir -p "$(dirname "${out}/${page}")"
   if [[ -n "${ISO_BASE_URL:-}" ]]; then

@@ -6,7 +6,10 @@ makes sure every template text is translated in every language; it only
 sees the lists of texts the programs keep (TEXTS), which this check
 completes. A text is also defined only once in each template and
 translation: gettext's own tools (msgfmt, translation editors) refuse a
-file with a text twice. Run by tests/lint.sh."""
+file with a text twice. A text that two programs share reads the same in
+both (the same button, the same name), French and Italian use the
+typographic apostrophe (l’écran), and no space comes before "…". Run by
+tests/lint.sh."""
 
 import pathlib
 import re
@@ -26,6 +29,25 @@ MOD = re.compile(
     r'^\s*(?:#\[path\s*=\s*"([^"]+)"\]\s*)?(?:pub(?:\([^)]*\))?\s+)?mod\s+(\w+)\s*;', re.M
 )
 MSGID = re.compile(r'^msgid "((?:[^"\\]|\\.)*)"\n((?:"(?:[^"\\]|\\.)*"\n)*)', re.M)
+ENTRY = re.compile(
+    r'^msgid "((?:[^"\\]|\\.)*)"\n((?:"(?:[^"\\]|\\.)*"\n)*)'
+    r'msgstr "((?:[^"\\]|\\.)*)"\n((?:"(?:[^"\\]|\\.)*"\n)*)',
+    re.M,
+)
+# The catalogs of one language, by program
+CATALOGS = {"tour": "po/{}.po", "tools": "po/tools/{}.po", "parental": "po/parental/{}.po"}
+# Shared texts that may read differently in one program, on purpose:
+# (text, language): the program whose translation differs
+SHARED_EXCEPTIONS = {
+    # The tour's "Back" goes to the previous step of a wizard (Précédent);
+    # the other apps' goes back to their main page (Retour)
+    ("Back", "fr"): "tour",
+    # The tour invites to try (imperative); the Tools menus name an action
+    # (infinitive), like every other entry there
+    ("Lock the screen", "it"): "tour",
+    ("Take a screenshot", "it"): "tour",
+}
+STRAIGHT_APOSTROPHE = re.compile(r"(?<=[^\W\d_])'(?=[^\W_])")
 
 
 def unescape(text):
@@ -51,6 +73,18 @@ def template(path):
     return set(msgids(path))
 
 
+def translations(path):
+    """{text: translation} of a .po file, its header left out"""
+    found = {}
+    for match in ENTRY.finditer(path.read_text()):
+        text = unescape(match.group(1) + "".join(re.findall(r'"((?:[^"\\]|\\.)*)"', match.group(2))))
+        if text:
+            found[text] = unescape(
+                match.group(3) + "".join(re.findall(r'"((?:[^"\\]|\\.)*)"', match.group(4)))
+            )
+    return found
+
+
 errors = 0
 for po in sorted(CRATE.glob("po/**/*.po*")):
     seen = set()
@@ -59,6 +93,33 @@ for po in sorted(CRATE.glob("po/**/*.po*")):
             print(f"{po.relative_to(CRATE)}: defined twice: {text!r}")
             errors += 1
         seen.add(text)
+languages = sorted(po.stem for po in CRATE.glob("po/*.po"))
+for lang in languages:
+    catalogs = {
+        name: translations(CRATE / pattern.format(lang))
+        for name, pattern in CATALOGS.items()
+        if (CRATE / pattern.format(lang)).exists()
+    }
+    for name, found in catalogs.items():
+        where = CATALOGS[name].format(lang)
+        for text, translation in found.items():
+            if lang in ("fr", "it") and STRAIGHT_APOSTROPHE.search(translation):
+                print(f"{where}: straight apostrophe, use ’: {translation!r}")
+                errors += 1
+            if " …" in translation:
+                print(f"{where}: space before …: {translation!r}")
+                errors += 1
+    shared = set()
+    for found in catalogs.values():
+        shared |= {text for text in found if sum(text in other for other in catalogs.values()) > 1}
+    for text in sorted(shared):
+        apart = SHARED_EXCEPTIONS.get((text, lang))
+        versions = {
+            name: found[text] for name, found in catalogs.items() if text in found and name != apart
+        }
+        if len(set(versions.values())) > 1:
+            print(f"{lang}: {text!r} reads differently: {versions}")
+            errors += 1
 for root, pot in PROGRAMS.items():
     known = template(CRATE / pot)
     # The program's modules, and theirs (src/ is flat: a module's own

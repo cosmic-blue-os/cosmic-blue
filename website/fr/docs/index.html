@@ -96,7 +96,7 @@
         </ul>
         <h2>Aide</h2>
         <ul>
-          <li><a href="#help">Obtenir de l'aide</a></li>
+          <li><a href="#help">Obtenir de l’aide</a></li>
           <li><a href="troubleshooting/">Dépannage</a></li>
         </ul>
       </nav>
@@ -104,52 +104,52 @@
     <div class="doc-body" data-pagefind-body>
     <section class="block">
       <h1>Documentation</h1>
-      <p>Ce qu'il faut savoir pour utiliser Celenn OS au quotidien. Celenn OS est une image atomique indépendante, construite sur la base Universal Blue&nbsp;: le système est en lecture seule et mis à jour d'un bloc, vos applications et vos fichiers vivent à part.</p>
+      <p>Ce qu’il faut savoir pour utiliser Celenn OS au quotidien. Celenn OS est une image atomique indépendante, construite sur la base Universal Blue&nbsp;: le système est en lecture seule et mis à jour d’un bloc, vos applications et vos fichiers vivent à part.</p>
     </section>
 
     <section class="block">
       <h2 id="updates">Mises à jour et retour en arrière</h2>
-      <p>L'application <strong>Mises à jour</strong> montre la version utilisée. Un souci après une mise à jour&nbsp;? <em>Revenir en arrière</em>, dans les Outils Celenn OS, repasse à la version précédente au prochain redémarrage, sans toucher à vos fichiers, et la version quittée n'est pas réinstallée. <em>Recevoir les nouveautés en avance</em>, dans <em>Pour les initiés…</em>, donne une mise à jour par jour au lieu d'une mise à jour testée par semaine.</p>
-      <p>Le système, les applications Flatpak, les paquets Homebrew et les AppImages ajoutées avec Gear Lever se mettent à jour seuls en arrière-plan. Une mise à jour du système s'applique au prochain démarrage. Pour mettre à jour tout de suite, ou couper les mises à jour automatiques&nbsp;:</p>
+      <p>L’application <strong>Mises à jour</strong> montre la version utilisée. Un souci après une mise à jour&nbsp;? <em>Revenir en arrière</em>, dans les Outils Celenn OS, repasse à la version précédente au prochain redémarrage, sans toucher à vos fichiers, et la version quittée n’est pas réinstallée. <em>Recevoir les nouveautés en avance</em>, dans <em>Pour les initiés…</em>, donne une mise à jour par jour au lieu d’une mise à jour testée par semaine.</p>
+      <p>Le système, les applications Flatpak, les paquets Homebrew et les AppImages ajoutées avec Gear Lever se mettent à jour seuls en arrière-plan. Une mise à jour du système s’applique au prochain démarrage. Pour mettre à jour tout de suite, ou couper les mises à jour automatiques&nbsp;:</p>
       <div class="code">
         <pre><code>ujust update           # tout mettre à jour maintenant
 ujust toggle-updates   # activer ou couper les mises à jour automatiques</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>Si une mise à jour casse quelque chose, revenez à la version précédente. Elle reste installée jusqu'à la mise à jour suivante, donc cela marche sans réseau&nbsp;:</p>
+      <p>Si une mise à jour casse quelque chose, revenez à la version précédente. Elle reste installée jusqu’à la mise à jour suivante, donc cela marche sans réseau&nbsp;:</p>
       <div class="code">
         <pre><code>sudo bootc rollback    # utiliser la version précédente au prochain démarrage
 sudo systemctl reboot
 sudo bootc status      # voir la version actuelle et la précédente</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>L'ordinateur ne démarre plus, ou la version cassée revient sans cesse&nbsp;? Voir <a href="troubleshooting/">Dépannage</a>.</p>
+      <p>L’ordinateur ne démarre plus, ou la version cassée revient sans cesse&nbsp;? Voir <a href="troubleshooting/">Dépannage</a>.</p>
     </section>
 
     <section class="block">
       <h2 id="apps">Installer des logiciels</h2>
       <h3>Applications&nbsp;: COSMIC Store</h3>
-      <p>Les applications graphiques sont des Flatpak, installées depuis le <strong>COSMIC Store</strong>, qui affiche Flathub et les applications COSMIC. Elles se mettent à jour avec le système et n'y touchent pas.</p>
+      <p>Les applications graphiques sont des Flatpak, installées depuis le <strong>COSMIC Store</strong>, qui affiche Flathub et les applications COSMIC. Elles se mettent à jour avec le système et n’y touchent pas.</p>
       <h3>AppImages&nbsp;: Gear Lever</h3>
-      <p>Ouvrez une AppImage téléchargée&nbsp;: <strong>Gear Lever</strong> l'ajoute à la liste des applications et la tient à jour.</p>
+      <p>Ouvrez une AppImage téléchargée&nbsp;: <strong>Gear Lever</strong> l’ajoute à la liste des applications et la tient à jour.</p>
       <h3>Applis web</h3>
-      <p>WhatsApp, Netflix, Gmail ou tout autre site peuvent s'ouvrir dans leur propre fenêtre, avec leur icône dans la liste des applications, comme une application&nbsp;: Outils Celenn OS, <em>Applis web</em>. Elles utilisent Firefox, donc sa protection contre les pubs et le pistage et le contrôle parental s'appliquent. Connectez-vous une fois dans chacune. <em>Ajouter aussi au dock</em> garde son icône dans le dock.</p>
+      <p>WhatsApp, Netflix, Gmail ou tout autre site peuvent s’ouvrir dans leur propre fenêtre, avec leur icône dans la liste des applications, comme une application&nbsp;: Outils Celenn OS, <em>Applis web</em>. Elles utilisent Firefox, donc sa protection contre les pubs et le pistage et le contrôle parental s’appliquent. Connectez-vous une fois dans chacune. <em>Ajouter aussi au dock</em> garde son icône dans le dock.</p>
       <h3>Outils en ligne de commande&nbsp;: Homebrew</h3>
-      <p>Les outils en ligne de commande s'installent dans votre dossier personnel avec Homebrew&nbsp;:</p>
+      <p>Les outils en ligne de commande s’installent dans votre dossier personnel avec Homebrew&nbsp;:</p>
       <div class="code">
         <pre><code>brew search ripgrep
 brew install ripgrep</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <h3>Paquets d'autres distributions&nbsp;: Distrobox</h3>
-      <p>Besoin d'un paquet qui n'existe que pour une autre distribution&nbsp;? Distrobox le fait tourner dans un conteneur qui partage votre dossier personnel&nbsp;:</p>
+      <h3>Paquets d’autres distributions&nbsp;: Distrobox</h3>
+      <p>Besoin d’un paquet qui n’existe que pour une autre distribution&nbsp;? Distrobox le fait tourner dans un conteneur qui partage votre dossier personnel&nbsp;:</p>
       <div class="code">
         <pre><code>distrobox create --name arch --image archlinux:latest
 distrobox enter arch</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
       <h3>Outils de développement</h3>
-      <p>Le mode développeur ajoute Docker, Podman Desktop, VS Code et d'autres IDE, Lima et plus encore. Choisissez ce que vous voulez dans un menu&nbsp;:</p>
+      <p>Le mode développeur ajoute Docker, Podman Desktop, VS Code et d’autres IDE, Lima et plus encore. Choisissez ce que vous voulez dans un menu&nbsp;:</p>
       <div class="code">
         <pre><code>ujust install-dev-tools</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -158,7 +158,7 @@ distrobox enter arch</code></pre>
 
     <section class="block">
       <h2 id="alternatives">Vos logiciels Windows et Mac, ici</h2>
-      <p>Les programmes Windows (.exe) et Mac ne s'installent pas ici. Presque chacun a un équivalent gratuit, souvent déjà installé. Les autres sont dans le <strong>COSMIC Store</strong>&nbsp;: cherchez leur nom.</p>
+      <p>Les programmes Windows (.exe) et Mac ne s’installent pas ici. Presque chacun a un équivalent gratuit, souvent déjà installé. Les autres sont dans le <strong>COSMIC Store</strong>&nbsp;: cherchez leur nom.</p>
       <div class="table">
         <table>
           <thead><tr><th>Pour</th><th>Sous Windows ou Mac</th><th>Sur Celenn OS</th><th>Où</th></tr></thead>
@@ -166,7 +166,7 @@ distrobox enter arch</code></pre>
           <tr><td>Naviguer</td><td>Edge, Chrome, Safari</td><td><strong>Firefox</strong></td><td><span class="here">Déjà installé</span> · Chrome&nbsp;: COSMIC Store</td></tr>
           <tr><td>E-mails, agenda</td><td>Outlook, Mail</td><td><strong>Thunderbird</strong></td><td><span class="here">Déjà installé</span></td></tr>
           <tr><td>Bureautique</td><td>Word, Excel, PowerPoint</td><td><strong>LibreOffice</strong></td><td>Visite guidée ou Outils Celenn OS, <em>Bureautique</em></td></tr>
-          <tr><td>Photos</td><td>Photos, Paint</td><td><strong>Visionneuse d'images, Pinta</strong></td><td><span class="here">Déjà installé</span></td></tr>
+          <tr><td>Photos</td><td>Photos, Paint</td><td><strong>Visionneuse d’images, Pinta</strong></td><td><span class="here">Déjà installé</span></td></tr>
           <tr><td>Retouche, dessin</td><td>Photoshop, Illustrator</td><td><strong>GIMP, Inkscape, Krita</strong></td><td>Visite guidée ou Outils Celenn OS, <em>Graphisme et photo</em></td></tr>
           <tr><td>Vidéo</td><td>Premiere, iMovie, OBS</td><td><strong>Kdenlive, OBS Studio</strong></td><td>Visite guidée ou Outils Celenn OS, <em>Vidéo et streaming</em></td></tr>
           <tr><td>Musique, vidéos</td><td>Spotify, VLC</td><td><strong>Spotify, VLC, COSMIC Player</strong></td><td>COSMIC Store · COSMIC Player&nbsp;: <span class="here">déjà installé</span></td></tr>
@@ -187,17 +187,17 @@ distrobox enter arch</code></pre>
     <section class="block">
       <h2 id="hardware">Imprimantes, firmware, batterie</h2>
       <h3>Imprimantes et scanners</h3>
-      <p>La plupart des imprimantes réseau et USB fonctionnent tout de suite, sans pilote. Pour en ajouter une à la main, ouvrez <strong>Paramètres d'impression</strong>&nbsp;: les pilotes HP, Epson, Brother, Canon et d'autres sont installés. <strong>Numériseur de documents</strong> numérise avec les scanners réseau et USB.</p>
+      <p>La plupart des imprimantes réseau et USB fonctionnent tout de suite, sans pilote. Pour en ajouter une à la main, ouvrez <strong>Paramètres d’impression</strong>&nbsp;: les pilotes HP, Epson, Brother, Canon et d’autres sont installés. <strong>Numériseur de documents</strong> numérise avec les scanners réseau et USB.</p>
       <h3>Autres disques</h3>
-      <p>Un deuxième disque interne, ou le D: de Windows, peut s'ouvrir à chaque démarrage&nbsp;: dans les <strong>Outils Celenn OS</strong>, <em>Autres disques</em>. Il est alors toujours au même endroit, <code>/mnt/&lt;son nom&gt;</code>, dans Fichiers et pour Steam, qui peut y garder une bibliothèque. Un disque au format Windows (NTFS) ne s'ouvre que si Windows a été complètement éteint&nbsp;: désactivez le démarrage rapide de Windows. Le disque sur lequel tourne Windows et les disques chiffrés ne sont pas proposés.</p>
+      <p>Un deuxième disque interne, ou le D: de Windows, peut s’ouvrir à chaque démarrage&nbsp;: dans les <strong>Outils Celenn OS</strong>, <em>Autres disques</em>. Il est alors toujours au même endroit, <code>/mnt/&lt;son nom&gt;</code>, dans Fichiers et pour Steam, qui peut y garder une bibliothèque. Un disque au format Windows (NTFS) ne s’ouvre que si Windows a été complètement éteint&nbsp;: désactivez le démarrage rapide de Windows. Le disque sur lequel tourne Windows et les disques chiffrés ne sont pas proposés.</p>
       <h3>Mises à jour du firmware</h3>
-      <p>L'application <strong>Micrologiciel</strong> met à jour le firmware de l'ordinateur et de ses périphériques (BIOS/UEFI, SSD, station d'accueil…), quand leur fabricant le publie sur fwupd.org. Ou depuis le terminal&nbsp;:</p>
+      <p>L’application <strong>Micrologiciel</strong> met à jour le firmware de l’ordinateur et de ses périphériques (BIOS/UEFI, SSD, station d’accueil…), quand leur fabricant le publie sur fwupd.org. Ou depuis le terminal&nbsp;:</p>
       <div class="code">
         <pre><code>ujust update-firmware</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
       <h3>Batterie des portables</h3>
-      <p>Une batterie souvent branchée dure plus longtemps si elle n'est pas toujours pleine. Sur les portables qui le permettent, ceci arrête la charge à 80&nbsp;%&nbsp;:</p>
+      <p>Une batterie souvent branchée dure plus longtemps si elle n’est pas toujours pleine. Sur les portables qui le permettent, ceci arrête la charge à 80&nbsp;%&nbsp;:</p>
       <div class="code">
         <pre><code>ujust toggle-battery-limit</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -206,14 +206,15 @@ distrobox enter arch</code></pre>
 
     <section class="block">
       <h2 id="tools">Outils Celenn OS</h2>
-      <p><strong>Outils Celenn OS</strong> est une boîte à outils&nbsp;: chaque tuile ouvre un outil. <em>Au quotidien</em>&nbsp;: mettre à jour, installer des applications, applis web, libérer de l'espace, protéger vos fichiers, imprimer, changer d'ordinateur. <em>Mon ordinateur</em>&nbsp;: ce qu'il y a dedans, la batterie, les autres disques, l'apparence, le pilote NVIDIA, les polices Microsoft. <em>Quand ça ne va pas</em>&nbsp;: revenir en arrière, réparer, obtenir de l'aide. Une ligne en haut signale ce qui demande votre attention, et <em>Pour les initiés…</em> réunit le canal de mises à jour, les anciennes versions, le firmware et les machines virtuelles. Chaque outil montre la commande <code>ujust</code> correspondante, et son bouton <strong>?</strong> ouvre sa partie de ce guide. Les changements du système demandent le mot de passe d'un administrateur.</p>
+      <p><strong>Outils Celenn OS</strong> est une boîte à outils&nbsp;: chaque tuile ouvre un outil. <em>Au quotidien</em>&nbsp;: mettre à jour, installer des applications, applis web, libérer de l’espace, protéger vos fichiers, imprimer, changer d’ordinateur. <em>Mon ordinateur</em>&nbsp;: ce qu’il y a dedans, la batterie, les autres disques, l’apparence, le pilote NVIDIA, les polices Microsoft. <em>Quand ça ne va pas</em>&nbsp;: revenir en arrière, réparer, obtenir de l’aide. Une ligne en haut signale ce qui demande votre attention, et <em>Pour les initiés…</em> réunit le canal de mises à jour, les anciennes versions, le firmware et les machines virtuelles. Chaque outil montre la commande <code>ujust</code> correspondante, et son bouton <strong>?</strong> ouvre sa partie de ce guide. Les changements du système demandent le mot de passe d’un administrateur.</p>
+      <p>De n’importe où, <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Espace</kbd> ouvre le <strong>Menu rapide</strong>&nbsp;: faire une capture d’écran, voir les raccourcis clavier, verrouiller l’écran, ou taper ce que vous voulez faire pour trouver le bon outil. Appuyez à nouveau sur le raccourci, ou sur <kbd>Échap</kbd>, pour le fermer.</p>
     </section>
 
     <section class="block">
       <h2 id="parental">Contrôle parental</h2>
-      <p>L'app <strong>Contrôle parental</strong> crée des comptes enfants et règle pour chacun un temps d'écran par jour (semaine et week-end), des heures de coucher et un filtre web familial. Seul le temps passé devant l'écran compte. L'enfant est prévenu 10, 5 et 1 minute avant la fermeture de la session, et peut demander plus de temps, qu'un parent accorde avec son mot de passe.</p>
-      <h3>Ce qu'il ne peut pas empêcher</h3>
-      <p>Le filtre web bloque les contenus pour adultes, les jeux d'argent et les sites malveillants dans tous les navigateurs du compte enfant, et impose la recherche sécurisée. Il refuse aussi les contournements habituels : autres serveurs DNS, DNS chiffré vers des résolveurs publics, et connexions VPN que l'enfant ajouterait. Il ne peut pas tout bloquer : une app qui fait passer son trafic pour de la navigation web ordinaire, comme Tor Browser ou une extension VPN de navigateur, passe à côté, et quelqu'un qui a l'ordinateur en main peut démarrer un autre système depuis une clé USB. Gardez un œil sur les apps qu'un enfant installe.</p>
+      <p>L’app <strong>Contrôle parental</strong> crée des comptes enfants et règle pour chacun un temps d’écran par jour (semaine et week-end), des heures de coucher et un filtre web familial. Seul le temps passé devant l’écran compte. L’enfant est prévenu 10, 5 et 1 minute avant la fermeture de la session, et peut demander plus de temps, qu’un parent accorde avec son mot de passe.</p>
+      <h3>Ce qu’il ne peut pas empêcher</h3>
+      <p>Le filtre web bloque les contenus pour adultes, les jeux d’argent et les sites malveillants dans tous les navigateurs du compte enfant, et impose la recherche sécurisée. Il refuse aussi les contournements habituels : autres serveurs DNS, DNS chiffré vers des résolveurs publics, et connexions VPN que l’enfant ajouterait. Il ne peut pas tout bloquer : une app qui fait passer son trafic pour de la navigation web ordinaire, comme Tor Browser ou une extension VPN de navigateur, passe à côté, et quelqu’un qui a l’ordinateur en main peut démarrer un autre système depuis une clé USB. Gardez un œil sur les apps qu’un enfant installe.</p>
     </section>
 
     <section class="block">
@@ -225,9 +226,9 @@ distrobox enter arch</code></pre>
         <dt><code>ujust toggle-updates</code></dt>
         <dd>Activer ou couper les mises à jour automatiques.</dd>
         <dt><code>ujust update-firmware</code></dt>
-        <dd>Installer les mises à jour du firmware (BIOS/UEFI, SSD, station d'accueil…).</dd>
+        <dd>Installer les mises à jour du firmware (BIOS/UEFI, SSD, station d’accueil…).</dd>
         <dt><code>ujust switch-channel</code></dt>
-        <dd>Passer d'un canal d'images à l'autre&nbsp;: <code>stable</code> (hebdomadaire, par défaut), <code>testing</code> (quotidien) ou <code>dev</code> (chaque changement fusionné).</dd>
+        <dd>Passer d’un canal d’images à l’autre&nbsp;: <code>stable</code> (hebdomadaire, par défaut), <code>testing</code> (quotidien) ou <code>dev</code> (chaque changement fusionné).</dd>
         <dt><code>ujust install-dev-tools</code></dt>
         <dd>Outils de développement, au choix dans un menu&nbsp;: Docker, VS Code, Podman Desktop…</dd>
         <dt><code>ujust install-cli-tools</code></dt>
@@ -237,7 +238,7 @@ distrobox enter arch</code></pre>
         <dt><code>ujust install-gaming</code></dt>
         <dd>Steam et Heroic (Epic Games, GOG, Amazon).</dd>
         <dt><code>ujust toggle-flatpark</code></dt>
-        <dd>Activer ou couper FlatPark, une source d'applications en plus. Coupée par défaut&nbsp;: ses applications ne sont pas vérifiées comme celles de Flathub.</dd>
+        <dd>Activer ou couper FlatPark, une source d’applications en plus. Coupée par défaut&nbsp;: ses applications ne sont pas vérifiées comme celles de Flathub.</dd>
         <dt><code>ujust toggle-dark-mode</code></dt>
         <dd>Passer du thème sombre au thème clair, et inversement.</dd>
         <dt><code>ujust reset-cosmic-theme</code></dt>
@@ -257,7 +258,7 @@ distrobox enter arch</code></pre>
 
     <section class="block">
       <h2 id="look">Apparence</h2>
-      <p>Celenn OS arrive avec un thème COSMIC bleu, des panneaux en verre dépoli, des fonds d'écran, icônes et curseurs Celenn OS. Tout se change dans les <strong>Paramètres</strong>. Pour retrouver le style d'origine&nbsp;:</p>
+      <p>Celenn OS arrive avec un thème COSMIC bleu, des panneaux en verre dépoli, des fonds d’écran, icônes et curseurs Celenn OS. Tout se change dans les <strong>Paramètres</strong>. Pour retrouver le style d’origine&nbsp;:</p>
       <div class="code">
         <pre><code>ujust reset-cosmic-theme</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -267,7 +268,7 @@ distrobox enter arch</code></pre>
 
     <section class="block">
       <h2 id="terminal">Terminal</h2>
-      <p>Chaque nouveau terminal affiche un message d'accueil avec une astuce. <code>fastfetch</code> affiche les informations du système. Pour désactiver le message d'accueil, ou le réactiver&nbsp;:</p>
+      <p>Chaque nouveau terminal affiche un message d’accueil avec une astuce. <code>fastfetch</code> affiche les informations du système. Pour désactiver le message d’accueil, ou le réactiver&nbsp;:</p>
       <div class="code">
         <pre><code>uwelcome toggle</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -278,38 +279,42 @@ distrobox enter arch</code></pre>
       <h2 id="data">Vos données</h2>
       <p>Les mises à jour ne remplacent que le système&nbsp;: votre dossier personnel, vos applications et leurs réglages sont conservés, ainsi que vos modifications de <code>/etc</code>.</p>
       <h3>Chiffrement du disque</h3>
-      <p>Le chiffrement se choisit dans l'installateur&nbsp;: dans <em>Destination de l'installation</em>, cochez <em>Chiffrer mes données</em> et choisissez une phrase de passe. Faites-le sur un portable, qui peut être perdu ou volé. Il ne peut pas être activé plus tard sans réinstaller. Une fois installé, la puce TPM2 peut déverrouiller le disque au démarrage à la place de la phrase de passe&nbsp;:</p>
+      <p>Le chiffrement se choisit dans l’installateur&nbsp;: dans <em>Destination de l’installation</em>, cochez <em>Chiffrer mes données</em> et choisissez une phrase de passe. Faites-le sur un portable, qui peut être perdu ou volé. Il ne peut pas être activé plus tard sans réinstaller. Une fois installé, la puce TPM2 peut déverrouiller le disque au démarrage à la place de la phrase de passe&nbsp;:</p>
       <div class="code">
         <pre><code>ujust toggle-tpm2</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
       <h3>Sauvegardes</h3>
-      <p>L'application <strong>Sauvegardes</strong> (Déjà Dup) est installée&nbsp;: elle enregistre votre dossier personnel sur un disque externe, un partage réseau ou un stockage en ligne, chiffré si vous le souhaitez, et restaure un fichier ou tout le dossier. En ligne de commande, <code>restic</code>, <code>borg</code> et <code>rclone</code> sont aussi installés.</p>
-      <h3>Venir d'un autre système</h3>
-      <p>Sauvegardez d'abord vos fichiers (Sauvegardes, ou une copie sur un disque externe), installez Celenn OS, puis recopiez-les dans votre dossier personnel. Réinstallez vos applications depuis COSMIC Store&nbsp;; les applications Flatpak gardent leurs données dans <code>~/.var/app</code>, que vous pouvez recopier depuis un autre système qui utilisait les mêmes Flatpaks.</p>
+      <p>L’application <strong>Sauvegardes</strong> (Déjà Dup) est installée&nbsp;: elle enregistre votre dossier personnel sur un disque externe, un partage réseau ou un stockage en ligne, chiffré si vous le souhaitez, et restaure un fichier ou tout le dossier. En ligne de commande, <code>restic</code>, <code>borg</code> et <code>rclone</code> sont aussi installés.</p>
+      <h3>Corbeille</h3>
+      <p>Les fichiers restés plus de 30 jours dans la corbeille sont supprimés tout seuls. Pour les garder, désactivez <em>Supprimer les fichiers restés plus de 30 jours dans la corbeille</em> dans Outils Celenn OS, sous <em>Libérer de l’espace</em>. Seule la corbeille de votre dossier personnel est concernée, pas celle des clés USB.</p>
+      <h3>Venir d’un autre système</h3>
+      <p>Sauvegardez d’abord vos fichiers (Sauvegardes, ou une copie sur un disque externe), installez Celenn OS, puis recopiez-les dans votre dossier personnel. Réinstallez vos applications depuis COSMIC Store&nbsp;; les applications Flatpak gardent leurs données dans <code>~/.var/app</code>, que vous pouvez recopier depuis un autre système qui utilisait les mêmes Flatpaks.</p>
     </section>
 
     <section class="block">
       <h2 id="privacy">Vie privée</h2>
       <p>Celenn OS ne collecte rien sur vous. Ce que le système contacte de lui-même&nbsp;:</p>
       <ul>
-        <li>Les mises à jour, une fois par jour&nbsp;: les images Celenn OS sur GitHub, Flathub et le dépôt d'applications COSMIC, et Homebrew si vous l'utilisez (avec les statistiques d'utilisation de Homebrew désactivées).</li>
-        <li>Le comptage anonyme hebdomadaire de Fedora (<code>rpm-ostree-countme</code>)&nbsp;: une requête par semaine aux serveurs de Fedora, avec la version de Fedora et l'âge approximatif du système mais sans identifiant, pour que Fedora sache combien de systèmes l'utilisent.</li>
-        <li>Firefox&nbsp;: télémétrie, études, contenus sponsorisés et mesure publicitaire sont désactivés. uBlock Origin bloque publicités et traqueurs, et les sites s'ouvrent en HTTPS dès que possible.</li>
+        <li>Les mises à jour, une fois par jour&nbsp;: les images Celenn OS sur GitHub, Flathub et le dépôt d’applications COSMIC, et Homebrew si vous l’utilisez (avec les statistiques d’utilisation de Homebrew désactivées).</li>
+        <li>Le comptage anonyme hebdomadaire de Fedora (<code>rpm-ostree-countme</code>)&nbsp;: une requête par semaine aux serveurs de Fedora, avec la version de Fedora et l’âge approximatif du système mais sans identifiant, pour que Fedora sache combien de systèmes l’utilisent.</li>
+        <li>Firefox&nbsp;: télémétrie, études, contenus sponsorisés et mesure publicitaire sont désactivés. uBlock Origin bloque publicités et traqueurs, et les sites s’ouvrent en HTTPS dès que possible.</li>
+        <li>L’outil <em>Applis web</em>&nbsp;: à sa première ouverture, il récupère le logo de chaque site proposé sur ce site même, et le garde sur l’ordinateur. Un site que vous ajoutez vous-même est contacté de la même façon.</li>
+        <li>Les comptes enfants avec le filtre web activé (Contrôle parental)&nbsp;: pour bloquer des sites, les noms des sites qu’ils ouvrent sont envoyés au filtre familial de CleanBrowsing au lieu du serveur DNS habituel.</li>
         <li>Tailscale est installé, pour <code>sudo tailscale up</code>&nbsp;: son service tourne mais ne rejoint aucun réseau tant que vous ne vous êtes pas connecté.</li>
       </ul>
-      <p>Pour arrêter le comptage de Fedora, ou le service Tailscale si vous ne l'utilisez pas&nbsp;:</p>
+      <p>Pour arrêter le comptage de Fedora, ou le service Tailscale si vous ne l’utilisez pas&nbsp;:</p>
       <div class="code">
         <pre><code>sudo systemctl mask --now rpm-ostree-countme.timer
 sudo systemctl disable --now tailscaled.service</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
       </div>
-      <p>Le pare-feu (firewalld) est actif&nbsp;; l'application <strong>Pare-feu</strong> change ses réglages. <strong>Flatseal</strong> montre et change ce à quoi chaque application Flatpak a accès (fichiers, périphériques, réseau).</p>
+      <p>Le pare-feu (firewalld) est actif&nbsp;; l’application <strong>Pare-feu</strong> change ses réglages. <strong>Flatseal</strong> montre et change ce à quoi chaque application Flatpak a accès (fichiers, périphériques, réseau).</p>
     </section>
 
     <section class="block">
       <h2 id="verify">Vérifier les téléchargements</h2>
-      <p>La somme de contrôle de chaque ISO live est signée avec la clé du projet, <a href="https://github.com/celenn-os/celenn/blob/main/cosign.pub">cosign.pub</a>. Téléchargez l'ISO, son fichier <code>.sha256</code> et sa signature <code>.sha256.sigstore.json</code> dans le même dossier, puis vérifiez-les avec <a href="https://github.com/sigstore/cosign">cosign</a> (pour l'ISO NVIDIA, utilisez les noms <code>celenn-nvidia-live-amd64</code>)&nbsp;:</p>
+      <p>La somme de contrôle de chaque ISO live est signée avec la clé du projet, <a href="https://github.com/celenn-os/celenn/blob/main/cosign.pub">cosign.pub</a>. Téléchargez l’ISO, son fichier <code>.sha256</code> et sa signature <code>.sha256.sigstore.json</code> dans le même dossier, puis vérifiez-les avec <a href="https://github.com/sigstore/cosign">cosign</a> (pour l’ISO NVIDIA, utilisez les noms <code>celenn-nvidia-live-amd64</code>)&nbsp;:</p>
       <div class="code">
         <pre><code>cosign verify-blob --key cosign.pub \
   --bundle celenn-live-amd64.iso.sha256.sigstore.json \
@@ -327,10 +332,10 @@ cosign verify-attestation --key cosign.pub --type spdxjson \
     </section>
 
     <section class="block">
-      <h2 id="help">Obtenir de l'aide</h2>
+      <h2 id="help">Obtenir de l’aide</h2>
       <p>Quelque chose ne marche pas&nbsp;? La <a href="troubleshooting/">page de dépannage</a> couvre les problèmes courants.</p>
       <p>Une question, ou quelque chose de pas clair&nbsp;? Posez-la dans les <a href="https://github.com/celenn-os/celenn/discussions">Discussions</a> (en anglais de préférence).</p>
-      <p>Un bug&nbsp;? Lancez ceci dans un terminal sur l'ordinateur concerné&nbsp;: la commande rassemble les informations du système (aucune donnée personnelle) et ouvre un <a href="https://github.com/celenn-os/celenn/issues/new/choose">rapport de bug</a> déjà rempli avec elles. Dites ensuite ce que vous avez fait et ce qui s'est passé.</p>
+      <p>Un bug&nbsp;? Lancez ceci dans un terminal sur l’ordinateur concerné&nbsp;: la commande rassemble les informations du système (aucune donnée personnelle) et ouvre un <a href="https://github.com/celenn-os/celenn/issues/new/choose">rapport de bug</a> déjà rempli avec elles. Dites ensuite ce que vous avez fait et ce qui s’est passé.</p>
       <div class="code">
         <pre><code>ujust report-bug</code></pre>
         <button type="button" class="copy" data-copy>Copier</button>
@@ -349,14 +354,14 @@ cosign verify-attestation --key cosign.pub --type spdxjson \
         <h2 id="footer-discover">Découvrir</h2>
         <ul>
           <li><a href="../why/">Pourquoi Celenn OS ?</a></li>
-          <li><a href="../screenshots/">Captures d'écran</a></li>
+          <li><a href="../screenshots/">Captures d’écran</a></li>
           <li><a href="../#download">Télécharger</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Aide</h2>
         <ul>
-          <li><a href="../install/">Guide d'installation</a></li>
+          <li><a href="../install/">Guide d’installation</a></li>
           <li><a href="../docs/">Documentation</a></li>
           <li><a href="../docs/troubleshooting/">Dépannage</a></li>
           <li><a href="../#faq">Questions fréquentes</a></li>

@@ -60,7 +60,7 @@ msgid "Version {} is set aside"
 msgstr "La version {} est mise de côté"
 
 msgid "You went back from it, so it will not be installed again. Updates start again with the next version."
-msgstr "Vous l'avez quittée, elle ne sera donc pas réinstallée. Les mises à jour reprennent avec la version suivante."
+msgstr "Vous l’avez quittée, elle ne sera donc pas réinstallée. Les mises à jour reprennent avec la version suivante."
 
 msgid "Get new features early"
 msgstr "Recevoir les nouveautés en avance"
@@ -103,7 +103,7 @@ msgid "An older version"
 msgstr "Une version plus ancienne"
 
 msgid "Choose the stable version of a past week. The system then stays on it, without updates, until you resume them."
-msgstr "Choisir la version stable d'une semaine passée. Le système reste alors dessus, sans mises à jour, jusqu'à ce que vous les repreniez."
+msgstr "Choisir la version stable d’une semaine passée. Le système reste alors dessus, sans mises à jour, jusqu’à ce que vous les repreniez."
 
 msgid "Choose…"
 msgstr "Choisir…"
@@ -148,10 +148,10 @@ msgid "See what takes space"
 msgstr "Voir ce qui prend de la place"
 
 msgid "Free up space"
-msgstr "Libérer de l'espace"
+msgstr "Libérer de l’espace"
 
 msgid "Removes what nothing uses any more: leftover parts of removed apps, unused container images, old downloads of tools."
-msgstr "Supprime ce qui ne sert plus : restes d'applications supprimées, images de conteneurs inutilisées, anciens téléchargements d'outils."
+msgstr "Supprime ce qui ne sert plus : restes d’applications supprimées, images de conteneurs inutilisées, anciens téléchargements d’outils."
 
 msgid "Clean up"
 msgstr "Nettoyer"
@@ -193,7 +193,7 @@ msgid "Warn when the disk is almost full"
 msgstr "Prévenir quand le disque est presque plein"
 
 msgid "A notification when less than 10 % is free (20 GB at most)."
-msgstr "Une notification quand il reste moins de 10 % d'espace (20 Go au plus)."
+msgstr "Une notification quand il reste moins de 10 % d’espace (20 Go au plus)."
 
 msgid "The disk is almost full"
 msgstr "Le disque est presque plein"
@@ -208,10 +208,10 @@ msgid "All of them are installed."
 msgstr "Elles sont toutes installées."
 
 msgid "One of them was removed. Put it back?"
-msgstr "L'une d'elles a été supprimée. La remettre ?"
+msgstr "L’une d’elles a été supprimée. La remettre ?"
 
 msgid "{} of them were removed. Put them back?"
-msgstr "{} d'entre elles ont été supprimées. Les remettre ?"
+msgstr "{} d’entre elles ont été supprimées. Les remettre ?"
 
 msgid "Reinstall"
 msgstr "Réinstaller"
@@ -226,7 +226,7 @@ msgid "Firmware updates"
 msgstr "Mises à jour des micrologiciels"
 
 msgid "New versions of the BIOS, SSD, dock… from their makers."
-msgstr "Nouvelles versions du BIOS, du SSD, de la station d'accueil… publiées par leurs fabricants."
+msgstr "Nouvelles versions du BIOS, du SSD, de la station d’accueil… publiées par leurs fabricants."
 
 msgid "Open"
 msgstr "Ouvrir"
@@ -244,7 +244,7 @@ msgid "Ask a question"
 msgstr "Poser une question"
 
 msgid "Other Celenn OS users and its makers answer, on GitHub."
-msgstr "D'autres utilisateurs de Celenn OS et ses auteurs répondent, sur GitHub."
+msgstr "D’autres utilisateurs de Celenn OS et ses auteurs répondent, sur GitHub."
 
 msgid "Report a problem"
 msgstr "Signaler un problème"
@@ -277,10 +277,10 @@ msgid "TB"
 msgstr "To"
 
 msgid "More apps in COSMIC Store, from outside Flathub. Less checked."
-msgstr "Plus d'applications dans COSMIC Store, hors de Flathub. Moins vérifiées."
+msgstr "Plus d’applications dans COSMIC Store, hors de Flathub. Moins vérifiées."
 
 msgid "Accent color, wallpaper, panel, dock, fonts…"
-msgstr "Couleur d'accentuation, fond d'écran, panneau, dock, polices…"
+msgstr "Couleur d’accentuation, fond d’écran, panneau, dock, polices…"
 
 msgid "Accept and install"
 msgstr "Accepter et installer"
@@ -292,7 +292,7 @@ msgid "Arial, Times New Roman, Verdana… for documents made on Windows."
 msgstr "Arial, Times New Roman, Verdana… pour les documents créés sous Windows."
 
 msgid "Back to the Celenn OS colors, dark theme, icons, fonts and wallpaper. Panel, dock, keyboard and shortcuts stay."
-msgstr "Retour aux couleurs, au thème sombre, aux icônes, aux polices et au fond d'écran de Celenn OS. Panneau, dock, clavier et raccourcis restent."
+msgstr "Retour aux couleurs, au thème sombre, aux icônes, aux polices et au fond d’écran de Celenn OS. Panneau, dock, clavier et raccourcis restent."
 
 msgid "Back to the Celenn OS defaults, for every setting. A copy of the current ones is kept."
 msgstr "Retour aux réglages par défaut de Celenn OS, pour tout. Une copie des réglages actuels est gardée."
@@ -301,7 +301,7 @@ msgid "Battery charge limit"
 msgstr "Limite de charge de la batterie"
 
 msgid "Settings"
-msgstr "Réglages"
+msgstr "Paramètres"
 
 msgid "Model"
 msgstr "Modèle"
@@ -346,13 +346,13 @@ msgid "No battery on this computer: nothing to set."
 msgstr "Pas de batterie sur cet ordinateur : rien à régler."
 
 msgid "This computer starts in legacy BIOS mode. To open its settings, press the key shown when it powers on, often F2, F10 or Del."
-msgstr "Cet ordinateur démarre en mode BIOS ancien. Pour ouvrir ses réglages, appuyez sur la touche affichée à l'allumage, souvent F2, F10 ou Suppr."
+msgstr "Cet ordinateur démarre en mode BIOS ancien. Pour ouvrir ses réglages, appuyez sur la touche affichée à l’allumage, souvent F2, F10 ou Suppr."
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Charging stops at 80 %: the battery lasts longer when the laptop stays plugged in."
-msgstr "La charge s'arrête à 80 % : la batterie dure plus longtemps quand le portable reste branché."
+msgstr "La charge s’arrête à 80 % : la batterie dure plus longtemps quand le portable reste branché."
 
 msgid "Dark theme"
 msgstr "Thème sombre"
@@ -385,7 +385,7 @@ msgid "Off: it hides when a window covers it."
 msgstr "Désactivé : il se cache quand une fenêtre le recouvre."
 
 msgid "This did not work."
-msgstr "Cela n'a pas marché."
+msgstr "Cela n’a pas marché."
 
 msgid "Layout"
 msgstr "Disposition"
@@ -424,7 +424,7 @@ msgid "Reset"
 msgstr "Réinitialiser"
 
 msgid "Restart into the computer's own settings: boot order, virtualization, Secure Boot…"
-msgstr "Redémarrer dans les réglages de l'ordinateur lui-même : ordre de démarrage, virtualisation, Secure Boot…"
+msgstr "Redémarrer dans les réglages de l’ordinateur lui-même : ordre de démarrage, virtualisation, Secure Boot…"
 
 msgid "Restart now"
 msgstr "Redémarrer maintenant"
@@ -439,22 +439,22 @@ msgid "Switch"
 msgstr "Changer"
 
 msgid "The NVIDIA edition is downloaded now and starts at the next restart. With Secure Boot on, a blue screen asks for the password celennos once."
-msgstr "L'édition NVIDIA est téléchargée maintenant et démarre au prochain redémarrage. Avec Secure Boot activé, un écran bleu demande une fois le mot de passe celennos."
+msgstr "L’édition NVIDIA est téléchargée maintenant et démarre au prochain redémarrage. Avec Secure Boot activé, un écran bleu demande une fois le mot de passe celennos."
 
 msgid "The NVIDIA edition starts at the next restart."
-msgstr "L'édition NVIDIA démarre au prochain redémarrage."
+msgstr "L’édition NVIDIA démarre au prochain redémarrage."
 
 msgid "The computer restarts now. Save your work first."
-msgstr "L'ordinateur redémarre tout de suite. Enregistrez votre travail avant."
+msgstr "L’ordinateur redémarre tout de suite. Enregistrez votre travail avant."
 
 msgid "The Celenn OS look"
 msgstr "Le look Celenn OS"
 
 msgid "Use it"
-msgstr "L'utiliser"
+msgstr "L’utiliser"
 
 msgid "Use the NVIDIA edition of Celenn OS, with NVIDIA's own driver, for games and graphics apps."
-msgstr "Utiliser l'édition NVIDIA de Celenn OS, avec le pilote de NVIDIA, pour les jeux et les applications graphiques."
+msgstr "Utiliser l’édition NVIDIA de Celenn OS, avec le pilote de NVIDIA, pour les jeux et les applications graphiques."
 
 msgid "Virtual machines"
 msgstr "Machines virtuelles"
@@ -463,7 +463,7 @@ msgid "Working…"
 msgstr "En cours…"
 
 msgid "You use the NVIDIA edition, with NVIDIA's own driver."
-msgstr "Vous utilisez l'édition NVIDIA, avec le pilote de NVIDIA."
+msgstr "Vous utilisez l’édition NVIDIA, avec le pilote de NVIDIA."
 
 msgid "virt-manager, to run Windows or another Linux in a window."
 msgstr "virt-manager, pour faire tourner Windows ou un autre Linux dans une fenêtre."
@@ -514,10 +514,10 @@ msgid "Close"
 msgstr "Fermer"
 
 msgid "Network settings"
-msgstr "Réglages réseau"
+msgstr "Paramètres réseau"
 
 msgid "No internet connection. Connect to a network, then try again. Nothing was changed."
-msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n'a été modifié."
+msgstr "Pas de connexion à Internet. Connectez-vous à un réseau, puis réessayez. Rien n’a été modifié."
 
 msgid "Open the report"
 msgstr "Ouvrir le rapport"
@@ -529,16 +529,16 @@ msgid "Secure Boot does not let NVIDIA's driver load yet. Allow it once: at the 
 msgstr "Secure Boot ne laisse pas encore le pilote NVIDIA se charger. Autorisez-le une fois : au prochain redémarrage, un écran bleu demande le mot de passe celennos."
 
 msgid "Something unexpected went wrong. Nothing was changed."
-msgstr "Un problème inattendu est survenu. Rien n'a été modifié."
+msgstr "Un problème inattendu est survenu. Rien n’a été modifié."
 
 msgid "Technical details"
 msgstr "Détails techniques"
 
 msgid "The disk is full ({} free). Free up space with Celenn OS Tools, then try again."
-msgstr "Le disque est plein ({} libres). Libérez de l'espace avec Outils Celenn OS, puis réessayez."
+msgstr "Le disque est plein ({} libres). Libérez de l’espace avec Outils Celenn OS, puis réessayez."
 
 msgid "The report opens in your browser, filled in: the Celenn OS version, the hardware and this error. No files or personal data. You read it before sending it; write in your own language. Sending needs a GitHub account."
-msgstr "Le rapport s'ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l'envoyer ; écrivez dans votre langue. L'envoi demande un compte GitHub."
+msgstr "Le rapport s’ouvre dans votre navigateur, déjà rempli : la version de Celenn OS, le matériel et cette erreur. Aucun fichier ni donnée personnelle. Vous le relisez avant de l’envoyer ; écrivez dans votre langue. L’envoi demande un compte GitHub."
 
 msgid "The server does not answer. Try again in a few minutes."
 msgstr "Le serveur ne répond pas. Réessayez dans quelques minutes."
@@ -547,10 +547,10 @@ msgid "Try again"
 msgstr "Réessayer"
 
 msgid "“{}” did not work"
-msgstr "« {} » n'a pas abouti"
+msgstr "« {} » n’a pas abouti"
 
 msgid "Some changes ask for the password of a parent or an administrator."
-msgstr "Certains changements demandent le mot de passe d'un parent ou d'un administrateur."
+msgstr "Certains changements demandent le mot de passe d’un parent ou d’un administrateur."
 
 msgid "Passwords"
 msgstr "Mots de passe"
@@ -574,7 +574,7 @@ msgid "Set up"
 msgstr "Mettre en place"
 
 msgid "Last backup today."
-msgstr "Dernière sauvegarde aujourd'hui."
+msgstr "Dernière sauvegarde aujourd’hui."
 
 msgid "Last backup {} days ago."
 msgstr "Dernière sauvegarde il y a {} jours."
@@ -721,7 +721,7 @@ msgid "Printers and scanners"
 msgstr "Imprimantes et scanners"
 
 msgid "No printer added yet. Recent printers on the network or plugged in by USB show up by themselves in the print window."
-msgstr "Aucune imprimante ajoutée. Les imprimantes récentes du réseau ou branchées en USB s'affichent d'elles-mêmes dans la fenêtre d'impression."
+msgstr "Aucune imprimante ajoutée. Les imprimantes récentes du réseau ou branchées en USB s’affichent d’elles-mêmes dans la fenêtre d’impression."
 
 msgid "{} (default)"
 msgstr "{} (par défaut)"
@@ -733,7 +733,7 @@ msgid "Scan"
 msgstr "Numériser"
 
 msgid "Change computers"
-msgstr "Changer d'ordinateur"
+msgstr "Changer d’ordinateur"
 
 msgid "Your settings and the list of your apps in a file, to take back on another Celenn OS computer."
 msgstr "Vos réglages et la liste de vos applis dans un fichier, à reprendre sur un autre ordinateur Celenn OS."
@@ -766,7 +766,7 @@ msgid "Look"
 msgstr "Apparence"
 
 msgid "Dark or light theme, accent color, wallpaper, panel and dock."
-msgstr "Thème sombre ou clair, couleur d'accentuation, fond d'écran, barre et dock."
+msgstr "Thème sombre ou clair, couleur d’accentuation, fond d’écran, barre et dock."
 
 msgid "Keyboard and shortcuts"
 msgstr "Clavier et raccourcis"
@@ -798,7 +798,7 @@ msgstr "Repris"
 
 
 msgid "Your own wallpaper is not in the file: copy the picture, then choose it in Settings."
-msgstr "Votre propre fond d'écran n'est pas dans le fichier : copiez l'image, puis choisissez-la dans Paramètres."
+msgstr "Votre propre fond d’écran n’est pas dans le fichier : copiez l’image, puis choisissez-la dans Paramètres."
 
 msgid "{} shortcuts start a program: for safety, add them again in Settings."
 msgstr "{} raccourcis lancent un programme : par sécurité, ajoutez-les à nouveau dans Paramètres."
@@ -810,10 +810,10 @@ msgid "{} settings unknown to this version of Celenn OS were left out."
 msgstr "{} réglages inconnus de cette version de Celenn OS ont été laissés de côté."
 
 msgid "{} app names were not valid and were left out."
-msgstr "{} noms d'applis n'étaient pas valides et ont été laissés de côté."
+msgstr "{} noms d’applis n’étaient pas valides et ont été laissés de côté."
 
 msgid "The apps could not be installed."
-msgstr "Les applis n'ont pas pu être installées."
+msgstr "Les applis n’ont pas pu être installées."
 
 msgid "A copy of your previous settings is in {}."
 msgstr "Une copie de vos réglages précédents est dans {}."
@@ -822,13 +822,13 @@ msgid "Log out and back in to see every change."
 msgstr "Déconnectez-vous puis reconnectez-vous pour voir tous les changements."
 
 msgid "This file is not a Celenn OS settings file."
-msgstr "Ce fichier n'est pas un fichier de réglages Celenn OS."
+msgstr "Ce fichier n’est pas un fichier de réglages Celenn OS."
 
 msgid "This file was saved by a newer Celenn OS. Update this computer first."
-msgstr "Ce fichier vient d'un Celenn OS plus récent. Mettez d'abord cet ordinateur à jour."
+msgstr "Ce fichier vient d’un Celenn OS plus récent. Mettez d’abord cet ordinateur à jour."
 
 msgid "This file could not be read."
-msgstr "Ce fichier n'a pas pu être lu."
+msgstr "Ce fichier n’a pas pu être lu."
 
 msgid "Nothing to take back: everything in this file is already here."
 msgstr "Rien à reprendre : tout ce que contient ce fichier est déjà là."
@@ -840,19 +840,19 @@ msgid "No other disk in this computer."
 msgstr "Aucun autre disque dans cet ordinateur."
 
 msgid "{} opens at every startup."
-msgstr "{} s'ouvre à chaque démarrage."
+msgstr "{} s’ouvre à chaque démarrage."
 
 msgid "{} open at every startup."
-msgstr "{} s'ouvrent à chaque démarrage."
+msgstr "{} s’ouvrent à chaque démarrage."
 
 msgid "None opens at startup yet: choose the ones Files and Steam should always find."
-msgstr "Aucun ne s'ouvre encore au démarrage : choisissez ceux que Fichiers et Steam doivent toujours trouver."
+msgstr "Aucun ne s’ouvre encore au démarrage : choisissez ceux que Fichiers et Steam doivent toujours trouver."
 
 msgid "Turn on the ones you want open at every startup, without clicking them in Files."
 msgstr "Activez ceux que vous voulez retrouver ouverts à chaque démarrage, sans cliquer dessus dans Fichiers."
 
 msgid "They open at every startup, even before you log in, and always at the same place: Files, Steam and your apps find them. USB drives are not concerned."
-msgstr "Ils s'ouvrent à chaque démarrage, avant même la connexion, et toujours au même endroit : Fichiers, Steam et vos applis les retrouvent. Les clés USB ne sont pas concernées."
+msgstr "Ils s’ouvrent à chaque démarrage, avant même la connexion, et toujours au même endroit : Fichiers, Steam et vos applis les retrouvent. Les clés USB ne sont pas concernées."
 
 msgid "Back"
 msgstr "Retour"
@@ -906,7 +906,7 @@ msgid "Encrypted: open it in Files, with its password."
 msgstr "Chiffré : ouvrez-le dans Fichiers, avec son mot de passe."
 
 msgid "Windows' own disk stays closed, so that nothing can harm it."
-msgstr "Le disque de Windows lui-même reste fermé, pour que rien ne puisse l'abîmer."
+msgstr "Le disque de Windows lui-même reste fermé, pour que rien ne puisse l’abîmer."
 
 msgid "Already opened at startup by a setting of your own."
 msgstr "Déjà ouvert au démarrage par un réglage à vous."
@@ -915,7 +915,7 @@ msgid "Not offered"
 msgstr "Non proposé"
 
 msgid "Done."
-msgstr "C'est fait."
+msgstr "C’est fait."
 
 msgid "{}: a file on it is open. Close it, then try again."
 msgstr "{} : un fichier de ce disque est ouvert. Fermez-le, puis réessayez."
@@ -924,16 +924,16 @@ msgid "{}: a file on it is open. It closes at the next restart."
 msgstr "{} : un fichier de ce disque est ouvert. Il se fermera au prochain redémarrage."
 
 msgid "{}: Windows did not fully shut down. In Windows, turn off Fast Startup and shut down, then try again."
-msgstr "{} : Windows ne s'est pas complètement éteint. Dans Windows, désactivez le démarrage rapide et éteignez, puis réessayez."
+msgstr "{} : Windows ne s’est pas complètement éteint. Dans Windows, désactivez le démarrage rapide et éteignez, puis réessayez."
 
 msgid "{}: Windows' own disk stays closed, so that nothing can harm it."
-msgstr "{} : le disque de Windows lui-même reste fermé, pour que rien ne puisse l'abîmer."
+msgstr "{} : le disque de Windows lui-même reste fermé, pour que rien ne puisse l’abîmer."
 
 msgid "{}: could not be opened."
-msgstr "{} : n'a pas pu être ouvert."
+msgstr "{} : n’a pas pu être ouvert."
 
 msgid "{}: could not be closed."
-msgstr "{} : n'a pas pu être fermé."
+msgstr "{} : n’a pas pu être fermé."
 
 msgid "A copy of your files"
 msgstr "Une copie de vos fichiers"
@@ -942,7 +942,7 @@ msgid "A copy of your files on a USB drive or another disk, made by itself every
 msgstr "Une copie de vos fichiers sur une clé USB ou un autre disque, faite toute seule chaque jour."
 
 msgid "All is well: Celenn OS looks after itself."
-msgstr "Tout va bien : Celenn OS s'occupe de lui-même."
+msgstr "Tout va bien : Celenn OS s’occupe de lui-même."
 
 msgid "Apps, look, settings"
 msgstr "Applications, apparence, réglages"
@@ -978,7 +978,7 @@ msgid "For experienced users…"
 msgstr "Pour les initiés…"
 
 msgid "Get help"
-msgstr "Obtenir de l'aide"
+msgstr "Obtenir de l’aide"
 
 msgid "Go back"
 msgstr "Revenir en arrière"
@@ -1026,7 +1026,7 @@ msgid "Protect your files"
 msgstr "Protéger vos fichiers"
 
 msgid "Put back what is missing: the apps that come with Celenn OS, the Celenn OS look, your COSMIC settings."
-msgstr "Remettre ce qui manque : les applications fournies avec Celenn OS, l'apparence de Celenn OS, vos réglages COSMIC."
+msgstr "Remettre ce qui manque : les applications fournies avec Celenn OS, l’apparence de Celenn OS, vos réglages COSMIC."
 
 msgid "Remove what nothing uses any more. Your files stay as they are."
 msgstr "Supprimer ce qui ne sert plus. Vos fichiers restent tels quels."
@@ -1071,7 +1071,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 msgid "Useful when you know what you are doing. Each one is also a ujust command."
-msgstr "Utile quand on sait ce qu'on fait. Chaque outil est aussi une commande ujust."
+msgstr "Utile quand on sait ce qu’on fait. Chaque outil est aussi une commande ujust."
 
 msgid "Version {}"
 msgstr "Version {}"
@@ -1080,7 +1080,7 @@ msgid "What this computer is made of, and how it starts."
 msgstr "De quoi cet ordinateur est fait, et comment il démarre."
 
 msgid "What's inside"
-msgstr "Ce qu'il y a dedans"
+msgstr "Ce qu’il y a dedans"
 
 msgid "When something is wrong"
 msgstr "Quand ça ne va pas"
@@ -1095,10 +1095,10 @@ msgid "{} things need your attention: {}"
 msgstr "{} choses demandent votre attention : {}"
 
 msgid "Charging stops at 80 %."
-msgstr "La charge s'arrête à 80 %."
+msgstr "La charge s’arrête à 80 %."
 
 msgid "Choose the ones that open at startup."
-msgstr "Choisissez ceux qui s'ouvrent au démarrage."
+msgstr "Choisissez ceux qui s’ouvrent au démarrage."
 
 msgid "Clean up the system"
 msgstr "Nettoyer le système"
@@ -1122,7 +1122,7 @@ msgid "The open driver built into Linux."
 msgstr "Le pilote libre intégré à Linux."
 
 msgid "This computer has only ever run this version."
-msgstr "Cet ordinateur n'a encore connu que cette version."
+msgstr "Cet ordinateur n’a encore connu que cette version."
 
 msgid "Add"
 msgstr "Ajouter"
