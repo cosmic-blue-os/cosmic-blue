@@ -273,10 +273,14 @@ grep -q 'libcryptsetup-token-systemd-tpm2.so' /tmp/initramfs.txt
 grep -q 'libtss2-esys' /tmp/initramfs.txt
 
 # Celenn OS signing key and policy, and the signed image reference
-test -s /etc/pki/containers/cosmic-blue.pub
-jq -e '.transports.docker."ghcr.io/cosmic-blue-os"[0].keyPath == "/etc/pki/containers/cosmic-blue.pub"' \
+test -s /etc/pki/containers/celenn.pub
+test ! -e /etc/pki/containers/cosmic-blue.pub
+jq -e '.transports.docker."ghcr.io/celenn-os"[0].keyPath == "/etc/pki/containers/celenn.pub"' \
     /etc/containers/policy.json >/dev/null
+jq -e '.transports.docker | has("ghcr.io/cosmic-blue-os") | not' /etc/containers/policy.json >/dev/null
+grep -q 'ghcr.io/celenn-os:' /etc/containers/registries.d/celenn.yaml
 grep -q 'use-sigstore-attachments: true' /etc/containers/registries.d/celenn.yaml
+if grep -q cosmic-blue /etc/containers/registries.d/celenn.yaml; then exit 1; fi
 jq -e '."image-ref" | startswith("ostree-image-signed:")' /usr/share/ublue-os/image-info.json >/dev/null
 
 # ujust and its recipes
@@ -670,7 +674,7 @@ done
 # module that does not load refuses every login)
 python3 -c "import ctypes; ctypes.CDLL('libpam.so.0', mode=ctypes.RTLD_GLOBAL); ctypes.CDLL('/usr/lib64/security/pam_celenn_parental.so').pam_sm_acct_mgmt" \
     || { echo "pam_celenn_parental.so does not load"; exit 1; }
-test "$(readlink /usr/lib64/security/pam_cosmic_blue_parental.so)" = pam_celenn_parental.so
+test ! -e /usr/lib64/security/pam_cosmic_blue_parental.so
 /usr/libexec/celenn-parental-daemon refusal | grep -q .
 PAM_USER=root /usr/libexec/celenn-parental-daemon login-check \
     || { echo "The parental controls login check refuses root"; exit 1; }
@@ -824,11 +828,6 @@ done
 test -L /etc/systemd/system/multi-user.target.wants/celenn-migrate-defaults.service
 /ctx/build_files/migrate-defaults-test.sh "${MIGRATE}"
 
-# Systems installed as cosmic-blue: their settings move to the new names
-test -x /usr/libexec/celenn-migrate-names
-test -L /etc/systemd/system/multi-user.target.wants/celenn-migrate-names.service
-/ctx/build_files/migrate-names-test.sh /usr/libexec/celenn-migrate-names
-
 # Secure Boot: the Universal Blue akmods key (enrolled with
 # `ujust enroll-secure-boot-key`) is in every image, so it can be enrolled
 # before switching to celenn-nvidia
@@ -905,12 +904,6 @@ fi
 # Signature check turned on for systems switched to Celenn OS without it
 test -x /usr/libexec/celenn-signed-updates
 systemctl is-enabled celenn-signed-updates.timer
-# Systems still on the images of the old name move to Celenn OS: same key
-test -x /usr/libexec/cosmic-blue-move-to-celenn
-systemctl is-enabled cosmic-blue-move-to-celenn.timer
-jq -e '.transports.docker."ghcr.io/celenn-os"[0].keyPath == "/etc/pki/containers/cosmic-blue.pub"' \
-    /etc/containers/policy.json
-grep -q 'ghcr.io/celenn-os:' /etc/containers/registries.d/celenn.yaml
 
 # Repair of the bootc aleph of early installs (bootloader-update.service)
 test -x /usr/libexec/celenn-fix-aleph

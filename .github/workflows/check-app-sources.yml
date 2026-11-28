@@ -26,10 +26,6 @@ env:
   # The testing image (the daily build): most recipes and Brewfiles come from
   # projectbluefin/common and ublue-os/brew, not from this repository
   IMAGE: ghcr.io/celenn-os/celenn:testing
-  # Until the first testing build under the new name: the same channel of
-  # the image published under the project's old name. Remove in the cleanup
-  # after the rename.
-  OLD_IMAGE: ghcr.io/celenn-os/cosmic-blue:testing
 
 jobs:
   check:
@@ -44,10 +40,6 @@ jobs:
       - name: Copy the image's lists and recipes
         run: |
           mkdir -p "${RUNNER_TEMP}/image/usr/share/flatpak"
-          if ! skopeo inspect --raw "docker://${IMAGE}" >/dev/null 2>&1; then
-            echo "::notice::${IMAGE} is not published yet, using ${OLD_IMAGE}"
-            IMAGE="${OLD_IMAGE}"
-          fi
           podman pull -q "${IMAGE}"
           podman create --name image "${IMAGE}" true >/dev/null
           podman cp image:/usr/share/ublue-os "${RUNNER_TEMP}/image/usr/share/"

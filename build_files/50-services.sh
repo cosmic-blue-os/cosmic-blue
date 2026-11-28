@@ -8,8 +8,6 @@ systemctl enable \
     celenn-login-pictures.path \
     celenn-login-pictures.service \
     celenn-migrate-defaults.service \
-    celenn-migrate-names.service \
-    cosmic-blue-move-to-celenn.timer \
     celenn-parental-controls.service \
     celenn-user-defaults.service \
     celenn-root-mount-options.service \

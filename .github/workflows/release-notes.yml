@@ -97,25 +97,11 @@ jobs:
           out="${RUNNER_TEMP}/notes"
           mkdir -p "${out}"
 
-          # Images from before the rename to Celenn OS are under the old
-          # name: the previous stable, and testing or stable until the first
-          # builds under the new name. Remove in the cleanup after the rename.
-          old_image="${IMAGE_REGISTRY,,}/cosmic-blue"
-          found_ref() {
-            local new="$1" old="$2"
-            if ! skopeo inspect --raw "docker://${new}" >/dev/null 2>&1 \
-              && skopeo inspect --raw "docker://${old}" >/dev/null 2>&1; then
-              echo "::notice::${new} not found, using ${old}" >&2
-              new="${old}"
-            fi
-            echo "${new}"
-          }
-
           ref_of() {
             if [[ "$1" == sha256:* ]]; then
-              found_ref "${image}@$1" "${old_image}@$1"
+              echo "${image}@$1"
             else
-              found_ref "${image}:$1" "${old_image}:$1"
+              echo "${image}:$1"
             fi
           }
 
@@ -143,7 +129,7 @@ jobs:
           # else from the image itself for the images built without one
           nvidia_of() {
             local nv evr
-            nv="$(found_ref "${image}-nvidia:$1" "${old_image}-nvidia:$1")"
+            nv="${image}-nvidia:$1"
             evr="$(cosign verify-attestation --key cosign.pub --type spdxjson \
                      --insecure-ignore-tlog=true "${nv}" 2>/dev/null \
                    | head -n 1 \

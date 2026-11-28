@@ -22,13 +22,6 @@ mkdir -p "${out}"
 
 fail() { echo "::error file=website/fetch-screenshots.sh::Screenshots: $*"; exit 1; }
 
-# Until the first stable promotion under the new name: the stable image
-# published under the project's old name. Remove in the cleanup after the
-# rename.
-if ! skopeo inspect --raw "${image}" >/dev/null 2>&1 && [[ "${repo,,}" == celenn-os/celenn ]]; then
-    echo "::notice::${image} is not published yet, using the image of the old name"
-    image="docker://ghcr.io/celenn-os/cosmic-blue:stable"
-fi
 labels="$(skopeo inspect --retry-times 3 "${image}")" || fail "could not read ${image}"
 # The boot test artifact is named after the image (boot-test-celenn)
 image_name="${image##*/}"

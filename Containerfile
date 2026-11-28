@@ -46,7 +46,7 @@ COPY --from=helpers /icons /icons
 COPY --from=helpers /cursors /system_files/celenn/usr/share/icons
 COPY --from=helpers /uupd /uupd
 # Public key used to verify the image signature on update
-COPY cosign.pub /system_files/celenn/etc/pki/containers/cosmic-blue.pub
+COPY cosign.pub /system_files/celenn/etc/pki/containers/celenn.pub
 
 FROM ${BASE_IMAGE}
 

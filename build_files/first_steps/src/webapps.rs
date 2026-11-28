@@ -42,7 +42,9 @@ const GROUPS: &str = "cosmic/com.system76.CosmicAppLibrary/v1/groups";
 /// How much of an icon's square its picture fills (as the system's icons)
 const ICON_FILL: f32 = 0.82;
 /// The launcher's key that keeps the web app's address
-const URL_KEY: &str = "X-CosmicBlue-WebApp-Url";
+const URL_KEY: &str = "X-Celenn-WebApp-Url";
+/// The same key, in launchers made before the project was renamed
+const URL_KEY_BEFORE_RENAME: &str = "X-CosmicBlue-WebApp-Url";
 const FIREFOX: &str = "org.mozilla.firefox";
 /// Tiles on a line (the page is as wide as the toolbox, WIDE in tools.rs):
 /// three, so that names and captions are not cut, in tiles as low as the
@@ -705,7 +707,7 @@ pub fn installed() -> Vec<WebApp> {
             Some(WebApp {
                 id: id.to_owned(),
                 name: value("Name")?,
-                url: value(URL_KEY)?,
+                url: value(URL_KEY).or_else(|| value(URL_KEY_BEFORE_RENAME))?,
             })
         })
         .collect();

@@ -323,15 +323,11 @@ jobs:
           # ISO (which replaces its previous version) must fit in 10 GB.
           # Otherwise keep the current download, open an issue and fail the
           # job so the maintainer is notified and can review.
-          # The ISO published under the project's old name (celenn-live-amd64.iso
-          # for celenn-live-amd64.iso) is replaced too, and removed after the
-          # upload. Remove in the cleanup after the rename.
-          old_name="cosmic-blue${ISO_NAME#celenn}"
           size=$(stat -c %s "${ISO_NAME}.iso")
           others=$(aws s3api list-objects-v2 --endpoint-url "${endpoint}" \
             --bucket "${R2_BUCKET}" --output json \
-            | jq --arg own "${ISO_NAME}.iso" --arg old "${old_name}.iso" \
-              '[.Contents[]? | select(.Key as $key | [$own, $own + ".sha256", $own + ".sha256.sigstore.json", $old, $old + ".sha256", $old + ".sha256.sigstore.json"] | index($key) | not) | .Size] | add // 0')
+            | jq --arg own "${ISO_NAME}.iso" \
+              '[.Contents[]? | select(.Key as $key | [$own, $own + ".sha256", $own + ".sha256.sigstore.json"] | index($key) | not) | .Size] | add // 0')
           total=$(( size + others ))
           total_gb=$(awk -v s="${total}" 'BEGIN { printf "%.2f", s / 1e9 }')
           echo "R2 bucket after upload: ${total_gb} GB"
@@ -371,9 +367,6 @@ jobs:
             "${ISO_NAME}.iso.sha256.sigstore.json" "s3://${R2_BUCKET}/${ISO_NAME}.iso.sha256.sigstore.json"
           aws s3 cp --endpoint-url "${endpoint}" --no-progress \
             "${ISO_NAME}.iso.sha256" "s3://${R2_BUCKET}/${ISO_NAME}.iso.sha256"
-          for file in "${old_name}.iso" "${old_name}.iso.sha256" "${old_name}.iso.sha256.sigstore.json"; do
-            aws s3 rm --endpoint-url "${endpoint}" "s3://${R2_BUCKET}/${file}"
-          done
 
   # A failed ISO build or install test opens an issue, closed by the next
   # run that passes (pull requests excluded)

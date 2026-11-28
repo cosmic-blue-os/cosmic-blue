@@ -118,21 +118,6 @@ jobs:
           previous="$(digest_of stable || true)"
           # Installed first by the update test: the current stable image
           from="${image}:stable"
-          # Before the first stable under the new name, the stable image of
-          # the project's old name (ghcr.io/celenn-os/cosmic-blue): the update
-          # test then checks the move to Celenn OS. Remove in the cleanup
-          # after the rename.
-          if [[ -z "${previous}" ]]; then
-            old_image="${IMAGE_REGISTRY,,}/${IMAGE_NAME,,}"
-            old_image="${old_image/%\/celenn/\/cosmic-blue}"
-            old_image="${old_image/%\/celenn-nvidia/\/cosmic-blue-nvidia}"
-            if previous="$(skopeo inspect --creds "${creds}" --format '{{.Digest}}' "docker://${old_image}:stable" 2>/dev/null)"; then
-              from="${old_image}:stable"
-              echo "::notice::No stable ${image} yet: the update test starts from ${from}"
-            else
-              previous=""
-            fi
-          fi
 
           # Pick the source: the given tag, or the most recent daily build
           # that is at least SOAK_DAYS old (a day without a green build has

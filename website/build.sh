@@ -202,7 +202,6 @@ for page in "${all_pages[@]}"; do
   fi
 done
 cp "${root}/website/style.css" "${root}/website/site.js" "${out}/"
-# (The pages still use the file names from before the rename to Celenn OS)
 cp "${root}/branding/logo/celenn-logo.svg" "${out}/img/celenn-logo.svg"
 cp "${root}/branding/logo/celenn-logo-horizontal-dark.svg" \
    "${out}/img/celenn-logo-horizontal-dark.svg"

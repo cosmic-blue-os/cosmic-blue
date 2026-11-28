@@ -266,24 +266,18 @@ grep -qsx 'HOMEBREW_NO_ANALYTICS=1' /etc/homebrew/brew.env \
 # Only accept key-signed Celenn OS images (cosign.pub, signed by build.yml).
 # The scope is the whole namespace, so that switching between celenn and
 # celenn-nvidia is verified too.
-# The namespace of the project's old name, ghcr.io/cosmic-blue-os, stays
-# trusted with the same key until the cleanup after the rename.
 IMAGE="ghcr.io/${IMAGE_VENDOR}"
-OLD_IMAGE="ghcr.io/cosmic-blue-os"
-jq --arg image "$IMAGE" --arg old "$OLD_IMAGE" 'del(.transports.docker[$image + "/celenn"])
+jq --arg image "$IMAGE" 'del(.transports.docker[$image + "/celenn"])
     | .transports.docker[$image] = [{
     "type": "sigstoreSigned",
-    "keyPath": "/etc/pki/containers/cosmic-blue.pub",
+    "keyPath": "/etc/pki/containers/celenn.pub",
     "signedIdentity": {"type": "matchRepository"}
-}]
-    | .transports.docker[$old] = .transports.docker[$image]' /etc/containers/policy.json > /tmp/policy.json
+}]' /etc/containers/policy.json > /tmp/policy.json
 mv /tmp/policy.json /etc/containers/policy.json
 mkdir -p /etc/containers/registries.d
 cat > /etc/containers/registries.d/celenn.yaml <<EOF
 docker:
   ${IMAGE}:
-    use-sigstore-attachments: true
-  ${OLD_IMAGE}:
     use-sigstore-attachments: true
 EOF
 

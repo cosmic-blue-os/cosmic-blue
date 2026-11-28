@@ -39,10 +39,5 @@ for service in cosmic-greeter greetd; do
     fi
     cat "${pam}"
 done
-# Systems installed before the rename to Celenn OS may keep an /etc/pam.d copy
-# that names the module's old name (an /etc file changed by hand is not
-# replaced on update): the old name leads to the same module. Remove in the
-# cleanup after the rename.
-ln -sf pam_celenn_parental.so /usr/lib64/security/pam_cosmic_blue_parental.so
 grep -qx 'service = "cosmic-greeter"' /etc/greetd/cosmic-greeter.toml \
     || { echo "The login screen's PAM service changed" >&2; exit 1; }

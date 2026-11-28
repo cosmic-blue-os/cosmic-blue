@@ -9,7 +9,7 @@ VERSION="${VERSION:-${FEDORA_MAJOR_VERSION}.$(date +%Y%m%d)}"
 
 # The image is verified with cosign.pub (see 10-system-files.sh); without it,
 # bootc cannot verify the signature and the image is referenced as "unverified".
-if [[ -f /etc/pki/containers/cosmic-blue.pub ]]; then
+if [[ -f /etc/pki/containers/celenn.pub ]]; then
     IMAGE_REF="ostree-image-signed:docker://ghcr.io/${IMAGE_VENDOR}/${IMAGE_NAME}"
 else
     IMAGE_REF="ostree-unverified-registry:ghcr.io/${IMAGE_VENDOR}/${IMAGE_NAME}"

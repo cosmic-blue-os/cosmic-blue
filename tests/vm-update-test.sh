@@ -78,19 +78,9 @@ log "Updating to ${TO}"
 bootc_cmd=bootc
 vm "grep -q update-progress /usr/libexec/celenn-bootc" 2>/dev/null \
     && bootc_cmd=/usr/libexec/celenn-bootc
-# The signature is checked when the old image trusts the namespace of TO.
-# Images from before the rename to Celenn OS do not trust ghcr.io/celenn-os:
-# they move to it by hand, without the check, and the new image turns it
-# back on (celenn-signed-updates). Remove in the cleanup after the rename.
-sigpolicy=--enforce-container-sigpolicy
-namespace="$(cut -d/ -f1-2 <<<"${TO}")"
-if ! vm "jq -e '.transports.docker.\"${namespace}\"[0].type == \"sigstoreSigned\"' /etc/containers/policy.json" >/dev/null 2>&1; then
-    echo "::warning::${FROM} does not trust ${namespace}: switching without the signature check, as its users do"
-    sigpolicy=""
-fi
 vm "(while sleep 1; do cp /run/celenn/update-progress.jsonl /run/progress-seen 2>/dev/null; done) >/dev/null 2>&1 &
     watcher=\$!
-    timeout 1800 ${bootc_cmd} switch ${sigpolicy} ${TO}; status=\$?
+    timeout 1800 ${bootc_cmd} switch --enforce-container-sigpolicy ${TO}; status=\$?
     kill \${watcher}
     exit \${status}" \
     || fail "bootc could not update to ${TO} (pull or signature check failed)"

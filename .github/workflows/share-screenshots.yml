@@ -38,18 +38,11 @@ jobs:
                 --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
           fi
           mkdir -p shots
-          # Builds from before the rename name their results after
-          # cosmic-blue: stored under the new names, so that two runs compare
-          # folder by folder. Remove in the cleanup after the rename.
           for image in celenn celenn-nvidia; do
-            old="cosmic-blue${image#celenn}"
-            for name in "${image}" "${old}"; do
-              if gh run download "${RUN_ID}" -R "${REPO}" -n "boot-test-${name}" -D "dl/${image}"; then
-                mkdir -p "shots/${image}"
-                cp dl/"${image}"/screenshots/* "shots/${image}/" 2>/dev/null || true
-                break
-              fi
-            done
+            if gh run download "${RUN_ID}" -R "${REPO}" -n "boot-test-${image}" -D "dl/${image}"; then
+              mkdir -p "shots/${image}"
+              cp dl/"${image}"/screenshots/* "shots/${image}/" 2>/dev/null || true
+            fi
           done
           [[ -n "$(ls -A shots)" ]] || { echo "::error::No screenshots in run ${RUN_ID}"; exit 1; }
           printf 'Screenshots of build run %s/%s/actions/runs/%s\n' \
