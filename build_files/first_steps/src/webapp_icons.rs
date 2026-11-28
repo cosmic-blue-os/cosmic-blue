@@ -6,7 +6,7 @@
 // into ~/.cache/celenn/site-icons when the tool opens: nothing is shipped
 // in the image.
 
-use crate::webapp_launcher::{ID_PREFIX, app_id, icon_paths};
+use crate::webapp_launcher::{ID_PREFIX, app_id, icon_paths, launcher, refresh_app_list};
 use crate::webapp_site::{absolute, attribute, download, fetch, icon_candidates};
 use crate::webapps::SITES;
 use std::path::{Path, PathBuf};
@@ -96,9 +96,40 @@ pub fn cache_icon(url: &str) {
     let _ = std::fs::rename(&svg_part, &svg);
     if found {
         let _ = std::fs::remove_file(&none);
+        // A web app of this site made with a letter or older logo
+        if let (Some(id), Some(icon)) = (app_id(url), cached_icon(url))
+            && launcher(&id).is_file()
+            && set_icon(&id, &icon).is_ok()
+        {
+            refresh_app_list();
+        }
     } else {
         let _ = std::fs::write(&none, "");
     }
+}
+
+/// The web app's icon, framed, from an icon file (which may be its own)
+pub fn set_icon(id: &str, source: &Path) -> std::io::Result<()> {
+    let [png, svg] = icon_paths(id);
+    let staged = std::env::temp_dir().join(format!(
+        "{}-{}.{}",
+        id,
+        std::process::id(),
+        source
+            .extension()
+            .and_then(|ext| ext.to_str())
+            .unwrap_or("png")
+    ));
+    std::fs::copy(source, &staged)?;
+    for path in [&png, &svg] {
+        if let Some(dir) = path.parent() {
+            std::fs::create_dir_all(dir)?;
+        }
+        let _ = std::fs::remove_file(path);
+    }
+    let framed = frame_file(&staged, &png, &svg);
+    let _ = std::fs::remove_file(&staged);
+    framed
 }
 
 /// The site's icon at the icon theme's place: the one in the cache, or its

@@ -47,6 +47,18 @@ pub fn applications() -> PathBuf {
     data_home().join("applications")
 }
 
+/// The app list and the dock read launchers and icons again
+pub fn refresh_app_list() {
+    let _ = std::process::Command::new("update-desktop-database")
+        .arg(applications())
+        .status();
+    // (the icon theme's folder changed: icon caches look at its time)
+    let hicolor = data_home().join("icons/hicolor");
+    if let Ok(dir) = std::fs::File::open(&hicolor) {
+        let _ = dir.set_modified(std::time::SystemTime::now());
+    }
+}
+
 pub fn launcher(id: &str) -> PathBuf {
     applications().join(format!("{id}.desktop"))
 }

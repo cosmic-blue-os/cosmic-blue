@@ -10,6 +10,9 @@
 //     or at once when it gets critical. Never in a child's session (Parental
 //     controls): the parent sees it in theirs.
 //
+//   - Web apps made by an older version are brought up to date
+//     (webapps::update_older), once.
+//
 // Both are on by default; the Free up space tool turns them off. Off is a
 // file in ~/.config/celenn/ (keep-trash, no-disk-warning), so nothing
 // is written while they stay on.
@@ -230,6 +233,7 @@ fn notify(free: u64) {
 
 /// `celenn-tools --housekeeping`: the timer's run
 pub fn run() -> i32 {
+    crate::webapps::update_older();
     if trash_auto() {
         let deleted = purge_trash(TRASH_DAYS);
         if deleted > 0 {

@@ -463,6 +463,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if let Some(code) = updates_page::command_line(options) {
         std::process::exit(code);
     }
+    // (web apps made by an older version, without opening their page)
+    webapps::update_older();
     let settings = Settings::default()
         .size(cosmic::iced::Size::new(1000.0, 760.0))
         .size_limits(Limits::NONE.min_width(520.0).min_height(480.0));

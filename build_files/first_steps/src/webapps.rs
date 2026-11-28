@@ -14,10 +14,12 @@
 use crate::common::{ToastAsk, dim_caption, label, row_title, toast, tool_icon};
 use crate::i18n::{fill, tr};
 use crate::webapp_folder::update_folder;
-use crate::webapp_icons::{cache_icons, frame_file, icon_missing, install_icon, site_icons};
+use crate::webapp_icons::{
+    cache_icons, cached_icon, icon_missing, install_icon, set_icon, site_icons,
+};
 use crate::webapp_launcher::{
-    CATEGORY, WebApp, app_id, applications, desktop_entry, firefox_installed, host, icon_file,
-    icon_paths, installed, launcher, normalize, pin, profile, valid_id, write_profile,
+    WebApp, app_id, desktop_entry, firefox_installed, host, icon_file, icon_paths, installed,
+    launcher, normalize, pin, profile, refresh_app_list, valid_id, write_profile,
 };
 use crate::webapp_site::{fetch, name_from_host, site_name};
 use cosmic::app::Task;
@@ -293,9 +295,7 @@ impl Page {
     }
 
     pub fn view(&self) -> Element<'_, Message> {
-        let cosmic_theme::Spacing {
-            space_xs, space_s, ..
-        } = theme::spacing();
+        let cosmic_theme::Spacing { space_s, .. } = theme::spacing();
         // The popular sites, then the other web apps, three per line
         let mut tiles: Vec<Element<'_, Message>> = SITES
             .iter()
@@ -355,10 +355,10 @@ impl Page {
                 }),
         );
         let mut grid =
-            widget::column::with_capacity(tiles.len().div_ceil(PER_LINE)).spacing(space_xs);
+            widget::column::with_capacity(tiles.len().div_ceil(PER_LINE)).spacing(space_s);
         let mut tiles = tiles.into_iter().peekable();
         while tiles.peek().is_some() {
-            let mut line = widget::row::with_capacity(PER_LINE).spacing(space_xs);
+            let mut line = widget::row::with_capacity(PER_LINE).spacing(space_s);
             let mut count = 0;
             for tile in tiles.by_ref().take(PER_LINE) {
                 line = line.push(tile);
@@ -449,7 +449,7 @@ fn tile<'a>(
         .class(crate::style::tile_style(added))
         .padding(0)
         .width(Length::Fill)
-        .height(Length::Fixed(44.0))
+        .height(Length::Fixed(54.0))
         .on_press_maybe(on_press)
         .into()
 }
@@ -493,9 +493,7 @@ fn create(name: Option<&str>, url: &str, dock: bool) -> Result<WebApp, String> {
         pin(&id, true);
     }
     // The app list and the dock read the new launcher
-    let _ = std::process::Command::new("update-desktop-database")
-        .arg(applications())
-        .status();
+    refresh_app_list();
     update_folder();
     Ok(WebApp {
         id,
@@ -519,29 +517,38 @@ fn remove(id: &str) {
     update_folder();
 }
 
-/// Web apps made by an older version: launcher with the folder's category,
-/// framed icon
-fn update_older() {
-    let mut changed = false;
-    for app in installed() {
-        let file = launcher(&app.id);
-        let Ok(content) = std::fs::read_to_string(&file) else {
-            continue;
-        };
-        if content.contains(CATEGORY) {
-            continue;
+/// What web apps made by an older version lack, made once per account
+/// (a number in ~/.local/state/celenn/web-apps): 2 = the folder's category,
+/// framed icons, the site's own logo when the cache now has it
+const WEB_APPS_VERSION: &str = "2";
+
+/// Brings web apps made by an older version up to date: launcher with the
+/// folder's category and the current keys, framed icon (the site's cached
+/// logo when there is one), the folder. Runs when Tools starts and in
+/// housekeeping, so people do not have to open the page.
+pub fn update_older() {
+    let state = crate::system::xdg("XDG_STATE_HOME", ".local/state").join("celenn/web-apps");
+    let done = std::fs::read_to_string(&state).is_ok_and(|v| v.trim() == WEB_APPS_VERSION);
+    let apps = installed();
+    if !done {
+        for app in &apps {
+            let file = launcher(&app.id);
+            let entry = desktop_entry(&app.id, &app.name, &app.url, &profile(&app.id));
+            if std::fs::read_to_string(&file).is_ok_and(|content| content != entry) {
+                let _ = std::fs::write(&file, entry);
+            }
+            let source = cached_icon(&app.url).or_else(|| icon_file(&app.id));
+            if let Some(source) = source {
+                let _ = set_icon(&app.id, &source);
+            }
         }
-        if let Some(icon) = icon_file(&app.id) {
-            let [png, svg] = icon_paths(&app.id);
-            let _ = frame_file(&icon, &png, &svg);
+        if !apps.is_empty() {
+            refresh_app_list();
         }
-        let entry = desktop_entry(&app.id, &app.name, &app.url, &profile(&app.id));
-        changed |= std::fs::write(&file, entry).is_ok();
-    }
-    if changed {
-        let _ = std::process::Command::new("update-desktop-database")
-            .arg(applications())
-            .status();
+        if let Some(dir) = state.parent() {
+            let _ = std::fs::create_dir_all(dir);
+        }
+        let _ = std::fs::write(&state, WEB_APPS_VERSION);
     }
     update_folder();
 }
