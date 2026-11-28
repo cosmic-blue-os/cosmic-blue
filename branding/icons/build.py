@@ -504,6 +504,33 @@ TOOLS_SYMBOLIC = {
 }
 
 
+
+# The symbol of Celenn OS Tools' "Change computers" tool, on its tile and at
+# the top of its page: the old computer's screen (translucent), the new one's,
+# and an arrow from the first to the second. Same 64px space and 40px window
+# as TOOLS_SYMBOLIC, drawn bold: the app shows it at 18 and 22 px.
+def screen(x, y, w=19, h=14.5, t=4, r=2.8):
+    """A screen on its stand, the screen hollow; x, y: its top left corner"""
+    def n(v):
+        return f"{v:g}"
+    cx = x + w / 2
+    side, top = w - 2 * r, h - 2 * r
+    return (f'<path fill-rule="evenodd" d="M{n(x + r)} {n(y)}h{n(side)}a{r} {r} 0 0 1 {r} {r}v{n(top)}'
+            f'a{r} {r} 0 0 1 -{r} {r}h-{n(side)}a{r} {r} 0 0 1 -{r} -{r}v-{n(top)}a{r} {r} 0 0 1 {r} -{r}z'
+            f'M{n(x + t)} {n(y + t)}v{n(h - 2 * t)}h{n(w - 2 * t)}v-{n(h - 2 * t)}z" fill="#fff"/>'
+            f'<rect x="{n(cx - 2.5)}" y="{n(y + h - 1)}" width="5" height="4.1" fill="#fff"/>'
+            f'<rect x="{n(cx - 6)}" y="{n(y + h + 2.6)}" width="12" height="3" rx="1.5" fill="#fff"/>')
+
+
+# (the translucent screen is one group, so that its overlapping parts are
+# not darker)
+TOOLS_TRANSFER = tools_symbolic(
+    f'<g opacity=".45">{screen(12, 28)}</g>' + screen(33, 28)
+    + '<path d="M21.5 25C22.5 13 35.5 12 40.3 19.3" fill="none" stroke="#fff" stroke-width="4" '
+    'stroke-linecap="round"/>'
+    '<path d="M42 25.8l-6.6-7.4h13.2z" fill="#fff" transform="rotate(-16 42 25.8)"/>')
+
+
 # Icon -> names (the desktop entries of the dock buttons and of the apps
 # they open). The first name gets the file, the others are links to it.
 # COSMIC Files: a folder, its back panel with the tab in translucent white
@@ -615,6 +642,7 @@ def main():
     (HICOLOR_APPS / "celenn-tools-appearance.svg").write_text(TOOLS_APPEARANCE)
     for name, icon in TOOLS_SYMBOLIC.items():
         (HICOLOR_APPS / f"celenn-tools-{name}-symbolic.svg").write_text(icon)
+    (HICOLOR_APPS / "celenn-tools-transfer-symbolic.svg").write_text(TOOLS_TRANSFER)
     # Bring your things: COSMIC Files' folder
     for name, icon in {**TOUR_ICONS, "celenn-tour-files": FILES}.items():
         (HICOLOR_APPS / f"{name}.svg").write_text(icon)

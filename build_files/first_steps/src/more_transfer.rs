@@ -1,15 +1,18 @@
-// "Change computers" on the Appearance page (more.rs): the row's Save and
-// Restore… buttons, and the dialog that takes a file back (transfer.rs).
+// The "Change computers" tool (more.rs): its rows, in the order things are
+// done, and the dialog that takes a file back (transfer.rs).
 //
-//   Save      the settings and the app list to Documents, then a toast
-//             with Show (the folder, to copy the file to a USB drive)
-//   Restore…  the file chooser, then the dialog: what the file has, ticked
-//             by group (developer tools left unticked), Restore, then what
-//             was done and what was not, with why
+//   Save my settings     (on the old computer) Save: the settings and the
+//                        app list to Documents, then a toast with Show (the
+//                        folder, to copy the file to a USB drive)
+//   Restore my settings  (on the new one) Restore…: the file chooser, then
+//                        the dialog: what the file has, ticked by group
+//                        (developer tools left unticked), Restore, then what
+//                        was done and what was not, with why
+//   My files             not in the file: a USB drive, or LocalSend
 
-use super::{Message, Page, apply_list, refresh};
+use super::{LOCALSEND, Message, Page, State, apply_list, refresh};
 use crate::apps::{CATEGORIES, DEVELOPMENT};
-use crate::common::{label, spawn, state_icon};
+use crate::common::{spawn, state_icon};
 use crate::failure;
 use crate::i18n::{fill, tr};
 use crate::transfer::{self, Group, Report, Restore};
@@ -35,6 +38,7 @@ pub enum TransferMessage {
     /// to install, or the password prompt was dismissed)
     Done(Report, Option<bool>),
     Close,
+    OpenLocalSend,
 }
 
 /// The dialog's steps
@@ -306,13 +310,14 @@ impl Page {
                 return refresh();
             }
             TransferMessage::Close => self.restore = None,
+            TransferMessage::OpenLocalSend => spawn("flatpak", &["run", LOCALSEND]),
         }
         Task::none()
     }
 
-    /// The Appearance page's row
-    pub(super) fn transfer_row<'a>(&self) -> Element<'a, Message> {
-        let space_s = theme::spacing().space_s;
+    /// The tool's rows: save on the old computer, take back on the new one,
+    /// and the files, which travel apart
+    pub(super) fn transfer<'a>(&self, state: &State) -> Element<'a, Message> {
         let busy = self.saving || self.restore.is_some();
         let save: Element<'a, Message> = if self.saving {
             widget::progress_bar::indeterminate_circular()
@@ -323,25 +328,41 @@ impl Page {
                 .on_press_maybe((!busy).then_some(Message::Transfer(TransferMessage::Save)))
                 .into()
         };
-        settings::item_row(vec![
-            state_icon("emblem-synchronizing-symbolic", false),
-            label(
-                tr("Change computers"),
-                tr("Your settings and the list of your apps in a file, to take back on another Celenn OS computer.")
-                    .to_owned(),
-            ),
-            widget::row::with_capacity(2)
-                .spacing(theme::spacing().space_xxs)
-                .align_y(Alignment::Center)
-                .push(save)
-                .push(
-                    widget::button::standard(tr("Restore…"))
-                        .on_press_maybe((!busy).then_some(Message::Transfer(TransferMessage::Open))),
-                )
-                .into(),
-        ])
-        .spacing(space_s)
-        .into()
+        let restore = widget::button::standard(tr("Restore…"))
+            .on_press_maybe((!busy).then_some(Message::Transfer(TransferMessage::Open)))
+            .into();
+        // LocalSend is a first-boot app; without it, the caption still says
+        // what to do
+        let localsend = if state.localsend {
+            widget::button::standard(tr("Open LocalSend"))
+                .on_press(Message::Transfer(TransferMessage::OpenLocalSend))
+                .into()
+        } else {
+            widget::space::horizontal().width(0).into()
+        };
+        settings::section()
+            .add(self.row(
+                "document-save-symbolic",
+                "Save my settings",
+                "Look, keyboard, shortcuts and the list of your apps, in a file in Documents. Copy it to a USB drive to take it along.",
+                save,
+                None,
+            ))
+            .add(self.row(
+                "document-open-symbolic",
+                "Restore my settings",
+                "On the new computer, choose the file saved on the old one, then tick what you want back.",
+                restore,
+                None,
+            ))
+            .add(self.row(
+                "folder-symbolic",
+                "My files",
+                "Documents and photos are not in the settings file: copy them to a USB drive, or send them over Wi-Fi with LocalSend, open on both computers.",
+                localsend,
+                None,
+            ))
+            .into()
     }
 
     /// The dialog that takes a file back

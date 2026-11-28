@@ -56,6 +56,8 @@ const TOOLS_HELPER: &str = "/usr/libexec/celenn-tools-helper";
 const FONTS_LICENSE: &str = "https://corefonts.sourceforge.net/eula.htm";
 const VMS: &str = "org.virt_manager.virt-manager";
 const SCANNER: &str = "org.gnome.SimpleScan";
+/// Change computers: files to the other computer over Wi-Fi (a first-boot app)
+const LOCALSEND: &str = "org.localsend.localsend_app";
 
 pub const TEXTS: &[&str] = &[
     // The Install apps tool
@@ -177,6 +179,8 @@ pub struct State {
     disks: Vec<crate::disks::Disk>,
     /// Document Scanner is installed
     scanner: bool,
+    /// LocalSend is installed
+    localsend: bool,
     /// None: no laptop battery whose charge can be limited
     battery_limit: Option<bool>,
     /// None: no NVIDIA graphics card. Some(true): the NVIDIA edition runs
@@ -526,6 +530,7 @@ pub fn read_state() -> State {
         printers: printers(),
         disks: crate::disks::read(),
         scanner: has(SCANNER),
+        localsend: has(LOCALSEND),
         battery_limit,
         nvidia,
         driver_key: if nvidia == Some(true) {
@@ -910,7 +915,7 @@ impl Page {
                     Some(Job::Fonts(true)),
                 )),
                 Part::Apps => self.software(state),
-                Part::Transfer => section(self.transfer_row()),
+                Part::Transfer => self.transfer(state),
                 Part::Repair => self.repair(),
                 Part::Advanced => self.advanced(state),
             })
@@ -990,7 +995,7 @@ impl Page {
                 .to_owned(),
             ),
             Part::Apps => Summary::Says(tr("Office, games, school, development…").to_owned()),
-            Part::Transfer => Summary::Says(tr("Your settings and apps, in one file.").to_owned()),
+            Part::Transfer => Summary::Says(tr("Settings, apps and files").to_owned()),
             Part::Repair | Part::Advanced => Summary::Unknown,
         }
     }

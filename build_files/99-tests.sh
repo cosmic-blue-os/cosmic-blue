@@ -583,6 +583,8 @@ grep -qx 'Exec=/usr/libexec/celenn-tools' \
     /usr/share/applications/io.github.celenn_os.Tools.desktop
 grep -qx 'Icon=celenn-tools' /usr/share/applications/io.github.celenn_os.Tools.desktop
 test -s /usr/share/icons/hicolor/scalable/apps/celenn-tools.svg
+# The Change computers tool's own symbol (branding/icons/build.py)
+test -s /usr/share/icons/hicolor/scalable/apps/celenn-tools-transfer-symbolic.svg
 grep -qx 'Exec=/usr/libexec/celenn-tools --updates' \
     /usr/share/applications/io.github.celenn_os.Updates.desktop
 grep -qx 'Icon=celenn-update' /usr/share/applications/io.github.celenn_os.Updates.desktop
