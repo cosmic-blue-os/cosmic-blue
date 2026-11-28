@@ -786,8 +786,9 @@ fn remove(id: &str) {
 
 /// What web apps made by an older version lack, made once per account
 /// (a number in ~/.local/state/celenn/web-apps): 2 = the folder's category,
-/// framed icons, the site's own logo when the cache now has it
-const WEB_APPS_VERSION: &str = "2";
+/// framed icons, the site's own logo when the cache now has it;
+/// 3 = the grid sites without a logo are asked again (a new way to get it)
+const WEB_APPS_VERSION: &str = "3";
 
 /// Brings web apps made by an older version up to date: launcher with the
 /// folder's category and the current keys, framed icon (the site's cached
@@ -798,6 +799,11 @@ pub fn update_older() {
     let done = std::fs::read_to_string(&state).is_ok_and(|v| v.trim() == WEB_APPS_VERSION);
     let apps = installed();
     if !done {
+        for (_, url, _) in SITES {
+            if let Some([_, _, none]) = cache_paths(url) {
+                let _ = std::fs::remove_file(none);
+            }
+        }
         for app in &apps {
             let file = launcher(&app.id);
             let entry = desktop_entry(&app.id, &app.name, &app.url, &profile(&app.id));
@@ -1270,7 +1276,7 @@ fn install_icon(
 /// larger one) to `png` or `svg`; false when it has none. Its page's icons
 /// first, then the usual icons at the address asked (a site that sends
 /// programs to a sign-in page, or that only answers browsers, has its
-/// icons there).
+/// icons there), then for the grid's sites Google's favicon service.
 fn site_icon(
     png: &Path,
     svg: &Path,
@@ -1285,6 +1291,15 @@ fn site_icon(
         {
             candidates.push(usual);
         }
+    }
+    // A popular site of the grid that only answers browsers (Messenger,
+    // Instagram): its icon as Google's favicon service keeps it. Only the
+    // grid's sites, so an address someone types is never sent to Google.
+    if SITES.iter().any(|(_, site, _)| *site == url) {
+        candidates.push(format!(
+            "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON\
+             &fallback_opts=TYPE,SIZE,URL&size=256&url={url}"
+        ));
     }
     let mut small: Option<image::DynamicImage> = None;
     for candidate in &candidates {
