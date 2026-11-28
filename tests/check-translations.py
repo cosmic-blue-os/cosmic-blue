@@ -140,5 +140,18 @@ for root, pot in PROGRAMS.items():
                 line = source.count("\n", 0, match.start()) + 1
                 print(f"{file.relative_to(CRATE)}:{line}: not in {pot}: {text!r}")
                 errors += 1
+# The French and Italian texts of the launchers and the password prompts
+# (Keywords stay as people type them)
+SYSTEM_TEXT = re.compile(
+    r'^(?:Name|GenericName|Comment)\[(?:fr|it)\]=(.*)$|xml:lang="(?:fr|it)">([^<]*)<', re.M
+)
+for file in sorted((CRATE / "../../system_files").resolve().rglob("*")):
+    if file.suffix not in (".desktop", ".policy") or not file.is_file():
+        continue
+    for match in SYSTEM_TEXT.finditer(file.read_text()):
+        text = match.group(1) or match.group(2) or ""
+        if STRAIGHT_APOSTROPHE.search(text):
+            print(f"{file.relative_to(CRATE.parent.parent)}: straight apostrophe, use ’: {text!r}")
+            errors += 1
 print(f"translations: {errors} problem(s) found")
 sys.exit(1 if errors else 0)

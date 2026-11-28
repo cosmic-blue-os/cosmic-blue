@@ -32,13 +32,13 @@
   </action>
   <action id="io.github.celenn_os.parental.extend">
     <description>Give more screen time</description>
-    <description xml:lang="fr">Accorder plus de temps d'écran</description>
+    <description xml:lang="fr">Accorder plus de temps d’écran</description>
     <description xml:lang="de">Mehr Bildschirmzeit gewähren</description>
     <description xml:lang="es">Conceder más tiempo de pantalla</description>
     <description xml:lang="it">Concedere più tempo di utilizzo</description>
     <description xml:lang="pt_BR">Conceder mais tempo de tela</description>
     <message>A parent's password is required to give more screen time</message>
-    <message xml:lang="fr">Le mot de passe d'un parent est nécessaire pour accorder plus de temps d'écran</message>
+    <message xml:lang="fr">Le mot de passe d’un parent est nécessaire pour accorder plus de temps d’écran</message>
     <message xml:lang="de">Für mehr Bildschirmzeit ist das Passwort eines Elternteils erforderlich</message>
     <message xml:lang="es">Se necesita la contraseña de un padre o una madre para conceder más tiempo de pantalla</message>
     <message xml:lang="it">Serve la password di un genitore per concedere più tempo di utilizzo</message>
