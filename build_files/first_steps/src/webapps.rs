@@ -469,7 +469,7 @@ fn tile<'a>(
         .class(crate::style::tile_style(added))
         .padding(0)
         .width(Length::Fill)
-        .height(Length::Fixed(46.0))
+        .height(Length::Fixed(54.0))
         .on_press_maybe(on_press)
         .into()
 }
