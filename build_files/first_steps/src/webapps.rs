@@ -316,7 +316,7 @@ impl Page {
 
     pub fn view(&self) -> Element<'_, Message> {
         let cosmic_theme::Spacing {
-            space_xs, space_s, ..
+            space_s, ..
         } = theme::spacing();
         // The popular sites, then the other web apps, three per line
         let mut tiles: Vec<Element<'_, Message>> = SITES
@@ -377,10 +377,10 @@ impl Page {
                 }),
         );
         let mut grid =
-            widget::column::with_capacity(tiles.len().div_ceil(PER_LINE)).spacing(space_xs);
+            widget::column::with_capacity(tiles.len().div_ceil(PER_LINE)).spacing(space_s);
         let mut tiles = tiles.into_iter().peekable();
         while tiles.peek().is_some() {
-            let mut line = widget::row::with_capacity(PER_LINE).spacing(space_xs);
+            let mut line = widget::row::with_capacity(PER_LINE).spacing(space_s);
             let mut count = 0;
             for tile in tiles.by_ref().take(PER_LINE) {
                 line = line.push(tile);
@@ -471,7 +471,7 @@ fn tile<'a>(
         .class(crate::style::tile_style(added))
         .padding(0)
         .width(Length::Fill)
-        .height(Length::Fixed(44.0))
+        .height(Length::Fixed(46.0))
         .on_press_maybe(on_press)
         .into()
 }
@@ -600,6 +600,13 @@ fn cache_icon(url: &str) {
     let _ = std::fs::rename(&svg_part, &svg);
     if found {
         let _ = std::fs::remove_file(&none);
+        // A web app of this site made with a letter or older logo
+        if let (Some(id), Some(icon)) = (app_id(url), cached_icon(url))
+            && launcher(&id).is_file()
+            && set_icon(&id, &icon).is_ok()
+        {
+            refresh_app_list();
+        }
     } else {
         let _ = std::fs::write(&none, "");
     }
@@ -779,31 +786,80 @@ fn remove(id: &str) {
     update_folder();
 }
 
-/// Web apps made by an older version: launcher with the folder's category,
-/// framed icon
-fn update_older() {
-    let mut changed = false;
-    for app in installed() {
-        let file = launcher(&app.id);
-        let Ok(content) = std::fs::read_to_string(&file) else {
-            continue;
-        };
-        if content.contains(CATEGORY) {
-            continue;
+/// What web apps made by an older version lack, made once per account
+/// (a number in ~/.local/state/celenn/web-apps): 2 = the folder's category,
+/// framed icons, the site's own logo when the cache now has it
+const WEB_APPS_VERSION: &str = "2";
+
+/// Brings web apps made by an older version up to date: launcher with the
+/// folder's category and the current keys, framed icon (the site's cached
+/// logo when there is one), the folder. Runs when Tools starts and in
+/// housekeeping, so people do not have to open the page.
+pub fn update_older() {
+    let state = xdg_state().join("celenn/web-apps");
+    let done = std::fs::read_to_string(&state).is_ok_and(|v| v.trim() == WEB_APPS_VERSION);
+    let apps = installed();
+    if !done {
+        for app in &apps {
+            let file = launcher(&app.id);
+            let entry = desktop_entry(&app.id, &app.name, &app.url, &profile(&app.id));
+            if std::fs::read_to_string(&file).is_ok_and(|content| content != entry) {
+                let _ = std::fs::write(&file, entry);
+            }
+            let source = cached_icon(&app.url).or_else(|| icon_file(&app.id));
+            if let Some(source) = source {
+                let _ = set_icon(&app.id, &source);
+            }
         }
-        if let Some(icon) = icon_file(&app.id) {
-            let [png, svg] = icon_paths(&app.id);
-            let _ = frame_file(&icon, &png, &svg);
+        if !apps.is_empty() {
+            refresh_app_list();
         }
-        let entry = desktop_entry(&app.id, &app.name, &app.url, &profile(&app.id));
-        changed |= std::fs::write(&file, entry).is_ok();
-    }
-    if changed {
-        let _ = std::process::Command::new("update-desktop-database")
-            .arg(data_home().join("applications"))
-            .status();
+        if let Some(dir) = state.parent() {
+            let _ = std::fs::create_dir_all(dir);
+        }
+        let _ = std::fs::write(&state, WEB_APPS_VERSION);
     }
     update_folder();
+}
+
+fn xdg_state() -> PathBuf {
+    std::env::var_os("XDG_STATE_HOME")
+        .map(PathBuf::from)
+        .filter(|path| path.is_absolute())
+        .unwrap_or_else(|| home().join(".local/state"))
+}
+
+/// The web app's icon, framed, from an icon file (which may be its own)
+fn set_icon(id: &str, source: &Path) -> std::io::Result<()> {
+    let [png, svg] = icon_paths(id);
+    let staged = std::env::temp_dir().join(format!(
+        "{}-{}.{}",
+        id,
+        std::process::id(),
+        source.extension().and_then(|ext| ext.to_str()).unwrap_or("png")
+    ));
+    std::fs::copy(source, &staged)?;
+    for path in [&png, &svg] {
+        if let Some(dir) = path.parent() {
+            std::fs::create_dir_all(dir)?;
+        }
+        let _ = std::fs::remove_file(path);
+    }
+    let framed = frame_file(&staged, &png, &svg);
+    let _ = std::fs::remove_file(&staged);
+    framed
+}
+
+/// The app list and the dock read launchers and icons again
+fn refresh_app_list() {
+    let _ = std::process::Command::new("update-desktop-database")
+        .arg(data_home().join("applications"))
+        .status();
+    // (the icon theme's folder changed: icon caches look at its time)
+    let hicolor = data_home().join("icons/hicolor");
+    if let Ok(dir) = std::fs::File::open(&hicolor) {
+        let _ = dir.set_modified(std::time::SystemTime::now());
+    }
 }
 
 /// Adds the app list's "Web apps" folder while there are web apps, and
