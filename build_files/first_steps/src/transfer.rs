@@ -94,6 +94,20 @@ const SETTINGS: &[(&str, &str, Group)] = &[
     ("com.system76.CosmicTheme.Light", "*", Group::Look),
     ("com.system76.CosmicTheme.Light.Builder", "*", Group::Look),
     ("com.system76.CosmicTk", "*", Group::Look),
+    ("com.system76.CosmicBackground.Dark", "all", Group::Look),
+    (
+        "com.system76.CosmicBackground.Dark",
+        "same-on-all",
+        Group::Look,
+    ),
+    ("com.system76.CosmicBackground.Light", "all", Group::Look),
+    (
+        "com.system76.CosmicBackground.Light",
+        "same-on-all",
+        Group::Look,
+    ),
+    // Before COSMIC 1.12 (files saved then): fills the two above when
+    // they are empty
     ("com.system76.CosmicBackground", "all", Group::Look),
     ("com.system76.CosmicBackground", "same-on-all", Group::Look),
     ("com.system76.CosmicPanel", "entries", Group::Look),
@@ -119,7 +133,23 @@ const SETTINGS: &[(&str, &str, Group)] = &[
 /// is on
 const MACHINE_KEYS: &[&str] = &["output"];
 const CUSTOM_SHORTCUTS: (&str, &str) = ("com.system76.CosmicSettings.Shortcuts", "custom");
+/// The wallpaper settings start with it
 const BACKGROUND: &str = "com.system76.CosmicBackground";
+/// The settings at version 2 of COSMIC's config (libcosmic's Theme and
+/// ThemeBuilder); the others are at version 1
+const VERSION_2: &[&str] = &[
+    "com.system76.CosmicTheme.Dark",
+    "com.system76.CosmicTheme.Dark.Builder",
+    "com.system76.CosmicTheme.Light",
+    "com.system76.CosmicTheme.Light.Builder",
+];
+
+/// The folder of a setting's keys
+fn config(cosmic: &Path, id: &str) -> PathBuf {
+    cosmic
+        .join(id)
+        .join(if VERSION_2.contains(&id) { "v2" } else { "v1" })
+}
 
 fn group_of(id: &str, key: &str) -> Option<Group> {
     if !plain_name(key) || MACHINE_KEYS.contains(&key) {
@@ -189,7 +219,7 @@ fn own_settings(cosmic: &Path) -> Vec<(String, String, String)> {
     let mut ids: Vec<&str> = SETTINGS.iter().map(|(id, _, _)| *id).collect();
     ids.dedup();
     for id in ids {
-        let Ok(entries) = std::fs::read_dir(cosmic.join(id).join("v1")) else {
+        let Ok(entries) = std::fs::read_dir(config(cosmic, id)) else {
             continue;
         };
         for entry in entries.flatten() {
@@ -581,7 +611,7 @@ fn apply_settings_in(cosmic: &Path, restore: &Restore, groups: &BTreeSet<Group>)
     }
     for (id, key, value, group) in chosen {
         let mut value = value.clone();
-        if id == BACKGROUND && own_wallpaper(&value) {
+        if id.starts_with(BACKGROUND) && own_wallpaper(&value) {
             report.own_wallpaper = true;
             continue;
         }
@@ -610,7 +640,7 @@ fn apply_settings_in(cosmic: &Path, restore: &Restore, groups: &BTreeSet<Group>)
 /// Writes a setting in one go (a temporary file renamed), as
 /// system::cosmic_write, in the given folder
 fn write(cosmic: &Path, id: &str, key: &str, value: &str) -> bool {
-    let dir = cosmic.join(id).join("v1");
+    let dir = config(cosmic, id);
     let tmp = dir.join(format!(".{key}.tmp"));
     std::fs::create_dir_all(&dir)
         .and_then(|()| std::fs::write(&tmp, value))
@@ -813,12 +843,27 @@ mod tests {
                 "{ (modifiers: [Super], key: \"e\"): Spawn(\"x\"), (modifiers: [Super], key: \"q\"): Close, }",
             ),
             ("com.system76.CosmicFiles", "show_hidden", "true"),
+            (
+                "com.system76.CosmicTheme.Dark.Builder",
+                "accent",
+                "Some((red: 0.31, green: 0.55, blue: 1.0))",
+            ),
+            (
+                "com.system76.CosmicBackground.Dark",
+                "all",
+                "(source: Path(\"/usr/share/backgrounds/celenn/celenn-arcs.jpg\"))",
+            ),
         ] {
             assert!(write(&from, id, key, value));
         }
+        // The theme's builder is at version 2 of COSMIC's config
+        assert!(
+            from.join("com.system76.CosmicTheme.Dark.Builder/v2/accent")
+                .is_file()
+        );
         let settings = own_settings(&from);
         // Not the panel's screen, not the files app
-        assert_eq!(settings.len(), 4);
+        assert_eq!(settings.len(), 6);
         let text = file_content(&settings, &[], &[]).to_string();
         let restore = parse(&text, &BTreeSet::new()).unwrap();
         assert!(write(
@@ -829,12 +874,12 @@ mod tests {
         ));
         let groups: BTreeSet<Group> = [Group::Look, Group::Keyboard].into();
         let report = apply_settings_in(&to, &restore, &groups);
-        assert_eq!(report.written, 3);
+        assert_eq!(report.written, 5);
         assert_eq!(report.groups, groups);
         assert!(report.own_wallpaper);
         assert_eq!(report.shortcuts_with_programs, 1);
         let read = |dir: &Path, id: &str, key: &str| {
-            std::fs::read_to_string(dir.join(id).join("v1").join(key)).ok()
+            std::fs::read_to_string(config(dir, id).join(key)).ok()
         };
         assert_eq!(
             read(&to, "com.system76.CosmicTheme.Mode", "is_dark").as_deref(),
@@ -846,6 +891,14 @@ mod tests {
         );
         assert_eq!(read(&to, "com.system76.CosmicPanel.Panel", "output"), None);
         assert_eq!(read(&to, "com.system76.CosmicBackground", "all"), None);
+        assert!(
+            read(&to, "com.system76.CosmicBackground.Dark", "all")
+                .is_some_and(|all| all.contains("celenn-arcs.jpg"))
+        );
+        assert!(
+            to.join("com.system76.CosmicTheme.Dark.Builder/v2/accent")
+                .is_file()
+        );
         let custom = read(&to, "com.system76.CosmicSettings.Shortcuts", "custom").unwrap();
         assert!(custom.contains("Close") && !custom.contains("Spawn"));
         // The previous value is in the copy

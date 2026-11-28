@@ -113,29 +113,45 @@ pub fn wallpapers() -> Vec<(PathBuf, PathBuf)> {
     found
 }
 
-/// The wallpaper shown now: its file, from the background setting
+/// The wallpaper settings, one per theme (dark, light): COSMIC 1.12's
+/// cosmic-bg reads these (cosmic-bg-config's Mode::config_name), and the
+/// older com.system76.CosmicBackground only once, to fill them when they
+/// are empty
+pub const BACKGROUNDS: [&str; 2] = [
+    "com.system76.CosmicBackground.Dark",
+    "com.system76.CosmicBackground.Light",
+];
+
+/// The wallpaper shown now: its file, from the background setting of the
+/// current theme
 pub fn current_wallpaper() -> Option<PathBuf> {
-    let all = cosmic_read("com.system76.CosmicBackground", "all")?;
+    let id = if is_dark() {
+        BACKGROUNDS[0]
+    } else {
+        BACKGROUNDS[1]
+    };
+    let all = cosmic_read(id, "all")?;
     let start = all.find("Path(\"")? + "Path(\"".len();
     let end = start + all[start..].find('"')?;
     Some(PathBuf::from(&all[start..end]))
 }
 
-/// The same wallpaper on every screen. Only the picture of the current
-/// setting (the person's, else Celenn OS's default,
-/// /usr/share/cosmic/com.system76.CosmicBackground) changes: the other
-/// fields, including any a new COSMIC adds, stay as they are.
+/// The same wallpaper on every screen, in the dark and the light theme.
+/// Only the picture of each setting (the person's, else Celenn OS's
+/// default in /usr/share/cosmic) changes: the other fields, including any
+/// a new COSMIC adds, stay as they are.
 pub fn set_wallpaper(path: &Path) -> bool {
-    let id = "com.system76.CosmicBackground";
     let source = format!("Path({:?})", path.to_string_lossy());
-    let value = cosmic_read(id, "all")
-        .and_then(|entry| with_source(&entry, &source))
-        .unwrap_or_else(|| {
-            format!(
-                "(\n    output: \"all\",\n    source: {source},\n    filter_by_theme: true,\n    rotation_frequency: 300,\n    filter_method: Lanczos,\n    scaling_mode: Zoom,\n    sampling_method: Alphanumeric,\n)"
-            )
-        });
-    cosmic_write(id, "same-on-all", "true") && cosmic_write(id, "all", &value)
+    BACKGROUNDS.iter().fold(true, |done, id| {
+        let value = cosmic_read(id, "all")
+            .and_then(|entry| with_source(&entry, &source))
+            .unwrap_or_else(|| {
+                format!(
+                    "(\n    output: \"all\",\n    source: {source},\n    filter_by_theme: true,\n    rotation_frequency: 300,\n    filter_method: Lanczos,\n    scaling_mode: Zoom,\n    sampling_method: Alphanumeric,\n)"
+                )
+            });
+        cosmic_write(id, "same-on-all", "true") && cosmic_write(id, "all", &value) && done
+    })
 }
 
 /// A background entry (RON) with its `source` replaced: None when it has
