@@ -120,7 +120,8 @@
   // build_files/icon_theme/tela.sh, the Bibata cursors (sources kept in the
   // repository, release recorded in build_files/cursor_theme/bibata.sh),
   // Starship and the Nerd Font symbols at a pinned release in
-  // build_files/30-packages.sh, uupd at a pinned release in
+  // build_files/30-packages.sh, COSMIC's theme bundles at a pinned commit in
+  // build_files/20-cosmic.sh, uupd at a pinned release in
   // build_files/uupd/build.sh, titanoboa at a pinned commit in
   // .github/workflows/build-live-iso.yml, Renovate (config validator) at a
   // pinned version in .github/workflows/lint.yml, chunkah at a pinned digest
@@ -149,6 +150,15 @@
         "UUPD_REPO=\"https://github\\.com/(?<depName>[^\"]+)\\.git\"\\s+UUPD_VERSION=\"(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^build_files/20-cosmic\\.sh$/"],
+      "matchStrings": [
+        "THEME_BUNDLES_REPO=\"(?<depName>[^\"]+)\"\\s+THEME_BUNDLES_COMMIT=\"(?<currentDigest>[0-9a-f]{40})\""
+      ],
+      "datasourceTemplate": "git-refs",
+      "currentValueTemplate": "master"
     },
     {
       "customType": "regex",

@@ -154,6 +154,65 @@ if grep -rlF /usr/share/backgrounds/cosmic/ /usr/share/cosmic /etc 2>/dev/null; 
     exit 1
 fi
 
+# COSMIC's own theme bundles ("constellations": COSMIC, Dunes, Mirror Grove,
+# Still Peaks, Universe in four colors, each dark and light), shown next to
+# Celenn Dark and Celenn Light in Settings > Appearance. System76 ships them in
+# cosmic-theme-bundles, which Fedora doesn't package: taken from upstream at a
+# pinned commit. Their wallpapers (Git LFS, checked against the LFS pointers)
+# go with COSMIC's in cosmic-desktop, their icon themes (Universe) in
+# /usr/share/icons. Celenn's own bundles and defaults stay as they are.
+# Updated by Renovate (latest commit of the master branch, see .github/renovate.json5)
+THEME_BUNDLES_REPO="https://github.com/pop-os/cosmic-theme-bundles.git"
+THEME_BUNDLES_COMMIT="792870f4adbe13eb5c178f530f7e5b7aedfc6bb6"
+bundles_src=/tmp/cosmic-theme-bundles
+bundles_base="${THEME_BUNDLES_REPO%.git}"
+mkdir -p "${bundles_src}"
+curl -fsSL --retry 3 "${bundles_base}/archive/${THEME_BUNDLES_COMMIT}.tar.gz" \
+    | tar -xz -C "${bundles_src}" --strip-components=1
+bundle_wallpapers=()
+bundles_media="https://media.githubusercontent.com/media/${bundles_base#https://github.com/}/${THEME_BUNDLES_COMMIT}"
+while IFS= read -r -d '' image; do
+    name="${image#"${bundles_src}/resources/backgrounds/"}"
+    if head -c 40 "${image}" | grep -q '^version https://git-lfs'; then
+        oid="$(sed -n 's/^oid sha256:\([0-9a-f]\{64\}\)$/\1/p' "${image}")"
+        test -n "${oid}"
+        curl -fsSL --retry 3 -o "${image}" "${bundles_media}/resources/backgrounds/${name}"
+        echo "${oid}  ${image}" | sha256sum -c -
+    fi
+    # The same image as one already there (cosmic-wallpapers): no duplicate
+    # in the wallpaper list, the bundle points to that one
+    hash="$(sha256sum "${image}" | cut -d' ' -f1)"
+    if [[ -n "${seen_wallpapers[${hash}]:-}" ]]; then
+        bundle_wallpapers+=("s|/usr/share/backgrounds/cosmic/${name}\"|${seen_wallpapers[${hash}]}\"|")
+    else
+        install -D -m 0644 "${image}" "/usr/share/backgrounds/cosmic-desktop/${name}"
+        seen_wallpapers[${hash}]="/usr/share/backgrounds/cosmic-desktop/${name}"
+    fi
+done < <(find "${bundles_src}/resources/backgrounds" -type f -print0)
+cp -a "${bundles_src}/resources/icons/." /usr/share/icons/
+for bundle in "${bundles_src}"/resources/default_schema/com.system76.CosmicThemeBundle.*; do
+    slug="${bundle##*CosmicThemeBundle.}"
+    slug="${slug%%.*}"
+    if [[ "${slug}" == celenn-* ]]; then
+        echo "Upstream bundle ${slug} would replace ours" >&2
+        exit 1
+    fi
+done
+for rewrite in "${bundle_wallpapers[@]}"; do
+    sed -i "${rewrite}" "${bundles_src}"/resources/default_schema/com.system76.CosmicThemeBundle.*.Background/v1/*
+done
+cp -a "${bundles_src}/resources/default_schema/." /usr/share/cosmic/
+grep -rlZF /usr/share/backgrounds/cosmic/ /usr/share/cosmic \
+    | xargs -0 -r sed -i 's|/usr/share/backgrounds/cosmic/|/usr/share/backgrounds/cosmic-desktop/|g'
+for background in /usr/share/cosmic/com.system76.CosmicThemeBundle.*.Background/v1/base; do
+    source="$(sed -n 's|^ *source: Path("\(.*\)"),$|\1|p' "${background}")"
+    if [[ ! -f "${source}" ]]; then
+        echo "${background}: missing wallpaper ${source}" >&2
+        exit 1
+    fi
+done
+rm -rf "${bundles_src}"
+
 # Celenn OS boot screen: Fedora's BGRT theme (the PC maker's logo from the
 # firmware, so the boot stays flicker-free) with our images. When the firmware
 # has no logo (virtual machines, some PCs), the Celenn OS mark is shown in
