@@ -239,7 +239,7 @@ pub fn refresh() -> Task<Message> {
 }
 
 /// Lower case, without accents, so that "theme" finds "Thème"
-fn fold(text: &str) -> String {
+pub(crate) fn fold(text: &str) -> String {
     text.to_lowercase()
         .chars()
         .map(|c| match c {

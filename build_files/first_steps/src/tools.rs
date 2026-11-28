@@ -36,6 +36,9 @@
 //   celenn-tools --maintenance / --computer / --software /
 //                     --appearance / --help-page   the tools that replace
 //                                   the pages of the same names
+//   celenn-tools --quick       the quick menu (quick.rs; Super + Alt +
+//                                   Space): what people do most, and the
+//                                   toolbox one click away
 //   celenn-tools --restore     the window, on Change computers,
 //                                   choosing a settings file to take back
 //                                   (transfer.rs)
@@ -74,11 +77,13 @@ mod more;
 mod network;
 mod overview;
 mod process;
+mod quick;
 mod style;
 // What the tour reads from the system; Tools uses the settings folder and
 // the first-boot apps (transfer.rs)
 #[allow(dead_code)]
 mod system;
+mod toggle;
 mod transfer;
 mod units;
 mod update_progress;
@@ -434,6 +439,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             transfer::TEXTS,
             disks::TEXTS,
             webapps::TEXTS,
+            quick::TEXTS,
         ]
         .concat();
         let mut sorted = texts.clone();
@@ -441,6 +447,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         sorted.sort_unstable();
         sorted.dedup();
         std::process::exit(if i18n::check(&sorted) { 0 } else { 1 });
+    }
+    if options.iter().any(|arg| arg == "--quick") {
+        return quick::run();
     }
     if options.iter().any(|arg| arg == "--housekeeping") {
         std::process::exit(housekeeping::run());

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=Quick menu
+Name[fr]=Menu rapide
+Name[de]=Schnellmenü
+Name[es]=Menú rápido
+Name[it]=Menu rapido
+Name[pt_BR]=Menu rápido
+Comment=What you do most, and the toolbox (Super + Alt + Space)
+Comment[fr]=Ce que vous faites le plus, et la boîte à outils (Super + Alt + Espace)
+Comment[de]=Was Sie am häufigsten tun, und der Werkzeugkasten (Super + Alt + Leertaste)
+Comment[es]=Lo que más hace, y la caja de herramientas (Super + Alt + Espacio)
+Comment[it]=Quello che fai più spesso, e la cassetta degli attrezzi (Super + Alt + Spazio)
+Comment[pt_BR]=O que você mais faz, e a caixa de ferramentas (Super + Alt + Espaço)
+Icon=celenn-tools
+Exec=/usr/libexec/celenn-tools --quick
+NoDisplay=true
+Terminal=false
+StartupNotify=false
+Categories=System;

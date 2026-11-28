@@ -162,7 +162,7 @@ test -s "${SHORTCUTS}/defaults"
 grep -q 'System(Terminal)' "${SHORTCUTS}/custom"
 for combo in '\[Ctrl, Alt\], key: "t"' '\[Super\], key: "e"' \
              '\[Super, Shift\], key: "s"' '\[Ctrl, Shift\], key: "Escape"' \
-             '\[Super\], key: "F1"'; do
+             '\[Super\], key: "F1"' '\[Super, Alt\], key: "space"'; do
     grep -q "${combo}" "${SHORTCUTS}/custom"
     if grep -q "${combo}" "${SHORTCUTS}/defaults"; then exit 1; fi
 done
@@ -587,6 +587,8 @@ if ldd /usr/libexec/celenn-tools | grep 'not found'; then
     echo "celenn-tools: missing libraries"; exit 1
 fi
 /usr/libexec/celenn-tools --check
+grep -qx 'Exec=/usr/libexec/celenn-tools --quick' \
+    /usr/share/applications/io.github.celenn_os.QuickMenu.desktop
 # Web apps (webapps.rs): the programs that make them and open them
 for program in curl gio update-desktop-database; do
     command -v "${program}"

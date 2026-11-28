@@ -1207,3 +1207,40 @@ msgstr ""
 
 msgid "{} was removed."
 msgstr ""
+
+msgid "Quick menu"
+msgstr ""
+
+msgid "What do you want to do?"
+msgstr ""
+
+msgid "Right away"
+msgstr ""
+
+msgid "Take a screenshot"
+msgstr ""
+
+msgid "The whole screen, a window or an area"
+msgstr ""
+
+msgid "See the keyboard shortcuts"
+msgstr ""
+
+msgid "Every key on one page"
+msgstr ""
+
+msgid "Lock the screen"
+msgstr ""
+
+msgid "Your windows stay open"
+msgstr ""
+
+msgid "The whole toolbox…"
+msgstr ""
+
+
+msgid "Shift"
+msgstr ""
+
+msgid "Escape"
+msgstr ""

@@ -55,6 +55,7 @@ mod readiness;
 mod shortcuts;
 mod style;
 mod system;
+mod toggle;
 mod tour_keys;
 mod tour_pages;
 mod tour_view;

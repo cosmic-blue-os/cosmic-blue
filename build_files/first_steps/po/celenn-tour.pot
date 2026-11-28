@@ -935,3 +935,6 @@ msgstr ""
 
 msgid "TB"
 msgstr ""
+
+msgid "Quick menu"
+msgstr ""

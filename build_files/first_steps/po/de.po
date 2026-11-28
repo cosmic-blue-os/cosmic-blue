@@ -934,3 +934,6 @@ msgstr "GB"
 
 msgid "TB"
 msgstr "TB"
+
+msgid "Quick menu"
+msgstr "Schnellmenü"

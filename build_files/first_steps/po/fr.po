@@ -934,3 +934,6 @@ msgstr "Go"
 
 msgid "TB"
 msgstr "To"
+
+msgid "Quick menu"
+msgstr "Menu rapide"

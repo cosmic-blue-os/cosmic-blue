@@ -442,6 +442,7 @@ desktop_tour() {
         "06-tools-developer|CELENN_TOOLS_PREVIEW=developer-tools /usr/libexec/celenn-tools --tool apps" \
         "06-tools-disks|/usr/libexec/celenn-tools --tool disks" \
         "06-tools-web-apps|/usr/libexec/celenn-tools --tool web-apps" \
+        "06-quick-menu|/usr/libexec/celenn-tools --quick" \
         "06-shortcuts|/usr/libexec/celenn-tour --shortcuts"; do
         name="${entry%%|*}"
         cmd="${entry#*|}"

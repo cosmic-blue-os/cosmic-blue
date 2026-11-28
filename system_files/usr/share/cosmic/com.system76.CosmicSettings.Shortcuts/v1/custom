@@ -4,4 +4,5 @@
     (modifiers: [Super, Shift], key: "s", description: Some("Screenshot")): System(Screenshot),
     (modifiers: [Ctrl, Shift], key: "Escape", description: Some("System monitor")): Spawn("cosmic-monitor"),
     (modifiers: [Super], key: "F1", description: Some("Keyboard shortcuts")): Spawn("/usr/libexec/celenn-tour --shortcuts"),
+    (modifiers: [Super, Alt], key: "space", description: Some("Quick menu")): Spawn("/usr/libexec/celenn-tools --quick"),
 }

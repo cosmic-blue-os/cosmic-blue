@@ -1209,3 +1209,40 @@ msgstr "{} está nos seus apps."
 
 msgid "{} was removed."
 msgstr "{} foi removido."
+
+msgid "Quick menu"
+msgstr "Menu rápido"
+
+msgid "What do you want to do?"
+msgstr "O que você quer fazer?"
+
+msgid "Right away"
+msgstr "Agora mesmo"
+
+msgid "Take a screenshot"
+msgstr "Fazer uma captura de tela"
+
+msgid "The whole screen, a window or an area"
+msgstr "A tela inteira, uma janela ou uma área"
+
+msgid "See the keyboard shortcuts"
+msgstr "Ver os atalhos de teclado"
+
+msgid "Every key on one page"
+msgstr "Todas as teclas em uma página"
+
+msgid "Lock the screen"
+msgstr "Bloquear a tela"
+
+msgid "Your windows stay open"
+msgstr "Suas janelas continuam abertas"
+
+msgid "The whole toolbox…"
+msgstr "A caixa de ferramentas inteira…"
+
+
+msgid "Shift"
+msgstr "Shift"
+
+msgid "Escape"
+msgstr "Esc"

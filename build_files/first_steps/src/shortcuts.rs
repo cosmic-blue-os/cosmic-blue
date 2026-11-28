@@ -16,6 +16,7 @@ pub const SHORTCUTS: &[(&str, &[(&str, &str)])] = &[
             ("Super + Shift + S", "Take a screenshot"),
             ("Super + Escape", "Lock the screen"),
             ("Super + F1", "These keyboard shortcuts"),
+            ("Super + Alt + Space", "Quick menu"),
         ],
     ),
     (
@@ -57,41 +58,14 @@ pub const SHORTCUTS: &[(&str, &[(&str, &str)])] = &[
 ];
 
 /// The columns of the shortcuts sheet: numbers of SHORTCUTS' sections
-pub const SHORTCUT_COLUMNS: [&[usize]; 3] = [&[0, 4], &[1], &[2, 3]];
+pub const SHORTCUT_COLUMNS: [&[usize]; 3] = [&[0], &[1, 4], &[2, 3]];
 
 /// Key names drawn translated on the keys ("Shift" is "Maj" in French)
 pub const KEY_LABELS: &[&str] = &["Shift", "Ctrl", "Escape", "Space"];
 
-/// The shortcuts sheet already open (its process number in the runtime
-/// folder, still running with --shortcuts): close it and say so; otherwise
-/// note this one
+/// The shortcuts sheet already open: close it and say so (toggle.rs)
 pub fn close_open_sheet() -> bool {
-    let Some(runtime) = std::env::var_os("XDG_RUNTIME_DIR") else {
-        return false;
-    };
-    let file = PathBuf::from(runtime).join("celenn-shortcuts.pid");
-    let open = std::fs::read_to_string(&file)
-        .ok()
-        .and_then(|pid| pid.trim().parse::<u32>().ok())
-        .filter(|pid| {
-            *pid != std::process::id()
-                && std::fs::read(format!("/proc/{pid}/cmdline")).is_ok_and(|cmdline| {
-                    cmdline
-                        .split(|byte| *byte == 0)
-                        .any(|arg| arg == b"--shortcuts")
-                })
-        });
-    if let Some(pid) = open {
-        let closed = std::process::Command::new("kill")
-            .arg(pid.to_string())
-            .status()
-            .is_ok_and(|status| status.success());
-        if closed {
-            return true;
-        }
-    }
-    let _ = std::fs::write(&file, std::process::id().to_string());
-    false
+    crate::toggle::close_if_open("celenn-shortcuts", "--shortcuts")
 }
 
 // The sheet itself, a view of the tour's App (main.rs)
@@ -234,6 +208,7 @@ fn bindings(keys: &str) -> Vec<Binding> {
             "←→" => vec![Some("Left".to_owned()), Some("Right".to_owned())],
             "=" => vec![Some("equal".to_owned())],
             "-" => vec![Some("minus".to_owned())],
+            "Space" => vec![Some("space".to_owned())],
             key if key.chars().count() == 1 => vec![Some(key.to_lowercase())],
             key => vec![Some(key.to_owned())],
         };
