@@ -51,6 +51,16 @@ for mode in Dark Light; do
     cmp "/usr/share/cosmic/com.system76.CosmicBackground.${mode}/v1/all" "${bundle}.Background/v1/base"
     grep -qx "\"com.system76.CosmicThemeBundle.celenn-${mode,,}\"" "${bundle}.Package/v1/package_id"
 done
+# COSMIC's own constellations (cosmic-theme-bundles, see 20-cosmic.sh) next to
+# ours, each with its wallpaper
+test "$(find /usr/share/cosmic -maxdepth 1 -name 'com.system76.CosmicThemeBundle.*.Theme' | wc -l)" -ge 18
+for slug in cosmic dunes mirror-grove still-peaks universe-blue; do
+    for mode in dark light; do
+        background="/usr/share/cosmic/com.system76.CosmicThemeBundle.${slug}-${mode}.Background/v1/base"
+        test -s "$(sed -n 's|^ *source: Path("\(.*\)"),$|\1|p' "${background}")"
+    done
+done
+test -s "/usr/share/icons/Universe - Blue/index.theme"
 test -s /usr/share/icons/hicolor/scalable/apps/celenn-logo.svg
 # fastfetch: Celenn OS logo and config instead of Bluefin's, a valid
 # config, keys in the accent color, and Nerd Font symbols for its icons

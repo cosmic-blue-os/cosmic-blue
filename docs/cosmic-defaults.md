@@ -28,7 +28,9 @@ Each exported setting is reviewed, never copied as is:
   (light), dark mode and frosted glass stay on unless decided otherwise.
   The same tool writes the "Celenn Dark" and "Celenn Light" constellations
   (COSMIC theme bundles, `CosmicThemeBundle.celenn-*`), which must stay
-  identical to the default themes.
+  identical to the default themes. COSMIC's own constellations (upstream
+  `cosmic-theme-bundles`, which Fedora doesn't package) are installed next to
+  them by `build_files/20-cosmic.sh` and are only offered, never the default.
 - **Icons, cursor, wallpaper**: stay the Celenn OS ones. Since COSMIC 1.12
   the icon theme is part of the theme (`build_files/theme`); `CosmicTk` still
   holds it for older accounts. The wallpaper is in `CosmicBackground*`.
