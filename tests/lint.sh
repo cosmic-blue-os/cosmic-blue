@@ -4,8 +4,9 @@
 # image (warnings and errors only), rustfmt on the Rust programs, the apps'
 # translatable texts (tests/check-translations.py), the developer tools
 # lists (tests/check-dev-tools.py), the COSMIC settings versions
-# (tests/check-cosmic-config.sh), actionlint on the workflows when it is
-# installed (the workflow runs it separately).
+# (tests/check-cosmic-config.sh), the root helpers (tests/check-helpers.sh),
+# actionlint on the workflows when it is installed (the workflow runs it
+# separately).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -45,6 +46,10 @@ tests/check-dev-tools.py
 # The COSMIC settings Celenn OS ships and changes are in the table of
 # versions that check-cosmic-version.yml compares with each new COSMIC
 tests/check-cosmic-config.sh
+
+# The helpers that run as root through pkexec refuse anything but the
+# changes they document (stubs, nothing touches the machine)
+tests/check-helpers.sh
 
 if command -v actionlint >/dev/null; then
     SHELLCHECK_OPTS="--severity=warning" actionlint
