@@ -49,10 +49,7 @@ const BOTTOM: &[(&str, &str, &str)] = &[
 ];
 
 fn setting(id: &str, key: &str) -> PathBuf {
-    std::env::var_os("XDG_CONFIG_HOME")
-        .map(PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|home| PathBuf::from(home).join(".config")))
-        .unwrap_or_else(|| PathBuf::from(".config"))
+    crate::system::config_dir()
         .join("cosmic")
         .join(id)
         .join("v1")

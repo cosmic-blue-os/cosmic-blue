@@ -20,11 +20,23 @@ pub const AVATARS: &str = "/usr/share/pixmaps/faces";
 /// Homebrew, set up at the first boot (ublue-os/brew)
 pub const UPDATES_HELPER: &str = "/usr/libexec/celenn-updates-helper";
 
-pub fn config_dir() -> PathBuf {
-    std::env::var_os("XDG_CONFIG_HOME")
+/// The home folder ("/" when HOME is not set)
+pub fn home() -> PathBuf {
+    std::env::var_os("HOME").map_or_else(|| PathBuf::from("/"), PathBuf::from)
+}
+
+/// An XDG base folder (XDG_CONFIG_HOME, XDG_DATA_HOME...) when it is set to
+/// an absolute path, else its default under the home folder (the XDG Base
+/// Directory rule: a relative path is ignored)
+pub fn xdg(variable: &str, default: &str) -> PathBuf {
+    std::env::var_os(variable)
         .map(PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|home| Path::new(&home).join(".config")))
-        .unwrap_or_else(|| PathBuf::from(".config"))
+        .filter(|path| path.is_absolute())
+        .unwrap_or_else(|| home().join(default))
+}
+
+pub fn config_dir() -> PathBuf {
+    xdg("XDG_CONFIG_HOME", ".config")
 }
 
 /// A COSMIC setting: the person's value, else the system default

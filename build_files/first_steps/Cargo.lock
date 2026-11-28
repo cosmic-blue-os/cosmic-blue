@@ -684,6 +684,8 @@ version = "0.1.0"
 dependencies = [
  "image",
  "libcosmic",
+ "ron",
+ "serde",
  "serde_json",
  "tokio",
 ]

@@ -88,6 +88,10 @@ mod transfer;
 mod units;
 mod update_progress;
 mod updates_page;
+mod webapp_folder;
+mod webapp_icons;
+mod webapp_launcher;
+mod webapp_site;
 mod webapps;
 use i18n::tr;
 

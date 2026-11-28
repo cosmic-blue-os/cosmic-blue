@@ -498,7 +498,7 @@ fn driver_key() -> Option<DriverKey> {
 /// The COSMIC dark theme setting: the person's, else the system default
 fn dark() -> bool {
     let key = "cosmic/com.system76.CosmicTheme.Mode/v1/is_dark";
-    let config = crate::housekeeping::xdg("XDG_CONFIG_HOME", ".config");
+    let config = crate::system::xdg("XDG_CONFIG_HOME", ".config");
     std::fs::read_to_string(config.join(key))
         .or_else(|_| std::fs::read_to_string(Path::new("/usr/share").join(key)))
         .map_or(true, |value| value.trim() == "true")
@@ -520,7 +520,7 @@ pub fn read_state() -> State {
         &["list", "--system", "--app", "--columns=application"],
     );
     let has = |id: &str| apps.lines().any(|line| line.trim() == id);
-    let data = crate::housekeeping::xdg("XDG_DATA_HOME", ".local/share");
+    let data = crate::system::xdg("XDG_DATA_HOME", ".local/share");
     let nvidia = crate::edition::nvidia();
     State {
         printers: printers(),

@@ -16,6 +16,7 @@
 
 use crate::common::{fill, spawn};
 use crate::i18n::tr;
+use crate::system::xdg;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::time::{Duration, SystemTime};
@@ -38,19 +39,6 @@ pub const TEXTS: &[&str] = &[
     "{} left. Updates and new apps need room.",
     "Free up space",
 ];
-
-fn home() -> PathBuf {
-    std::env::var_os("HOME").map_or_else(|| PathBuf::from("/"), PathBuf::from)
-}
-
-/// An XDG base folder (XDG_CONFIG_HOME, XDG_DATA_HOME...) when it is set to
-/// an absolute path, else its default under the home folder
-pub fn xdg(variable: &str, default: &str) -> PathBuf {
-    std::env::var_os(variable)
-        .map(PathBuf::from)
-        .filter(|path| path.is_absolute())
-        .unwrap_or_else(|| home().join(default))
-}
 
 fn config(name: &str) -> PathBuf {
     xdg("XDG_CONFIG_HOME", ".config").join("celenn").join(name)
