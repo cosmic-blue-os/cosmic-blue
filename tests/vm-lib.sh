@@ -422,13 +422,14 @@ desktop_tour() {
     monitor "sendkey esc"
     sleep 3
 
-    # Files (folder icons), Settings (accent, theme), COSMIC Store (our
-    # rebuild, which no other step starts: a crash fails vm_check_crashes),
+    # Files (the folder icons: the test user's home, in grid view), Settings
+    # (accent, theme), COSMIC Store (our rebuild, which no other step starts:
+    # a crash fails vm_check_crashes),
     # Celenn OS Tools (its home, tools, a failure card, the developer tools list)
     # and Keyboard shortcuts (Celenn OS's own apps; images before them skip
     # them). A command may start with VARIABLE=value settings.
     local entry name cmd program settings
-    for entry in "05-files|cosmic-files" "06-settings|cosmic-settings appearance" "06-store|cosmic-store" \
+    for entry in "05-files|cosmic-files /home/${DEMO_USER}" "06-settings|cosmic-settings appearance" "06-store|cosmic-store" \
         "06-tools-overview|/usr/libexec/celenn-tools" \
         "06-updates|/usr/libexec/celenn-updates" \
         "06-tools-space|/usr/libexec/celenn-tools --tool space" \
@@ -461,6 +462,12 @@ desktop_tour() {
             continue
         fi
         sleep 12
+        # (Files opens in list view: Ctrl+2 shows the folders as a grid of
+        # big icons. Files keeps the choice for this account)
+        if [[ "${name}" == 05-files ]]; then
+            monitor "sendkey ctrl-2"
+            sleep 3
+        fi
         # (Web apps: its sites' icons come from the internet)
         [[ "${name}" == 06-tools-web-apps ]] && sleep 18
         screenshot "${SHOTS}/${name}"
