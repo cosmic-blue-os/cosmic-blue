@@ -950,6 +950,9 @@ msgstr "Apps, Aussehen, Einstellungen"
 msgid "Arial, Times New Roman, Verdana…"
 msgstr "Arial, Times New Roman, Verdana…"
 
+msgid "Installed."
+msgstr "Installiert."
+
 msgid "Channel, versions, firmware, virtual machines"
 msgstr "Kanal, Versionen, Firmware, virtuelle Maschinen"
 

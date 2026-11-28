@@ -149,6 +149,7 @@ const TEXTS: &[&str] = &[
     "Microsoft fonts",
     "Arial, Times New Roman, Verdana… for documents made on Windows.",
     "Arial, Times New Roman, Verdana…",
+    "Installed.",
     "Go back",
     "Something wrong since the last update? Go back to the previous version. Your files and settings stay as they are.",
     "To the previous version",

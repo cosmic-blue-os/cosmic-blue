@@ -462,11 +462,29 @@ impl Page {
             .push(search)
             .push(widget::space::vertical().height(space_xs));
         if self.query.trim().is_empty() {
-            for (group, tools) in GROUPS {
-                let shown: Vec<Element<'a, Message>> = tiles
+            let shown_in = |tools: &[Tool]| {
+                tiles
                     .iter()
-                    .filter(|(tool, summary)| tools.contains(tool) && *summary != Summary::Hidden)
-                    .map(|(tool, summary)| tile(*tool, summary))
+                    .filter(move |(tool, summary)| {
+                        tools.contains(tool) && *summary != Summary::Hidden
+                    })
+                    .collect::<Vec<_>>()
+            };
+            // Tiles keep their roomy height, and get lower only when this
+            // computer shows so many tools that they would not fit otherwise
+            let lines: usize = GROUPS
+                .iter()
+                .map(|(_, tools)| shown_in(tools).len().div_ceil(3))
+                .sum();
+            let height = if lines > ROOMY_LINES {
+                LOW_TILE
+            } else {
+                ROOMY_TILE
+            };
+            for (group, tools) in GROUPS {
+                let shown: Vec<Element<'a, Message>> = shown_in(tools)
+                    .into_iter()
+                    .map(|(tool, summary)| tile(*tool, summary, height))
                     .collect();
                 body = body
                     .push(
@@ -541,7 +559,15 @@ fn warning<'a>(element: Element<'a, Message>) -> Element<'a, Message> {
 /// Tile texts stay on one line, cut with an ellipsis when too long
 const ONE_LINE: Ellipsize = Ellipsize::End(EllipsizeHeightLimit::Lines(1));
 
-fn tile<'a>(tool: Tool, summary: &Summary) -> Element<'a, Message> {
+/// A tile's usual height, and the lower one used when more than
+/// ROOMY_LINES lines of tiles are shown (a laptop with an NVIDIA card and
+/// other disks shows six), so that every tile fits without scrolling in the
+/// window COSMIC opens on a 1080p screen (693 px high)
+const ROOMY_TILE: f32 = 54.0;
+const LOW_TILE: f32 = 44.0;
+const ROOMY_LINES: usize = 5;
+
+fn tile<'a>(tool: Tool, summary: &Summary, height: f32) -> Element<'a, Message> {
     let cosmic_theme::Spacing { space_s, .. } = theme::spacing();
     let (title, _, usual) = tool.texts();
     let caption: Element<'a, Message> = match summary {
@@ -569,7 +595,7 @@ fn tile<'a>(tool: Tool, summary: &Summary) -> Element<'a, Message> {
         .class(crate::style::tile_style(false))
         .padding(0)
         .width(Length::Fill)
-        .height(Length::Fixed(44.0))
+        .height(Length::Fixed(height))
         .on_press(Message::Go(tool))
         .into()
 }

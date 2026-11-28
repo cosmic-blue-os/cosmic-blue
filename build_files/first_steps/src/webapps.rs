@@ -34,8 +34,11 @@ const ID_PREFIX: &str = "io.github.celenn_os.WebApp_";
 /// The launcher's key that keeps the web app's address
 const URL_KEY: &str = "X-CosmicBlue-WebApp-Url";
 const FIREFOX: &str = "org.mozilla.firefox";
-/// Tiles on a line (the page is as wide as the toolbox, WIDE in tools.rs)
-const PER_LINE: usize = 4;
+/// Tiles on a line (the page is as wide as the toolbox, WIDE in tools.rs):
+/// three, so that names and captions are not cut, in tiles as low as the
+/// toolbox's smaller ones, so that the page still fits without scrolling
+/// in the window COSMIC opens on a 1080p screen (693 px high)
+const PER_LINE: usize = 3;
 
 /// Sites people use most, in the order of the grid: name, address, caption
 pub const SITES: &[(&str, &str, &str)] = &[
@@ -300,12 +303,9 @@ impl Page {
 
     pub fn view(&self) -> Element<'_, Message> {
         let cosmic_theme::Spacing {
-            space_xxs,
-            space_xs,
-            space_s,
-            ..
+            space_xs, space_s, ..
         } = theme::spacing();
-        // The popular sites, then the other web apps, four per line
+        // The popular sites, then the other web apps, three per line
         let mut tiles: Vec<Element<'_, Message>> = SITES
             .iter()
             .enumerate()
@@ -407,7 +407,6 @@ impl Page {
         widget::column::with_capacity(4)
             .spacing(space_s)
             .push(grid)
-            .push(widget::space::vertical().height(space_xxs))
             .push(settings::section().add(other).add(dock))
             .push(
                 dim_caption(tr(
@@ -459,7 +458,7 @@ fn tile<'a>(
         .class(crate::style::tile_style(added))
         .padding(0)
         .width(Length::Fill)
-        .height(Length::Fixed(50.0))
+        .height(Length::Fixed(44.0))
         .on_press_maybe(on_press)
         .into()
 }

@@ -948,6 +948,9 @@ msgstr ""
 msgid "Arial, Times New Roman, Verdana…"
 msgstr ""
 
+msgid "Installed."
+msgstr ""
+
 msgid "Channel, versions, firmware, virtual machines"
 msgstr ""
 
